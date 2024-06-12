@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "Jua";
+    src: url("../components/fonts/Jua-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "Dongle";
+    src: url("../components/fonts/Dongle-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "YeonSung";
+    src: url("../components/fonts/YeonSung-Regular.ttf");
+  }
+  
+  .header-link {
+    text-decoration: none;
+    color: #333; // 사이트의 링크 색상에 맞게 조정
+    font-weight: 700;
+    margin-right: 50px;
+    
+  
+    // 호버 효과
+    &:hover {    
+      color: #228b22;       
+    }
+  }

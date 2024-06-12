@@ -1,0 +1,130 @@
+@font-face {
+    font-family: "Jua";
+    src: url("../components/fonts/Jua-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "Dongle";
+    src: url("../components/fonts/Dongle-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "YeonSung";
+    src: url("../components/fonts/YeonSung-Regular.ttf");
+  }
+  
+  .footer {
+    // background-color: #666;
+    color: #333;
+    // padding: 20px 0;
+    font-size: 14px;
+    // margin-left: 100px;
+    
+
+    .footer-links {
+        margin-top: 0;
+    }
+    
+    &-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    //   max-width: 1200px;
+    //   margin-left: 180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    //   background-color: aqua;
+      
+    }
+  
+    &-logo {
+      width: 50px;
+      height: auto;
+    }
+    
+    &-left {
+        display: flex;
+        width: 25%;
+        justify-content: center;
+    }
+
+    .footer-title {
+      color: #228b22;
+      font-weight: 700;
+      line-height: 1.2; // 줄 간격을 조정하여 텍스트가 잘 보이도록
+      margin-left: 30px; // 로고와 제목 사이의 간격을 조정
+      font-size: 24px;
+      font-family: "Jua";
+    //   background-color: red;
+    }
+  
+    &-info {
+    //   margin-left: 200px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: gray;
+      width: 50%;
+      border-right: 1px solid lightgray;
+      border-left: 1px solid lightgray;
+      margin-bottom: 14px;
+  
+      .copy {
+        font-weight: 700;
+        font-size: 17px;
+        margin-top: 10px;
+      }
+  
+      p {
+        margin: 0;
+      }
+    }
+  
+    &-links {
+      list-style: none;
+    //   padding-left: 70px;
+      display: flex;
+    //   margin-top: -30px;
+      padding: 15px;
+      background-color: gray;
+      line-height: 15px;
+      justify-content: center;
+  
+      li {
+        margin-right: 20px;
+  
+        a {
+          color: #333;
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 600;
+          font-family: "Jua";
+          
+
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+  
+    .mark {
+      text-align: center;
+    //   margin-left: auto;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: "Jua";
+      line-height: 20px;
+      width: 25%;
+  
+      a {
+        text-decoration: none;
+        color: #333;
+  
+        &:hover {
+          color: #228b22;
+        }
+      }
+    }
+  }
+  
