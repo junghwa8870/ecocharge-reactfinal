@@ -1,6 +1,8 @@
 import React from 'react';
 import './MainInfo.scss';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
+
+import { Link } from 'react-router-dom';
 
 const MainInfo = () => {
   return (
@@ -32,6 +34,14 @@ const MainInfo = () => {
           <div className='ncontent'>내용테스트1</div>
         </Grid>
       </div>
+      <Button
+        component={Link}
+        to='/newInfo'
+        variant='outlined'
+        style={{ color: 'black' }}
+      >
+        더보기
+      </Button>
     </Grid>
   );
 };
