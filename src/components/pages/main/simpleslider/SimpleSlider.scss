@@ -1,0 +1,105 @@
+// SimpleSlider.scss
+
+// 슬라이더 컨테이너
+.simple-slider {
+    width: 80%; /* 슬라이더의 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+    
+  }
+  
+  // 슬라이드 항목
+  .simple-slider .slick-slide {
+    margin: 0 10px; /* 슬라이드 간격 설정 */
+  }
+  
+  // 도트 컨테이너
+  .simple-slider .slick-dots {
+    bottom: 10px; /* 도트 위치 조정 */
+  }
+  
+  // 각 도트
+  .simple-slider .slick-dots li {
+    margin: 0 5px; /* 도트 사이 간격 조정 */
+  }
+  
+  // 활성화된 도트의 색상
+  .simple-slider .slick-dots li button:before {
+    color: #007bff; /* 활성화된 도트의 색상 */
+  }
+
+  .slick-slider {
+    dir: ltr;
+    // .slick-slider에 대한 스타일
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+    margin-top: 300px;
+    background-color: purple;
+    height: 300px;
+    width: 700px;
+    text-align: center;
+  
+    &.slick-initialized {
+      // .slick-slider.slick-initialized에 대한 스타일
+  
+      .some-child-element {
+        // .slick-slider.slick-initialized .some-child-element에 대한 스타일
+      }
+    }
+  }
+  
+  .slick-prev {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transform: (0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-color: black;
+    margin-left: -30px;
+
+    &:before {
+      line-height: 1;
+      color: yellow;
+      font-size: 27px;
+      opacity: .75;
+    }
+  }
+  
+  .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transform: (0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-color: black;
+    margin-right: -30px;
+
+    &:before {
+      line-height: 1;
+      color: yellow;
+      font-size: 27px;
+      opacity: .75;
+      
+      }
+  
+
+    
+  }
