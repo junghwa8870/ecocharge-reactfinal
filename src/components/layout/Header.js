@@ -26,28 +26,37 @@ const Header = () => {
             flex={2}
             style={{ alignContent: 'center', display: 'flex' }}
           >
-            <img
-              src='ecocharge_pavicon.png'
-              alt='Logo'
-              style={{ width: 100, paddingTop: 15 }}
-            />
-            <div
-              className='logo-title'
+            <Link
+              to='/'
               style={{
-                color: '#228b22',
-                fontWeight: 700,
-                lineHeight: 1.2,
-                marginLeft: 40,
-                fontSize: 24,
-                marginTop: 30,
-                textAlign: 'center',
-                fontFamily: 'Jua',
+                display: 'flex',
+                alignItems: 'center',
+                textDecoration: 'none',
               }}
             >
-              ECO
-              <br />
-              CHARGE
-            </div>
+              <img
+                src='ecocharge_pavicon.png'
+                alt='Logo'
+                style={{ width: 100, paddingTop: 15 }}
+              />
+              <div
+                className='logo-title'
+                style={{
+                  color: '#228b22',
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                  marginLeft: 40,
+                  fontSize: 24,
+                  marginTop: 30,
+                  textAlign: 'center',
+                  fontFamily: 'Jua',
+                }}
+              >
+                ECO
+                <br />
+                CHARGE
+              </div>
+            </Link>
           </Grid>
           <Grid
             item
