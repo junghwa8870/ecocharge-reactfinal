@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "Jua";
+  src: url("../../fonts/Jua-Regular.ttf");
+}
+
+.carContainer {
+  .ecoCarTitle {
+  font-family: "Jua";
+  font-weight: 700;
+  font-size: 50px;
+  margin-top: 20px;
+  text-align: center;
+  }
+}
+
+.carbox {
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // height: 100%;
+    
+  // .search {
+  //   width: 300px;
+  //   height: 30px;
+  //   margin-top: 0px;
+      
+  // }
+
+  // .carInfo {
+  //   border: 1px solid blue;
+  //   width: 20%;
+  //   height: 50%;
+  //   margin-top: 150px;
+      
+  // }
+
+  // .moreBtn {
+  //   width: 40px;
+  //   font-size: 10px;
+      
+  // }
+}
+
+.carInfoBox {
+display: flex;
+flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
+justify-content: space-between;
+gap: 20px; // 아이템 사이에 간격 추가
+
+
+.carInfo {
+  border: 1px solid blue;
+  width: calc(33.33% - 20px); // 3개씩 배치되도록 너비 설정
+  height: 380px; // 아이템 높이 설정
+  margin-top: 40px; // 상단 여백 추가
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.moreBtn {
+  width: 40px;
+  font-size: 10px;
+  padding: 6px 6px;
+}
+}
+
+.searchBox {
+display: flex;
+flex-direction: row;
+justify-content: center;
+text-align: center;
+
+.search {
+  width: 300px;
+  height: 30px;
+  margin-top: 30px;
+}
+
+.searchBtn {
+  width: 30px;
+  height: 35px;
+  margin-top: 30px;
+}
+}

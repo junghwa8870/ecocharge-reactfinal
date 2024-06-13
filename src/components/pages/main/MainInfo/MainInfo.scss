@@ -4,7 +4,9 @@
 }
 
 .container {
-  background-color: blue;
+  border: 3px solid #228b22;
+  
+  // background-color: blue;
   padding: 20px 0 20px;
   
   justify-content: center;
@@ -15,6 +17,7 @@
   height: 400px;
 //   transform: translate(-50%, -50%);
   margin-top: 150px;
+  border-radius: 20px;
   
   .title {
     text-align: center;
@@ -30,6 +33,26 @@
   .box {
     height: 250px;
     margin: 0 2%;
+    border-radius: 20px;
+    border: 3px solid #228b22;
+
+    .ntitle {
+      font-size: 25px;
+      font-weight: 600;
+      font-family: "Jua";
+      margin-top: 10px;
+      margin-bottom: 10px;
+      
+    }
+
+    .ncontent {
+      font-size: 17px;
+      font-weight: 300;
+      font-family: "Jua";
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background-color: #bce9bc;
+    }
   }  
 }
 

@@ -17,11 +17,21 @@ const MainInfo = () => {
           width: '100%',
         }}
       >
-        <Grid item className='box' flex={2} style={{ backgroundColor: 'pink' }}>
+        <Grid
+          item
+          className='box'
+          flex={2}
+          style={{ backgroundColor: '#228b7b' }}
+        >
           <div className='ntitle'>제목테스트1</div>
           <div className='ncontent'>내용테스트1</div>
         </Grid>
-        <Grid item className='box' flex={2} style={{ backgroundColor: 'pink' }}>
+        <Grid
+          item
+          className='box'
+          flex={2}
+          style={{ backgroundColor: '#228b3e' }}
+        >
           <div className='ntitle'>제목테스트1</div>
           <div className='ncontent'>내용테스트1</div>
         </Grid>
