@@ -72,8 +72,9 @@
   line-height: 0;
   position: absolute;
   top: 50%;
-  width: 40px;
-  height: 40px;
+  
+  width: 60px;
+  height: 60px;
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
@@ -81,13 +82,14 @@
   border: none;
   outline: none;
   background: transparent;
-  background-color: blue;
-  margin-left: -30px;
+  z-index: 10;
+  // background-color: blue;
+  margin-left: 180px;
 
   &:before {
     line-height: 1;
-    color: yellow;
-    font-size: 27px;
+    color: black;
+    font-size: 60px;
     opacity: .75;
   }
 }
@@ -97,8 +99,8 @@
   line-height: 0;
   position: absolute;
   top: 50%;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
@@ -106,13 +108,13 @@
   border: none;
   outline: none;
   background: transparent;
-  background-color: blue;
-  margin-right: -30px;
+  // background-color: blue;
+  margin-right: 180px;
 
   &:before {
     line-height: 1;
-    color: yellow;
-    font-size: 27px;
+    color: black;
+    font-size: 60px;
     opacity: .75;
   }
 }
