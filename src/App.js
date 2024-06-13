@@ -10,6 +10,7 @@ import Login from './components/pages/Login.js';
 import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
+import SearchBar from './components/pages/findcharge/SearchBar.js';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
             path='/'
             element={
               <div className='main'>
-                {/* SearchComponent를 이곳에 추가 */}
+                <SearchBar />
                 {/* <SimpleSlider />
               <MainInfo /> */}
                 <Main />

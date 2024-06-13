@@ -15,4 +15,13 @@
   button {
     margin-top: 10px; // 버튼과 카테고리 사이의 간격 조정
   }
+  .search-component select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   

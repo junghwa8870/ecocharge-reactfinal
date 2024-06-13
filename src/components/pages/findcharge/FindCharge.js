@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import SearchComponent from './SearchComponent';
+import SearchComponent from './SearchComponent'; // SearchComponent를 임포트합니다.
+import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임포트합니다.
 import MapComponent from './MapComponent';
+import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
 
 function FindCharge() {
@@ -20,14 +22,9 @@ function FindCharge() {
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
+          <SearchBar onSearch={handleSearch} />
           <div className='search-results'>
-            {/* 검색 결과를 리스트 형태로 보여줍니다 */}
-            <ul>
-              <li>검색 결과 1</li>
-              <li>검색 결과 2</li>
-              <li>검색 결과 3</li>
-              {/* 더 많은 결과 */}
-            </ul>
+            {searchParams && <SearchResult searchParams={searchParams} />}
           </div>
         </div>
         <div className='map-area'>
