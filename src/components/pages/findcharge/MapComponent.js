@@ -6,7 +6,7 @@ function MapComponent({ searchParams }) {
       id='map'
       style={{ width: '100%', height: '100%', position: 'relative' }}
     >
-      {/* 지도를 표시할 영역입니다. */}
+      {/* 지도 표시*/}
       <div
         style={{
           width: '100%',
