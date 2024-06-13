@@ -28,18 +28,17 @@
 }
 
 .slick-slider {
-  direction: ltr;
-  // .slick-slider에 대한 스타일
-  // position: relative;
-  // display: block;
-  // box-sizing: border-box;
-  user-select: none;
-  touch-action: pan-y;
+  // direction: ltr;
+  // // .slick-slider에 대한 스타일
+  // // position: relative;
+  // // display: block;
+  // // box-sizing: border-box;
+  // user-select: none;
+  // touch-action: pan-y;
   margin-top: 200px;
-  background-color: purple;
-  height: 50rem;
+  // background-color: purple;
+  height: 500px;
   width: 1700px;
-  text-align: center;
   
   .slick-initialized {
     // .slick-slider.slick-initialized에 대한 스타일
@@ -51,10 +50,18 @@
 
   .imgbox {
     
-    height: 50rem;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+     /* 세로 중앙 정렬 */
+    height: 100%; /* 부모(.slick-slider)의 높이와 같게 설정 */
 
     img {
       display: block;
+      width: 1200px;
+      height: 500px;
+      align-items: center;
+      margin-left: 250px;
+      
     }
   }
   
@@ -108,4 +115,14 @@
     font-size: 27px;
     opacity: .75;
   }
+}
+.slick-dots {
+  position: absolute;
+  bottom: -65px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
 }

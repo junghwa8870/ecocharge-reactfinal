@@ -2,61 +2,96 @@
   font-family: "Jua";
   src: url("../../../fonts/Jua-Regular.ttf");
 }
+.main-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 200px; /* 원하는 위치로 조정 */
+  margin-bottom: 200px; /* 원하는 위치로 조정 */
+
+  .title {
+    // font-family: "Jua";
+    font-weight: 700;
+    font-size: 2.7rem;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+    margin-bottom: 20px;
+  }
+}
 
 .container {
-  border: 3px solid #228b22;
+  box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+  // background-color: #e0ffe0;
+  background-color: rgba(101, 235, 135, 0.1);
   
-  // background-color: blue;
   padding: 20px 0 20px;
-  
   justify-content: center;
   width: 80%;
   display: flex;
   text-align: center;
   align-items: center;
   height: 400px;
-//   transform: translate(-50%, -50%);
   margin-top: 150px;
-  border-radius: 20px;
-  
-  .title {
-    text-align: center;
-    font-family: "Jua";
-    font-weight: 700;
-    font-weight: 700;
-    font-size: 2.7rem;
-    line-height: 1.235;
-    letter-spacing: 0.00735em;
-      
-  }
+  border-radius: 10px;
+
+  // .title {
+  //   text-align: center;
+  //   // font-family: "Jua";
+  //   font-weight: 700;
+  //   font-size: 2.7rem;
+  //   line-height: 1.235;
+  //   letter-spacing: 0.00735em;
+  // }
 
   .box {
     height: 250px;
     margin: 0 2%;
     border-radius: 20px;
-    border: 3px solid #228b22;
+    background-color: #ffffff;
+    box-shadow: 1px 2px 4px rgba(0.6, 0.6, 0.6, 0.6);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 35px;
 
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      
+    }
+  
+    .box-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  
     .ntitle {
       font-size: 25px;
       font-weight: 600;
-      font-family: "Jua";
       margin-top: 10px;
       margin-bottom: 10px;
-      
+      padding: 30px 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
+  
     .ncontent {
-      font-size: 17px;
+      font-size: 20px;
       font-weight: 300;
-      font-family: "Jua";
       margin-top: 10px;
       margin-bottom: 10px;
-      background-color: #bce9bc;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 10px;
+      padding-right: 10px;
     }
-  }  
+  }
+  
 }
-
-
-
- 
-
