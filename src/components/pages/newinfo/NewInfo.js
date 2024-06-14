@@ -31,8 +31,8 @@ const NewInfoBox = ({ title, content }) => {
         </span>
       </div>
       <Collapse isOpen={collapse}>
-        <Card>
-          <CardBody>{content}</CardBody>
+        <Card className='newInfoCard'>
+          <CardBody className='newInfoCardBody'>{content}</CardBody>
         </Card>
       </Collapse>
     </div>
@@ -61,7 +61,7 @@ function NewInfo(props) {
 
   return (
     <>
-      <div style={{ textAlign: 'center' }}>
+      <div className='newInfoTitleContainer' style={{ textAlign: 'center' }}>
         <h2
           style={{
             margin: '200px 0 0',
@@ -72,6 +72,15 @@ function NewInfo(props) {
         >
           새소식
         </h2>
+      </div>
+      <div
+        className='newInfoWriteBox'
+        style={{ width: '50px', height: '30px' }}
+      >
+        <button
+          className='newInfoWriteBtn'
+          style={{ backgroundColor: 'red' }}
+        />
       </div>
       <div
         className='newInfoContainer'
