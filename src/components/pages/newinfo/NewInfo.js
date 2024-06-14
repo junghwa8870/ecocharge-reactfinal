@@ -17,7 +17,6 @@ const NewInfoBox = ({ title, content }) => {
       >
         <Button
           className='newInfoMoreBtn'
-          color='primary'
           onClick={toggle}
           style={{
             // marginBottom: '1rem',
@@ -27,7 +26,10 @@ const NewInfoBox = ({ title, content }) => {
         >
           {collapse ? 'More ▲' : 'More ▼'}
         </Button>
-        <span style={{ marginLeft: '0.5rem', fontWeight: 'bold' }}>
+        <span
+          className='articleTitle'
+          style={{ marginLeft: '0.5rem', fontWeight: 'bold', fontSize: '23px' }}
+        >
           {title}
         </span>
       </div>
@@ -36,6 +38,12 @@ const NewInfoBox = ({ title, content }) => {
           <CardBody className='newInfoCardBody'>{content}</CardBody>
         </Card>
       </Collapse>
+
+      <div className='newInfoSmall'>
+        <div className='newInfoWriteDate'>작성일: 2024/01/01</div>
+        <div className='newInfoWriter'>작성자: 홍길동</div>
+        <div className='newInfoView'>조회수: 3</div>
+      </div>
     </div>
   );
 };
@@ -74,14 +82,14 @@ function NewInfo(props) {
           새소식
         </h2>
       </div>
-      <div className='newInfoWriteBtn'>
-        <Button color='primary'>작성하기</Button>
+      <div className='newInfoWriteBtnBox'>
+        <Button className='newInfoWriteBtn'>작성하기</Button>
       </div>
 
       <div
         className='newInfoContainer'
         style={{
-          border: '1px solid black',
+          // border: '1px solid black',
           width: '80%',
           margin: '100px auto',
         }}

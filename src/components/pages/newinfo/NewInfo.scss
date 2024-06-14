@@ -6,8 +6,55 @@
 //     border: 1px solid black;
 // }
 
-.newInfoWriteBtn {
+.newInfoWriteBtnBox {
     position: absolute;
     right: 200px;
     bottom: 600px;
+    
+    
+    .newInfoWriteBtn {
+        border: 3px solid #228b22;
+        background-color: white;
+        color: black;
+        font-weight: 800;
+    }
+}
+
+.newInfoContainer {
+  box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+  border-radius: 10px;
+  border: 2px solid gray;
+}
+
+.newInfoCard {
+    margin: 10px;
+    box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+}
+
+.newInfoSmall {
+    margin: 20px;
+    display: flex;
+
+    .newInfoWriteDate {
+        margin-right: 20px;
+    }
+    .newInfoWriter{
+        margin-right: 20px;
+    }
+    
+}
+
+.newInfoInnerBox {
+    .newInfoMoreBtn {
+
+        &:hover {
+            box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+        }
+    }
+}
+
+.newInfoBox {
+    box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+    border: 1px solid gray;
+    
 }
