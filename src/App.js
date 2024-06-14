@@ -30,7 +30,7 @@ function App() {
             path='/'
             element={
               <div className='main'>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 {/* <SimpleSlider />
               <MainInfo /> */}
                 <Main />
