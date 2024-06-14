@@ -4,6 +4,7 @@ import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임�
 import MapComponent from './MapComponent';
 import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
+import '../findcharge/ChargeSpotDetail';
 
 function FindCharge() {
   const [searchParams, setSearchParams] = useState(null);
