@@ -15,7 +15,7 @@ function SimpleSlider() {
   return (
     <Slider {...settings}>
       <div className='imgbox'>
-        <img src='car1.jpg' alt='Slide 1' />
+        <img src='carA.png' alt='Slide 1' />
       </div>
       <div className='imgbox'>
         <img src='car2.jpg' alt='Slide 2' />

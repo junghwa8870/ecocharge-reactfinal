@@ -1,10 +1,29 @@
-import React from 'react';
-import { AppBar, Grid, Toolbar, Link as MuiLink } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  AppBar,
+  Grid,
+  Toolbar,
+  Link as MuiLink,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import '../../scss/Header.scss';
-import Button from '@mui/material/Button';
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <AppBar
       position='fixed'
@@ -12,13 +31,12 @@ const Header = () => {
         width: '100%',
         height: 110,
         backgroundColor: '#fff',
-        // boxShadow: 'none',
       }}
     >
       <Toolbar>
         <Grid
           container
-          justify='space-between'
+          justifyContent='space-between'
           style={{ backgroundColor: 'white' }}
         >
           <Grid
@@ -104,8 +122,8 @@ const Header = () => {
             }}
           >
             <Button
-              component={Link}
-              to='/login'
+              className='loginBtn'
+              onClick={handleClickOpen}
               variant='outlined'
               style={{
                 color: '#228b22',
@@ -122,6 +140,86 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Login</DialogTitle>
+        <DialogContent>
+          <Button
+            className='naverLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#1ec800',
+            //   color: '#fff',
+            // }}
+            // fullWidth
+          >
+            <img
+              className='naver'
+              src={'naverLogo.png'}
+              alt='naver'
+              style={{
+                width: '140px',
+              }}
+            />
+            {/* 네이버 로그인 */}
+          </Button>
+          <Button
+            className='kakaoLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#ffeb00',
+            //   color: '#000',
+            // }}
+            // fullWidth
+          >
+            <img
+              src={'kakaoLogo.png'}
+              className='kakao'
+              alt='kakao'
+              style={{ width: '150px' }}
+            />
+            {/* 카카오 로그인 */}
+          </Button>
+          <Button
+            className='googleLoginBtn'
+            variant='contained'
+            style={{
+              // marginBottom: '10px',
+              // backgroundColor: '#4285F4',
+              color: 'gray',
+              backgroundColor: 'white',
+              fontWeight: '600',
+              width: '150px',
+              height: '38px',
+              // marginTop: '5px',
+              marginLeft: '10px',
+              marginRight: '10px',
+              fontSize: '12px',
+              lineHeight: 'unset',
+            }}
+            fullWidth
+          >
+            <img
+              className='google'
+              src={'googleLogo.png'}
+              alt='Google'
+              style={{
+                width: '25px',
+                marginLeft: '-27px',
+                paddingRight: '17px',
+              }}
+            />
+            구글 로그인
+          </Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color='primary'>
+            닫기
+          </Button>
+        </DialogActions>
+      </Dialog>
     </AppBar>
   );
 };
