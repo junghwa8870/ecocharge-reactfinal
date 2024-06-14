@@ -28,18 +28,17 @@
 }
 
 .slick-slider {
-  direction: ltr;
-  // .slick-slider에 대한 스타일
-  // position: relative;
-  // display: block;
-  // box-sizing: border-box;
-  user-select: none;
-  touch-action: pan-y;
+  // direction: ltr;
+  // // .slick-slider에 대한 스타일
+  // // position: relative;
+  // // display: block;
+  // // box-sizing: border-box;
+  // user-select: none;
+  // touch-action: pan-y;
   margin-top: 200px;
-  background-color: purple;
-  height: 50rem;
+  // background-color: purple;
+  height: 500px;
   width: 1700px;
-  text-align: center;
   
   .slick-initialized {
     // .slick-slider.slick-initialized에 대한 스타일
@@ -51,10 +50,18 @@
 
   .imgbox {
     
-    height: 50rem;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+     /* 세로 중앙 정렬 */
+    height: 100%; /* 부모(.slick-slider)의 높이와 같게 설정 */
 
     img {
       display: block;
+      width: 1200px;
+      height: 500px;
+      align-items: center;
+      margin-left: 250px;
+      
     }
   }
   
@@ -65,8 +72,9 @@
   line-height: 0;
   position: absolute;
   top: 50%;
-  width: 40px;
-  height: 40px;
+  
+  width: 60px;
+  height: 60px;
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
@@ -74,13 +82,14 @@
   border: none;
   outline: none;
   background: transparent;
-  background-color: blue;
-  margin-left: -30px;
+  z-index: 10;
+  // background-color: blue;
+  margin-left: 180px;
 
   &:before {
     line-height: 1;
-    color: yellow;
-    font-size: 27px;
+    color: black;
+    font-size: 60px;
     opacity: .75;
   }
 }
@@ -90,8 +99,8 @@
   line-height: 0;
   position: absolute;
   top: 50%;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
@@ -99,13 +108,23 @@
   border: none;
   outline: none;
   background: transparent;
-  background-color: blue;
-  margin-right: -30px;
+  // background-color: blue;
+  margin-right: 180px;
 
   &:before {
     line-height: 1;
-    color: yellow;
-    font-size: 27px;
+    color: black;
+    font-size: 60px;
     opacity: .75;
   }
+}
+.slick-dots {
+  position: absolute;
+  bottom: -65px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
 }
