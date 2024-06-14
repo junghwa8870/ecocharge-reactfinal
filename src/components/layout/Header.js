@@ -208,7 +208,8 @@ const Header = () => {
               style={{
                 width: '25px',
                 marginLeft: '-27px',
-                paddingRight: '17px',
+                // paddingRight: '17px',
+                marginRight: '10px',
               }}
             />
             구글 로그인
