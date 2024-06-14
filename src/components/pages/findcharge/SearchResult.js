@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../scss/SearchResult.scss';
 
 function SearchResult({ searchParams }) {
   // 여기에 searchParams를 기반으로 검색 결과를 표시하는 로직을 추가
