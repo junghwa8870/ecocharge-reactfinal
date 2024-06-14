@@ -11,7 +11,7 @@ const MainInfo = () => {
       </Typography>
       <Grid
         container
-        className='container'
+        className='icontainer'
         style={{ width: '80%', height: '450px', marginTop: '20px' }}
       >
         <Grid item className='box' flex={2}>
