@@ -2,25 +2,29 @@
     width: 80%;
     margin: 200px auto 100px;
     // padding: 2rem;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
+    border: 2px solid gray;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
+
     .wWriteTitle {
       text-align: center;
       margin-bottom: 3.5rem;
       font-weight: 700;
       font-size: 40px;
+      
     }
   
     .form-group {
       margin-bottom: 1.5rem;
     }
   
-    .btn-primary {
-      width: 100%;
+    .wirteCompleteBtn {
+      width: 13%;
       padding: 0.75rem;
       font-size: 1.2rem;
+      margin-left: 500px;
     }
 
     .newInfoBackBtn {
@@ -41,10 +45,20 @@
     } 
   }
 
+.wTitleBox {
+  box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+}
+
 .wcontentbox {
     height: 200px;
+    box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+    // border: 1px solid gray;
 }
-  
+
+.wWriterBox {
+  box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+}
+
 .infoFormBox {
     width: 80%;
     margin: 10px auto;

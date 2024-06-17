@@ -42,6 +42,7 @@ const NewInfoWrite = () => {
           <FormGroup className='infoWriteForm'>
             <Label for='wtitle'>제목</Label>
             <Input
+              className='wTitleBox'
               type='text'
               name='wtitle'
               id='wtitle'
@@ -65,6 +66,7 @@ const NewInfoWrite = () => {
           <FormGroup className='infoWriteForm'>
             <Label for='writer'>작성자</Label>
             <Input
+              className='wWriterBox'
               type='text'
               name='writer'
               id='writer'
