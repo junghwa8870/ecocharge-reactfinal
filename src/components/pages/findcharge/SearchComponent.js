@@ -121,7 +121,7 @@ function SearchComponent({ onSearch }) {
           <option value='없음'>없음</option>
         </select>
       </div>
-      <button onClick={handleSearch}>검색하기</button>
+      <button onClick={handleSearch}>검색</button>
     </div>
   );
 }

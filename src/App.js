@@ -10,6 +10,7 @@ import Login from './components/pages/Login.js';
 import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
+import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
 
 function App() {
   return (
@@ -24,11 +25,13 @@ function App() {
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
           {/* 필요한 다른 라우트 추가 */}
           <Route
             path='/'
             element={
               <div className='main'>
+                {/* <SearchBar /> */}
                 {/* <SimpleSlider />
               <MainInfo /> */}
                 <Main />
