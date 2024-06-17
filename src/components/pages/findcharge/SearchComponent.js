@@ -98,7 +98,7 @@ function SearchComponent({ onSearch }) {
         </select>
       </div>
       <div>
-        <label>외부인개방</label>
+        <label>외부인 개방</label>
         <select
           name='publicAccess'
           value={filters.publicAccess}
