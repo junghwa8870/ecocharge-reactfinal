@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import './CarList.scss';
-import { orange } from '@mui/material/colors';
+import { Badge } from 'reactstrap';
 
 const CarList = () => {
   // 버튼 동작 확인용
@@ -13,6 +13,10 @@ const CarList = () => {
     alert('검색버튼 클릭 확인용');
   };
 
+  const handleCarInfoBoxClick = () => {
+    window.location.href = 'https://www.kia.com';
+  };
+
   return (
     <Grid
       container
@@ -20,10 +24,9 @@ const CarList = () => {
       style={{
         width: '80%',
         height: '1700px',
-        backgroundColor: 'pink',
         display: 'flex',
-        flexDirection: 'column', // Flexbox direction을 column으로 설정
-        alignItems: 'center', // 수평 가운데 정렬
+        flexDirection: 'column',
+        alignItems: 'center',
         margin: '200px auto',
       }}
     >
@@ -35,10 +38,9 @@ const CarList = () => {
         item
         className='carbox'
         style={{
-          backgroundColor: 'purple',
-          width: '90%', // 가로 전체 길이 차지
-          flex: 1, // flex-grow를 사용하여 남은 공간 채우기
-          marginTop: '20px', // 상단 여백 추가
+          width: '90%',
+          flex: 1,
+          marginTop: '20px',
           marginBottom: '100px',
         }}
       >
@@ -51,13 +53,13 @@ const CarList = () => {
           <Button
             className='searchBtn'
             variant='contained'
-            color='primary'
+            // color='primary'
             onClick={handleSearchClick}
           >
             검색
           </Button>
         </div>
-        <div className='carInfoBox'>
+        <div className='carInfoBox' onClick={handleCarInfoBoxClick}>
           {[...Array(9)].map((_, index) => (
             <div
               key={index}
@@ -67,24 +69,31 @@ const CarList = () => {
                 flexDirection: 'column',
               }}
             >
-              <Typography variant='h6'>자동차이름</Typography>
-              <Typography variant='body1'>자동차브랜드</Typography>
+              <Typography variant='h6' className='carName'>
+                자동차이름
+              </Typography>
+              <Badge
+                color='dark'
+                pill
+                style={{ width: '100px', margin: '0 10px' }}
+              >
+                KIA
+              </Badge>
               <div className='imageContainer'>
                 <img src='carA.png' alt='CarA' style={{ width: '100%' }} />
               </div>
-              <Typography variant='body2' style={{ backgroundColor: 'orange' }}>
-                자동차설명
+              <Typography variant='body2' className='carStat'>
+                자동차설명1
               </Typography>
-              <div style={{ marginTop: 'auto', marginLeft: 'auto' }}>
-                <Button
-                  className='moreBtn'
-                  variant='contained'
-                  color='primary'
-                  onClick={handleDetailClick}
-                >
-                  상세보기
-                </Button>
-              </div>
+              <Typography variant='body2' className='carStat'>
+                자동차설명2
+              </Typography>
+              <Typography variant='body2' className='carStat'>
+                자동차설명3
+              </Typography>
+              <Typography variant='body2' className='carStat'>
+                자동차설명4
+              </Typography>
             </div>
           ))}
         </div>
