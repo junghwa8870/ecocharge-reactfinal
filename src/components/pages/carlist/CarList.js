@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import './CarList.scss';
 import { Badge } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExpand } from '@fortawesome/free-solid-svg-icons';
 
 const CarList = () => {
   // 버튼 동작 확인용
@@ -94,6 +96,9 @@ const CarList = () => {
               <Typography variant='body2' className='carStat'>
                 자동차설명4
               </Typography>
+              <div style={{ marginTop: 'auto', marginLeft: 'auto' }}>
+                <FontAwesomeIcon icon={faExpand} className='expandIcon' />
+              </div>
             </div>
           ))}
         </div>
