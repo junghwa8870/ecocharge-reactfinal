@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useNavigate } from 'react-router-dom';
 import './NewInfo.scss';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,6 +50,8 @@ const NewInfoBox = ({ title, content }) => {
 };
 
 function NewInfo(props) {
+  const navigate = useNavigate();
+
   const infoTitle = '전기차 판매량 줄었다고?…장기 전망은 "굳건" ';
   const infoContent = `
     블룸버그NEF의 장기 전기차 전망(EVO)에 따르면 배터리 가격의 급격한 하락과 차세대 배터리 기술의 발전, 내연기관차(ICE) 대비 전기차의 경제성 개선이 전 세계적으로 장기적인 전기차 성장을 뒷받침하고 있다.
@@ -83,7 +86,12 @@ function NewInfo(props) {
         </h2>
       </div>
       <div className='newInfoWriteBtnBox'>
-        <Button className='newInfoWriteBtn'>작성하기</Button>
+        <Button
+          className='newInfoWriteBtn'
+          onClick={() => navigate('/newInfoWrite')}
+        >
+          작성하기
+        </Button>
       </div>
 
       <div
