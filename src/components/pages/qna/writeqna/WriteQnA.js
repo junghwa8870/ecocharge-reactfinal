@@ -15,9 +15,7 @@ const WriteQnA = () => {
     const qnaFormData = {
       title,
       content,
-      writer,
       category, // Include category in form data
-      writeDate: new Date().toISOString().split('T')[0], // 현재 날짜를 yyyy-mm-dd 형식으로 저장
     };
     console.log(qnaFormData);
     navigate('/qna');
