@@ -11,6 +11,7 @@ import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
+import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/carList' element={<CarList />} />
           <Route path='/findCharge' element={<FindCharge />} />
           <Route path='/newInfo' element={<NewInfo />} />
+          <Route path='/newInfoWrite' element={<NewInfoWrite />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
           <Route path='/login' element={<Login />} />
