@@ -21,7 +21,7 @@ const Footer = () => {
 
       <div className='footer-content'>
         <div className='footer-left'>
-          <img src='ecocharge_pavicon.png' alt='Logo' className='footer-logo' />
+          <img src='ecologo.png' alt='Logo' className='footer-logo' />
           <div className='footer-title'>
             ECO
             <br />
