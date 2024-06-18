@@ -59,7 +59,7 @@
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: rgba(101, 235, 135, 0.1);
+      background-color: hwb(0 94% 6%);
       border: 2px solid gray;
     }
   
@@ -97,4 +97,10 @@
     }
   }
   
+}
+
+.qnaBtn {
+  &:hover {
+    border: 2px solid black;
+  }
 }
