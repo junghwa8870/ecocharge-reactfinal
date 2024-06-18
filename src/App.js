@@ -6,11 +6,13 @@ import FindCharge from './components/pages/findcharge/FindCharge.js';
 import NewInfo from './components/pages/newinfo/NewInfo.js';
 import MyPage from './components/pages/mypage/MyPage.js';
 import QnA from './components/pages/qna/QnA.js';
-import Login from './components/pages/Login.js';
+import Login from './components/user/Login.js';
 import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
+import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
+import SmsVerification from './components/user/SmsVerification.js';
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
           <Route path='/qna' element={<QnA />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
+          <Route path='/auth/kakao' element={<KakaoLoginHandler />} />
+          <Route path='/sms' element={<SmsVerification />} />
+
           {/* 필요한 다른 라우트 추가 */}
           <Route
             path='/'
