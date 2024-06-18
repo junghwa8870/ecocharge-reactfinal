@@ -43,6 +43,7 @@ const WriteQnA = () => {
           <FormGroup className='qWriteForm'>
             <Label for='qcategory'>카테고리</Label>
             <Input
+              className='qnaSelect'
               type='select'
               name='qcategory'
               id='qcategory'
