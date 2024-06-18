@@ -53,17 +53,17 @@ const Header = () => {
               }}
             >
               <img
-                src='ecocharge_pavicon.png'
+                src='ecologo.png'
                 alt='Logo'
-                style={{ width: 100, paddingTop: 15 }}
+                style={{ width: 100, paddingTop: 10 }}
               />
               <div
                 className='logo-title'
                 style={{
-                  color: '#228b22',
+                  color: 'rgb(13, 110, 253)',
                   fontWeight: 700,
                   lineHeight: 1.2,
-                  marginLeft: 40,
+                  marginLeft: 20,
                   fontSize: 24,
                   marginTop: 30,
                   textAlign: 'center',
@@ -126,7 +126,7 @@ const Header = () => {
               onClick={handleClickOpen}
               variant='outlined'
               style={{
-                color: '#228b22',
+                color: 'rgb(13, 110, 253)',
                 borderColor: 'black',
                 fontFamily: 'Jua',
                 fontSize: '20px',
