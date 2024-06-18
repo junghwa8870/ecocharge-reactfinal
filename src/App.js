@@ -12,10 +12,13 @@ import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
 import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
+import Favicon from 'react-favicon';
 
 function App() {
   return (
     <>
+      <Favicon url='/favicon-32x32.png' />
+
       <div className='app' style={{ display: 'flex', flexDirection: 'column' }}>
         <Header />
         {/* <Main /> */}
