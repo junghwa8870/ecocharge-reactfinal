@@ -1,5 +1,5 @@
 .newInfoWriteContainer {
-    width: 80%;
+    width: 50%;
     margin: 200px auto 100px;
     // padding: 2rem;
     // border: 1px solid #ccc;
@@ -21,18 +21,24 @@
     }
   
     .wirteCompleteBtn {
-      width: 13%;
+      // width: 13%;
       padding: 0.75rem;
       font-size: 1.2rem;
-      margin-left: 500px;
+      margin-left: 300px;
+      text-wrap: nowrap;
+      background-color: #0D6EFD;
+
+      &:hover {
+        border: 2px solid black;
+      }
     }
 
     .newInfoBackBtn {
       margin-bottom: 1rem;   
       position: absolute;
-      right: 380px;
-      top: 300px;
-      border: 3px solid #228b22;
+      right: 600px;
+      top: 320px;
+      border: 3px solid gray;
       background-color: white;
       color: black;
       font-weight: 800;
@@ -55,7 +61,7 @@
     // border: 1px solid gray;
 }
 
-.wWriterBox {
+.wSourceBox {
   box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
 }
 
