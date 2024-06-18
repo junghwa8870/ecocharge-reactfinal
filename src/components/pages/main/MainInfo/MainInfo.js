@@ -14,7 +14,7 @@ const MainInfo = () => {
         className='icontainer'
         style={{ width: '80%', height: '450px', marginTop: '20px' }}
       >
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo1' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -27,7 +27,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo2' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -40,7 +40,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo3' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -53,7 +53,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo4' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -76,6 +76,7 @@ const MainInfo = () => {
           }}
         >
           <Button
+            className='mainInfoDetailBtn'
             component={Link}
             to='/newInfo'
             variant='contained'

@@ -15,22 +15,22 @@ function SimpleSlider() {
   return (
     <Slider {...settings}>
       <div className='imgbox'>
-        <img src='carA.png' alt='Slide 1' />
+        <img className='mainCarImg' src='carA.png' alt='Slide 1' />
       </div>
       <div className='imgbox'>
-        <img src='car2.jpg' alt='Slide 2' />
+        <img className='mainCarImg' src='car2.jpg' alt='Slide 2' />
       </div>
       <div className='imgbox'>
-        <img src='car3.jpg' alt='Slide 3' />
+        <img className='mainCarImg' src='car3.jpg' alt='Slide 3' />
       </div>
       <div className='imgbox'>
-        <img src='car4.jpg' alt='Slide 4' />
+        <img className='mainCarImg' src='car4.jpg' alt='Slide 4' />
       </div>
       <div className='imgbox'>
-        <img src='car5.jpg' alt='Slide 5' />
+        <img className='mainCarImg' src='car5.jpg' alt='Slide 5' />
       </div>
       <div className='imgbox'>
-        <img src='car6.jpg' alt='Slide 6' />
+        <img className='mainCarImg' src='car6.jpg' alt='Slide 6' />
       </div>
     </Slider>
   );
