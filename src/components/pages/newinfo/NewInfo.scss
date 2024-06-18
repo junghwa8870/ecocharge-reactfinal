@@ -13,7 +13,7 @@
     
     
     .newInfoWriteBtn {
-        border: 3px solid #228b22;
+        border: 3px solid gray;
         background-color: white;
         color: black;
         font-weight: 800;
@@ -38,8 +38,17 @@
     .newInfoWriteDate {
         margin-right: 20px;
     }
-    .newInfoWriter{
+    .newInfoView {
         margin-right: 20px;
+    }
+
+    .newInfoSource {
+        text-decoration: none;
+        color: gray;
+
+        &:hover {
+            color: black;
+        }
     }
     
 }

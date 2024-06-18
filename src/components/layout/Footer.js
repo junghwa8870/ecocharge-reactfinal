@@ -6,22 +6,30 @@ const Footer = () => {
     <footer className='footer'>
       <ul className='footer-links'>
         <li>
-          <a href='#privacy'>개인정보처리방침</a>
+          <a href='https://www.pipc.go.kr/np/default/page.do?mCode=H010000000'>
+            개인정보처리방침
+          </a>
         </li>
         <li>
-          <a href='#email'>이메일 무단수집거부</a>
+          <a href='https://www.copyright.or.kr/customer-center/user-guide/email-rejection/index.do'>
+            이메일 무단수집거부
+          </a>
         </li>
         <li>
-          <a href='#video'>영상정보처리기기 운영관리지침</a>
+          <a href='https://www.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS217&mCode=D010030000&nttId=9870'>
+            영상정보처리기기 운영관리지침
+          </a>
         </li>
         <li>
-          <a href='#report'>불편민원신고센터</a>
+          <a href='https://www.acrc.go.kr/menu.es?mid=a10201010100'>
+            불편민원신고센터
+          </a>
         </li>
       </ul>
 
       <div className='footer-content'>
         <div className='footer-left'>
-          <img src='ecocharge_pavicon.png' alt='Logo' className='footer-logo' />
+          <img src='ecologo.png' alt='Logo' className='footer-logo' />
           <div className='footer-title'>
             ECO
             <br />
