@@ -22,7 +22,7 @@ const MyPage = () => {
       </Grid>
       <Grid container className='subContainer'>
         <Typography className='titles'>충전소 예약 내역</Typography>
-        <Typography className='titles'>내가 쓴 문의사항</Typography>
+        <Typography className='titles'>나의 문의사항</Typography>
         <ReservationDetails />
         <InqauiryList />
       </Grid>

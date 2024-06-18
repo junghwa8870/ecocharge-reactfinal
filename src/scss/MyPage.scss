@@ -2,44 +2,66 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 200px;
+    padding-top: 110px;
     padding-bottom: 100px;
-    background-color: aqua;
+    background-color: #f0f0f0;
 
     .myInfoContainer {
-        width: 80%;
-        height: 20rem;
+        height: 30rem;
         display: flex;
         justify-content: space-between;
-        background-color: black;
         align-items: center;
-        border: 3px, solid, black;
+        font-size: 2rem;
+        font-family: 'Noto Sans KR', sans-serif; 
+        font-weight: bold;
+        color: yellow; 
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        border-bottom: 5px solid black;
+        border-top: 5px solid black;
+        
 
         .myInfoWrapper {
             width: 65.4%;
             height: 100%;
-            background-color: lightgray;
+            background-color: rgb(129, 172, 236);
             padding: 20px 0;
+            border-right: 5px solid black;
         }
 
         .bookmarkChargeSpaceWrapper {
             width: 34.4%;
             height: 100%;
-            background-color: lightgray;
+            background-color: rgb(129, 172, 236);
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
-            padding: 20px 0;
+            border-left: 5px solid black;
+
+            
 
             .bookmarkChargeSpaceTitle {
                 font-size: 2rem;
-                font-weight: 700;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 30px;
+                animation: blink 0.5s infinite alternate;
+                color: initial;
+            }
+
+            @keyframes blink {
+                0%, 100% {
+                    color: initial;
+                }
+                50% {
+                    color: yellow;
+                }
             }
         }
     }
 
     .subContainer {
-        margin-top: 150px;
+        margin-top: 60px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -47,9 +69,14 @@
         .titles {
             width: 40%;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
             font-size: 2rem;
-            font-weight: 700;
+            font-family: 'Noto Sans KR', sans-serif; 
+            font-weight: bold;
+            color: #333; 
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
         }
+        
     }
+    
 }
