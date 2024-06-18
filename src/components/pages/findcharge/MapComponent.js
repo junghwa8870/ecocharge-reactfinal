@@ -1,90 +1,88 @@
-// import React, { useEffect } from 'react';
-
-// function MapComponent({ searchParams }) {
-//   useEffect(() => {
-//     // 카카오 API 로드
-//     const script = document.createElement('script');
-//     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_API_KEY&libraries=services`;
-//     script.async = true;
-//     script.onload = () => {
-//       const { kakao } = window;
-
-//       // 지도 초기화
-//       const container = document.getElementById('map');
-//       const options = {
-//         center: new kakao.maps.LatLng(33.450701, 126.570667),
-//         level: 3,
-//       };
-//       const map = new kakao.maps.Map(container, options);
-
-//       // 검색 파라미터가 있을 경우, 해당 위치로 이동
-//       if (searchParams) {
-//         const ps = new kakao.maps.services.Places();
-
-//         ps.keywordSearch(searchParams.keyword, (data, status) => {
-//           if (status === kakao.maps.services.Status.OK) {
-//             const bounds = new kakao.maps.LatLngBounds();
-//             for (let i = 0; i < data.length; i++) {
-//               const place = data[i];
-//               const markerPosition = new kakao.maps.LatLng(place.y, place.x);
-
-//               const marker = new kakao.maps.Marker({
-//                 position: markerPosition,
-//               });
-
-//               marker.setMap(map);
-//               bounds.extend(markerPosition);
-//             }
-//             map.setBounds(bounds);
-//           }
-//         });
-//       }
-//     };
-
-//     document.head.appendChild(script);
-
-//     return () => {
-//       // Cleanup the script if the component unmounts
-//       document.head.removeChild(script);
-//     };
-//   }, [searchParams]);
-
-//   return (
-//     <div
-//       id='map'
-//       style={{ width: '100%', height: '100%', position: 'relative' }}
-//     >
-//       {/* 카카오 지도가 이 div에 표시*/}
-//     </div>
-//   );
-// }
-
-// export default MapComponent;
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function MapComponent({ searchParams }) {
+  const [map, setMap] = useState(null);
+
+  useEffect(() => {
+    const loadNaverMap = async () => {
+      try {
+        const response = await fetch('/api/get-naver-map-client-id');
+        if (!response.ok) {
+          throw new Error('Failed to fetch Naver Maps API client ID');
+        }
+        const json = await response.json();
+        const { ncpClientId } = json;
+
+        const script = document.createElement('script');
+        script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}`;
+        script.async = true;
+        script.onload = () => {
+          const { naver } = window;
+          const mapOptions = {
+            center: new naver.maps.LatLng(37.3595704, 127.105399),
+            zoom: 10,
+          };
+          const mapInstance = new naver.maps.Map('map', mapOptions);
+          setMap(mapInstance);
+        };
+        document.head.appendChild(script);
+      } catch (error) {
+        console.error('Failed to load Naver Maps API:', error);
+      }
+    };
+
+    loadNaverMap();
+
+    return () => {
+      const existingScript = document.querySelector(
+        `script[src^="https://openapi.map.naver.com/openapi/v3/maps.js"]`,
+      );
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!searchParams || !map) return;
+
+    const fetchSearchResults = async () => {
+      try {
+        const response = await fetch(
+          `/api/naver-map/search?keyword=${searchParams.keyword}`,
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch search results');
+        }
+        const data = await response.json();
+        const bounds = new window.naver.maps.LatLngBounds();
+
+        data.items.forEach((place) => {
+          const markerPosition = new window.naver.maps.LatLng(
+            place.mapy,
+            place.mapx,
+          );
+          const marker = new window.naver.maps.Marker({
+            position: markerPosition,
+            map,
+          });
+          bounds.extend(markerPosition);
+        });
+
+        map.fitBounds(bounds);
+      } catch (error) {
+        console.error('Failed to fetch search results:', error);
+      }
+    };
+
+    fetchSearchResults();
+  }, [searchParams, map]);
+
   return (
     <div
       id='map'
       style={{ width: '100%', height: '100%', position: 'relative' }}
-    >
-      {/* 지도 표시*/}
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: '#f0f0f0',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '1.5rem',
-          color: '#555',
-        }}
-      >
-        지도 표시 임시로~
-      </div>
-    </div>
+    />
   );
 }
 
