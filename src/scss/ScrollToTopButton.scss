@@ -1,24 +1,28 @@
 .scroll-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-  
-  .top-button {
-    width: 60px;
-    height: 60px;
-    background-color: #ffffff; /* 갈색 배경색 */
-    color: #000000; /* 흰색 아이콘색 */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-    border: 3px solid;
-  }
-  
-  .top-button:hover {
-    opacity: 0.8;
-  }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.top-button {
+  width: 60px;
+  height: 60px;
+  background-color: hsl(216, 74%, 82%); /* 배경색 */
+  color: white; /* 아이콘 색상 */
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.top-button:hover {
+  background-color: #0D6EFD; /* 호버 시 배경색 */
+  color: #ffffff; /* 호버 시 아이콘 색상 */
+  transform: scale(1.1); /* 호버 시 확대 효과 */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 효과 강화 */
+}

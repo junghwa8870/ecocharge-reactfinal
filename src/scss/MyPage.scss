@@ -1,0 +1,79 @@
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 110px;
+    background-color: #f0f0f0;
+
+    .myInfoContainer {
+        height: 30rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+        font-family: 'Noto Sans KR', sans-serif; 
+        font-weight: bold;
+        color: yellow; 
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        border-bottom: 3px solid black;
+        border-top: 3px solid black;
+        
+
+        .myInfoWrapper {
+            width: 65.4%;
+            height: 100%;
+            background-color: rgb(129, 172, 236);
+            padding: 20px 0;
+            border-right: 3px solid black;
+        }
+
+        .bookmarkChargeSpaceWrapper {
+            width: 34.4%;
+            height: 100%;
+            background-color: rgb(129, 172, 236);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            border-left: 3px solid black;
+
+            
+
+            .bookmarkChargeSpaceTitle {
+                font-size: 2rem;
+                text-align: center;
+                margin-top: 30px;
+                animation: blink 0.5s infinite alternate;
+                color: initial;
+            }
+
+            @keyframes blink {
+                0%, 100% {
+                    color: initial;
+                }
+                50% {
+                    color: yellow;
+                }
+            }
+        }
+    }
+
+    .subContainer {
+        margin-top: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 80px 250px;
+
+        .titles {
+            width: 40%;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #0D6EFD; 
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+        }
+        
+    }
+    
+}

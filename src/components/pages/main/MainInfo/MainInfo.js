@@ -11,10 +11,10 @@ const MainInfo = () => {
       </Typography>
       <Grid
         container
-        className='container'
+        className='icontainer'
         style={{ width: '80%', height: '450px', marginTop: '20px' }}
       >
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo1' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -27,7 +27,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo2' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -40,7 +40,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo3' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -53,7 +53,7 @@ const MainInfo = () => {
             </div>
           </Link>
         </Grid>
-        <Grid item className='box' flex={2}>
+        <Grid item className='ibox' flex={2}>
           <Link to='/newInfo4' className='box-link'>
             <div className='ntitle'>
               완속, 급속 충전시설 보조사업 신제품 수요조사 알림
@@ -76,11 +76,12 @@ const MainInfo = () => {
           }}
         >
           <Button
+            className='mainInfoDetailBtn'
             component={Link}
             to='/newInfo'
             variant='contained'
             style={{
-              backgroundColor: '#228b22',
+              backgroundColor: 'rgb(13, 110, 253)',
               // backgroundColor: 'white',
               color: 'white',
               fontWeight: 'bold',
@@ -89,11 +90,11 @@ const MainInfo = () => {
               padding: '12px 24px',
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
               transition: 'background-color 0.3s, color 0.3s, transform 0.2s',
-              '&:hover': {
-                backgroundColor: '#1a751d',
-                transform: 'scale(1.05)',
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-              },
+              // '&:hover': {
+              //   backgroundColor: '#1a751d',
+              //   transform: 'scale(1.05)',
+              //   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+              // },
             }}
           >
             더보기

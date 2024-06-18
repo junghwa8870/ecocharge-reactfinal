@@ -11,12 +11,20 @@ import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
+<<<<<<< HEAD
 import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
 import SmsVerification from './components/user/SmsVerification.js';
+=======
+import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
+import Favicon from 'react-favicon';
+import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
+>>>>>>> e19d2a592e79394e203d0894a4a85142bcef279b
 
 function App() {
   return (
     <>
+      <Favicon url='/favicon-32x32.png' />
+
       <div className='app' style={{ display: 'flex', flexDirection: 'column' }}>
         <Header />
         {/* <Main /> */}
@@ -24,8 +32,10 @@ function App() {
           <Route path='/carList' element={<CarList />} />
           <Route path='/findCharge' element={<FindCharge />} />
           <Route path='/newInfo' element={<NewInfo />} />
+          <Route path='/newInfoWrite' element={<NewInfoWrite />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
+          <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
           <Route path='/auth/kakao' element={<KakaoLoginHandler />} />

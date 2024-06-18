@@ -40,17 +40,17 @@ const Header = () => {
               }}
             >
               <img
-                src='ecocharge_pavicon.png'
+                src='ecologo.png'
                 alt='Logo'
-                style={{ width: 100, paddingTop: 15 }}
+                style={{ width: 100, paddingTop: 10 }}
               />
               <div
                 className='logo-title'
                 style={{
-                  color: '#228b22',
+                  color: 'rgb(13, 110, 253)',
                   fontWeight: 700,
                   lineHeight: 1.2,
-                  marginLeft: 40,
+                  marginLeft: 20,
                   fontSize: 24,
                   marginTop: 30,
                   textAlign: 'center',
@@ -113,7 +113,7 @@ const Header = () => {
               onClick={toggleButtons}
               variant='outlined'
               style={{
-                color: '#228b22',
+                color: 'rgb(13, 110, 253)',
                 borderColor: 'black',
                 fontFamily: 'Jua',
                 fontSize: '20px',
@@ -226,6 +226,87 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Login</DialogTitle>
+        <DialogContent>
+          <Button
+            className='naverLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#1ec800',
+            //   color: '#fff',
+            // }}
+            // fullWidth
+          >
+            <img
+              className='naver'
+              src={'naverLogo.png'}
+              alt='naver'
+              style={{
+                width: '140px',
+              }}
+            />
+            {/* 네이버 로그인 */}
+          </Button>
+          <Button
+            className='kakaoLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#ffeb00',
+            //   color: '#000',
+            // }}
+            // fullWidth
+          >
+            <img
+              src={'kakaoLogo.png'}
+              className='kakao'
+              alt='kakao'
+              style={{ width: '150px' }}
+            />
+            {/* 카카오 로그인 */}
+          </Button>
+          <Button
+            className='googleLoginBtn'
+            variant='contained'
+            style={{
+              // marginBottom: '10px',
+              // backgroundColor: '#4285F4',
+              color: 'gray',
+              backgroundColor: 'white',
+              fontWeight: '600',
+              width: '150px',
+              height: '38px',
+              // marginTop: '5px',
+              marginLeft: '10px',
+              marginRight: '10px',
+              fontSize: '12px',
+              lineHeight: 'unset',
+            }}
+            fullWidth
+          >
+            <img
+              className='google'
+              src={'googleLogo.png'}
+              alt='Google'
+              style={{
+                width: '25px',
+                marginLeft: '-27px',
+                // paddingRight: '17px',
+                marginRight: '10px',
+              }}
+            />
+            구글 로그인
+          </Button>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color='primary'>
+            닫기
+          </Button>
+        </DialogActions>
+      </Dialog>
     </AppBar>
   );
 };
