@@ -18,19 +18,19 @@ function SimpleSlider() {
         <img className='mainCarImg' src='carA.png' alt='Slide 1' />
       </div>
       <div className='imgbox'>
-        <img className='mainCarImg' src='car2.jpg' alt='Slide 2' />
+        <img className='mainCarImg' src='carB.png' alt='Slide 2' />
       </div>
       <div className='imgbox'>
-        <img className='mainCarImg' src='car3.jpg' alt='Slide 3' />
+        <img className='mainCarImg' src='carC.png' alt='Slide 3' />
       </div>
       <div className='imgbox'>
-        <img className='mainCarImg' src='car4.jpg' alt='Slide 4' />
+        <img className='mainCarImg' src='carD.png' alt='Slide 4' />
       </div>
       <div className='imgbox'>
-        <img className='mainCarImg' src='car5.jpg' alt='Slide 5' />
+        <img className='mainCarImg' src='carE.png' alt='Slide 5' />
       </div>
       <div className='imgbox'>
-        <img className='mainCarImg' src='car6.jpg' alt='Slide 6' />
+        <img className='mainCarImg' src='carF.png' alt='Slide 6' />
       </div>
     </Slider>
   );
