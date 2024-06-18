@@ -22,7 +22,7 @@ const NewInfoBox = ({ title, content }) => {
           onClick={toggle}
           style={{
             // marginBottom: '1rem',
-            backgroundColor: 'green',
+            backgroundColor: '#0D6EFD',
             margin: '5px',
           }}
         >
@@ -44,8 +44,14 @@ const NewInfoBox = ({ title, content }) => {
 
       <div className='newInfoSmall'>
         <div className='newInfoWriteDate'>작성일: 2024/01/01</div>
-        <div className='newInfoWriter'>작성자: 홍길동</div>
         <div className='newInfoView'>조회수: 3</div>
+        <a
+          href=' https://www.digitaltoday.co.kr/news/articleView.html?idxno=521162'
+          className='newInfoSource'
+        >
+          출처:
+          https://www.digitaltoday.co.kr/news/articleView.html?idxno=521162
+        </a>
       </div>
     </div>
   );

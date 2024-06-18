@@ -38,7 +38,7 @@ const ScrollToTopButton = () => {
           <FontAwesomeIcon
             icon={faArrowUp}
             size='lg'
-            style={{ color: '#266d5f' }}
+            // style={{ color: '#266d5f' }}
           />
         </div>
       )}
