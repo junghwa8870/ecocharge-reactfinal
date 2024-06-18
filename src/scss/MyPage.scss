@@ -1,0 +1,55 @@
+.mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 200px;
+    padding-bottom: 100px;
+    background-color: aqua;
+
+    .myInfoContainer {
+        width: 80%;
+        height: 20rem;
+        display: flex;
+        justify-content: space-between;
+        background-color: black;
+        align-items: center;
+        border: 3px, solid, black;
+
+        .myInfoWrapper {
+            width: 65.4%;
+            height: 100%;
+            background-color: lightgray;
+            padding: 20px 0;
+        }
+
+        .bookmarkChargeSpaceWrapper {
+            width: 34.4%;
+            height: 100%;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px 0;
+
+            .bookmarkChargeSpaceTitle {
+                font-size: 2rem;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .subContainer {
+        margin-top: 150px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .titles {
+            width: 40%;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+}
