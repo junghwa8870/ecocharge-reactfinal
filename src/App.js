@@ -13,6 +13,7 @@ import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
 import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
 import Favicon from 'react-favicon';
+import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/newInfoWrite' element={<NewInfoWrite />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
+          <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
           {/* 필요한 다른 라우트 추가 */}
