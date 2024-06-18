@@ -7,7 +7,7 @@ function SearchBar({ onSearch }) {
 
   const handleButtonClick = (type) => {
     setSearchType(type); // 클릭한 버튼에 해당하는 검색 타입으로 설정
-    onSearch({ type, query: searchQuery }); // onSearch 호출
+    onSearch({ 충전소: type, 검색어: searchQuery }); // onSearch 호출
   };
 
   const handleInputChange = (e) => {
@@ -19,7 +19,7 @@ function SearchBar({ onSearch }) {
       {/* 검색창 */}
       <input
         type='text'
-        placeholder='검색어를 입력하세요'
+        placeholder='검색 지역을 입력하세요.'
         value={searchQuery}
         onChange={handleInputChange}
       />
