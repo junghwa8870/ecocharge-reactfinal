@@ -49,11 +49,11 @@
   }
 
   .imgbox {
-    
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
      /* 세로 중앙 정렬 */
     height: 100%; /* 부모(.slick-slider)의 높이와 같게 설정 */
+    position: relative;
 
     .mainCarImg {
       display: block;
