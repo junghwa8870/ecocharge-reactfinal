@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './SimpleSlider.scss';
+import axios from 'axios';
+import SliderItem from './sliderItem/SliderItem';
 
 function SimpleSlider() {
   let settings = {
@@ -12,26 +14,25 @@ function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  const [sliderItems, setSliderItems] = useState([]);
+
+  useEffect(() => {
+    const fetchSlider = async () => {
+      try {
+        const res = await axios.get('http://localhost:8181/main/slider');
+        setSliderItems(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSlider();
+  }, []);
   return (
     <Slider {...settings}>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='carA.png' alt='Slide 1' />
-      </div>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='car2.jpg' alt='Slide 2' />
-      </div>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='car3.jpg' alt='Slide 3' />
-      </div>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='car4.jpg' alt='Slide 4' />
-      </div>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='car5.jpg' alt='Slide 5' />
-      </div>
-      <div className='imgbox'>
-        <img className='mainCarImg' src='car6.jpg' alt='Slide 6' />
-      </div>
+      {sliderItems.map((sliderItem) => (
+        <SliderItem key={sliderItem.dataId} props={sliderItem} />
+      ))}
     </Slider>
   );
 }

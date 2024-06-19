@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MainInfo.scss';
-import { Grid, Typography, Button } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
+import MainInfoItem from './mainInfoItem/MainInfoItem.js';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const MainInfo = () => {
+  const [newsList, setNewsList] = useState([]);
+
+  useEffect(() => {
+    const mainInfoRendering = async () => {
+      const res = await axios.get('http://localhost:8181/main/news');
+      setNewsList(res.data);
+    };
+
+    mainInfoRendering();
+  }, []);
+
   return (
     <div className='main-info-container'>
       <Typography variant='h4' className='title'>
@@ -14,58 +27,9 @@ const MainInfo = () => {
         className='icontainer'
         style={{ width: '80%', height: '450px', marginTop: '20px' }}
       >
-        <Grid item className='ibox' flex={2}>
-          <Link to='/newInfo1' className='box-link'>
-            <div className='ntitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='ncontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='ibox' flex={2}>
-          <Link to='/newInfo2' className='box-link'>
-            <div className='ntitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='ncontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='ibox' flex={2}>
-          <Link to='/newInfo3' className='box-link'>
-            <div className='ntitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='ncontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='ibox' flex={2}>
-          <Link to='/newInfo4' className='box-link'>
-            <div className='ntitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='ncontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
+        {newsList.map((news) => (
+          <MainInfoItem key={news.newsNo} data={news} />
+        ))}
         <Grid
           item
           xs={12}

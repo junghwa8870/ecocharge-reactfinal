@@ -96,9 +96,9 @@ const CarList = () => {
               <Typography variant='body2' className='carStat'>
                 자동차설명4
               </Typography>
-              <div style={{ marginTop: 'auto', marginLeft: 'auto' }}>
-                <FontAwesomeIcon icon={faExpand} className='expandIcon' />
-              </div>
+              {/* <div style={{ marginTop: 'auto', marginLeft: 'auto' }}> */}
+              <FontAwesomeIcon icon={faExpand} className='expandIcon' />
+              {/* </div> */}
             </div>
           ))}
         </div>
