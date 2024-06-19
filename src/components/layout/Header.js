@@ -3,6 +3,9 @@ import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '../../scss/Header.scss';
 import { Translate } from '@mui/icons-material';
+import { KAKAO_AUTH_URL } from '../../config/kakao-config';
+import { NAVER_AUTH_URL } from '../../config/naver-config';
+import { GOOGLE_AUTH_URL } from '../../config/google-config';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -97,11 +100,11 @@ const Header = () => {
                 to={link.to}
                 underline='none'
                 color='black'
-                fontFamily='Jua'
                 marginRight='60'
                 fontSize='20px'
+                fontWeight='700'
                 textAlign='center'
-                paddingRight='100px'
+                paddingRight='80px'
               >
                 {link.text}
               </MuiLink>
@@ -178,6 +181,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
+                  onClick={() => (window.location.href = NAVER_AUTH_URL)}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -204,6 +208,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
+                  onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
                   variant='contained'
                   style={{
                     marginBottom: '10px',

@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MainQnA.scss';
 import { Grid, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import MainQnAItem from './mainQnAItem/MainQnAItem';
+import axios from 'axios';
 
 const MainQnA = () => {
+  const [qnaList, setQnaList] = useState([]);
+
+  useEffect(() => {
+    const MainQnARendering = async () => {
+      const res = await axios.get('http://localhost:8181/main/qna');
+      setQnaList(res.data);
+    };
+
+    MainQnARendering();
+  }, []);
   return (
     <div className='main-qna-container'>
       <Typography variant='h4' className='qtitle'>
@@ -14,58 +26,9 @@ const MainQnA = () => {
         className='qcontainer'
         style={{ width: '80%', height: '450px', marginTop: '20px' }}
       >
-        <Grid item className='qbox' flex={2}>
-          <Link to='/qna1' className='qbox-link'>
-            <div className='qtitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='qcontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='qbox' flex={2}>
-          <Link to='/qna2' className='qbox-link'>
-            <div className='qtitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='qcontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='qbox' flex={2}>
-          <Link to='/qna3' className='qbox-link'>
-            <div className='qtitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='qcontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
-        <Grid item className='qbox' flex={2}>
-          <Link to='/qna4' className='qbox-link'>
-            <div className='qtitle'>
-              완속, 급속 충전시설 보조사업 신제품 수요조사 알림
-            </div>
-            <div className='qcontent'>
-              우리는 소셜 미디어 기능의 제공과 데이터 분석 및 본 사이트가 올바로
-              동작하고 개인화된 콘텐츠와 광고를 제공하기 위해 쿠키를 사용하고
-              있습니다. 회사 사이트에 대한 귀하의 사용 정보를 회사의 소셜
-              미디어, 광고 및 분석 협력사와 공유합니다.
-            </div>
-          </Link>
-        </Grid>
+        {qnaList.map((qna) => (
+          <MainQnAItem key={qna.qnaNo} data={qna} />
+        ))}
         <Grid
           item
           xs={12}
