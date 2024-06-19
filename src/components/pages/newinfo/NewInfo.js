@@ -4,6 +4,7 @@ import './NewInfo.scss';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faLeaf } from '@fortawesome/free-solid-svg-icons';
+import Paging from '../../layout/Paging';
 
 const NewInfoBox = ({ title, content }) => {
   const [collapse, setCollapse] = useState(false);
@@ -121,6 +122,16 @@ function NewInfo(props) {
         <NewInfoBox title={infoTitle} content={infoContent} />
         <NewInfoBox title={infoTitle} content={infoContent} />
         <NewInfoBox title={infoTitle} content={infoContent} />
+      </div>
+      <div
+        className='paging-container'
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '200px',
+        }}
+      >
+        <Paging />
       </div>
     </>
   );
