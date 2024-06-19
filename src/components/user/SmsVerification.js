@@ -8,6 +8,8 @@ const SmsVerification = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
   const [showInput, setShowInput] = useState(false);
+  //
+  //
 
   const handleChange = (e) => {
     const { name, value } = e.target;
