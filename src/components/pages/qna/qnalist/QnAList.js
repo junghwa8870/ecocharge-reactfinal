@@ -104,7 +104,9 @@ const QnAList = () => {
           <div className='coment'>●업무시간 : 9:00 ~ 18:00</div>
         </div>
         <div className='myqnaBtnbox'>
-          <Button className='goAsk'>문의하기</Button>
+          <Button className='goAsk' onClick={() => navigate('/questionform')}>
+            문의하기
+          </Button>
           <Button className='goMyAskList'>내 문의내역</Button>
         </div>
       </div>
