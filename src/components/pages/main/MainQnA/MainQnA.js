@@ -44,7 +44,7 @@ const MainQnA = () => {
             to='/qna'
             variant='contained'
             style={{
-              backgroundColor: '#228b22',
+              backgroundColor: 'rgb(13, 110, 253)',
               // backgroundColor: 'white',
               color: 'white',
               fontWeight: 'bold',
@@ -53,11 +53,11 @@ const MainQnA = () => {
               padding: '12px 24px',
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
               transition: 'background-color 0.3s, color 0.3s, transform 0.2s',
-              '&:hover': {
-                backgroundColor: '#1a751d',
-                transform: 'scale(1.05)',
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-              },
+              // '&:hover': {
+              //   backgroundColor: '#1a751d',
+              //   transform: 'scale(1.05)',
+              //   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+              // },
             }}
           >
             더보기

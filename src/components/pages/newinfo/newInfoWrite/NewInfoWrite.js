@@ -64,13 +64,13 @@ const NewInfoWrite = () => {
             />
           </FormGroup>
           <FormGroup className='infoWriteForm'>
-            <Label for='writer'>작성자</Label>
+            <Label for='wsource'>출처</Label>
             <Input
-              className='wWriterBox'
+              className='wSourceBox'
               type='text'
               name='writer'
               id='writer'
-              placeholder='작성자 이름을 입력하세요'
+              placeholder='출처를 적어주세요'
               value={writer}
               onChange={(e) => setWriter(e.target.value)}
             />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './QnA.scss';
 import CategoryFilter from './CategoryFilter';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   {
@@ -127,15 +128,15 @@ const QnA = () => {
     );
   }, [category]);
 
-  const handleAddQuestion = () => {
-    // 여기에 새 질문을 추가하는 로직을 구현할 수 있습니다.
-    console.log('작성하기 버튼 클릭');
-  };
+  const navigate = useNavigate();
 
   return (
     <div className='qnacontainer'>
       <div className='qnatitle'>Q & A</div>
-      <button className='add-question-button' onClick={handleAddQuestion}>
+      <button
+        className='add-question-button'
+        onClick={() => navigate('/writeqna')}
+      >
         작성하기
       </button>
       <CategoryFilter
