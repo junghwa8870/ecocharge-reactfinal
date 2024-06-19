@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import {
-  AppBar,
-  Grid,
-  Toolbar,
-  Link as MuiLink,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from '@mui/material';
+import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '../../scss/Header.scss';
+import { Translate } from '@mui/icons-material';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,6 +14,8 @@ const Header = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [showButtons, setShowButtons] = useState(false);
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
@@ -139,113 +131,110 @@ const Header = () => {
                 fontSize: '20px',
                 borderWidth: '3px',
                 borderRadius: '10px',
-                fontWeight: '200',
-                marginTop: '50px',
-                marginLeft: '100px',
-                background: 'white',
+                fontWeight: '600',
               }}
             >
               Login
             </Button>
-            <div
-              className={`additional-buttons-container ${showButtons ? 'show' : ''}`}
-              style={{
-                position: 'absolute',
-                top: '90%',
-                backgroundColor: '#fff',
-                width: '200px', // 가로 넓이 설정
-                borderRadius: '5px',
-                zIndex: 1,
-                marginTop: '30px',
-                marginLeft: '150px',
-                opacity: showButtons ? 1 : 0,
-                transition: 'opacity 0.5s ease-in-out',
-                pointerEvents: showButtons ? 'auto' : 'none',
-              }}
-            >
-              <Button
-                className='kakaoLoginBtn'
+            {showButtons && (
+              <div
+                className={`additional-buttons-container`}
                 style={{
-                  color: 'gray',
-                  backgroundColor: 'white',
-                  fontWeight: '600',
-                  width: '120px',
-                  height: '50px',
-                  marginTop: '5px',
-                  marginLeft: '10px',
-                  marginRight: '10px',
-                  fontSize: '12px',
-                  lineHeight: 'unset',
-                }}
-              >
-                <img
-                  src={'kakaoLogo.png'}
-                  className='kakao'
-                  alt='kakao'
-                  style={{
-                    width: '120px',
-                    marginLeft: '5px',
-                  }}
-                />
-                {/* 카카오 로그인 */}
-              </Button>
-              <Button
-                className='naverLoginBtn'
-                style={{
-                  color: 'gray',
-                  backgroundColor: 'white',
-                  fontWeight: '600',
-                  width: '120px',
-                  height: '50px',
-                  marginTop: '5px',
-                  marginLeft: '10px',
-                  marginRight: '10px',
-                  fontSize: '12px',
-                  lineHeight: 'unset',
-                }}
-              >
-                <img
-                  className='naver'
-                  src={'naverLogo.png'}
-                  alt='naver'
-                  style={{
-                    width: '120px',
-                    marginLeft: '5px',
-                  }}
-                />
-                {/* 네이버 로그인 */}
-              </Button>
-              <Button
-                className='googleLoginBtn'
-                variant='contained'
-                style={{
-                  marginBottom: '10px',
-                  color: 'gray',
-                  backgroundColor: 'white',
-                  fontWeight: '600',
-                  width: '120px',
-                  height: '33px',
+                  position: 'absolute',
+                  top: '65%',
+                  backgroundColor: '#fff',
+                  border: '1px solid #ccc',
+                  width: '150px', // 가로 넓이 설정
+                  borderRadius: '5px',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                  zIndex: 1,
                   marginTop: '10px',
-                  marginLeft: '14px',
-                  marginRight: '10px',
-                  fontSize: '12px',
-                  lineHeight: 'unset',
                 }}
-                fullWidth
               >
-                <img
-                  className='google'
-                  src={'googleLogo.png'}
-                  alt='Google'
+                <Button
+                  className='kakaoLoginBtn'
                   style={{
-                    width: '25px',
-                    marginLeft: '-20px',
-                    paddingRight: '5px',
+                    color: 'gray',
+                    backgroundColor: 'white',
+                    fontWeight: '600',
+                    width: '120px',
+                    height: '33px',
+                    marginTop: '5px',
+                    marginLeft: '10px',
+                    marginRight: '10px',
+                    fontSize: '12px',
+                    lineHeight: 'unset',
                   }}
-                />
-                구글 로그인
-              </Button>
-            </div>
+                >
+                  <img
+                    src={'kakaoLogo.png'}
+                    className='kakao'
+                    alt='kakao'
+                    style={{
+                      width: '120px',
+                      marginLeft: '5px',
+                    }}
+                  />
+                  {/* 카카오 로그인 */}
+                </Button>
+                <Button
+                  className='naverLoginBtn'
+                  style={{
+                    color: 'gray',
+                    backgroundColor: 'white',
+                    fontWeight: '600',
+                    width: '120px',
+                    height: '33px',
+                    marginTop: '5px',
+                    marginLeft: '10px',
+                    marginRight: '10px',
+                    fontSize: '12px',
+                    lineHeight: 'unset',
+                  }}
+                >
+                  <img
+                    className='naver'
+                    src={'naverLogo.png'}
+                    alt='naver'
+                    style={{
+                      width: '120px',
+                      marginLeft: '5px',
+                    }}
+                  />
+                  {/* 네이버 로그인 */}
+                </Button>
+                <Button
+                  className='googleLoginBtn'
+                  variant='contained'
+                  style={{
+                    marginBottom: '10px',
+                    color: 'gray',
+                    backgroundColor: 'white',
+                    fontWeight: '600',
+                    width: '120px',
+                    height: '33px',
+                    marginTop: '10px',
+                    marginLeft: '14px',
+                    marginRight: '10px',
+                    fontSize: '12px',
+                    lineHeight: 'unset',
+                  }}
+                  fullWidth
+                >
+                  <img
+                    className='google'
+                    src={'googleLogo.png'}
+                    alt='Google'
+                    style={{
+                      width: '25px',
+                      marginLeft: '-20px',
+                      paddingRight: '5px',
+                    }}
+                  />
+                  구글 로그인
+                </Button>
+              </div>
+            )}
           </Grid>
         </Grid>
       </Toolbar>
@@ -253,7 +242,16 @@ const Header = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
-          <Button className='naverLoginBtn'>
+          <Button
+            className='naverLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#1ec800',
+            //   color: '#fff',
+            // }}
+            // fullWidth
+          >
             <img
               className='naver'
               src={'naverLogo.png'}
@@ -264,7 +262,16 @@ const Header = () => {
             />
             {/* 네이버 로그인 */}
           </Button>
-          <Button className='kakaoLoginBtn'>
+          <Button
+            className='kakaoLoginBtn'
+            // variant='contained'
+            // style={{
+            //   marginBottom: '10px',
+            //   backgroundColor: '#ffeb00',
+            //   color: '#000',
+            // }}
+            // fullWidth
+          >
             <img
               src={'kakaoLogo.png'}
               className='kakao'
@@ -273,7 +280,25 @@ const Header = () => {
             />
             {/* 카카오 로그인 */}
           </Button>
-          <Button className='googleLoginBtn'>
+          <Button
+            className='googleLoginBtn'
+            variant='contained'
+            style={{
+              // marginBottom: '10px',
+              // backgroundColor: '#4285F4',
+              color: 'gray',
+              backgroundColor: 'white',
+              fontWeight: '600',
+              width: '150px',
+              height: '38px',
+              // marginTop: '5px',
+              marginLeft: '10px',
+              marginRight: '10px',
+              fontSize: '12px',
+              lineHeight: 'unset',
+            }}
+            fullWidth
+          >
             <img
               className='google'
               src={'googleLogo.png'}
@@ -281,6 +306,7 @@ const Header = () => {
               style={{
                 width: '25px',
                 marginLeft: '-27px',
+                // paddingRight: '17px',
                 marginRight: '10px',
               }}
             />

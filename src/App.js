@@ -6,19 +6,20 @@ import FindCharge from './components/pages/findcharge/FindCharge.js';
 import NewInfo from './components/pages/newinfo/NewInfo.js';
 import MyPage from './components/pages/mypage/MyPage.js';
 import QnA from './components/pages/qna/QnA.js';
-import Login from './components/pages/Login.js';
+import Login from './components/user/Login.js';
 import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
 import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
-import Favicon from 'react-favicon';
 import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
+import SmsVerification from './components/user/SmsVerification.js';
+import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
 
 function App() {
   return (
     <>
-      <Favicon url='/favicon-32x32.png' />
+      {/* <Favicon url='/favicon-32x32.png' /> */}
 
       <div className='app' style={{ display: 'flex', flexDirection: 'column' }}>
         <Header />
@@ -33,6 +34,9 @@ function App() {
           <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
+          <Route path='/auth/kakao' element={<KakaoLoginHandler />} />
+          <Route path='/sms' element={<SmsVerification />} />
+
           {/* 필요한 다른 라우트 추가 */}
           <Route
             path='/'
