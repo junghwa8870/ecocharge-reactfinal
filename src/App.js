@@ -15,6 +15,8 @@ import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.j
 import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
 import SmsVerification from './components/user/SmsVerification.js';
 import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
+import NaverLoginHandler from './components/user/NaverLoginHandler.js';
+import GoogleLoginHandler from './components/user/GoogleLoginHandler.js';
 
 function App() {
   return (
@@ -34,7 +36,9 @@ function App() {
           <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
-          <Route path='/auth/kakao' element={<KakaoLoginHandler />} />
+          <Route path='/oauth/kakao' element={<KakaoLoginHandler />} />
+          <Route path='/oauth/naver' element={<NaverLoginHandler />} />
+          <Route path='/oauth/google' element={<GoogleLoginHandler />} />
           <Route path='/sms' element={<SmsVerification />} />
 
           {/* 필요한 다른 라우트 추가 */}
