@@ -92,6 +92,14 @@
     outline: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+      }
+    
+    &:active {
+        background-color: #003d80;
+    }
     }
 }
 
