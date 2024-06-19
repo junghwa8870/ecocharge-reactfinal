@@ -4,12 +4,12 @@
 .simple-slider {
   width: 80%; /* 슬라이더의 너비 */
   margin: 0 auto; /* 가운데 정렬 */
-  
 }
 
 // 슬라이드 항목
 .simple-slider .slick-slide {
   margin: 0 10px; /* 슬라이드 간격 설정 */
+  transition: transform 0.3s ease-in-out; /* 슬라이드 간 이동 시 부드러운 전환 효과 */
 }
 
 // 도트 컨테이너
@@ -28,21 +28,11 @@
 }
 
 .slick-slider {
-  // direction: ltr;
-  // // .slick-slider에 대한 스타일
-  // // position: relative;
-  // // display: block;
-  // // box-sizing: border-box;
-  // user-select: none;
-  // touch-action: pan-y;
   margin-top: 200px;
-  // background-color: purple;
-  height: 500px;
-  width: 1700px;
-  
-  .slick-initialized {
-    // .slick-slider.slick-initialized에 대한 스타일
+  height: 400px;
+  width: 100%;
 
+  .slick-initialized {
     .some-child-element {
       // .slick-slider.slick-initialized .some-child-element에 대한 스타일
     }
@@ -51,95 +41,40 @@
   .imgbox {
     display: flex;
     justify-content: center; /* 가로 중앙 정렬 */
-     /* 세로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
     height: 100%; /* 부모(.slick-slider)의 높이와 같게 설정 */
     position: relative;
 
     .mainCarImg {
       display: block;
-      width: 1200px;
-      height: 500px;
-      align-items: center;
-      margin-left: 250px;
-      
+      width: 70%;
+      height: auto;
+      max-width: 1000px; /* 중앙 이미지는 최대 너비 1000px */
+      max-height: 400px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:not(.slick-center) .mainCarImg {
+      transform: scale(0.8); /* 중앙이 아닌 이미지 축소 */
+      opacity: 0.5; /* 중앙이 아닌 이미지 투명도 설정 */
     }
   }
-  
-}
 
-.slick-prev {
-  font-size: 0;
-  line-height: 0;
-  position: absolute;
-  top: 50%;
-  
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  color: transparent;
-  border: none;
-  outline: none;
-  background: transparent;
-  z-index: 10;
-  // background-color: blue;
-  margin-left: 180px;
-
-  &:before {
-    line-height: 1;
-    color: black;
-    font-size: 60px;
-    opacity: .75;
+  .slick-center .imgbox .mainCarImg {
+    transform: scale(1.3); /* 중앙 이미지 확대 */
+    opacity: 1; /* 중앙 이미지 불투명도 설정 */
   }
-}
-
-.slick-next {
-  font-size: 0;
-  line-height: 0;
-  position: absolute;
-  top: 50%;
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  color: transparent;
-  border: none;
-  outline: none;
-  background: transparent;
-  // background-color: blue;
-  margin-right: 180px;
-
-  &:before {
-    line-height: 1;
-    color: black;
-    font-size: 60px;
-    opacity: .75;
-  }
-}
-.slick-dots {
-  position: absolute;
-  bottom: -65px;
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
 }
 
 .mainCarImgName {
   font-size: 25px;
-    font-weight: 700;
-    /* background: black; */
-    color: black;
-    width: fit-content;
-    border-radius: 10px;
-    padding: 10px;
-    position: relative;
-    left: 1100px;
-    top: -40px;
-    /* text-decoration: underline; */
-    text-decoration-line: underline;
+  font-weight: 700;
+  color: black;
+  width: fit-content;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  left: 1100px;
+  top: -40px;
+  text-decoration-line: underline;
 }

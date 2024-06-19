@@ -128,10 +128,10 @@ const Header = () => {
                 color: 'black',
                 borderColor: 'black',
                 fontFamily: 'Jua',
-                fontSize: '20px',
+                fontSize: '15px',
                 borderWidth: '3px',
-                borderRadius: '10px',
                 fontWeight: '600',
+                marginTop: '30px',
               }}
             >
               Login
@@ -141,11 +141,10 @@ const Header = () => {
                 className={`additional-buttons-container`}
                 style={{
                   position: 'absolute',
-                  top: '65%',
+                  top: '80%',
                   backgroundColor: '#fff',
                   border: '1px solid #ccc',
-                  width: '150px', // 가로 넓이 설정
-                  borderRadius: '5px',
+                  width: '170px', // 가로 넓이 설정
                   boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                   zIndex: 1,
                   marginTop: '10px',
@@ -160,7 +159,7 @@ const Header = () => {
                     width: '120px',
                     height: '33px',
                     marginTop: '5px',
-                    marginLeft: '10px',
+                    marginLeft: '20px',
                     marginRight: '10px',
                     fontSize: '12px',
                     lineHeight: 'unset',
@@ -186,7 +185,7 @@ const Header = () => {
                     width: '120px',
                     height: '33px',
                     marginTop: '5px',
-                    marginLeft: '10px',
+                    marginLeft: '20px',
                     marginRight: '10px',
                     fontSize: '12px',
                     lineHeight: 'unset',
@@ -214,7 +213,7 @@ const Header = () => {
                     width: '120px',
                     height: '33px',
                     marginTop: '10px',
-                    marginLeft: '14px',
+                    marginLeft: '25px',
                     marginRight: '10px',
                     fontSize: '12px',
                     lineHeight: 'unset',
@@ -238,87 +237,6 @@ const Header = () => {
           </Grid>
         </Grid>
       </Toolbar>
-
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Login</DialogTitle>
-        <DialogContent>
-          <Button
-            className='naverLoginBtn'
-            // variant='contained'
-            // style={{
-            //   marginBottom: '10px',
-            //   backgroundColor: '#1ec800',
-            //   color: '#fff',
-            // }}
-            // fullWidth
-          >
-            <img
-              className='naver'
-              src={'naverLogo.png'}
-              alt='naver'
-              style={{
-                width: '140px',
-              }}
-            />
-            {/* 네이버 로그인 */}
-          </Button>
-          <Button
-            className='kakaoLoginBtn'
-            // variant='contained'
-            // style={{
-            //   marginBottom: '10px',
-            //   backgroundColor: '#ffeb00',
-            //   color: '#000',
-            // }}
-            // fullWidth
-          >
-            <img
-              src={'kakaoLogo.png'}
-              className='kakao'
-              alt='kakao'
-              style={{ width: '150px' }}
-            />
-            {/* 카카오 로그인 */}
-          </Button>
-          <Button
-            className='googleLoginBtn'
-            variant='contained'
-            style={{
-              // marginBottom: '10px',
-              // backgroundColor: '#4285F4',
-              color: 'gray',
-              backgroundColor: 'white',
-              fontWeight: '600',
-              width: '150px',
-              height: '38px',
-              // marginTop: '5px',
-              marginLeft: '10px',
-              marginRight: '10px',
-              fontSize: '12px',
-              lineHeight: 'unset',
-            }}
-            fullWidth
-          >
-            <img
-              className='google'
-              src={'googleLogo.png'}
-              alt='Google'
-              style={{
-                width: '25px',
-                marginLeft: '-27px',
-                // paddingRight: '17px',
-                marginRight: '10px',
-              }}
-            />
-            구글 로그인
-          </Button>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color='primary'>
-            닫기
-          </Button>
-        </DialogActions>
-      </Dialog>
     </AppBar>
   );
 };
