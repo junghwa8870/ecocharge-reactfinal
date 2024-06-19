@@ -28,7 +28,12 @@ const NewInfoBox = ({ title, content }) => {
         >
           {collapse ? 'More ▲' : 'More ▼'}
         </Button>
-        <span style={{ marginLeft: '0.5rem', fontWeight: 'bold' }}></span>
+        <span
+          className='articleNum'
+          style={{ marginLeft: '0.5rem', fontWeight: 'bold' }}
+        >
+          1
+        </span>
         <span
           className='articleTitle'
           style={{ marginLeft: '0.5rem', fontWeight: 'bold', fontSize: '23px' }}
