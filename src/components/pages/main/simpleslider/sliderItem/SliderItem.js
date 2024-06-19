@@ -1,11 +1,11 @@
 import React from 'react';
 
 const SliderItem = ({ props }) => {
-  const { dataId, imgUrl, infoUrl } = props;
+  const { dataId, imgUrl } = props;
   return (
-    <a className='imgbox' href={infoUrl}>
+    <div className='imgbox'>
       <img className='mainCarImg' src={imgUrl} alt={`Slide ${dataId}`} />
-    </a>
+    </div>
   );
 };
 

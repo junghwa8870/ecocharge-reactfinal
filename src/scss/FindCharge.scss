@@ -14,8 +14,8 @@
 .find-charge-filters {
   flex-wrap: wrap;
   padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
-  background-color: #ffffff;
+  border-bottom: 1px solid gray;
+  background-color: rgb(129, 172, 236);
 }
 
 .find-charge-content {
@@ -54,15 +54,24 @@
 }
 
 .search-component button {
-  width: 7%;
+  width: 80px;
+  height: 80px;
   padding: 0.75rem;
-  background-color: forestgreen;
-  color: white;
-  border: none;
+  background-color: white;
+  color: rgb(13, 110, 253);
+  border: 2px solid black;
   border-radius: 20px;
   font-weight: bold;
   font-size: 20px;
+  margin-top: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-component button:hover {
+  background-color: rgb(13, 110, 253); 
+  color: white; 
+  border-color: black;
 }
 
 .search-results ul {
@@ -72,5 +81,5 @@
 
 .search-results li {
   margin-bottom: 1rem;
- 
 } 
+

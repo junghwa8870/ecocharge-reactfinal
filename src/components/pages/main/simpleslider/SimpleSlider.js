@@ -10,9 +10,22 @@ function SimpleSlider() {
   let settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    centerMode: true,
+    centerPadding: '25%', // 양쪽 이미지의 보이는 부분 설정
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: '0',
+        },
+      },
+    ],
   };
   const [sliderItems, setSliderItems] = useState([]);
 
@@ -28,6 +41,7 @@ function SimpleSlider() {
 
     fetchSlider();
   }, []);
+
   return (
     <Slider {...settings}>
       {sliderItems.map((sliderItem) => (
