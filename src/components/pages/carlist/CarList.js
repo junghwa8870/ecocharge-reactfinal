@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import './CarList.scss';
-import { Badge } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExpand } from '@fortawesome/free-solid-svg-icons';
-import Paging from '../../layout/Paging';
+import CarListItem from './carListItem/CarListItem';
+import axios from 'axios';
 
 const CarList = () => {
   // 버튼 동작 확인용
@@ -16,9 +14,22 @@ const CarList = () => {
     alert('검색버튼 클릭 확인용');
   };
 
-  const handleCarInfoBoxClick = () => {
-    window.location.href = 'https://www.kia.com';
-  };
+  const [carInfoList, setCarInfoList] = useState([]);
+
+  useEffect(() => {
+    const carListRendering = async () => {
+      const res = await axios.get('http://localhost:8181/carList');
+
+      try {
+        // console.log(res.data);
+        setCarInfoList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    carListRendering();
+  }, []);
 
   return (
     <Grid
@@ -62,49 +73,20 @@ const CarList = () => {
             검색
           </Button>
         </div>
-        <div className='carInfoBox' onClick={handleCarInfoBoxClick}>
-          {[...Array(9)].map((_, index) => (
-            <div
-              key={index}
-              className='carInfo'
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <Typography variant='h6' className='carName'>
-                자동차이름
-              </Typography>
-              <Badge
-                color='dark'
-                pill
-                style={{ width: '100px', margin: '0 10px' }}
-              >
-                KIA
-              </Badge>
-              <div className='imageContainer'>
-                <img src='carA.png' alt='CarA' style={{ width: '100%' }} />
-              </div>
-              <Typography variant='body2' className='carStat'>
-                자동차설명1
-              </Typography>
-              <Typography variant='body2' className='carStat'>
-                자동차설명2
-              </Typography>
-              <Typography variant='body2' className='carStat'>
-                자동차설명3
-              </Typography>
-              <Typography variant='body2' className='carStat'>
-                자동차설명4
-              </Typography>
-              {/* <div style={{ marginTop: 'auto', marginLeft: 'auto' }}> */}
-              <FontAwesomeIcon icon={faExpand} className='expandIcon' />
-              {/* </div> */}
-            </div>
+        <Grid
+          container
+          className='carInfoBox'
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '50px',
+          }}
+        >
+          {carInfoList.map((carInfo) => (
+            <CarListItem key={carInfo.id} info={carInfo} />
           ))}
-        </div>
+        </Grid>
       </Grid>
-      <Paging />
     </Grid>
   );
 };
