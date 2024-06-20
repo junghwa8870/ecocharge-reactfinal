@@ -1,11 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  Marker,
-  NaverMap,
-  NavermapsProvider,
-  useNavermaps,
-} from 'react-naver-maps';
+import React from 'react';
+import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
 function MapComponent({ searchParams }) {
   const navermaps = useNavermaps();

@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import './MainQnA.scss';
-import { Grid, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, Grid, Typography } from '@mui/material';
 import MainQnAItem from './mainQnAItem/MainQnAItem';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const MainQnA = () => {
   const [qnaList, setQnaList] = useState([]);
 
   useEffect(() => {
-    const MainQnARendering = async () => {
+    const fetchQnA = async () => {
       const res = await axios.get('http://localhost:8181/main/qna');
       setQnaList(res.data);
     };
 
-    MainQnARendering();
+    fetchQnA();
   }, []);
+
   return (
     <div className='main-qna-container'>
       <Typography variant='h4' className='qtitle'>
         Q & A
       </Typography>
-      <Grid
-        container
-        className='qcontainer'
-        style={{ width: '80%', height: '450px', marginTop: '20px' }}
-      >
+      <Grid container className='qcontainer'>
         {qnaList.map((qna) => (
-          <MainQnAItem key={qna.qnaNo} data={qna} />
+          <Grid item key={qna.qnaNo} className='qbox'>
+            <Link to={`/qna/${qna.qnaNo}`} className='qbox-link'>
+              <div className='qtitle'>{qna.qtitle}</div>
+              <div className='qcontent'>{qna.qcontent}</div>
+            </Link>
+          </Grid>
         ))}
         <Grid
           item
@@ -35,7 +37,6 @@ const MainQnA = () => {
           style={{
             textAlign: 'center',
             marginTop: '-30px',
-            marginBottom: '-20px',
           }}
         >
           <Button
@@ -43,22 +44,6 @@ const MainQnA = () => {
             component={Link}
             to='/qna'
             variant='contained'
-            style={{
-              backgroundColor: 'rgb(13, 110, 253)',
-              // backgroundColor: 'white',
-              color: 'white',
-              fontWeight: 'bold',
-              textTransform: 'none',
-              borderRadius: '10px',
-              padding: '12px 24px',
-              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-              transition: 'background-color 0.3s, color 0.3s, transform 0.2s',
-              // '&:hover': {
-              //   backgroundColor: '#1a751d',
-              //   transform: 'scale(1.05)',
-              //   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-              // },
-            }}
           >
             더보기
           </Button>

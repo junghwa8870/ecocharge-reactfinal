@@ -104,7 +104,7 @@ const Header = () => {
                 fontSize='20px'
                 fontWeight='700'
                 textAlign='center'
-                paddingRight='80px'
+                paddingRight='65px'
               >
                 {link.text}
               </MuiLink>
