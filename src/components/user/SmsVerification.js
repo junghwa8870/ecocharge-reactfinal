@@ -1,22 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { API_BASE_URL, USER } from '../../config/host_config';
+import React, { useState } from 'react';
+import { API_BASE_URL } from '../../config/host_config';
 import '../../scss/SmsVerification.scss';
-import '../../scss/Header.scss';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 const SmsVerification = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [verifivationCodeInput, setVerificationCode] = useState('');
+  const [verificationCodeInput, setVerificationCode] = useState('');
   const [showInput, setShowInput] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  // URL에 쿼리스트링으로 전달된 인가 코드를 얻어오는 방법.
-  const code = new URL(window.location.href).searchParams.get('code');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'phoneNumber') {
       setPhoneNumber(value);
-    } else if (name === 'verifivationCodeInput') {
+    } else if (name === 'verificationCodeInput') {
       setVerificationCode(value);
     }
   };
@@ -49,13 +46,12 @@ const SmsVerification = () => {
         },
         body: JSON.stringify({
           phoneNumber,
-          verifivationCodeInput,
+          verificationCodeInput,
         }),
       });
       const result = await response.json();
       if (result) {
         alert('인증에 성공했습니다.');
-
         await fetch(`${API_BASE_URL}/api/save-phone`, {
           method: 'POST',
           headers: {
@@ -73,106 +69,42 @@ const SmsVerification = () => {
       alert('인증에 실패했습니다.');
     }
   };
-  return (
-    <>
-      <div className='containner'>
-        <image />
-        <h2>
-          서비스 이용을 위해 소셜 로그인 전에 휴대전화 인증이 필요합니다.
-          <br />
-        </h2>
-        <div>
-          <form onSubmit={handleSendCode}>
-            <label
-              className='inputlabel'
-              style={{
-                fontFamily: 'Jua',
-                marginTop: '5%',
-              }}
-            >
-              핸드폰번호:
-              <input
-                type='text'
-                name='phoneNumber'
-                value={phoneNumber}
-                onChange={handleChange}
-                style={{
-                  marginLeft: '10px',
-                }}
-              />
-            </label>
-            <button
-              className='codeBtn'
-              style={{
-                marginLeft: '5px',
-                borderRadius: '5px',
-                width: '120px',
-                height: '30px',
-                fontSize: '15px',
-                cursor: 'pointer',
-              }}
-              type='submut'
-            >
-              인증 코드 발송
-            </button>
-          </form>
-        </div>
 
-        <div>
-          {showInput && (
-            <label
-              className='inputlabel'
-              style={{
-                fontFamily: 'Jua',
-                position: 'absolute',
-                top: '50%',
-                left: '30%',
-              }}
-            >
-              인증 코드:
-              <input
-                type='text'
-                name='verifivationCodeInput'
-                value={verifivationCodeInput}
-                onChange={handleChange}
-                style={{
-                  position: 'relative',
-                  bottom: '2px',
-                  marginLeft: '10px',
-                }}
-                // readOnly={isReadOnly}
-              />
-            </label>
-          )}
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            right: '300px',
-            width: '20%',
-            height: '50px',
-            alignItems: 'center',
-            flexDirection: 'column',
-            marginTop: '200px',
-          }}
-        >
-          <form onSubmit={handleVerifyCode}>
-            <button
-              className='submit'
-              name='submit'
-              style={{
-                fontFamily: 'Jua',
-                cursor: 'pointer',
-                marginLeft: '-12px',
-              }}
-              type='submit'
-            >
-              인증 확인
-            </button>
-          </form>
-        </div>
-      </div>
-    </>
+  return (
+    <div className='container'>
+      <h2>휴대전화 인증</h2>
+      <p>서비스 이용을 위해 소셜 로그인 전에 휴대전화 인증이 필요합니다.</p>
+      <form onSubmit={handleSendCode} className='form'>
+        <label className='inputLabel'>
+          핸드폰 번호:
+          <input
+            type='text'
+            name='phoneNumber'
+            value={phoneNumber}
+            onChange={handleChange}
+          />
+        </label>
+        <button className='sendCodeBtn' type='submit'>
+          인증 코드 발송
+        </button>
+      </form>
+      {showInput && (
+        <form onSubmit={handleVerifyCode} className='form'>
+          <label className='inputLabel'>
+            인증 코드:
+            <input
+              type='text'
+              name='verificationCodeInput'
+              value={verificationCodeInput}
+              onChange={handleChange}
+            />
+          </label>
+          <button className='verifyCodeBtn' type='submit'>
+            인증 확인
+          </button>
+        </form>
+      )}
+    </div>
   );
 };
 
