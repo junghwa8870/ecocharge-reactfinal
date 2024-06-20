@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewInfoWrite.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const NewInfoWrite = () => {
   const [title, setTitle] = useState('');
@@ -22,21 +24,24 @@ const NewInfoWrite = () => {
     navigate('/newInfo');
   };
 
-  const handleBack = () => {
-    navigate('/newInfo');
-  };
+  // const handleBack = () => {
+  //   navigate('/newInfo');
+  // };
 
   return (
     <div className='newInfoWriteContainer' style={{ padding: '2rem' }}>
+      <div className='goNewInfotBtn' onClick={() => navigate('/newinfo')}>
+        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      </div>
       <h2 className='wWriteTitle'>새 글 작성</h2>
-      <Button
+      {/* <Button
         className='newInfoBackBtn'
         color='secondary'
         onClick={handleBack}
         style={{ marginBottom: '1rem' }}
       >
         되돌아가기
-      </Button>
+      </Button> */}
       <div className='infoFormBox'>
         <Form onSubmit={handleSubmit}>
           <FormGroup className='infoWriteForm'>
