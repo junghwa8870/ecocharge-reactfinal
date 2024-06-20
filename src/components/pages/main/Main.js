@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SimpleSlider from './simpleslider/SimpleSlider';
 import MainInfo from './MainInfo/MainInfo';
 import MainQnA from './MainQnA/MainQnA';
+import MainCar from './MainCar/MainCar';
 
 // 메인페이지 부드럽게 뜨게
 const Main = () => {
@@ -42,6 +43,7 @@ const Main = () => {
       }}
     >
       <SimpleSlider />
+      <MainCar />
       <MainInfo />
       <MainQnA />
     </div>
