@@ -23,10 +23,8 @@ const Header = () => {
     setShowButtons(!showButtons);
   };
   const navigate = useNavigate();
-  const ButtonActions = {
-    naverLogin: () => navigate((window.location.href = NAVER_AUTH_URL)), // 네이버 로그인 클릭 시 동작
-    googleLogin: () => navigate('/sms'), // 구글 로그인 클릭 시 동작
-    kakaoLogin: () => navigate('/sms'), // SMS 버튼 클릭 시 동작
+  const handleLogin = (authUrl) => {
+    navigate('/sms', { state: { redirectUrl: authUrl } });
   };
 
   return (
@@ -172,6 +170,7 @@ const Header = () => {
                     fontSize: '12px',
                     lineHeight: 'unset',
                   }}
+                  onClick={() => handleLogin(KAKAO_AUTH_URL)}
                 >
                   <img
                     src={'kakaoLogo.png'}
@@ -186,7 +185,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={ButtonActions.naverLogin}
+                  onClick={() => handleLogin(NAVER_AUTH_URL)}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -213,7 +212,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={ButtonActions.googleLogin}
+                  onClick={() => handleLogin(GOOGLE_AUTH_URL)}
                   variant='contained'
                   style={{
                     marginBottom: '10px',

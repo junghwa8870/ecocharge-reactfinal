@@ -3,11 +3,6 @@ import { API_BASE_URL, USER } from '../../config/host_config';
 import '../../scss/SmsVerification.scss';
 import '../../scss/Header.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  NAVER_AUTH_URL,
-  KAKAO_AUTH_URL,
-  GOOGLE_AUTH_URL,
-} from '../layout/Header';
 const SmsVerification = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verifivationCodeInput, setVerificationCode] = useState('');
@@ -68,15 +63,8 @@ const SmsVerification = () => {
           },
           body: JSON.stringify({ phoneNumber }),
         });
-        if (KAKAO_AUTH_URL) {
-          window.location.href = KAKAO_AUTH_URL;
-        }
-        if (NAVER_AUTH_URL) {
-          window.location.href = NAVER_AUTH_URL;
-        }
-        if (GOOGLE_AUTH_URL) {
-          window.location.href = GOOGLE_AUTH_URL;
-        }
+        const { redirectUrl } = location.state;
+        window.location.href = redirectUrl;
       } else {
         alert('서버 오류');
       }
