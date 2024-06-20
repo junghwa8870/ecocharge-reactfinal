@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
-import { Translate } from '@mui/icons-material';
-import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
+import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,6 +21,10 @@ const Header = () => {
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
+  };
+  const navigate = useNavigate();
+  const handleLogin = (authUrl) => {
+    navigate('/sms', { state: { redirectUrl: authUrl } });
   };
 
   return (
@@ -167,6 +170,7 @@ const Header = () => {
                     fontSize: '12px',
                     lineHeight: 'unset',
                   }}
+                  onClick={() => handleLogin(KAKAO_AUTH_URL)}
                 >
                   <img
                     src={'kakaoLogo.png'}
@@ -181,7 +185,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={() => (window.location.href = NAVER_AUTH_URL)}
+                  onClick={() => handleLogin(NAVER_AUTH_URL)}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -208,7 +212,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
+                  onClick={() => handleLogin(GOOGLE_AUTH_URL)}
                   variant='contained'
                   style={{
                     marginBottom: '10px',
