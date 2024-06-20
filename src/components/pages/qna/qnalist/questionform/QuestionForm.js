@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuestionForm.scss';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const QuestionForm = () => {
   const [title, setTitle] = useState('');
@@ -21,21 +23,28 @@ const QuestionForm = () => {
     navigate('/qnalist');
   };
 
-  const handleBack = () => {
-    navigate('/qnalist');
-  };
+  // const handleBack = () => {
+  //   navigate('/qnalist');
+  // };
 
   return (
     <div className='questionWriteContainer' style={{ padding: '2rem' }}>
+      <div
+        className='gomyquestionlistBtn'
+        onClick={() => navigate('/myquestionlist')}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      </div>
+
       <h2 className='questionWriteTitle'>1:1 문의</h2>
-      <Button
+      {/* <Button
         className='questionListBackBtn'
         color='secondary'
         onClick={handleBack}
         style={{ marginBottom: '1rem' }}
       >
         되돌아가기
-      </Button>
+      </Button> */}
       <div className='questionFormBox'>
         <Form onSubmit={handleSubmit}>
           <FormGroup className='questionWriteForm'>
