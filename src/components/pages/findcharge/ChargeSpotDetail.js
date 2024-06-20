@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import {
   Button,
   Dialog,
@@ -49,27 +51,21 @@ function ChargeSpotDetail() {
 
   return (
     <div className='charge-spot-detail-container'>
+      <div className='GoFindCharge' onClick={() => navigate('/FindCharge')}>
+        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      </div>
       <div className='page-title'>
+        {/* <Button
+          variant='contained'
+          onClick={handleBackToList}
+          style={{ cursor: 'pointer', fontSize: '20px;' }}
+        >
+          Back
+        </Button> */}
         <h2 style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ color: 'blue', marginRight: '10px' }}>⚡</span> 충전소
           상세정보
         </h2>
-
-        <Button
-          variant='contained'
-          onClick={handleBackToList}
-          style={{ background: 'green' }}
-        >
-          이전으로
-        </Button>
-
-        <Button
-          variant='contained'
-          onClick={handleReservation}
-          style={{ marginLeft: '20px' }}
-        >
-          예약하기
-        </Button>
       </div>
       <div className='charge-spot-detail-content'>
         {/* 주차장명 */}
