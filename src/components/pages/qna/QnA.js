@@ -134,11 +134,18 @@ const QnA = () => {
     <div className='qnacontainer'>
       <div className='qnatitle'>Q & A</div>
       <button
+        className='go-direct-question-button'
+        onClick={() => navigate('/qnalist')}
+      >
+        1:1 문의
+      </button>
+      <button
         className='add-question-button'
         onClick={() => navigate('/writeqna')}
       >
         작성하기
       </button>
+
       <CategoryFilter
         categories={categories}
         category={category}

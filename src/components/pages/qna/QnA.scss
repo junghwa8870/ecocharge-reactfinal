@@ -94,8 +94,31 @@
     margin: 200px auto;
 }
 
+.go-direct-question-button {
+  position: absolute;
+  right: 460px;
+  top: 400px;
+  background-color: rgb(145, 151, 223);
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+      }
+    
+    &:active {
+        background-color: #003d80;
+    }
+}
+
 .add-question-button {
-    position: absolute;
+  position: absolute;
     right: 350px;
     top: 400px;
 
