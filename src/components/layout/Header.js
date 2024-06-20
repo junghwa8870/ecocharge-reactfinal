@@ -1,21 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../scss/Header.scss';
+import { Translate } from '@mui/icons-material';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
-import AuthContext from '../../utils/AuthContext';
+import { NAVER_AUTH_URL } from '../../config/naver-config';
+import { GOOGLE_AUTH_URL } from '../../config/google-config';
 
 const Header = () => {
-  const [showButtons, setShowButtons] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [showButtons, setShowButtons] = useState(false);
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
-  };
-  const navigate = useNavigate();
-  const handleLogin = (authUrl) => {
-    navigate('/sms', { state: { redirectUrl: authUrl } });
   };
 
   return (
@@ -23,7 +29,7 @@ const Header = () => {
       position='fixed'
       style={{
         width: '100%',
-        height: 110,
+        height: 120,
         backgroundColor: '#fff',
       }}
     >
@@ -49,22 +55,21 @@ const Header = () => {
               <img
                 src='ecologo.png'
                 alt='Logo'
-                style={{ width: 100, paddingTop: 10 }}
+                style={{ width: 100, paddingTop: 10, marginLeft: 50 }}
               />
               <div
                 className='logo-title'
                 style={{
                   color: 'rgb(13, 110, 253)',
                   fontWeight: 700,
-                  lineHeight: 1.2,
                   marginLeft: 20,
-                  fontSize: 24,
-                  marginTop: 30,
+                  fontSize: 25,
+                  marginTop: 20,
                   textAlign: 'center',
                   fontFamily: 'Jua',
                 }}
               >
-                ECO
+                E C O
                 <br />
                 CHARGE
               </div>
@@ -78,6 +83,7 @@ const Header = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              marginTop: 20,
             }}
           >
             {[
@@ -105,37 +111,50 @@ const Header = () => {
             ))}
           </Grid>
 
-          {!isLoggedIn && (
-            <Grid
-              item
-              flex={2}
+          <Grid
+            item
+            flex={2}
+            style={{
+              alignContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Button
+              className='loginBtn'
+              onClick={toggleButtons}
+              variant='outlined'
               style={{
-                alignContent: 'center',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                width: '130px',
+                height: '40px',
+                color: 'black',
+                borderColor: 'black',
+                fontFamily: 'Jua',
+                fontSize: '15px',
+                borderWidth: '3px',
+                fontWeight: '600',
+                marginTop: '30px',
               }}
             >
-              <Button
-                className='loginBtn'
-                onClick={toggleButtons}
-                variant='outlined'
+              Login
+            </Button>
+            {showButtons && (
+              <div
+                className={`additional-buttons-container`}
                 style={{
-                  color: 'rgb(13, 110, 253)',
-                  borderColor: 'black',
-                  fontFamily: 'Jua',
-                  fontSize: '20px',
-                  borderWidth: '3px',
-                  borderRadius: '10px',
-                  fontWeight: '600',
-                  width: '170px',
+                  position: 'absolute',
+                  top: '80%',
+                  backgroundColor: '#fff',
+                  border: '1px solid #ccc',
+                  width: '170px', // 가로 넓이 설정
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                  zIndex: 1,
+                  marginTop: '10px',
                 }}
               >
-                Login
-              </Button>
-              {showButtons && (
-                <div
-                  className={`additional-buttons-container`}
+                <Button
+                  className='kakaoLoginBtn'
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -148,7 +167,6 @@ const Header = () => {
                     fontSize: '12px',
                     lineHeight: 'unset',
                   }}
-                  onClick={() => handleLogin(KAKAO_AUTH_URL)}
                 >
                   <img
                     src={'kakaoLogo.png'}
@@ -163,7 +181,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={() => handleLogin(NAVER_AUTH_URL)}
+                  onClick={() => (window.location.href = NAVER_AUTH_URL)}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -190,7 +208,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={() => handleLogin(GOOGLE_AUTH_URL)}
+                  onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
                   variant='contained'
                   style={{
                     marginBottom: '10px',
@@ -200,123 +218,28 @@ const Header = () => {
                     width: '120px',
                     height: '33px',
                     marginTop: '10px',
+                    marginLeft: '25px',
+                    marginRight: '10px',
+                    fontSize: '12px',
+                    lineHeight: 'unset',
                   }}
+                  fullWidth
                 >
-                  <Button
-                    className='kakaoLoginBtn'
-                    onClick={() => (window.location.href = KAKAO_AUTH_URL)}
+                  <img
+                    className='google'
+                    src={'googleLogo.png'}
+                    alt='Google'
                     style={{
-                      color: 'gray',
-                      backgroundColor: 'white',
-                      fontWeight: '600',
-                      width: '140px',
-                      height: '33px',
-                      marginTop: '7px',
-                      marginLeft: '9px',
-                      marginRight: '10px',
-                      fontSize: '12px',
-                      lineHeight: 'unset',
+                      width: '25px',
+                      marginLeft: '-20px',
+                      paddingRight: '5px',
                     }}
-                  >
-                    <img
-                      src={'kakaoLogo.png'}
-                      className='kakao'
-                      alt='kakao'
-                      style={{
-                        width: '140px',
-                        marginLeft: '5px',
-                      }}
-                    />
-                  </Button>
-                  <Button
-                    className='naverLoginBtn'
-                    style={{
-                      color: 'gray',
-                      backgroundColor: 'white',
-                      fontWeight: '600',
-                      width: '140px',
-                      height: '33px',
-                      marginTop: '15px',
-                      marginLeft: '10px',
-                      marginRight: '10px',
-                      fontSize: '12px',
-                      lineHeight: 'unset',
-                    }}
-                  >
-                    <img
-                      className='naver'
-                      src={'naverLogo.png'}
-                      alt='naver'
-                      style={{
-                        width: '140px',
-                        marginLeft: '5px',
-                      }}
-                    />
-                  </Button>
-                  <Button
-                    className='googleLoginBtn'
-                    variant='contained'
-                    style={{
-                      marginBottom: '10px',
-                      color: 'gray',
-                      backgroundColor: 'white',
-                      fontWeight: '600',
-                      width: '140px',
-                      height: '33px',
-                      marginTop: '15px',
-                      marginLeft: '13px',
-                      marginRight: '10px',
-                      fontSize: '12px',
-                      lineHeight: 'unset',
-                    }}
-                    fullWidth
-                  >
-                    <img
-                      className='google'
-                      src={'googleLogo.png'}
-                      alt='Google'
-                      style={{
-                        width: '25px',
-                        marginLeft: '-15px',
-                        paddingRight: '5px',
-                      }}
-                    />
-                    구글 로그인
-                  </Button>
-                </div>
-              )}
-            </Grid>
-          )}
-          {isLoggedIn && (
-            <Grid
-              item
-              flex={2}
-              style={{
-                alignContent: 'center',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onClick={() => (window.location.href = '/api/auth/logout')}
-            >
-              <Button
-                className='logoutBtn'
-                variant='outlined'
-                style={{
-                  color: 'rgb(13, 110, 253)',
-                  borderColor: 'black',
-                  fontFamily: 'Jua',
-                  fontSize: '20px',
-                  borderWidth: '3px',
-                  borderRadius: '10px',
-                  fontWeight: '600',
-                  width: '170px',
-                }}
-              >
-                Logout
-              </Button>
-            </Grid>
-          )}
+                  />
+                  구글 로그인
+                </Button>
+              </div>
+            )}
+          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>
