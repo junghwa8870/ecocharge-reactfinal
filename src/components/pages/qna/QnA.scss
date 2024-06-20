@@ -96,17 +96,21 @@
 
 .go-direct-question-button {
   position: absolute;
-  right: 460px;
-  top: 400px;
-  background-color: rgb(145, 151, 223);
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+    right: 350px;
+    top: 400px;
+    // background-color: rgb(145, 151, 223);
+    background-color: #0D6EFD;
+    // background-color: #9eb1c5;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+  
 
     &:hover {
         background-color: #0056b3;
@@ -119,18 +123,18 @@
 
 .add-question-button {
   position: absolute;
-    right: 350px;
-    top: 400px;
-
-    background-color: #0D6EFD;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  right: 460px;
+  top: 400px;
+  
+  background-color: #9eb1c5;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 
     &:hover {
         background-color: #0056b3;

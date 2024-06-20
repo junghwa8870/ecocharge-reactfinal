@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WriteQnA.scss';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const WriteQnA = () => {
   const [title, setTitle] = useState('');
@@ -27,15 +29,18 @@ const WriteQnA = () => {
 
   return (
     <div className='qnaWriteContainer' style={{ padding: '2rem' }}>
+      <div className='goQnatBtn' onClick={() => navigate('/qna')}>
+        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      </div>
       <h2 className='qWriteTitle'>새 글 작성</h2>
-      <Button
+      {/* <Button
         className='qnaBackBtn'
         color='secondary'
         onClick={handleBack}
         style={{ marginBottom: '1rem' }}
       >
         되돌아가기
-      </Button>
+      </Button> */}
       <div className='qnaFormBox'>
         <Form onSubmit={handleSubmit}>
           <FormGroup className='qWriteForm'>
