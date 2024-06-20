@@ -16,6 +16,7 @@ import Favicon from 'react-favicon';
 import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
 import QnAList from './components/pages/qna/qnalist/QnAList.js';
 import QuestionForm from './components/pages/qna/qnalist/questionform/QuestionForm.js';
+import MyQuestionList from './components/pages/qna/qnalist/myquestionlist/MyQuestionList.js';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/qnalist' element={<QnAList />} />
           <Route path='/questionform' element={<QuestionForm />} />
+          <Route path='/myquestionlist' element={<MyQuestionList />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
           {/* 필요한 다른 라우트 추가 */}
