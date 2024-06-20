@@ -17,6 +17,9 @@ import SmsVerification from './components/user/SmsVerification.js';
 import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
 import NaverLoginHandler from './components/user/NaverLoginHandler.js';
 import GoogleLoginHandler from './components/user/GoogleLoginHandler.js';
+import QnAList from './components/pages/qna/qnalist/QnAList.js';
+import QuestionForm from './components/pages/qna/qnalist/questionform/QuestionForm.js';
+import MyQuestionList from './components/pages/qna/qnalist/myquestionlist/MyQuestionList.js';
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
           <Route path='/writeqna' element={<WriteQnA />} />
+          <Route path='/qnalist' element={<QnAList />} />
+          <Route path='/questionform' element={<QuestionForm />} />
+          <Route path='/myquestionlist' element={<MyQuestionList />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
           <Route path='/oauth/kakao' element={<KakaoLoginHandler />} />
