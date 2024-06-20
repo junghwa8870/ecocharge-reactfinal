@@ -5,6 +5,8 @@ import MapComponent from './MapComponent';
 import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
 import '../findcharge/ChargeSpotDetail';
+import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
+import Home from './Home';
 // import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
 
 function FindCharge() {
@@ -14,6 +16,8 @@ function FindCharge() {
     setSearchParams(params);
   };
   const clientId = process.env.REACT_APP_NAVER_MAP_CLIENT_ID;
+
+  console.log(process.env.REACT_APP_NAVER_MAP_CLIENT_ID);
 
   return (
     <div className='find-charge-container'>
@@ -29,6 +33,13 @@ function FindCharge() {
           <div className='search-results'>
             {searchParams && <SearchResult searchParams={searchParams} />}
           </div>
+        </div>
+        <div className='map-area'>
+          <NavermapsProvider ncpClientId={clientId}>
+            <MapDiv>
+              <Home />
+            </MapDiv>
+          </NavermapsProvider>
         </div>
       </div>
     </div>
