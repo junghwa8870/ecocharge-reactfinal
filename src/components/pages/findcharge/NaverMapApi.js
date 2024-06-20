@@ -1,25 +1,13 @@
 import React from 'react';
-import { Marker, NaverMap, RenderAfterNavermapsLoaded } from 'react-naver-maps';
-
+import { NavermapsProvider } from 'react-naver-maps';
+import MapComponent from './MapComponent';
 const NaverMapApi = (props) => {
+  const id = process.env.REACT_APP_NAVER_MAP_CLIENT_ID;
+  console.log(id);
   return (
-    <NaverMap
-      mapDivId={'maps-getting-started-uncontrolled'}
-      style={{ width: '30%', height: '30%' }}
-      center={{ lat: props.Latitude, lng: props.Longtitude }}
-      defaultZoom={12}
-      zoom={props.zoom}
-      minZoom={12}
-      enableWheelZoom={false}
-    >
-      {props.zoom === 15 && (
-        <Marker
-          position={{ lat: props.Latitude, lng: props.Longtitude }}
-          title={props.roadAddress}
-          clickable={true}
-        />
-      )}
-    </NaverMap>
+    <NavermapsProvider ncpClientId={id} submodules={['geocoder']}>
+      <MapComponent />
+    </NavermapsProvider>
   );
 };
 
