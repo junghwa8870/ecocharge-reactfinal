@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
-import { Translate } from '@mui/icons-material';
-import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
+import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,6 +21,12 @@ const Header = () => {
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
+  };
+  const navigate = useNavigate();
+  const ButtonActions = {
+    naverLogin: () => navigate((window.location.href = NAVER_AUTH_URL)), // 네이버 로그인 클릭 시 동작
+    googleLogin: () => navigate('/sms'), // 구글 로그인 클릭 시 동작
+    kakaoLogin: () => navigate('/sms'), // SMS 버튼 클릭 시 동작
   };
 
   return (
@@ -181,7 +186,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={() => (window.location.href = NAVER_AUTH_URL)}
+                  onClick={ButtonActions.naverLogin}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -208,7 +213,7 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
+                  onClick={ButtonActions.googleLogin}
                   variant='contained'
                   style={{
                     marginBottom: '10px',

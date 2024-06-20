@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
-import { API_BASE_URL } from '../../config/host_config';
+import React, { useContext, useEffect, useState } from 'react';
+import { API_BASE_URL, USER } from '../../config/host_config';
 import '../../scss/SmsVerification.scss';
 import '../../scss/Header.scss';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  NAVER_AUTH_URL,
+  KAKAO_AUTH_URL,
+  GOOGLE_AUTH_URL,
+} from '../layout/Header';
 const SmsVerification = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [message, setMessage] = useState('');
+  const [verifivationCodeInput, setVerificationCode] = useState('');
   const [showInput, setShowInput] = useState(false);
-  //
-  //
+  const location = useLocation();
+  const navigate = useNavigate();
+  // URL에 쿼리스트링으로 전달된 인가 코드를 얻어오는 방법.
+  const code = new URL(window.location.href).searchParams.get('code');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'phoneNumber') {
       setPhoneNumber(value);
-    } else if (name === 'verificationCode') {
+    } else if (name === 'verifivationCodeInput') {
       setVerificationCode(value);
     }
   };
@@ -30,12 +36,11 @@ const SmsVerification = () => {
         },
         body: JSON.stringify({ phoneNumber }),
       });
-      const result = await response.json();
-      setMessage(result.message); // assuming your response has a message field
+      alert('인증 코드를 발송하였습니다.');
       setShowInput(true);
     } catch (error) {
       console.log('phoneNumber:', phoneNumber);
-      setMessage('인증 코드 발송에 실패했습니다.');
+      alert('인증 코드 발송에 실패했습니다.');
     }
   };
 
@@ -49,18 +54,35 @@ const SmsVerification = () => {
         },
         body: JSON.stringify({
           phoneNumber,
-          verificationCode,
+          verifivationCodeInput,
         }),
       });
       const result = await response.json();
       if (result) {
-        setMessage('인증에 성공했습니다.');
+        alert('인증에 성공했습니다.');
+
+        await fetch(`${API_BASE_URL}/api/save-phone`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ phoneNumber }),
+        });
+        if (KAKAO_AUTH_URL) {
+          window.location.href = KAKAO_AUTH_URL;
+        }
+        if (NAVER_AUTH_URL) {
+          window.location.href = NAVER_AUTH_URL;
+        }
+        if (GOOGLE_AUTH_URL) {
+          window.location.href = GOOGLE_AUTH_URL;
+        }
       } else {
-        setMessage('인증에 실패했습니다.');
+        alert('서버 오류');
       }
     } catch (error) {
       console.error('Error verifying code:', error);
-      setMessage('인증에 실패했습니다.');
+      alert('인증에 실패했습니다.');
     }
   };
   return (
@@ -122,8 +144,8 @@ const SmsVerification = () => {
               인증 코드:
               <input
                 type='text'
-                name='verificationCode'
-                value={verificationCode}
+                name='verifivationCodeInput'
+                value={verifivationCodeInput}
                 onChange={handleChange}
                 style={{
                   position: 'relative',
@@ -135,7 +157,6 @@ const SmsVerification = () => {
             </label>
           )}
         </div>
-        <p>{message}</p>
         <div
           style={{
             display: 'flex',
@@ -150,7 +171,7 @@ const SmsVerification = () => {
           <form onSubmit={handleVerifyCode}>
             <button
               className='submit'
-              name=''
+              name='submit'
               style={{
                 fontFamily: 'Jua',
                 cursor: 'pointer',
