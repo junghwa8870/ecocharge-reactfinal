@@ -170,7 +170,10 @@ const Header = () => {
                     fontSize: '12px',
                     lineHeight: 'unset',
                   }}
-                  onClick={() => handleLogin(KAKAO_AUTH_URL)}
+                  onClick={() => {
+                    handleLogin(KAKAO_AUTH_URL);
+                    toggleButtons();
+                  }}
                 >
                   <img
                     src={'kakaoLogo.png'}
@@ -185,7 +188,10 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={() => handleLogin(NAVER_AUTH_URL)}
+                  onClick={() => {
+                    handleLogin(NAVER_AUTH_URL);
+                    toggleButtons();
+                  }}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -212,7 +218,10 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={() => handleLogin(GOOGLE_AUTH_URL)}
+                  onClick={() => {
+                    handleLogin(GOOGLE_AUTH_URL);
+                    toggleButtons();
+                  }}
                   variant='contained'
                   style={{
                     marginBottom: '10px',
