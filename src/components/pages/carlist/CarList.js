@@ -4,6 +4,7 @@ import './CarList.scss';
 import { Badge } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExpand } from '@fortawesome/free-solid-svg-icons';
+import Paging from '../../layout/Paging';
 
 const CarList = () => {
   // 버튼 동작 확인용
@@ -103,6 +104,7 @@ const CarList = () => {
           ))}
         </div>
       </Grid>
+      <Paging />
     </Grid>
   );
 };

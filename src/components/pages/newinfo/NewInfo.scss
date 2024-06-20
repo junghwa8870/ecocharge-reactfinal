@@ -1,45 +1,133 @@
-// .card {
+
+
+// .newInfoWriteBtnBox {
+//     position: absolute;
+//     right: 200px;
+//     bottom: 600px;
+    
+    
+//     .newInfoWriteBtn {
+//         background-color: #0D6EFD;
+//     color: white;
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     border: none;
+//     cursor: pointer;
+//     outline: none;
+//     border-radius: 5px;
+//     transition: background-color 0.3s ease;
+//     }
+// }
+
+// .newInfoContainer {
+//   box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+//   border-radius: 10px;
+//   border: 2px solid gray;
+// }
+
+// .newInfoCard {
+//     margin: 10px;
+//     box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+// }
+
+// .newInfoSmall {
 //     margin: 20px;
+//     display: flex;
+
+//     .newInfoWriteDate {
+//         margin-right: 20px;
+//     }
+//     .newInfoView {
+//         margin-right: 20px;
+//     }
+
+//     .newInfoSource {
+//         text-decoration: none;
+//         color: gray;
+
+//         &:hover {
+//             color: black;
+//         }
+//     }
+    
+// }
+
+// .newInfoInnerBox {
+//     .newInfoMoreBtn {
+
+//         &:hover {
+//             box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+//         }
+//     }
 // }
 
 // .newInfoBox {
-//     border: 1px solid black;
+//     box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+//     border: 1px solid gray;
+    
 // }
+
+// .articleNum {
+//     border: 1px solid gray;
+//     padding: 5px 10px;
+// }
+
+// 위에까지 원래 코드
+
+
 
 .newInfoWriteBtnBox {
     position: absolute;
-    right: 200px;
-    bottom: 600px;
+    right: 380px;
+    bottom: 590px;
     
     
     .newInfoWriteBtn {
-        border: 3px solid gray;
-        background-color: white;
-        color: black;
-        font-weight: 800;
+        background-color: #0D6EFD;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+      }
+    
+    &:active {
+        background-color: #003d80;
+    }
     }
 }
 
 .newInfoContainer {
-  box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
-  border-radius: 10px;
-  border: 2px solid gray;
+//   box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+//   border-radius: 10px;
+//   border: 2px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
 }
 
 .newInfoCard {
-    margin: 10px;
-    box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+    margin: 10px 60px 10px 60px;
+    box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
+    
 }
 
 .newInfoSmall {
-    margin: 20px;
+    margin: 20px 80px;
     display: flex;
 
     .newInfoWriteDate {
         margin-right: 20px;
+        color: darkslategrey;
     }
     .newInfoView {
         margin-right: 20px;
+        color: darkslategrey;
     }
 
     .newInfoSource {
@@ -63,7 +151,13 @@
 }
 
 .newInfoBox {
-    box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
-    border: 1px solid gray;
-    
+    // box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+    // border: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.articleNum {
+    // border: 1px solid gray;
+    padding: 5px 10px;
 }
