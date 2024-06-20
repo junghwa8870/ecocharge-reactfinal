@@ -44,22 +44,6 @@ const MainInfo = () => {
             component={Link}
             to='/newInfo'
             variant='contained'
-            style={{
-              backgroundColor: 'rgb(13, 110, 253)',
-              // backgroundColor: 'white',
-              color: 'white',
-              fontWeight: 'bold',
-              textTransform: 'none',
-              borderRadius: '10px',
-              padding: '12px 24px',
-              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-              transition: 'background-color 0.3s, color 0.3s, transform 0.2s',
-              // '&:hover': {
-              //   backgroundColor: '#1a751d',
-              //   transform: 'scale(1.05)',
-              //   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-              // },
-            }}
           >
             더보기
           </Button>
