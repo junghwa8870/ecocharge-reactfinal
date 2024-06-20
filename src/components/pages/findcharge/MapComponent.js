@@ -1,23 +1,23 @@
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  Marker,
-  NaverMap,
-  NavermapsProvider,
-  useNavermaps,
-} from 'react-naver-maps';
+// import axios from 'axios';
+// import React, { useEffect, useRef, useState } from 'react';
+// import {
+//   Marker,
+//   NaverMap,
+//   NavermapsProvider,
+//   useNavermaps,
+// } from 'react-naver-maps';
 
-function MapComponent({ searchParams }) {
-  const navermaps = useNavermaps();
+// function MapComponent({ searchParams }) {
+//   const navermaps = useNavermaps();
 
-  return (
-    <NaverMap
-      defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)}
-      defaultZoom={15}
-    >
-      <Marker defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)} />
-    </NaverMap>
-  );
-}
+//   return (
+//     <NaverMap
+//       defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)}
+//       defaultZoom={15}
+//     >
+//       <Marker defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)} />
+//     </NaverMap>
+//   );
+// }
 
-export default MapComponent;
+// export default MapComponent;
