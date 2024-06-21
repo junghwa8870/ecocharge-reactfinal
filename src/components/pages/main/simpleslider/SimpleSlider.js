@@ -10,7 +10,7 @@ function SimpleSlider() {
   let settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,

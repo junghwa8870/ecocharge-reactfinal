@@ -31,7 +31,7 @@ const Footer = () => {
         <div className='footer-left'>
           <img src='ecologo.png' alt='Logo' className='footer-logo' />
           <div className='footer-title'>
-            ECO
+            E C O
             <br />
             CHARGE
           </div>
