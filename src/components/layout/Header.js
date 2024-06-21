@@ -86,9 +86,9 @@ const Header = () => {
                 to={link.to}
                 underline='none'
                 color='black'
-                marginRight='60'
-                fontSize='20px'
-                fontWeight='700'
+                fontFamily='Jua'
+                marginRight='50'
+                fontSize='23px'
                 textAlign='center'
                 paddingRight='65px'
               >
