@@ -8,7 +8,9 @@ const MainCar = () => {
       <Typography variant='h4' className='main-car-title'>
         Model
       </Typography>
-      <div className='main-car-comment'>최근 출시 예정인 모델입니다.</div>
+      <div className='main-car-comment'>
+        최근 출시 예정인 전기차 모델입니다.
+      </div>
       <Grid className='main-car-box'>
         <div className='main-car-innerbox'>
           <img
