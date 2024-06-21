@@ -3,6 +3,13 @@ import { Button, Grid, Typography } from '@mui/material';
 import './CarList.scss';
 import CarListItem from './carListItem/CarListItem';
 import axios from 'axios';
+import PageButton from '../pageButton/PageButton';
+import {
+  createSearchParams,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 
 const CarList = () => {
   // 버튼 동작 확인용
@@ -14,34 +21,66 @@ const CarList = () => {
     alert('검색버튼 클릭 확인용');
   };
 
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page') || 1;
+  createSearchParams(page);
+
+  const [pageMaker, setPageMaker] = useState({});
+
   const [carInfoList, setCarInfoList] = useState([]);
 
-  useEffect(() => {
-    const carListRendering = async () => {
-      const res = await axios.get('http://localhost:8181/carList');
+  const [pageButtoncount, setPageButtonCount] = useState();
 
-      try {
-        // console.log(res.data);
-        setCarInfoList(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+  const [pageNo, setPageNo] = useState(1);
+  const location = useLocation();
+  const pageButtonClickHandler = (no) => {
+    setPageNo(no);
+    if (location.pathname && pageNo !== no) {
+      navigate(`/carList?page=${no}`, { state: page });
+    }
+  };
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      // 이 이벤트를 통해 뒤로 가기 버튼이 눌렸을 때 원하는 작업을 수행할 수 있습니다.
+      console.log(event.state);
+
+      setPageNo(event.state);
     };
 
-    carListRendering();
+    window.addEventListener('popstate', handleBackButton);
   }, []);
+
+  const carListRendering = async () => {
+    let url = `http://localhost:8181/carList?pageNo=${page}`;
+    // console.log(url);
+    const res = await axios.get(url);
+
+    try {
+      console.log(res.data);
+      setCarInfoList(res.data.subsidyCarList);
+      setPageMaker(res.data.pageMaker);
+      setPageButtonCount(res.data.pageMaker.end);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    carListRendering();
+  }, [pageNo]);
 
   return (
     <Grid
       container
       className='carContainer'
       style={{
-        width: '80%',
-        height: '1700px',
+        width: '100%',
+        height: '2300px',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        margin: '200px auto',
+        justifyContent: 'center',
       }}
     >
       <Typography variant='h1' className='ecoCarTitle'>
@@ -53,7 +92,6 @@ const CarList = () => {
         className='carbox'
         style={{
           width: '90%',
-          flex: 1,
           marginTop: '20px',
           marginBottom: '100px',
         }}
@@ -85,6 +123,12 @@ const CarList = () => {
           {carInfoList.map((carInfo) => (
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
+
+          <PageButton
+            pageMaker={pageMaker}
+            buttonCount={pageButtoncount}
+            clickHandler={pageButtonClickHandler}
+          />
         </Grid>
       </Grid>
     </Grid>

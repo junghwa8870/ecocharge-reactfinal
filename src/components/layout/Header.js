@@ -2,29 +2,12 @@ import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
-import { NAVER_AUTH_URL } from '../../config/naver-config';
-import { GOOGLE_AUTH_URL } from '../../config/google-config';
-import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [showButtons, setShowButtons] = useState(false);
-
-  const toggleButtons = () => {
-    setShowButtons(!showButtons);
-  };
   const navigate = useNavigate();
-  const handleLogin = (authUrl) => {
-    navigate('/sms', { state: { redirectUrl: authUrl } });
+
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -126,7 +109,7 @@ const Header = () => {
           >
             <Button
               className='loginBtn'
-              onClick={toggleButtons}
+              onClick={handleLogin}
               variant='outlined'
               style={{
                 width: '130px',
@@ -142,116 +125,6 @@ const Header = () => {
             >
               Login
             </Button>
-            {showButtons && (
-              <div
-                className={`additional-buttons-container`}
-                style={{
-                  position: 'absolute',
-                  top: '80%',
-                  backgroundColor: '#fff',
-                  border: '1px solid #ccc',
-                  width: '170px', // 가로 넓이 설정
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                  zIndex: 1,
-                  marginTop: '10px',
-                }}
-              >
-                <Button
-                  className='kakaoLoginBtn'
-                  style={{
-                    color: 'gray',
-                    backgroundColor: 'white',
-                    fontWeight: '600',
-                    width: '120px',
-                    height: '33px',
-                    marginTop: '5px',
-                    marginLeft: '20px',
-                    marginRight: '10px',
-                    fontSize: '12px',
-                    lineHeight: 'unset',
-                  }}
-                  onClick={() => {
-                    handleLogin(KAKAO_AUTH_URL);
-                    toggleButtons();
-                  }}
-                >
-                  <img
-                    src={'kakaoLogo.png'}
-                    className='kakao'
-                    alt='kakao'
-                    style={{
-                      width: '120px',
-                      marginLeft: '5px',
-                    }}
-                  />
-                  {/* 카카오 로그인 */}
-                </Button>
-                <Button
-                  className='naverLoginBtn'
-                  onClick={() => {
-                    handleLogin(NAVER_AUTH_URL);
-                    toggleButtons();
-                  }}
-                  style={{
-                    color: 'gray',
-                    backgroundColor: 'white',
-                    fontWeight: '600',
-                    width: '120px',
-                    height: '33px',
-                    marginTop: '5px',
-                    marginLeft: '20px',
-                    marginRight: '10px',
-                    fontSize: '12px',
-                    lineHeight: 'unset',
-                  }}
-                >
-                  <img
-                    className='naver'
-                    src={'naverLogo.png'}
-                    alt='naver'
-                    style={{
-                      width: '120px',
-                      marginLeft: '5px',
-                    }}
-                  />
-                  {/* 네이버 로그인 */}
-                </Button>
-                <Button
-                  className='googleLoginBtn'
-                  onClick={() => {
-                    handleLogin(GOOGLE_AUTH_URL);
-                    toggleButtons();
-                  }}
-                  variant='contained'
-                  style={{
-                    marginBottom: '10px',
-                    color: 'gray',
-                    backgroundColor: 'white',
-                    fontWeight: '600',
-                    width: '120px',
-                    height: '33px',
-                    marginTop: '10px',
-                    marginLeft: '25px',
-                    marginRight: '10px',
-                    fontSize: '12px',
-                    lineHeight: 'unset',
-                  }}
-                  fullWidth
-                >
-                  <img
-                    className='google'
-                    src={'googleLogo.png'}
-                    alt='Google'
-                    style={{
-                      width: '25px',
-                      marginLeft: '-20px',
-                      paddingRight: '5px',
-                    }}
-                  />
-                  구글 로그인
-                </Button>
-              </div>
-            )}
           </Grid>
         </Grid>
       </Toolbar>
