@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
-import { Translate } from '@mui/icons-material';
-import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
+import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,6 +21,10 @@ const Header = () => {
 
   const toggleButtons = () => {
     setShowButtons(!showButtons);
+  };
+  const navigate = useNavigate();
+  const handleLogin = (authUrl) => {
+    navigate('/sms', { state: { redirectUrl: authUrl } });
   };
 
   return (
@@ -100,11 +103,11 @@ const Header = () => {
                 to={link.to}
                 underline='none'
                 color='black'
-                fontFamily='Jua'
-                marginRight='50'
-                fontSize='23px'
+                marginRight='60'
+                fontSize='20px'
+                fontWeight='700'
                 textAlign='center'
-                paddingRight='65px'
+                paddingRight='80px'
               >
                 {link.text}
               </MuiLink>
@@ -167,6 +170,10 @@ const Header = () => {
                     fontSize: '12px',
                     lineHeight: 'unset',
                   }}
+                  onClick={() => {
+                    handleLogin(KAKAO_AUTH_URL);
+                    toggleButtons();
+                  }}
                 >
                   <img
                     src={'kakaoLogo.png'}
@@ -181,7 +188,10 @@ const Header = () => {
                 </Button>
                 <Button
                   className='naverLoginBtn'
-                  onClick={() => (window.location.href = NAVER_AUTH_URL)}
+                  onClick={() => {
+                    handleLogin(NAVER_AUTH_URL);
+                    toggleButtons();
+                  }}
                   style={{
                     color: 'gray',
                     backgroundColor: 'white',
@@ -208,7 +218,10 @@ const Header = () => {
                 </Button>
                 <Button
                   className='googleLoginBtn'
-                  onClick={() => (window.location.href = GOOGLE_AUTH_URL)}
+                  onClick={() => {
+                    handleLogin(GOOGLE_AUTH_URL);
+                    toggleButtons();
+                  }}
                   variant='contained'
                   style={{
                     marginBottom: '10px',

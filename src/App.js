@@ -21,10 +21,11 @@ import QnAList from './components/pages/qna/qnalist/QnAList.js';
 import QuestionForm from './components/pages/qna/qnalist/questionform/QuestionForm.js';
 import MyQuestionList from './components/pages/qna/qnalist/myquestionlist/MyQuestionList.js';
 import LogoutHandler from './components/user/LogoutHandler.js';
+import { AuthContextProvider } from './utils/AuthContext.js';
 
 function App() {
   return (
-    <>
+    <AuthContextProvider>
       {/* <Favicon url='/favicon-32x32.png' /> */}
 
       <div className='app' style={{ display: 'flex', flexDirection: 'column' }}>
@@ -65,7 +66,7 @@ function App() {
         <ScrollToTopButton />
         <Footer />
       </div>
-    </>
+    </AuthContextProvider>
   );
 }
 
