@@ -5,10 +5,6 @@ import React from 'react';
 import { Badge } from 'reactstrap';
 
 const CarListItem = ({ info }) => {
-  const handleCarInfoBoxClick = () => {
-    window.location.href = 'https://www.kia.com';
-  };
-
   const {
     carName,
     imgUrl,
@@ -20,7 +16,12 @@ const CarListItem = ({ info }) => {
     callNumber,
     company,
     country,
+    locationUrl,
   } = info;
+
+  const handleCarInfoBoxClick = () => {
+    window.location.href = locationUrl;
+  };
 
   return (
     <Grid
