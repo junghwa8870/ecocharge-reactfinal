@@ -6,6 +6,7 @@ import axios from 'axios';
 import PageButton from '../pageButton/PageButton';
 import {
   createSearchParams,
+  useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
@@ -24,7 +25,7 @@ const CarList = () => {
 
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') || 1;
-  const pageParam = createSearchParams(page).toString();
+  createSearchParams(page);
 
   const [pageMaker, setPageMaker] = useState({});
 
@@ -32,19 +33,33 @@ const CarList = () => {
 
   const [pageButtoncount, setPageButtonCount] = useState();
 
-  const [pageNo, setPageNo] = useState(0);
-
+  const [pageNo, setPageNo] = useState(1);
+  const location = useLocation();
   const pageButtonClickHandler = (no) => {
     setPageNo(no);
-    navigate(`/carList?page=${no}`, { search: pageParam });
+    if (location.pathname && pageNo !== no) {
+      navigate(`/carList?page=${no}`, { state: page });
+    }
   };
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      // 이 이벤트를 통해 뒤로 가기 버튼이 눌렸을 때 원하는 작업을 수행할 수 있습니다.
+      console.log(event.state);
+
+      setPageNo(event.state);
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+  }, []);
+
   const carListRendering = async () => {
     let url = `http://localhost:8181/carList?pageNo=${page}`;
     // console.log(url);
     const res = await axios.get(url);
 
     try {
-      // console.log(res.data);
+      console.log(res.data);
       setCarInfoList(res.data.subsidyCarList);
       setPageMaker(res.data.pageMaker);
       setPageButtonCount(res.data.pageMaker.end);
