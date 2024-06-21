@@ -1,0 +1,93 @@
+.main-car-container {
+    width: 90%;
+    height: 600px;
+    margin: 100px auto;
+    // display: flex;
+
+    // background-color: pink;
+    
+
+    .main-car-title {
+        width: 80%;
+        height: 70px;
+        font-weight: 700;
+        font-size: 2.7rem;
+        line-height: 1.235;
+        letter-spacing: 0.00735em;
+        margin-bottom: 20px;
+        color: #333;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        // background-color: red;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-car-comment {
+        width: 80%;
+        height: 20px;
+        font-size: 17px;
+        margin: 20px auto;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        color: rgb(82, 80, 80);
+        font-weight: 600;
+    }
+
+    .main-car-box {
+        width: 80%;
+        height: 400px;
+        margin: 60px auto;
+        // background-color: yellow;
+        display: flex;
+        
+    }
+
+    .main-car-innerbox {
+        // height: 300px;
+        // width: 80%;
+        // background-color: gray;
+        display: flex;
+        margin: 0 auto;
+     .carname{
+        position: relative;
+        right: -1%;
+        font-size: 36px;
+        top: -7%;
+        font-weight: bold;
+    }   
+        
+        .feature1 {
+            width: 40%;
+            height: 100%;
+        }
+
+        .mini-car-box {
+        //    display: flex;
+        //    align-items: end; 
+           margin: 50px;
+           
+           width: 700px;
+           
+            
+        .feature2 {
+            width: 50%;
+            height: 200px;
+            margin-right: 50px;
+            margin-left: 10px;
+            
+        }
+        .feature3 {
+            width: 50%;
+            height: 200px;
+        }
+    }
+    }
+}
+
+// .carnames {
+//     display: flex;
+//     align-items: flex-end;
+//     justify-content: flex-end;
+// }

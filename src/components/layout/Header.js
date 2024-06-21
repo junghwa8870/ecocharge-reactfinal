@@ -2,31 +2,12 @@ import React, { useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
-import { NAVER_AUTH_URL } from '../../config/naver-config';
-import { GOOGLE_AUTH_URL } from '../../config/google-config';
-import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [showButtons, setShowButtons] = useState(false);
-
-  const { isLoggedIn } = useContext(AuthContext);
-
-  const toggleButtons = () => {
-    setShowButtons(!showButtons);
-  };
   const navigate = useNavigate();
-  const handleLogin = (authUrl) => {
-    navigate('/sms', { state: { redirectUrl: authUrl } });
+
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (

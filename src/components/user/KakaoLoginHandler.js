@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { API_BASE_URL, USER } from '../../config/host_config';
 import AuthContext from '../../utils/AuthContext';
+
 import { useNavigate } from 'react-router-dom';
 
 const KakaoLoginHandler = () => {
@@ -8,7 +9,7 @@ const KakaoLoginHandler = () => {
     '사용자가 동의화면을 통해 필수 정보 동의 후 Kakao 인증 서버에서 redirect를 진행함!',
   );
 
-  const { onLogin } = useContext(AuthContext);
+  const { onLogin, userName } = useContext(AuthContext);
   const redirection = useNavigate();
 
   const REQUEST_URL = API_BASE_URL + USER;
@@ -23,8 +24,7 @@ const KakaoLoginHandler = () => {
         `${REQUEST_URL}/kakaologin?code=${code}&phoneNumber=${phoneNumber}`,
       );
 
-      const { token, userName, email, role } = await res.json(); // 서버에서 온 json 읽기
-
+      const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
       onLogin(token, userName, role);
 
       redirection('/');
