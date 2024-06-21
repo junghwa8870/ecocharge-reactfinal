@@ -86,11 +86,11 @@ const Header = () => {
                 to={link.to}
                 underline='none'
                 color='black'
-                fontFamily='Jua'
-                marginRight='50'
-                fontSize='23px'
+                marginRight='60'
+                fontSize='20px'
+                fontWeight='700'
                 textAlign='center'
-                paddingRight='65px'
+                paddingRight='80px'
               >
                 {link.text}
               </MuiLink>

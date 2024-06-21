@@ -17,9 +17,7 @@ const NaverLoginHandler = () => {
     const naverLogin = async () => {
       const res = await fetch(REQUEST_URL + '/naverlogin?code=' + code);
 
-      const { token, userName, email, role } = await res.json(); // 서버에서 온 json 읽기
-
-      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+      const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
       onLogin(token, userName, role);
 
       redirection('/');

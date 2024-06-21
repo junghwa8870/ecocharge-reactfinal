@@ -17,7 +17,7 @@ const GoogleLoginHandler = () => {
     const googleLogin = async () => {
       const res = await fetch(REQUEST_URL + '/googlelogin?code=' + code);
 
-      const { token, userName, email, role } = await res.json();
+      const { token, userName, role } = await res.json();
 
       onLogin(token, userName, role);
 
