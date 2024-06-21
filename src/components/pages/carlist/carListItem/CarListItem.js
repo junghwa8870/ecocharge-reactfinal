@@ -29,43 +29,55 @@ const CarListItem = ({ info }) => {
       onClick={handleCarInfoBoxClick}
       style={{
         display: 'flex',
-        flexDirection: 'column',
+        flexWrap: 'wrap',
         width: '25%',
       }}
     >
       <Typography variant='h6' className='carName'>
         {carName}
       </Typography>
-      <Badge color='dark' pill style={{ width: '100px', margin: '0 10px' }}>
+      <Badge
+        color='dark'
+        pill
+        style={{
+          width: 'fit-content',
+          margin: '0 10px 10px',
+          padding: '5px 10px',
+        }}
+      >
         {company}
       </Badge>
       <div className='imageContainer'>
         <img
           src={`https://ev.or.kr${imgUrl}`}
           alt='CarA'
-          style={{ width: '100%' }}
+          style={{ width: '100%', overflow: 'hidden' }}
         />
       </div>
-      <Typography variant='body2' className='carStat'>
-        승차인원: {ridingCapacity}
+      <Typography
+        variant='body2'
+        className='carStat'
+        style={{ marginTop: '10px' }}
+      >
+        <strong>승차인원</strong>: {ridingCapacity}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        배터리: {battery}
+        <strong>배터리</strong>: {battery}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        1회충전 주행거리: {fullChargeRange}
+        <strong>1회충전 주행거리</strong>: {fullChargeRange}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        지원금: {subsidy}
+        <strong>지원금</strong>: {subsidy}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        최고속도: {topSpeed}
+        <strong>최고속도</strong>: {topSpeed}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        제조국: {country}
+        <strong>제조국</strong>: {country}
       </Typography>
       <Typography variant='body2' className='carStat'>
-        판매사 연락처: {callNumber}
+        <strong>판매사 연락처</strong>: {callNumber}
       </Typography>
       <FontAwesomeIcon icon={faExpand} className='expandIcon' />
     </Grid>
