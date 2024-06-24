@@ -138,7 +138,7 @@ gap: 20px; // 아이템 사이에 간격 추가
     left: 45%; /* 부모 요소의 중앙 정렬을 위해 left을 50%로 설정 */
     // transform: translate(-50%, -50%); /* 아이콘을 가운데 정렬 */
     font-size: 40px; /* 아이콘 크기 설정 */
-    color: black; /* 아이콘 색상 설정 */
+    color: #0D1245; /* 아이콘 색상 설정 */
     opacity: 0; /* 초기에는 숨김 */
     transition: opacity 0.3s ease; /* 투명도 전환 애니메이션 추가 */
     // z-index: 1; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
@@ -190,11 +190,11 @@ align-items: center;
   height: 35px;
   margin-top: 30px;
   margin-left: 10px;
-  background-color: #0D1245;
+  background-color: #0d1245;
   font-weight: 700;
 
   &:hover {
-    background-color: #0d1245a6;
+    background-color: hsla(234, 69%, 16%, 0.788);
   }
 }
 }

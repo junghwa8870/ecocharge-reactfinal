@@ -3,13 +3,6 @@ import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
 
 const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
-  let index = pageMaker.begin;
-  const newNums = [];
-  while (index <= buttonCount) {
-    newNums.push(index);
-    index += 1;
-  }
-
   const [currentPage, setCurrentPage] = useState(
     pageMaker.page ? pageMaker.page.pageNo : 1,
   );
@@ -23,6 +16,14 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
     clickHandler(no);
   };
 
+  const calculatePageRange = () => {
+    const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+    const endPage = Math.min(startPage + 4, buttonCount);
+    return { startPage, endPage };
+  };
+
+  const { startPage, endPage } = calculatePageRange();
+
   return (
     <>
       {currentPage > 1 && (
@@ -31,7 +32,10 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
       {pageMaker.prev && (
         <Button onClick={() => handleClick(currentPage - 1)}>{'<'}</Button>
       )}
-      {newNums.map((num) => (
+      {Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => startPage + i,
+      ).map((num) => (
         <PageButtonItem
           key={num}
           no={num}
