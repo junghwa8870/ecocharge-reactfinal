@@ -23,6 +23,7 @@ const KakaoLoginHandler = () => {
       const res = await fetch(
         `${REQUEST_URL}/kakaologin?code=${code}&phoneNumber=${phoneNumber}`,
       );
+      console.log(phoneNumber);
 
       const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
       onLogin(token, userName, role);
