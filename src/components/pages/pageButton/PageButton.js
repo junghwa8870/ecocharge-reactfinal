@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
 
@@ -10,46 +10,40 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
     index += 1;
   }
 
+  const [currentPage, setCurrentPage] = useState(
+    pageMaker.page ? pageMaker.page.pageNo : 1,
+  );
+
+  useEffect(() => {
+    setCurrentPage(pageMaker.page ? pageMaker.page.pageNo : 1);
+  }, [pageMaker]);
+
+  const handleClick = (no) => {
+    setCurrentPage(no);
+    clickHandler(no);
+  };
+
   return (
     <>
-      {pageMaker.page && pageMaker.page.pageNo > 1 && (
-        <Button
-          onClick={() => {
-            clickHandler(1);
-          }}
-        >
-          {'<<'}
-        </Button>
+      {currentPage > 1 && (
+        <Button onClick={() => handleClick(1)}>{'<<'}</Button>
       )}
       {pageMaker.prev && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo - 1);
-          }}
-        >
-          {'<'}
-        </Button>
+        <Button onClick={() => handleClick(currentPage - 1)}>{'<'}</Button>
       )}
       {newNums.map((num) => (
-        <PageButtonItem key={num} no={num} clickHandler={clickHandler} />
+        <PageButtonItem
+          key={num}
+          no={num}
+          clickHandler={handleClick}
+          isActive={num === currentPage}
+        />
       ))}
       {pageMaker.next && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo + 1);
-          }}
-        >
-          {'>'}
-        </Button>
+        <Button onClick={() => handleClick(currentPage + 1)}>{'>'}</Button>
       )}
-      {pageMaker.page && pageMaker.page.pageNo < pageMaker.finalPage && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.finalPage);
-          }}
-        >
-          {'>>'}
-        </Button>
+      {currentPage < pageMaker.finalPage && (
+        <Button onClick={() => handleClick(pageMaker.finalPage)}>{'>>'}</Button>
       )}
     </>
   );

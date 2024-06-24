@@ -22,49 +22,43 @@ const CarList = () => {
   };
 
   const navigate = useNavigate();
-
   const [searchParams] = useSearchParams();
-  const page = searchParams.get('page') || 1;
-  createSearchParams(page);
+  const page = parseInt(searchParams.get('page')) || 1;
 
   const [pageMaker, setPageMaker] = useState({});
-
   const [carInfoList, setCarInfoList] = useState([]);
-
-  const [pageButtoncount, setPageButtonCount] = useState();
-
-  const [pageNo, setPageNo] = useState(1);
+  const [pageButtonCount, setPageButtonCount] = useState(0);
+  const [pageNo, setPageNo] = useState(page);
   const location = useLocation();
+
   const pageButtonClickHandler = (no) => {
     setPageNo(no);
     if (location.pathname && pageNo !== no) {
-      navigate(`/carList?page=${no}`, { state: page });
+      navigate(`/carList?page=${no}`, { state: no });
     }
   };
 
   useEffect(() => {
     const handleBackButton = (event) => {
-      // 이 이벤트를 통해 뒤로 가기 버튼이 눌렸을 때 원하는 작업을 수행할 수 있습니다.
-      console.log(event.state);
-
       setPageNo(event.state);
     };
 
     window.addEventListener('popstate', handleBackButton);
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
   }, []);
 
   const carListRendering = async () => {
-    let url = `http://localhost:8181/carList?pageNo=${page}`;
-    // console.log(url);
+    const url = `http://localhost:8181/carList?pageNo=${pageNo}`;
     const res = await axios.get(url);
 
     try {
-      console.log(res.data);
       setCarInfoList(res.data.subsidyCarList);
       setPageMaker(res.data.pageMaker);
       setPageButtonCount(res.data.pageMaker.end);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -78,7 +72,7 @@ const CarList = () => {
       className='carContainer'
       style={{
         width: '100%',
-        height: '2300px',
+        height: 'auto',
         display: 'flex',
         justifyContent: 'center',
       }}
@@ -90,11 +84,7 @@ const CarList = () => {
       <Grid
         item
         className='carbox'
-        style={{
-          width: '90%',
-          marginTop: '20px',
-          marginBottom: '100px',
-        }}
+        style={{ width: '90%', marginTop: '20px', marginBottom: '100px' }}
       >
         <div className='searchBox'>
           <input
@@ -105,7 +95,6 @@ const CarList = () => {
           <Button
             className='searchBtn'
             variant='contained'
-            // color='primary'
             onClick={handleSearchClick}
           >
             검색
@@ -124,11 +113,13 @@ const CarList = () => {
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
 
-          <PageButton
-            pageMaker={pageMaker}
-            buttonCount={pageButtoncount}
-            clickHandler={pageButtonClickHandler}
-          />
+          <Grid className='carListPageButtonBox'>
+            <PageButton
+              pageMaker={{ ...pageMaker, page: { pageNo } }}
+              buttonCount={pageButtonCount}
+              clickHandler={pageButtonClickHandler}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
