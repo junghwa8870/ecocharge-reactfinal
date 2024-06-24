@@ -23,7 +23,7 @@ const Header = () => {
         <Grid
           container
           justifyContent='space-between'
-          style={{ backgroundColor: 'white' }}
+          // style={{ backgroundColor: 'white' }}
         >
           <Grid
             item
@@ -39,11 +39,16 @@ const Header = () => {
               }}
             >
               <img
-                src='ecologo.png'
+                src='MainLogo.png'
                 alt='Logo'
-                style={{ width: 100, paddingTop: 10, marginLeft: 50 }}
+                style={{
+                  width: 200,
+                  paddingTop: 10,
+                  marginLeft: 50,
+                  paddingBottom: 10,
+                }}
               />
-              <div
+              {/* <div
                 className='logo-title'
                 style={{
                   color: 'rgb(13, 110, 253)',
@@ -58,7 +63,7 @@ const Header = () => {
                 E C O
                 <br />
                 CHARGE
-              </div>
+              </div> */}
             </Link>
           </Grid>
           <Grid
@@ -75,7 +80,7 @@ const Header = () => {
             {[
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
-              { to: '/newInfo', text: '새소식' },
+              { to: '/userBoard', text: '게시판' },
               { to: '/myPage', text: '마이페이지' },
               { to: '/qna', text: 'Q & A' },
             ].map((link, index) => (
