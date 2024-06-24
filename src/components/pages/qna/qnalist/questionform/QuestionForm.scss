@@ -31,10 +31,13 @@
       font-size: 1.2rem;
       margin-left: 400px;
       text-wrap: nowrap;
-      background-color: #0D6EFD;
+      background-color: #0D1245;
+      border: none;
+      color: #fff;
+      font-weight: 550;
 
       &:hover {
-        border: 2px solid black;
+        background-color: #0d124579;
       }
     }
 
