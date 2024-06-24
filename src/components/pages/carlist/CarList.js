@@ -139,7 +139,7 @@ const CarList = () => {
           className='carInfoBox'
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             marginTop: '50px',
           }}
         >
