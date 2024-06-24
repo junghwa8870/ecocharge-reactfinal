@@ -1,0 +1,99 @@
+.user-board-container {
+    width: 80%;
+    margin: 200px auto;
+
+    .user-board-title {
+        font-size: 50px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+    .Bcomentbox {
+        padding: 30px;
+        margin: 0 auto;
+        width: 80%;
+        display: flex;
+        background-color: rgb(223, 222, 222);
+        border-radius: 10px;
+    
+        .Bcoment {
+            width: 100%;
+            margin-right: 300px;
+            line-height: 30px;
+        }
+
+        .goBWriteBtnbox {
+            width: 400px;
+            // margin-left: 200px;
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            margin-right: 20px;
+        
+            .goBwriteForm {
+            margin-right: 30px;
+            width: 130px;
+            height: 50px;
+            background-color: #0D1245;
+        
+                &:hover {
+                    background-color: gray;
+                    color: white;
+                }
+            }
+    }
+    }
+
+    .user-board-table {
+        width: 80%;
+        // background: red;
+        margin-left: 170px;
+        // margin: 100px auto;
+        // cursor: pointer;
+
+        .boardInnerBox {
+            // display: flex;
+            // border-top: 1px solid black;
+            // padding: 10px;
+            // text-align: center;
+            // width: 90%;
+            margin: 100px auto;
+
+            .bRow {
+                cursor: pointer;
+                width: 70%;
+                height: 65px;
+                display: flex;
+                border-top: 1px solid black;
+                padding: 10px;
+                text-align: center;
+
+                .Bno{
+                    width: 200px;
+                }
+
+                .Btitle{
+                    width: 500px;
+                    margin-left: 70px;
+                    margin-right: 50px;
+                    text-align: start;
+                }
+
+                .Bwriter{
+                    width: 200px;
+                }
+
+                .Bdate{
+                    width: 400px;
+                    margin-left: 50px;
+                }
+
+                .Bview{
+                    width: 200px;
+                }
+            }
+
+        }
+    }
+}
