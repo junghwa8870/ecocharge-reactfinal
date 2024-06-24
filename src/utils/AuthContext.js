@@ -6,7 +6,7 @@ const AuthContext = React.createContext({
   userName: '',
   role: '',
   onLogout: () => {},
-  onLogin: (token, userName, role) => {},
+  onLogin: () => {},
 });
 
 // 바로 위에서 생성한 Context를 제공하는 provider
@@ -17,7 +17,7 @@ export const AuthContextProvider = (props) => {
   const [role, setRole] = useState('');
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role) => {
+  const loginHandler = (token, userName, role, loginMethod) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
     // 2. 세션 스토리지 - 브라우저가 종료 되면 사라짐.
