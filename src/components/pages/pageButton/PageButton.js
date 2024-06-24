@@ -1,55 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
 
 const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
-  let index = pageMaker.begin;
-  const newNums = [];
-  while (index <= buttonCount) {
-    newNums.push(index);
-    index += 1;
-  }
+  const [currentPage, setCurrentPage] = useState(
+    pageMaker.page ? pageMaker.page.pageNo : 1,
+  );
+
+  useEffect(() => {
+    setCurrentPage(pageMaker.page ? pageMaker.page.pageNo : 1);
+  }, [pageMaker]);
+
+  const handleClick = (no) => {
+    setCurrentPage(no);
+    clickHandler(no);
+  };
+
+  const calculatePageRange = () => {
+    const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+    const endPage = Math.min(startPage + 4, buttonCount);
+    return { startPage, endPage };
+  };
+
+  const { startPage, endPage } = calculatePageRange();
 
   return (
     <>
-      {pageMaker.page && pageMaker.page.pageNo > 1 && (
-        <Button
-          onClick={() => {
-            clickHandler(1);
-          }}
-        >
-          {'<<'}
-        </Button>
+      {currentPage > 1 && (
+        <Button onClick={() => handleClick(1)}>{'<<'}</Button>
       )}
       {pageMaker.prev && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo - 1);
-          }}
-        >
-          {'<'}
-        </Button>
+        <Button onClick={() => handleClick(currentPage - 1)}>{'<'}</Button>
       )}
-      {newNums.map((num) => (
-        <PageButtonItem key={num} no={num} clickHandler={clickHandler} />
+      {Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => startPage + i,
+      ).map((num) => (
+        <PageButtonItem
+          key={num}
+          no={num}
+          clickHandler={handleClick}
+          isActive={num === currentPage}
+        />
       ))}
       {pageMaker.next && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo + 1);
-          }}
-        >
-          {'>'}
-        </Button>
+        <Button onClick={() => handleClick(currentPage + 1)}>{'>'}</Button>
       )}
-      {pageMaker.page && pageMaker.page.pageNo < pageMaker.finalPage && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.finalPage);
-          }}
-        >
-          {'>>'}
-        </Button>
+      {currentPage < pageMaker.finalPage && (
+        <Button onClick={() => handleClick(pageMaker.finalPage)}>{'>>'}</Button>
       )}
     </>
   );
