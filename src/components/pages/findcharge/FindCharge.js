@@ -19,15 +19,19 @@ function FindCharge() {
     <div className='find-charge-container'>
       <header className='find-charge-header'>
         <h1>충전소 찾기</h1>
+        <h5>원하시는 지역의 충전소를 검색해보세요.</h5>
       </header>
       <div className='find-charge-filters'>
         <SearchComponent onSearch={handleSearch} />
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
+          <h5>검색결과를 확인해보세요.</h5>
           <SearchBar onSearch={handleSearch} />
-          <div className='search-results'>
-            {searchParams && <SearchResult searchParams={searchParams} />}
+          <div className='search-results-box'>
+            <div className='search-results'>
+              {searchParams && <SearchResult searchParams={searchParams} />}
+            </div>
           </div>
         </div>
         <div className='map-area'>
