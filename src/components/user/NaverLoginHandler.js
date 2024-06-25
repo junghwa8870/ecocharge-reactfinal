@@ -15,7 +15,9 @@ const NaverLoginHandler = () => {
 
   useEffect(() => {
     const naverLogin = async () => {
-      const res = await fetch(REQUEST_URL + '/naverlogin?code=' + code);
+      const res = await fetch(
+        `${REQUEST_URL}/naverlogin?code=${code}&phoneNumber=${phoneNumber}`,
+      );
 
       const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
       onLogin(token, userName, role);
