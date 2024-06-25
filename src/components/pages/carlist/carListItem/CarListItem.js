@@ -34,16 +34,27 @@ const CarListItem = ({ info }) => {
         width: '25%',
       }}
     >
-      <Typography variant='h6' className='carName'>
+      <Typography
+        variant='h6'
+        className='carName'
+        style={{
+          fontWeight: '400',
+          fontSize: '1.25rem',
+          backgroundColor: 'rgba(0 0, 0, 0.5)',
+          color: 'white',
+          textAlign: 'center',
+        }}
+      >
         {carName}
       </Typography>
       <Badge
         color='dark'
-        pill
+        // pill
         style={{
           width: 'fit-content',
-          margin: '0 10px 10px',
-          padding: '5px 10px',
+          margin: '10px',
+          padding: '10px',
+          fontSize: '17px',
         }}
       >
         {company}

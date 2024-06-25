@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
+import AuthContext from '../../utils/AuthContext';
+import { API_BASE_URL, USER } from '../../config/host_config';
 
 const Header = () => {
   const navigate = useNavigate();
 
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
+
   const handleLogin = () => {
     navigate('/login');
+  };
+
+  // 로그아웃 핸들러
+  const logoutHandler = async () => {
+    const res = await fetch(`${API_BASE_URL}${USER}/logout`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN'),
+      },
+    });
+
+    console.log(res);
+
+    if (res.status === 200) {
+      onLogout();
+      navigate('/login');
+    }
   };
 
   return (
@@ -23,7 +44,7 @@ const Header = () => {
         <Grid
           container
           justifyContent='space-between'
-          style={{ backgroundColor: 'white' }}
+          // style={{ backgroundColor: 'white' }}
         >
           <Grid
             item
@@ -39,11 +60,16 @@ const Header = () => {
               }}
             >
               <img
-                src='ecologo.png'
+                src='MainLogo.png'
                 alt='Logo'
-                style={{ width: 100, paddingTop: 10, marginLeft: 50 }}
+                style={{
+                  width: 200,
+                  paddingTop: 10,
+                  marginLeft: 50,
+                  paddingBottom: 10,
+                }}
               />
-              <div
+              {/* <div
                 className='logo-title'
                 style={{
                   color: 'rgb(13, 110, 253)',
@@ -58,7 +84,7 @@ const Header = () => {
                 E C O
                 <br />
                 CHARGE
-              </div>
+              </div> */}
             </Link>
           </Grid>
           <Grid
@@ -75,7 +101,7 @@ const Header = () => {
             {[
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
-              { to: '/newInfo', text: '새소식' },
+              { to: '/userBoard', text: '게시판' },
               { to: '/myPage', text: '마이페이지' },
               { to: '/qna', text: 'Q & A' },
             ].map((link, index) => (
@@ -107,24 +133,45 @@ const Header = () => {
               justifyContent: 'center',
             }}
           >
-            <Button
-              className='loginBtn'
-              onClick={handleLogin}
-              variant='outlined'
-              style={{
-                width: '130px',
-                height: '40px',
-                color: 'black',
-                borderColor: 'black',
-                fontFamily: 'Jua',
-                fontSize: '15px',
-                borderWidth: '3px',
-                fontWeight: '600',
-                marginTop: '30px',
-              }}
-            >
-              Login
-            </Button>
+            {isLoggedIn ? (
+              <Button
+                className='loginBtn'
+                onClick={logoutHandler}
+                variant='outlined'
+                style={{
+                  width: '130px',
+                  height: '40px',
+                  color: 'black',
+                  borderColor: 'black',
+                  fontFamily: 'Jua',
+                  fontSize: '15px',
+                  borderWidth: '3px',
+                  fontWeight: '600',
+                  marginTop: '30px',
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                className='loginBtn'
+                onClick={handleLogin}
+                variant='outlined'
+                style={{
+                  width: '130px',
+                  height: '40px',
+                  color: 'black',
+                  borderColor: 'black',
+                  fontFamily: 'Jua',
+                  fontSize: '15px',
+                  borderWidth: '3px',
+                  fontWeight: '600',
+                  marginTop: '30px',
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Toolbar>

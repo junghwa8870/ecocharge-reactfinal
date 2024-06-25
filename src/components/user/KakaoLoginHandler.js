@@ -16,10 +16,14 @@ const KakaoLoginHandler = () => {
 
   // URL에 쿼리스트링으로 전달된 인가 코드를 얻어오는 방법.
   const code = new URL(window.location.href).searchParams.get('code');
+  const phoneNumber = localStorage.getItem('phoneNumber');
 
   useEffect(() => {
     const kakaoLogin = async () => {
-      const res = await fetch(REQUEST_URL + '/kakaologin?code=' + code);
+      const res = await fetch(
+        `${REQUEST_URL}/kakaologin?code=${code}&phoneNumber=${phoneNumber}`,
+      );
+      console.log(phoneNumber);
 
       const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
       onLogin(token, userName, role);

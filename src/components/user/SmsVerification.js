@@ -11,6 +11,7 @@ const SmsVerification = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === 'phoneNumber') {
       setPhoneNumber(value);
     } else if (name === 'verificationCodeInput') {
@@ -49,16 +50,12 @@ const SmsVerification = () => {
           verificationCodeInput,
         }),
       });
+      console.log(`json 파일확인:${phoneNumber},${verificationCodeInput}`);
       const result = await response.json();
       if (result) {
         alert('인증에 성공했습니다.');
-        await fetch(`${API_BASE_URL}/api/save-phone`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ phoneNumber }),
-        });
+        localStorage.setItem('phoneNumber', phoneNumber);
+
         const { redirectUrl } = location.state;
         window.location.href = redirectUrl;
       } else {
