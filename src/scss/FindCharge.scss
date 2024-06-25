@@ -1,39 +1,196 @@
+// .find-charge-container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh;
+// }
+
+// .find-charge-header {
+//   // background-color: #f8f9fa;
+//   // padding: 1rem;
+//   text-align: center;
+//   border-bottom: 1px solid #dee2e6;
+//  
+// }
+
+// .find-charge-filters {
+//   flex-wrap: wrap;
+//   padding: 2rem;
+//   border-bottom: 2px solid gray;
+//   background-color: rgb(223, 222, 222);
+// }
+
+// .find-charge-content {
+//   display: flex;
+//   flex: 1;
+// }
+
+// .search-area {
+//   width: 300px;
+//   padding: 1rem;
+//   border-right: 1px solid #dee2e6;
+//   overflow-y: auto;
+// }
+
+// .map-area {
+//   flex: 1;
+//   position: relative;
+// }
+
+// .map-area > div {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .search-component > div {
+//   margin-bottom: 1rem;
+// }
+
+// .search-component select {
+//   width: 100%;
+//   padding: 0.5rem;
+//   margin-top: 0.5rem;
+// }
+
+// .search-component button {
+//   width: 80px;
+//   height: 80px;
+//   padding: 0.75rem;
+//   background-color: white;
+//   color: rgb(13, 110, 253);
+//   border: 2px solid black;
+//   border-radius: 20px;
+//   font-weight: bold;
+//   font-size: 20px;
+//   margin-top: 5px;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+// }
+
+// .search-component button:hover {
+//   background-color: rgb(13, 110, 253); 
+//   color: white; 
+//   border-color: black;
+// }
+
+// .search-results ul {
+//   list-style-type: none;
+//   padding: 0;
+// }
+
+// .search-results li {
+//   margin-bottom: 1rem;
+// } 
+
+
+
+
+/////추가한내용
 .find-charge-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  // height: 100vh;
+  height: 1200px;
 }
 
 .find-charge-header {
-  background-color: #f8f9fa;
-  padding: 1rem;
+  // background-color: #f8f9fa;
+  // padding: 1rem;
   text-align: center;
-  border-bottom: 1px solid #dee2e6;
+  // border-bottom: 1px solid #dee2e6;
+  margin-bottom: 30px;
+
+  // 추가한 내용
+   h1 {
+     font-weight: 700;
+     font-size: 50px;
+     margin-top: 200px;
+    //  margin-bottom: 50px;
+   }
+
+   h5 {
+    width: 80%;
+    height: 20px;
+    font-size: 17px;
+    margin: 20px auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(82, 80, 80);
+    font-weight: 600;
+   }
+  
+  
 }
 
 .find-charge-filters {
   flex-wrap: wrap;
-  padding: 2rem;
-  border-bottom: 2px solid gray;
-  background-color: rgb(223, 222, 222);
+    background-color: rgb(223, 222, 222);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 130px;
+    padding-bottom: 20px;
 }
 
 .find-charge-content {
   display: flex;
-  flex: 1;
+    flex: 1 1;
+    justify-content: space-evenly;
 }
 
 .search-area {
-  width: 300px;
-  padding: 1rem;
-  border-right: 1px solid #dee2e6;
-  overflow-y: auto;
+  width: 400px;
+    padding: 2rem;
+    /* border-right: 1px solid #dee2e6; */
+    overflow-y: auto;
+    margin: 20px;
+    /* background-color: #9eb1c55e; */
+    // border: 20px solid #9eb1c55e;
+    // border-right: 1px solid gray;
+
+    h5 {
+      width: 80%;
+      height: 20px;
+      font-size: 17px;
+      margin: 20px auto;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: rgb(82, 80, 80);
+      font-weight: 600;
+    }
+
+    .search-results-box {
+      // display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px auto;
+      // width: 80%;
+      // padding: 20px;
+      
+
+      .search-results {
+        // width: 300px;
+        // width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    }
 }
 
 .map-area {
-  flex: 1;
   position: relative;
+    /* margin: 20px; */
+    width: 1500px;
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
+
 
 .map-area > div {
   position: absolute;
@@ -45,6 +202,8 @@
 
 .search-component > div {
   margin-bottom: 1rem;
+  margin-right: 20px;
+  width: 140px;
 }
 
 .search-component select {
@@ -55,23 +214,24 @@
 
 .search-component button {
   width: 80px;
-  height: 80px;
-  padding: 0.75rem;
-  background-color: white;
-  color: rgb(13, 110, 253);
-  border: 2px solid black;
-  border-radius: 20px;
+  height: 50px;
+  // padding: 0.75rem;
+  background-color: #0d1245;
+  color: #fff;
+  // border: 2px solid black;
+  border-radius: 10px;
   font-weight: bold;
-  font-size: 20px;
-  margin-top: 5px;
+  font-size: 18px;
+  margin-top: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .search-component button:hover {
-  background-color: rgb(13, 110, 253); 
-  color: white; 
-  border-color: black;
+  background-color: hsla(234, 69%, 16%, 0.788); 
+  // color: white; 
+  // border-color: black;
+  border: none;
 }
 
 .search-results ul {
