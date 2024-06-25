@@ -333,7 +333,6 @@ const Login = () => {
       type: 'application/json',
     });
 
-    // 이미지 파일과 회원정보 JSON을 하나로 묶어서 보낼 예정.
     // FormData 객체를 활용해서.
     const userFormData = new FormData();
     userFormData.append('user', userJsonBlob);
