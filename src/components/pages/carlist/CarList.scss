@@ -41,13 +41,12 @@ gap: 20px; // 아이템 사이에 간격 추가
 
 .carName {
   width: 100%;
-  // font-weight: 600;
-  // text-decoration: underline;
-  //   text-underline-position: under;
-  //   text-decoration-color: black;
-  //   text-decoration-line: underline;
-    // padding: 10px 10px 0px 10px;
-    padding: 10px;
+  font-weight: 400;
+  font-size: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 .carBrand {
@@ -59,12 +58,12 @@ gap: 20px; // 아이템 사이에 간격 추가
   display: flex;
   flex-wrap: wrap;
 
-  border-radius: 10px;
-  border: 2px solid gray;
+  // border-radius: 10px;
+  // border: 2px solid gray;
   box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
 
   width: calc(25%); // 3개씩 배치되도록 너비 설정
-  height: 560px; // 아이템 높이 설정
+  height: 580px; // 아이템 높이 설정
   margin-top: 40px; // 상단 여백 추가
   // display: flex;
   // flex-direction: column;
@@ -79,21 +78,21 @@ gap: 20px; // 아이템 사이에 간격 추가
   }
 
   &:hover {
-  background-color: hwb(0 94% 6%); /* 호버 시 배경색 변경 */
-  transform: translateY(-5px); /* 호버 시 약간 위로 이동 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 추가 */
-  
-    .expandIcon {
-      opacity: 1; /* 호버 시에만 아이콘을 보이도록 설정 */
-    }
-
-    .imageContainer {
-      img {
-        opacity: 0.6;
-      }
-    }
+    background-color: hwb(0 94% 6%); /* 호버 시 배경색 변경 */
+    transform: translateY(-5px); /* 호버 시 약간 위로 이동 */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 추가 */
     
-  }
+      .expandIcon {
+        opacity: 1; /* 호버 시에만 아이콘을 보이도록 설정 */
+      }
+  
+      .imageContainer {
+        img {
+          opacity: 0.6;
+        }
+      }
+      
+    }
   
   .expandIcon {
     position: relative; /* 절대 위치 설정 */

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { API_BASE_URL } from '../../config/host_config';
+import { API_BASE_URL } from '../../config/host-config';
 import '../../scss/SmsVerification.scss';
 import { useLocation } from 'react-router-dom';
 

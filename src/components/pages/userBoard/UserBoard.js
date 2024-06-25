@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './UserBoard.scss';
 import { useNavigate } from 'react-router-dom';
-import { BOARD, BOARD_REPLY } from '../../../config/host_config';
+import { BOARD, BOARD_REPLY } from '../../../config/host-config';
 import axiosInstance from '../../../config/axios-config';
 import { dark } from '@mui/material/styles/createPalette';
 import { Grid } from '@mui/material';
@@ -36,25 +36,16 @@ const UserBoard = () => {
     bProfileImage,
   ) => {
     const newBoard = {
-      bWriter: bWriter,
-      bContent: bContent,
-      bAddress: bAddress,
-      bTitle: bTitle,
-      bProfileImage: bProfileImage,
+      bWriter,
+      bContent,
+      bAddress,
+      bTitle,
+      bProfileImage,
     };
-    handleRequest(
-      () => axiosInstance.post(API_BASE_URL, newBoard),
-      (data) => setBoard(dark.board),
-    );
   };
 
   // 할 일 삭제 처리 함수
-  const removeBoard = async (id) => {
-    handleRequest(
-      () => axiosInstance.delete(`${API_BASE_URL}/${id}`),
-      (data) => setBoard(data.todos),
-    );
-  };
+  const removeBoard = async (id) => {};
 
   const data = [
     {

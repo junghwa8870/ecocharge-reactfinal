@@ -54,7 +54,10 @@ const CarList = () => {
 
   useEffect(() => {
     const handleBackButton = (event) => {
-      setPageNo(event.state);
+      console.log(event.state.usr);
+      if (event.state.usr !== null) {
+        setPageNo(event.state.usr);
+      }
     };
 
     window.addEventListener('popstate', handleBackButton);
@@ -98,7 +101,16 @@ const CarList = () => {
   );
 
   return (
-    <Grid container className='carContainer'>
+    <Grid
+      container
+      className='carContainer'
+      style={{
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Typography variant='h1' className='ecoCarTitle'>
         구매보조금 지원 차종
       </Typography>
@@ -129,7 +141,7 @@ const CarList = () => {
           </Button>
         </div>
         <Grid container className='carInfoBox'>
-          {carInfoList.map((carInfo) => (
+          {filteredCarInfoList.map((carInfo) => (
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
 

@@ -4,7 +4,7 @@ import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import '../../scss/Login.scss';
-import { API_BASE_URL, USER } from '../../config/host_config';
+import { API_BASE_URL, USER } from '../../config/host-config';
 import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
 
