@@ -12,6 +12,7 @@ const NaverLoginHandler = () => {
   const REQUEST_URL = API_BASE_URL + USER;
 
   const code = new URL(window.location.href).searchParams.get('code');
+  const phoneNumber = localStorage.getItem('phoneNumber');
 
   useEffect(() => {
     const naverLogin = async () => {
