@@ -6,7 +6,6 @@ import axiosInstance from '../../../config/axios-config';
 import { dark } from '@mui/material/styles/createPalette';
 import { Grid } from '@mui/material';
 import { Button, Table } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
 import Paging from '../../layout/Paging';
 
 const UserBoard = () => {
