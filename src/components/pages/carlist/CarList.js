@@ -149,6 +149,7 @@ const CarList = () => {
 
           <Grid className='carListPageButtonBox'>
             <PageButton
+              page={pageNo}
               pageMaker={{ ...pageMaker, page: { pageNo } }}
               buttonCount={pageButtonCount}
               clickHandler={pageButtonClickHandler}

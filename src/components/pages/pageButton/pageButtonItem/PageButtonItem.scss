@@ -1,19 +1,20 @@
 .page-button-item {
     margin: 0 5px;
     // padding: 10px 20px;
-    border: 1px solid #0d1245;
+    border: 1px solid #ddd;
     background-color: #f6f3f2;
-    color: rgb(63, 62, 62);
+    color: black;
     cursor: pointer;
+    padding: 8px 16px;
 
     &.active {
         background-color: #9eb1c5 !important;
-        color: white;
+        color: white !important;
     }
 
     &:hover {
-        background-color: #0d1245 !important;
-        color: white;
+        background-color: #ddd !important;
+        // color: white !important;
     }
   }
   
