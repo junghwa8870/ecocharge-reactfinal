@@ -8,7 +8,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const CarList = () => {
   const [searchText, setSearchText] = useState(''); // 검색어 상태 추가
-
+  ///////////
   // 버튼 동작 확인용
   const handleDetailClick = () => {
     window.location.href = 'https://www.naver.com';
