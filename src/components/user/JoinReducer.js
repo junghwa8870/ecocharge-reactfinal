@@ -2,23 +2,22 @@ export const initialState = {
   userValue: {
     userName: '',
     password: '',
-    email: '',
     phoneNumber: '',
-    userId: '',
+    id: '',
   },
   message: {
     userName: '',
     password: '',
     passwordCheck: '',
     phoneNumber: '',
-    userId: '',
+    id: '',
   },
   correct: {
     userName: false,
     password: false,
     passwordCheck: false,
     phoneNumber: false,
-    userId: false,
+    id: false,
   },
 };
 
