@@ -30,11 +30,12 @@ const CarListItem = ({ info }) => {
       </Typography>
       <Badge
         color='dark'
-        pill
+        // pill
         style={{
           width: 'fit-content',
-          margin: '0 10px 10px',
-          padding: '5px 10px',
+          margin: '10px',
+          padding: '10px',
+          fontSize: '17px',
         }}
       >
         {company}

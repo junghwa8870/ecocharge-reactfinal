@@ -29,12 +29,12 @@ const Footer = () => {
 
       <div className='footer-content'>
         <div className='footer-left'>
-          <img src='ecologo.png' alt='Logo' className='footer-logo' />
-          <div className='footer-title'>
+          <img src='mainLogo.png' alt='Logo' className='footer-logo' />
+          {/* <div className='footer-title'>
             E C O
             <br />
             CHARGE
-          </div>
+          </div> */}
         </div>
 
         <div className='footer-info'>
@@ -42,12 +42,13 @@ const Footer = () => {
             대표: 이영섭 &nbsp;&nbsp;&nbsp; 사업자등록번호: 123-12-123123
             &nbsp;&nbsp;&nbsp;
             <br />
-            주소: 인천광역시 서구 환경로 42(경서동 종합환경연구단지)
+            대표전화: 12345-5678 &nbsp;&nbsp;&nbsp; 이메일: youngsub2@naver.com
             <br />
-            대표전화: 12345-5678
+            주소: 인천광역시 서구 환경로 42(경서동 종합환경연구단지)
             <br />
             &apos;급속충전시설 이용관련문의 및 회원카드 발급문의 한국 자동차
             환경협회 : 1661-9408&apos;
+            <br />
           </p>
 
           <p className='copy'>Copyright 2023. KECO All rights reserved.</p>
