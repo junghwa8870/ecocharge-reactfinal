@@ -71,6 +71,16 @@ const WriteBoardForm = () => {
       </Grid>
       <Form className='WboardFormBox'>
         <FormGroup>
+          <Label for='writeBoardWriter'>작성자</Label>
+          <Input
+            id='writeBoardWriter'
+            name='name'
+            placeholder='이름을 입력해주세요.'
+            type='name'
+            className='wbwBox'
+          />
+        </FormGroup>
+        <FormGroup>
           <Label for='writeBoardTitle'>제목</Label>
           <Input
             id='writeBoardTitle'
