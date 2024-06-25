@@ -4,42 +4,25 @@
 }
 
 .carContainer {
+
+  max-height: 2500px;
+  justify-content: center;
+  // margin-bottom: 50px;
+
   .ecoCarTitle {
-  // font-family: "Jua";
-  font-weight: 700;
-  font-size: 50px;
-  margin-top: 200px;
-  text-align: center;
+    // font-family: "Jua";
+    font-weight: 700;
+    font-size: 50px;
+    margin-top: 200px;
+    height: fit-content;
+  }
+
+  .carbox {
+    width: 90%;
+    height: 80%;
   }
 }
 
-.carbox {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // height: 100%;
-    
-  // .search {
-  //   width: 300px;
-  //   height: 30px;
-  //   margin-top: 0px;
-      
-  // }
-
-  // .carInfo {
-  //   border: 1px solid blue;
-  //   width: 20%;
-  //   height: 50%;
-  //   margin-top: 150px;
-      
-  // }
-
-  // .moreBtn {
-  //   width: 40px;
-  //   font-size: 10px;
-      
-  // }
-}
 
 .carInfoBox {
 display: flex;
@@ -47,48 +30,23 @@ flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
 justify-content: space-between;
 gap: 20px; // 아이템 사이에 간격 추가
 
-  .carListPageButtonBox {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    /* align-content: center; */
-    width: 100%;
-    height: 100px;
-
-    .btn-secondary{
-      margin-right: 3px;
-      // background-color: #f6f3f2;
-      background-color: #0d124509;
-      color: rgb(63, 62, 62);
-      // font-weight: bold;
-      border: 1px solid rgb(63, 62, 62);
-      border-radius: 0;
-
-      &:active {
-        background-color: #9eb1c5 !important;
-        color: white !important;
-      }
-
-      &:hover {
-        background-color: #0D1245;
-        color: white;
-      }
-    }
-
-    
-  }
-
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
+  margin-top: 50px;
+  // justify-content: space-between;
+  gap: 12.5%; // 아이템 사이에 간격 추가
+  row-gap: 50px;
 }
 
 .carName {
   width: 100%;
-  // font-weight: 600;
-  // text-decoration: underline;
-  //   text-underline-position: under;
-  //   text-decoration-color: black;
-  //   text-decoration-line: underline;
-    // padding: 10px 10px 0px 10px;
-    padding: 10px;
+  font-weight: 400;
+  font-size: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 .carBrand {
@@ -97,11 +55,14 @@ gap: 20px; // 아이템 사이에 간격 추가
 }
 
 .carInfo {
+  display: flex;
+  flex-wrap: wrap;
+
   // border-radius: 10px;
   // border: 2px solid gray;
   box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
 
-  width: calc(33.33% - 20px); // 3개씩 배치되도록 너비 설정
+  width: calc(25%); // 3개씩 배치되도록 너비 설정
   height: 580px; // 아이템 높이 설정
   margin-top: 40px; // 상단 여백 추가
   // display: flex;
@@ -117,20 +78,21 @@ gap: 20px; // 아이템 사이에 간격 추가
   }
 
   &:hover {
-  background-color: hwb(0 94% 6%); /* 호버 시 배경색 변경 */
-  transform: translateY(-5px); /* 호버 시 약간 위로 이동 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 추가 */
-  
-    .expandIcon {
-      opacity: 1; /* 호버 시에만 아이콘을 보이도록 설정 */
-    }
-
-    .imageContainer {
-      img {
-        opacity: 0.6;
+    background-color: hwb(0 94% 6%); /* 호버 시 배경색 변경 */
+    transform: translateY(-5px); /* 호버 시 약간 위로 이동 */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 추가 */
+    
+      .expandIcon {
+        opacity: 1; /* 호버 시에만 아이콘을 보이도록 설정 */
       }
+  
+      .imageContainer {
+        img {
+          opacity: 0.6;
+        }
+      }
+      
     }
-  }
   
   .expandIcon {
     position: relative; /* 절대 위치 설정 */

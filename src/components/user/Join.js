@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useCallback, useReducer, useRef, useState } from 'react';
-import { API_BASE_URL, USER } from '../../config/host_config';
+import { API_BASE_URL, USER } from '../../config/host-config';
 import { initialState, joinReducer } from './JoinReducer';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';

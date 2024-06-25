@@ -31,10 +31,13 @@
       font-size: 1.2rem;
       margin-left: 300px;
       text-wrap: nowrap;
-      background-color: #0D6EFD;
+      background-color: #0D1245;
+      color: #fff;
+      font-weight: 550;
+      border: none;
 
       &:hover {
-        border: 2px solid black;
+        background-color: #0d124579;
       }
     }
 
@@ -57,6 +60,7 @@
   }
 .qnaSelect {
   box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+  
 }
 
 .qTitleBox {

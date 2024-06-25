@@ -1,28 +1,33 @@
-import React, { useCallback, useReducer, useRef, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // useLocation 추가
+import React, {
+  useCallback,
+  useContext,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
+import { useNavigate, useLocation, Await } from 'react-router-dom'; // useLocation 추가
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import '../../scss/Login.scss';
-import { API_BASE_URL, USER } from '../../config/host_config';
+import { API_BASE_URL, USER } from '../../config/host-config';
 import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
-
+import AuthContext from '../../utils/AuthContext';
+import axios from 'axios';
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const location = useLocation(); // useLocation 훅 사용
   const [showModal, setShowModal] = useState(false);
   const [showVerificationInput, setShowVerificationInput] = useState(false);
   const [state, dispatch] = useReducer(joinReducer, initialState);
-
+  const { onLogin, isLoggedIn } = useContext(AuthContext);
   const handleSocialLogin = (authUrl) => {
     navigate('/sms', { state: { redirectUrl: authUrl } }); // 페이지 이동 처리
   };
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCodeInput, setVerificationCode] = useState('');
-
   const { userValue, message, correct } = state;
-
   // useRef를 사용해서 태그 참조하기
   const $fileTag = useRef();
 
@@ -85,7 +90,7 @@ const Login = () => {
   const idHandler = (e) => {
     console.log('idHandler가 동작함!');
     const inputValue = e.target.value;
-    const nameRegex = /^[가-힣a-zA-Z]{2,5}$/;
+    const nameRegex = /^[a-zA-Z0-9]{5,20}$/;
 
     // 입력값 검증
     let msg; // 검증 메세지를 저장할 변수
@@ -94,13 +99,13 @@ const Login = () => {
     if (!inputValue) {
       msg = 'ID입력은 필수입니다.';
     } else if (!nameRegex.test(inputValue)) {
-      msg = '특수문자를 제외한 2~5글자 사이의 닉네임을 입력해주세요!';
+      msg = '영문자를 포함한 5글자 이상의 ID를 입력해주세요';
     } else {
       msg = '사용 가능한 ID입니다.';
       flag = true;
     }
 
-    debouncedUpdateState('userId', inputValue, msg, flag);
+    debouncedUpdateState('id', inputValue, msg, flag);
   };
 
   const passwordHandler = (e) => {
@@ -147,6 +152,57 @@ const Login = () => {
   const handleRegularLogin = (e) => {
     e.preventDefault();
     // 일반 로그인 로직
+    console.log('로그인로직 수행');
+    fetchLogin();
+  };
+
+  const fetchLogin = async () => {
+    // 이메일, 비밀번호 입력 태그 취득하기
+    const $id = document.getElementById('id').value.trim();
+    const $password = document.getElementById('password').value.trim();
+
+    // await는 async로 선언된 함수에서만 사용이 가능합니다.
+    // await는 프로미스 객체가 처리될 때까지 기다립니다.
+    // 프로미스 객체의 반환값을 바로 활용할 수 있도록 도와줍니다.
+    // then()을 활용하는 것보다 가독성이 좋고, 쓰기도 쉽습니다.
+    /*
+    const res = await fetch(REQUEST_URL, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: $email.value,
+        password: $password.value,
+      }),
+    });
+    */
+
+    const data = JSON.stringify({
+      id: $id,
+      password: $password,
+    });
+    console.log($id);
+    console.log($password);
+
+    const res = await axios.post(`${API_BASE_URL}${USER}/signin`, data, {
+      headers: { 'content-type': 'application/json' },
+      // url, 넣을 데이터
+    });
+
+    console.log(res.data);
+
+    if (res.status === 400) {
+      const text = await res.text();
+      alert(text);
+      return;
+    }
+
+    const { token, userName, role } = await res.data;
+
+    // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+    onLogin(token, userName, role);
+
+    // 홈으로 리다이렉트
+    navigate('/');
   };
 
   const handleSignup = () => {
@@ -158,9 +214,14 @@ const Login = () => {
   };
 
   const handleSendVerification = async (e) => {
-    setShowVerificationInput(true);
+    if (!phoneNumber) {
+      alert('핸드폰번호를 입력해주세요');
+    } else if (phoneNumber.length !== '11' && !phoneNumber.startsWith('010')) {
+      alert("'-'을 제외한 번호를 입력해 주세요.");
+    }
     // 인증번호 전송 로직 추가 (예: API 호출)
     e.preventDefault();
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/send-sms`, {
         method: 'POST',
@@ -169,7 +230,12 @@ const Login = () => {
         },
         body: JSON.stringify({ phoneNumber }),
       });
-      alert('인증 코드를 발송하였습니다.');
+      if (response.status === 400) {
+        return alert('이미 가입 된 번호입니다.');
+      } else {
+        alert('인증 코드를 발송하였습니다.');
+        setShowVerificationInput(true);
+      }
     } catch (error) {
       console.log('phoneNumber:', phoneNumber);
       alert('인증 코드 발송에 실패했습니다.');
@@ -179,6 +245,7 @@ const Login = () => {
   const handleVerifyCode = async (e) => {
     // 인증번호 확인 로직 추가 (예: API 호출)
     e.preventDefault();
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
         method: 'POST',
@@ -220,7 +287,7 @@ const Login = () => {
       flag = true;
     }
 
-    debouncedUpdateState('phonenumber', inputValue, msg, flag);
+    debouncedUpdateState('phoneNumber', inputValue, msg, flag);
   };
 
   const verificationCodeHandler = (e) => {
@@ -229,11 +296,11 @@ const Login = () => {
   };
 
   const isValid = () => {
-    // for (let key in correct) {
-    //   const flag = correct[key];
-    //   console.log(key);
-    //   if (!flag) return false;
-    // }
+    for (let key in correct) {
+      const flag = correct[key];
+      console.log(key);
+      if (!flag) return false;
+    }
     return true;
   };
 
@@ -278,44 +345,12 @@ const Login = () => {
 
     if (res.status === 200) {
       const data = await res.json();
-      alert(`${data.userName}(${data.email})님 회원가입에 성공했습니다.`);
+      alert(`${data.userName}(${data.id})님 회원가입에 성공했습니다.`);
       // 로그인 페이지로 리다이렉트
-      navigate('/login');
+      setShowModal(false);
     } else {
       alert('서버와의 통신이 원활하지 않습니다.');
     }
-  };
-
-  // 이미지 파일 상태 변수
-  const [imgFile, setImgFile] = useState(null);
-
-  // 이미지 파일을 선택했을 때 썸네일 뿌리는 핸들러
-  const showThumbnailHandler = (e) => {
-    // 첨부된 파일 정보
-    const file = $fileTag.current.files[0];
-
-    // 첨부한 파일 이름을 얻은 후 확장자만 추출. (소문자로 일괄 변경)
-    const fileExt = file.name.slice(file.name.indexOf('.') + 1).toLowerCase();
-
-    if (
-      fileExt !== 'jpg' &&
-      fileExt !== 'png' &&
-      fileExt !== 'jpeg' &&
-      fileExt !== 'gif'
-    ) {
-      alert('이미지 파일(jpg, png, jpeg, gif)만 등록이 가능합니다!');
-      // 형식에 맞지 않는 파일을 첨부한 것이 파악됐다면, input의 상태도 원래대로 돌려놓아야 한다.
-      // 그렇지 않으면 잘못된 파일을 input 태그가 여전히 기억하게 됨 -> 서버 요청 시 에러 유발!
-      $fileTag.current.value = '';
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
   };
 
   return (
@@ -325,10 +360,15 @@ const Login = () => {
       <div className='regular-login-section'>
         <form onSubmit={handleRegularLogin}>
           <label>
-            <input type='text' placeholder='Id' />
+            <input type='text' name='id' id='id' placeholder='Id' />
           </label>
           <label>
-            <input type='password' placeholder='Password' />
+            <input
+              type='password'
+              name='password'
+              id='password'
+              placeholder='Password'
+            />
           </label>
           <button type='submit'>SIGN IN</button>
         </form>
@@ -378,25 +418,11 @@ const Login = () => {
               <div
                 className='thumbnail-box'
                 onClick={() => $fileTag.current.click()}
-              >
-                <img
-                  // src={imgFile || require('../../assets/img/image-add.png')}
-                  alt='profile'
-                />
-              </div>
-              <label className='signup-img-label' htmlFor='profile-img'>
-                프로필 이미지 추가
-              </label>
-              <input
-                id='profile-img'
-                type='file'
-                style={{ display: 'none' }}
-                accept='image/*'
-                ref={$fileTag}
-                onChange={showThumbnailHandler}
-              />
+              ></div>
+
               <label>
                 <input type='text' placeholder='Name' onChange={nameHandler} />
+                <br />
                 <span
                   style={
                     correct.userName ? { color: 'green' } : { color: 'red' }
@@ -407,11 +433,12 @@ const Login = () => {
               </label>
 
               <label>
-                <input type='text' placeholder='User Id' onChange={idHandler} />
+                <input type='text' placeholder='UserId' onChange={idHandler} />
+                <br />
                 <span
-                  style={correct.userId ? { color: 'green' } : { color: 'red' }}
+                  style={correct.id ? { color: 'green' } : { color: 'red' }}
                 >
-                  {message.userId}
+                  {message.id}
                 </span>
               </label>
               <label>
@@ -420,6 +447,7 @@ const Login = () => {
                   placeholder='Password'
                   onChange={passwordHandler}
                 />
+                <br />
                 <span
                   style={
                     correct.password ? { color: 'green' } : { color: 'red' }
@@ -435,6 +463,7 @@ const Login = () => {
                   placeholder='Password Check'
                   onChange={pwCheckHandler}
                 />
+                <br />
                 <span
                   style={
                     correct.passwordCheck
@@ -447,21 +476,26 @@ const Login = () => {
               </label>
               <label className='phone-verification'>
                 <input
-                  type='phone'
+                  type='phoneNumber'
                   placeholder='PhoneNum'
                   onChange={phonehandler}
+                  id='phoneinput'
                 />
-                <span
-                  style={
-                    correct.phoneNumber ? { color: 'green' } : { color: 'red' }
-                  }
-                >
-                  {message.phoneNumber}
-                </span>
                 <button type='button' onClick={handleSendVerification}>
                   인증번호 전송
                 </button>
               </label>
+              <br />
+              <span
+                style={{
+                  color: correct.phoneNumber ? 'green' : 'red',
+                  height: '20px',
+                  position: 'relative',
+                  top: '-40px',
+                }}
+              >
+                {message.phoneNumber}
+              </span>
               {showVerificationInput && (
                 <label className='verification-code'>
                   <input

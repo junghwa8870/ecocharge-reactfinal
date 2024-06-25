@@ -8,7 +8,7 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const CarList = () => {
   const [searchText, setSearchText] = useState(''); // 검색어 상태 추가
-
+  ///////////
   // 버튼 동작 확인용
   const handleDetailClick = () => {
     window.location.href = 'https://www.naver.com';
@@ -54,7 +54,10 @@ const CarList = () => {
 
   useEffect(() => {
     const handleBackButton = (event) => {
-      setPageNo(event.state);
+      console.log(event.state.usr);
+      if (event.state.usr !== null) {
+        setPageNo(event.state.usr);
+      }
     };
 
     window.addEventListener('popstate', handleBackButton);
@@ -115,7 +118,10 @@ const CarList = () => {
       <Grid
         item
         className='carbox'
-        style={{ width: '90%', marginTop: '20px', marginBottom: '100px' }}
+        style={{
+          marginTop: '20px',
+          marginBottom: '100px',
+        }}
       >
         <div className='searchBox'>
           <input
@@ -134,26 +140,17 @@ const CarList = () => {
             검색
           </Button>
         </div>
-        <Grid
-          container
-          className='carInfoBox'
-          style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            marginTop: '50px',
-          }}
-        >
+        <Grid container className='carInfoBox'>
           {filteredCarInfoList.map((carInfo) => (
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
 
-          <Grid className='carListPageButtonBox'>
-            <PageButton
-              pageMaker={{ ...pageMaker, page: { pageNo } }}
-              buttonCount={pageButtonCount}
-              clickHandler={pageButtonClickHandler}
-            />
-          </Grid>
+          <PageButton
+            pageMaker={pageMaker}
+            buttonCount={pageButtonCount}
+            clickHandler={pageButtonClickHandler}
+            page={pageNo}
+          />
         </Grid>
       </Grid>
     </Grid>

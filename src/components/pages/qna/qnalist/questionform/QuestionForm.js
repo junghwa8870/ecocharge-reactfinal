@@ -4,6 +4,7 @@ import './QuestionForm.scss';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { Grid } from '@mui/material';
 
 const QuestionForm = () => {
   const [title, setTitle] = useState('');
@@ -28,7 +29,7 @@ const QuestionForm = () => {
   // };
 
   return (
-    <div className='questionWriteContainer' style={{ padding: '2rem' }}>
+    <div className='QquestionWriteContainer' style={{ padding: '2rem' }}>
       <div
         className='gomyquestionlistBtn'
         onClick={() => navigate('/myquestionlist')}
@@ -45,7 +46,7 @@ const QuestionForm = () => {
       >
         되돌아가기
       </Button> */}
-      <div className='questionFormBox'>
+      <div className='QquestionFormBox'>
         <Form onSubmit={handleSubmit}>
           <FormGroup className='questionWriteForm'>
             <Label for='qcategory'>카테고리</Label>
@@ -90,13 +91,15 @@ const QuestionForm = () => {
               onChange={(e) => setContent(e.target.value)}
             />
           </FormGroup>
-          <Button
-            type='submit'
-            color='primary'
-            className='questionWirteCompleteBtn'
-          >
-            작성 완료
-          </Button>
+          <Grid className='QquestionWirteCompleteBtnBox'>
+            <Button
+              type='submit'
+              color='primary'
+              className='QquestionWirteCompleteBtn'
+            >
+              작성 완료
+            </Button>
+          </Grid>
         </Form>
       </div>
     </div>
