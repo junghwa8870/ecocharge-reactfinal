@@ -111,16 +111,16 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
 
-  
-
-  }
     &:hover {
-        background-color: #0d124579;
-      }
-    
+      background-color: #0d124579;
+    }
+  
     &:active {
         background-color: #0d124569;
     }
+
+  }
+    
 }
 
   .add-question-button {
