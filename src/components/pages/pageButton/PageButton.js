@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
+import '../../../scss/PageButton.scss';
 
-const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
+const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
   let index = pageMaker.begin;
   const newNums = [];
   while (index <= buttonCount) {
@@ -11,7 +12,7 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
   }
 
   return (
-    <>
+    <div className='buttonWrap'>
       {pageMaker.page && pageMaker.page.pageNo > 1 && (
         <Button
           onClick={() => {
@@ -31,7 +32,12 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
         </Button>
       )}
       {newNums.map((num) => (
-        <PageButtonItem key={num} no={num} clickHandler={clickHandler} />
+        <PageButtonItem
+          key={num}
+          no={num}
+          clickHandler={clickHandler}
+          page={page}
+        />
       ))}
       {pageMaker.next && (
         <Button
@@ -51,7 +57,7 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler }) => {
           {'>>'}
         </Button>
       )}
-    </>
+    </div>
   );
 };
 

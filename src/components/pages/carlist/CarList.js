@@ -73,16 +73,7 @@ const CarList = () => {
   }, [pageNo]);
 
   return (
-    <Grid
-      container
-      className='carContainer'
-      style={{
-        width: '100%',
-        height: '2300px',
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
+    <Grid container className='carContainer'>
       <Typography variant='h1' className='ecoCarTitle'>
         구매보조금 지원 차종
       </Typography>
@@ -91,7 +82,6 @@ const CarList = () => {
         item
         className='carbox'
         style={{
-          width: '90%',
           marginTop: '20px',
           marginBottom: '100px',
         }}
@@ -111,15 +101,7 @@ const CarList = () => {
             검색
           </Button>
         </div>
-        <Grid
-          container
-          className='carInfoBox'
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '50px',
-          }}
-        >
+        <Grid container className='carInfoBox'>
           {carInfoList.map((carInfo) => (
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
@@ -128,6 +110,7 @@ const CarList = () => {
             pageMaker={pageMaker}
             buttonCount={pageButtoncount}
             clickHandler={pageButtonClickHandler}
+            page={pageNo}
           />
         </Grid>
       </Grid>

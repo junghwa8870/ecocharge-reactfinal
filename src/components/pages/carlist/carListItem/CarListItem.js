@@ -24,16 +24,7 @@ const CarListItem = ({ info }) => {
   };
 
   return (
-    <Grid
-      item
-      className='carInfo'
-      onClick={handleCarInfoBoxClick}
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        width: '25%',
-      }}
-    >
+    <Grid item className='carInfo' onClick={handleCarInfoBoxClick}>
       <Typography variant='h6' className='carName'>
         {carName}
       </Typography>
