@@ -10,9 +10,11 @@ import NaverMapApi from './NaverMapApi';
 
 function FindCharge() {
   const [searchParams, setSearchParams] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   const handleSearch = (params) => {
     setSearchParams(params);
+    setVisible(Object.values(params).some((value) => value !== null));
   };
 
   return (
@@ -22,17 +24,16 @@ function FindCharge() {
         <h5>원하시는 지역의 충전소를 검색해보세요.</h5>
       </header>
       <div className='find-charge-filters'>
-        <SearchComponent onSearch={handleSearch} />
+        <SearchComponent onSearch={handleSearch} params={searchParams} />
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
-          <h5>검색결과를 확인해보세요.</h5>
-          <SearchBar onSearch={handleSearch} />
-          <div className='search-results-box'>
+          <SearchBar onSearch={handleSearch} params={searchParams} />
+          {!visible || (
             <div className='search-results'>
               {searchParams && <SearchResult searchParams={searchParams} />}
             </div>
-          </div>
+          )}
         </div>
         <div className='map-area'>
           <MapDiv>

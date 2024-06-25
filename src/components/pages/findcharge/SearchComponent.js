@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import '../../../scss/SearchComponent.scss';
 
-function SearchComponent({ onSearch }) {
+function SearchComponent({ onSearch, params }) {
   const [filters, setFilters] = useState({
-    connector: '',
-    speed: '',
-    fee: '',
-    parkingFee: '',
-    location: '',
-    availability: '',
-    publicAccess: '',
-    wheelchairAccess: '',
+    searchKey: null,
+    connector: null,
+    speed: null,
+    free: null,
+    parkingFree: null,
+    location: null,
+    availability: null,
+    publicAccess: null,
+    wheelchairAccess: null,
   });
 
   const handleChange = (e) => {
+    if (params !== null) {
+      setFilters(params);
+    }
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [name]: value,
+      [name]: value !== '전체' ? value : null,
     }));
   };
 
@@ -34,37 +38,37 @@ function SearchComponent({ onSearch }) {
           value={filters.connector}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='DC콤보'>DC콤보</option>
-          <option value='AC완속'>AC완속</option>
+          <option>전체</option>
+          <option>DC콤보</option>
+          <option>AC완속</option>
         </select>
       </div>
       <div>
         <label>충전속도</label>
         <select name='speed' value={filters.speed} onChange={handleChange}>
-          <option value=''>전체</option>
-          <option value='빠름'>빠름</option>
-          <option value='느림'>느림</option>
+          <option>전체</option>
+          <option>빠름</option>
+          <option>느림</option>
         </select>
       </div>
       <div>
         <label>충전요금</label>
-        <select name='fee' value={filters.fee} onChange={handleChange}>
-          <option value=''>전체</option>
-          <option value='무료'>무료</option>
-          <option value='유료'>유료</option>
+        <select name='free' value={filters.free} onChange={handleChange}>
+          <option>전체</option>
+          <option>무료</option>
+          <option>유료</option>
         </select>
       </div>
       <div>
         <label>주차요금</label>
         <select
-          name='parkingFee'
-          value={filters.parkingFee}
+          name='parkingFree'
+          value={filters.parkingFree}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='무료'>무료</option>
-          <option value='유료'>유료</option>
+          <option>전체</option>
+          <option>무료</option>
+          <option>유료</option>
         </select>
       </div>
       <div>
@@ -74,15 +78,15 @@ function SearchComponent({ onSearch }) {
           value={filters.location}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='서울'>서울</option>
-          <option value='부산'>부산</option>
-          <option value='대구'>대구</option>
-          <option value='인천'>인천</option>
-          <option value='광주'>광주</option>
-          <option value='대전'>대전</option>
-          <option value='울산'>울산</option>
-          <option value='세종'>세종</option>
+          <option>전체</option>
+          <option>서울</option>
+          <option>부산</option>
+          <option>대구</option>
+          <option>인천</option>
+          <option>광주</option>
+          <option>대전</option>
+          <option>울산</option>
+          <option>세종</option>
         </select>
       </div>
       <div>
@@ -92,9 +96,9 @@ function SearchComponent({ onSearch }) {
           value={filters.availability}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='가능'>가능</option>
-          <option value='불가능'>불가능</option>
+          <option>전체</option>
+          <option>가능</option>
+          <option>불가능</option>
         </select>
       </div>
       <div>
@@ -104,9 +108,9 @@ function SearchComponent({ onSearch }) {
           value={filters.publicAccess}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='개방'>개방</option>
-          <option value='비개방'>비개방</option>
+          <option>전체</option>
+          <option>개방</option>
+          <option>비개방</option>
         </select>
       </div>
       <div>
@@ -116,9 +120,9 @@ function SearchComponent({ onSearch }) {
           value={filters.wheelchairAccess}
           onChange={handleChange}
         >
-          <option value=''>전체</option>
-          <option value='있음'>있음</option>
-          <option value='없음'>없음</option>
+          <option>전체</option>
+          <option>있음</option>
+          <option>없음</option>
         </select>
       </div>
       <button onClick={handleSearch}>검색</button>

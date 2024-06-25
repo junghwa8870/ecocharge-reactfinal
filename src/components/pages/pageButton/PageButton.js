@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
+import '../../../scss/PageButton.scss';
 
-const PageButton = ({ page, pageMaker, buttonCount, clickHandler }) => {
+const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
   let index = pageMaker.begin;
   const newNums = [];
   while (index <= buttonCount) {
@@ -11,8 +12,8 @@ const PageButton = ({ page, pageMaker, buttonCount, clickHandler }) => {
   }
 
   return (
-    <>
-      {pageMaker.page && pageMaker.page.pageNo > 1 && (
+    <div className='buttonWrap'>
+      {page > 1 && (
         <Button
           onClick={() => {
             clickHandler(1);
@@ -22,13 +23,7 @@ const PageButton = ({ page, pageMaker, buttonCount, clickHandler }) => {
         </Button>
       )}
       {pageMaker.prev && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo - 1);
-          }}
-        >
-          {'<'}
-        </Button>
+        <Button onClick={() => clickHandler(page - 1)}>{'<'}</Button>
       )}
       {newNums.map((num) => (
         <PageButtonItem
@@ -39,24 +34,14 @@ const PageButton = ({ page, pageMaker, buttonCount, clickHandler }) => {
         />
       ))}
       {pageMaker.next && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.page.pageNo + 1);
-          }}
-        >
-          {'>'}
-        </Button>
+        <Button onClick={() => clickHandler(page - 1)}>{'>'}</Button>
       )}
-      {pageMaker.page && pageMaker.page.pageNo < pageMaker.finalPage && (
-        <Button
-          onClick={() => {
-            clickHandler(pageMaker.finalPage);
-          }}
-        >
+      {page < pageMaker.finalPage && (
+        <Button onClick={() => clickHandler(pageMaker.finalPage)}>
           {'>>'}
         </Button>
       )}
-    </>
+    </div>
   );
 };
 

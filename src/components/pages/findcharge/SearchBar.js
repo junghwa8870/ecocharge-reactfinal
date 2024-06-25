@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import '../../../scss/SearchBar.scss';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch, params }) {
   const [searchType, setSearchType] = useState('주변충전소'); // 초기 검색 타입 설정
-  const [searchQuery, setSearchQuery] = useState(''); // 검색어 상태 추가
+  const [searchQuery, setSearchQuery] = useState(); // 검색어 상태 추가
+
+  const [filters, setFilters] = useState({
+    searchKey: null,
+    connector: null,
+    speed: null,
+    free: null,
+    parkingFree: null,
+    location: null,
+    availability: null,
+    publicAccess: null,
+    wheelchairAccess: null,
+  });
 
   const handleButtonClick = (type) => {
     setSearchType(type); // 클릭한 버튼에 해당하는 검색 타입으로 설정
-    onSearch({ 충전소: type, 검색어: searchQuery }); // onSearch 호출
+    onSearch(filters, true); // onSearch 호출
   };
 
   const handleInputChange = (e) => {
-    setSearchQuery(e.target.value); // 검색어 변경 시 상태 업데이트
+    console.log(params);
+    const value = e.target.value;
+    const vlaues = { ...params, searchKey: value };
+    setFilters(vlaues);
+    setSearchQuery(value); // 검색어 변경 시 상태 업데이트
   };
 
   return (
