@@ -13,7 +13,7 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
 
   return (
     <div className='buttonWrap'>
-      {page > 1 && (
+      {pageMaker.page && pageMaker.page.pageNo > 1 && (
         <Button
           onClick={() => {
             clickHandler(1);
@@ -23,7 +23,9 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
         </Button>
       )}
       {pageMaker.prev && (
-        <Button onClick={() => clickHandler(page - 1)}>{'<'}</Button>
+        <Button onClick={() => clickHandler(pageMaker.page.pageNo - 1)}>
+          {'<'}
+        </Button>
       )}
       {newNums.map((num) => (
         <PageButtonItem
@@ -34,9 +36,11 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
         />
       ))}
       {pageMaker.next && (
-        <Button onClick={() => clickHandler(page - 1)}>{'>'}</Button>
+        <Button onClick={() => clickHandler(pageMaker.page.pageNo - 1)}>
+          {'>'}
+        </Button>
       )}
-      {page < pageMaker.finalPage && (
+      {pageMaker.page && pageMaker.page.pageNo < pageMaker.finalPage && (
         <Button onClick={() => clickHandler(pageMaker.finalPage)}>
           {'>>'}
         </Button>
