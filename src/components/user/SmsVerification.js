@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { API_BASE_URL } from '../../config/host_config';
+import { API_BASE_URL } from '../../config/host-config';
 import '../../scss/SmsVerification.scss';
 import { useLocation } from 'react-router-dom';
 
@@ -20,6 +20,16 @@ const SmsVerification = () => {
   };
 
   const handleSendCode = async (e) => {
+    if (!phoneNumber) {
+      alert('핸드폰번호를 입력해주세요');
+      return;
+    } else if (!phoneNumber.startsWith('010')) {
+      alert("'-'을 제외한 번호를 입력해 주세요.");
+      return;
+    } else if (phoneNumber.length !== 11) {
+      alert('유효하지 않은 번호입니다.');
+      return;
+    }
     e.preventDefault();
     try {
       const response = await fetch(`${API_BASE_URL}/api/send-sms`, {
@@ -40,7 +50,7 @@ const SmsVerification = () => {
   const handleVerifyCode = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
+      const response = await fetch(`${API_BASE_URL}/api/Sverify-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
