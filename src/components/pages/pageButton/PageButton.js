@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from 'reactstrap';
 import PageButtonItem from './pageButtonItem/PageButtonItem';
 import '../../../scss/PageButton.scss';

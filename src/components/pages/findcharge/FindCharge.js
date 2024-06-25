@@ -21,6 +21,7 @@ function FindCharge() {
     <div className='find-charge-container'>
       <header className='find-charge-header'>
         <h1>충전소 찾기</h1>
+        <h5>원하시는 지역의 충전소를 검색해보세요.</h5>
       </header>
       <div className='find-charge-filters'>
         <SearchComponent onSearch={handleSearch} params={searchParams} />
