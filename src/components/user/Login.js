@@ -15,7 +15,6 @@ import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
-
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const location = useLocation(); // useLocation 훅 사용
@@ -23,15 +22,12 @@ const Login = () => {
   const [showVerificationInput, setShowVerificationInput] = useState(false);
   const [state, dispatch] = useReducer(joinReducer, initialState);
   const { onLogin, isLoggedIn } = useContext(AuthContext);
-
   const handleSocialLogin = (authUrl) => {
     navigate('/sms', { state: { redirectUrl: authUrl } }); // 페이지 이동 처리
   };
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCodeInput, setVerificationCode] = useState('');
-
   const { userValue, message, correct } = state;
-
   // useRef를 사용해서 태그 참조하기
   const $fileTag = useRef();
 
@@ -94,7 +90,7 @@ const Login = () => {
   const idHandler = (e) => {
     console.log('idHandler가 동작함!');
     const inputValue = e.target.value;
-    const nameRegex = /^[a-zA-Z]{2,20}$/;
+    const nameRegex = /^[a-zA-Z0-9]{5,20}$/;
 
     // 입력값 검증
     let msg; // 검증 메세지를 저장할 변수
@@ -103,7 +99,7 @@ const Login = () => {
     if (!inputValue) {
       msg = 'ID입력은 필수입니다.';
     } else if (!nameRegex.test(inputValue)) {
-      msg = '특수문자를 제외한 2~5글자 사이의 닉네임을 입력해주세요!';
+      msg = '영문자를 포함한 5글자 이상의 ID를 입력해주세요';
     } else {
       msg = '사용 가능한 ID입니다.';
       flag = true;
@@ -161,7 +157,6 @@ const Login = () => {
   };
 
   const fetchLogin = async () => {
-    console.log('패치로그인 수행');
     // 이메일, 비밀번호 입력 태그 취득하기
     const $id = document.getElementById('id').value.trim();
     const $password = document.getElementById('password').value.trim();
@@ -219,8 +214,14 @@ const Login = () => {
   };
 
   const handleSendVerification = async (e) => {
+    if (!phoneNumber) {
+      alert('핸드폰번호를 입력해주세요');
+    } else if (phoneNumber.length !== '11' && !phoneNumber.startsWith('010')) {
+      alert("'-'을 제외한 번호를 입력해 주세요.");
+    }
     // 인증번호 전송 로직 추가 (예: API 호출)
     e.preventDefault();
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/send-sms`, {
         method: 'POST',
@@ -244,6 +245,7 @@ const Login = () => {
   const handleVerifyCode = async (e) => {
     // 인증번호 확인 로직 추가 (예: API 호출)
     e.preventDefault();
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
         method: 'POST',
@@ -420,6 +422,7 @@ const Login = () => {
 
               <label>
                 <input type='text' placeholder='Name' onChange={nameHandler} />
+                <br />
                 <span
                   style={
                     correct.userName ? { color: 'green' } : { color: 'red' }
@@ -430,11 +433,12 @@ const Login = () => {
               </label>
 
               <label>
-                <input type='text' placeholder='User Id' onChange={idHandler} />
+                <input type='text' placeholder='UserId' onChange={idHandler} />
+                <br />
                 <span
-                  style={correct.userId ? { color: 'green' } : { color: 'red' }}
+                  style={correct.id ? { color: 'green' } : { color: 'red' }}
                 >
-                  {message.userId}
+                  {message.id}
                 </span>
               </label>
               <label>
@@ -443,6 +447,7 @@ const Login = () => {
                   placeholder='Password'
                   onChange={passwordHandler}
                 />
+                <br />
                 <span
                   style={
                     correct.password ? { color: 'green' } : { color: 'red' }
@@ -458,6 +463,7 @@ const Login = () => {
                   placeholder='Password Check'
                   onChange={pwCheckHandler}
                 />
+                <br />
                 <span
                   style={
                     correct.passwordCheck
@@ -473,18 +479,23 @@ const Login = () => {
                   type='phoneNumber'
                   placeholder='PhoneNum'
                   onChange={phonehandler}
+                  id='phoneinput'
                 />
-                <span
-                  style={
-                    correct.phoneNumber ? { color: 'green' } : { color: 'red' }
-                  }
-                >
-                  {message.phoneNumber}
-                </span>
                 <button type='button' onClick={handleSendVerification}>
                   인증번호 전송
                 </button>
               </label>
+              <br />
+              <span
+                style={{
+                  color: correct.phoneNumber ? 'green' : 'red',
+                  height: '20px',
+                  position: 'relative',
+                  top: '-40px',
+                }}
+              >
+                {message.phoneNumber}
+              </span>
               {showVerificationInput && (
                 <label className='verification-code'>
                   <input
