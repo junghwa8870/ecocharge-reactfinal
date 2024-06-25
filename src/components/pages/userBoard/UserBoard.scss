@@ -21,6 +21,12 @@
             width: 100%;
             margin-right: 300px;
             line-height: 30px;
+
+            .bold {
+                font-weight: bold;
+                font-size: 17px;
+                color: DARKBLUE;
+            }
         }
 
         .goBWriteBtnbox {
@@ -38,11 +44,13 @@
             background-color: #0D1245;
         
                 &:hover {
-                    background-color: gray;
+                    background-color: #0d124579;
                     color: white;
                 }
             }
-    }
+
+            
+        }
     }
 
     .user-board-table {

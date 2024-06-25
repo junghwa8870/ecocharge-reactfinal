@@ -2,13 +2,20 @@ import React from 'react';
 import './UserBoard.scss';
 import { Grid } from '@mui/material';
 import { Button, Table } from 'reactstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Paging from '../../layout/Paging';
 
 const UserBoard = () => {
   const navigate = useNavigate();
 
   const data = [
+    {
+      no: '글번호',
+      title: '제목',
+      writer: '작성자',
+      date: '작성일',
+      view: '조회수',
+    },
     {
       no: 1,
       title: 'First Post',
@@ -44,13 +51,13 @@ const UserBoard = () => {
       date: '2023-06-24',
       view: '2',
     },
-    {
-      no: 6,
-      title: 'Sixth Post',
-      writer: 'Junhee',
-      date: '2023-06-25',
-      view: '2',
-    },
+    // {
+    //   no: 6,
+    //   title: 'Sixth Post',
+    //   writer: 'Junhee',
+    //   date: '2023-06-25',
+    //   view: '2',
+    // },
   ];
 
   return (
@@ -59,15 +66,23 @@ const UserBoard = () => {
       <div className='Bcomentbox'>
         <div className='Bcomment-inner'>
           <div className='Bcoment'>
-            ●자주 발생하는 질문에 대하여서는 FAQ에 등록된 질문 및 답변내용을
-            참조하여 주십시오.
+            ●게시글 작성 및 댓글 달기는{' '}
+            <span className='bold'>회원가입 후 가능</span>합니다.
           </div>
-          <div className='Bcoment'>●업무시간 : 9:00 ~ 18:00</div>
+          <div className='Bcoment'>
+            ●게시글에 대한 피드백은{' '}
+            <span className='bold'>예의 바르고 존중하는 태도</span>로
+            남겨주세요.
+          </div>
+          <div className='Bcoment'>
+            ●부적절한 글이나 댓글은 <span className='bold'>신고 기능</span>을
+            통해 알려주세요.
+          </div>
         </div>
         <div className='goBWriteBtnbox'>
           <Button
             className='goBwriteForm'
-            onClick={() => Navigate('/writeBoardForm')}
+            onClick={() => navigate('/writeBoardForm')}
           >
             작성하기
           </Button>
@@ -102,7 +117,7 @@ const UserBoard = () => {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: '100px',
+          // marginTop: '100px',
         }}
       >
         <Paging />
