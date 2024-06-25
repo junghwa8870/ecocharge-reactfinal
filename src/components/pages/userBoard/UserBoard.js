@@ -101,7 +101,11 @@ const UserBoard = () => {
         </thead> */}
         <div className='boardInnerBox'>
           {data.map((post) => (
-            <div key={post.no} className='bRow'>
+            <div
+              key={post.no}
+              className='bRow'
+              onClick={() => navigate('/userBoardDetail')}
+            >
               <div className='Bno'>{post.no}</div>
               <div className='Btitle'>{post.title}</div>
               <div className='Bwriter'>{post.writer}</div>

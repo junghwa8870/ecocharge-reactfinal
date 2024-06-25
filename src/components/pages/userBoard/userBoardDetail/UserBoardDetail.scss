@@ -1,0 +1,112 @@
+.UBDcontainer {
+    width: 70%;
+    margin: 200px auto;
+
+    .backUserBoard {
+        font-size: 25px;
+        width: 80%;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .UBDcontainerTitle {
+        font-size: 50px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .accuseBtnBox {
+        width: 80%;
+        margin: 10px auto;
+        display: flex;
+        justify-content: end;
+        cursor: pointer;
+
+        
+        .accuseText {
+            color: red;
+            font-size: 15px;
+            font-weight: bold;
+            border: 2px solid lightgray;
+            border-radius: 20px;
+            padding: 5px 15px 10px;
+            // background-color: black;
+            &:hover {
+                background-color: rgb(247, 228, 228);
+            }
+        }
+        
+        .accuseBtn {
+            color: red;
+            font-size: 25px;
+        }
+    }
+
+    .UBD-card-container {
+        width: 80%;
+        margin: 0 auto;
+
+        .UBDcardIMG {
+            width: 550px;
+            height: 350px;
+            margin: 0 auto;
+        }
+
+        .UserBoardInfo {
+            display: flex;
+            justify-content: space-around;
+            height: 50px;
+            align-items: center;
+            background-color: rgb(223, 222, 222);
+            font-weight: bold;
+            color: rgb(63, 62, 62);
+
+            .BoardInfoDetail {
+                font-size: 17px;
+            }
+        }
+
+        .UBDcardBody {
+            margin-top: 20px;
+            .UBDcardTitle {
+                font-weight: bold;
+            }
+        }
+
+        .mentSubmitBtnBox {
+            display: flex;
+            justify-content: center;
+            
+            .mentSubmitBtn {
+                font-weight: bold;
+                background-color: #0D1245;
+
+                &:hover {
+                    background-color: #0d124579;
+                    color: white;
+                }
+            }
+        }
+        
+    }
+
+    .UBD-card-container2 {
+        width: 80%;
+        margin: 0 auto;
+        background-color: rgb(223, 222, 222) !important;
+    
+        .likeDislikeContainer {
+            display: flex;
+            justify-content: center;
+
+            .goodBtn {
+                margin: 0 10px;
+            }
+
+            .badBtn {
+                margin: 0 10px;
+            }
+        }
+    }
+}

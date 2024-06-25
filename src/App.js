@@ -24,6 +24,8 @@ import LogoutHandler from './components/user/LogoutHandler.js';
 import { AuthContextProvider } from './utils/AuthContext.js';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
 import WriteBoardForm from './components/pages/userBoard/writeBoardForm/WriteBoardForm.js';
+import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBoardDetail.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
           {/* <Route path='/newInfo' element={<NewInfo />} />
           <Route path='/newInfoWrite' element={<NewInfoWrite />} /> */}
           <Route path='/userBoard' element={<UserBoard />} />
+          <Route path='/userBoardDetail' element={<UserBoardDetail />} />
           <Route path='/writeBoardForm' element={<WriteBoardForm />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />
