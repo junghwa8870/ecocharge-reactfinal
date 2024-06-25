@@ -1,13 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
+import AuthContext from '../../utils/AuthContext';
+import { API_BASE_URL, USER } from '../../config/host_config';
 
 const Header = () => {
   const navigate = useNavigate();
 
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
+
   const handleLogin = () => {
     navigate('/login');
+  };
+
+  // 로그아웃 핸들러
+  const logoutHandler = async () => {
+    const res = await fetch(`${API_BASE_URL}${USER}/logout`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN'),
+      },
+    });
+
+    console.log(res);
+
+    if (res.status === 200) {
+      onLogout();
+      navigate('/login');
+    }
   };
 
   return (
@@ -112,24 +133,45 @@ const Header = () => {
               justifyContent: 'center',
             }}
           >
-            <Button
-              className='loginBtn'
-              onClick={handleLogin}
-              variant='outlined'
-              style={{
-                width: '130px',
-                height: '40px',
-                color: 'black',
-                borderColor: 'black',
-                fontFamily: 'Jua',
-                fontSize: '15px',
-                borderWidth: '3px',
-                fontWeight: '600',
-                marginTop: '30px',
-              }}
-            >
-              Login
-            </Button>
+            {isLoggedIn ? (
+              <Button
+                className='loginBtn'
+                onClick={logoutHandler}
+                variant='outlined'
+                style={{
+                  width: '130px',
+                  height: '40px',
+                  color: 'black',
+                  borderColor: 'black',
+                  fontFamily: 'Jua',
+                  fontSize: '15px',
+                  borderWidth: '3px',
+                  fontWeight: '600',
+                  marginTop: '30px',
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                className='loginBtn'
+                onClick={handleLogin}
+                variant='outlined'
+                style={{
+                  width: '130px',
+                  height: '40px',
+                  color: 'black',
+                  borderColor: 'black',
+                  fontFamily: 'Jua',
+                  fontSize: '15px',
+                  borderWidth: '3px',
+                  fontWeight: '600',
+                  marginTop: '30px',
+                }}
+              >
+                Login
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Toolbar>

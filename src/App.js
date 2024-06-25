@@ -20,7 +20,6 @@ import GoogleLoginHandler from './components/user/GoogleLoginHandler.js';
 import QnAList from './components/pages/qna/qnalist/QnAList.js';
 import QuestionForm from './components/pages/qna/qnalist/questionform/QuestionForm.js';
 import MyQuestionList from './components/pages/qna/qnalist/myquestionlist/MyQuestionList.js';
-import LogoutHandler from './components/user/LogoutHandler.js';
 import { AuthContextProvider } from './utils/AuthContext.js';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
 import WriteBoardForm from './components/pages/userBoard/writeBoardForm/WriteBoardForm.js';
@@ -55,7 +54,6 @@ function App() {
           <Route path='/oauth/naver' element={<NaverLoginHandler />} />
           <Route path='/oauth/google' element={<GoogleLoginHandler />} />
           <Route path='/sms' element={<SmsVerification />} />
-          <Route path='/api/auth/logout' element={<LogoutHandler />} />
 
           {/* 필요한 다른 라우트 추가 */}
           <Route
