@@ -1,0 +1,32 @@
+.chargeSpaceContainer {
+  width: 100%;
+  max-height: 300px; /* Adjust height as needed */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.chargeSpaceItem {
+  padding: 15px 10px; /* Adjust padding for better spacing */
+  margin-bottom: 10px; /* Add spacing between items */
+  border-bottom: 1px solid #eee;
+}
+
+.chargeSpaceItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0; /* Remove margin from the last item */
+}
+
+.chargeSpaceTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px; /* Adjust margin for better spacing */
+  color: #333; /* Adjust color as needed */
+}
+
+.chargeSpaceInfo {
+  font-size: 1rem;
+  color: #555; /* Adjust color as needed */
+}
