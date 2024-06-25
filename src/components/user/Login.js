@@ -216,8 +216,10 @@ const Login = () => {
   const handleSendVerification = async (e) => {
     if (!phoneNumber) {
       alert('핸드폰번호를 입력해주세요');
+      return;
     } else if (phoneNumber.length !== '11' && !phoneNumber.startsWith('010')) {
       alert("'-'을 제외한 번호를 입력해 주세요.");
+      return;
     }
     // 인증번호 전송 로직 추가 (예: API 호출)
     e.preventDefault();
@@ -230,12 +232,9 @@ const Login = () => {
         },
         body: JSON.stringify({ phoneNumber }),
       });
-      if (response.status === 400) {
-        return alert('이미 가입 된 번호입니다.');
-      } else {
-        alert('인증 코드를 발송하였습니다.');
-        setShowVerificationInput(true);
-      }
+
+      alert('인증 코드를 발송하였습니다.');
+      setShowVerificationInput(true);
     } catch (error) {
       console.log('phoneNumber:', phoneNumber);
       alert('인증 코드 발송에 실패했습니다.');
@@ -258,6 +257,7 @@ const Login = () => {
         }),
       });
       const result = await response.json();
+
       if (result) {
         alert('인증되었습니다.');
       }
@@ -333,7 +333,6 @@ const Login = () => {
       type: 'application/json',
     });
 
-    // 이미지 파일과 회원정보 JSON을 하나로 묶어서 보낼 예정.
     // FormData 객체를 활용해서.
     const userFormData = new FormData();
     userFormData.append('user', userJsonBlob);
@@ -349,7 +348,7 @@ const Login = () => {
       // 로그인 페이지로 리다이렉트
       setShowModal(false);
     } else {
-      alert('서버와의 통신이 원활하지 않습니다.');
+      alert('이미 가입 된 계정입니다.');
     }
   };
 
