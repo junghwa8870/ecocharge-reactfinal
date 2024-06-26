@@ -5,72 +5,98 @@
   justify-content: center; 
   margin-top: 150px;
   margin-bottom: 200px;
+}
 
-  .GoFindCharge {
-    cursor: pointer;
-    font-size: 25px;
-    width: 80%;
-    margin: 0 auto;
-  }
+.GoFindCharge {
+  cursor: pointer;
+  font-size: 25px;
+  width: 80%;
+  margin: 0 auto;
+}
 
-  .charge-spot-detail-content {
-    width: 100%;
-    max-width: 1500px;
-    background-color: #fff;
-    padding: 50px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+.charge-spot-detail-content {
+  width: 100%;
+  max-width: 1500px;
+  background-color: #fff;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-  .page-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    font-size: 30px;
-    margin-bottom: 30px;
-    margin-right: 150px;
-  }
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
 
-  .page-title h2 {
-    font-weight: bold;
-    font-size: 40px;
-    margin-left: 100px;
-  }
+.page-title h2 {
+  font-weight: bold;
+  font-size: 40px;
+  margin-left: 220px;
+}
 
-  .section {
-    flex: 1;
-    background-color: #f0f0f0;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+.reservation-button {
+  margin-left: auto;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+}
 
-  .section h2 {
-    color: black;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
+.section {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 300px;
+}
 
-  .section p {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
+.section h2 {
+  color: black;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
 
-  .modal-backdrop.show {
-    opacity: 0.5;
-    background-color: rgba(0, 0, 0, 0.5); 
-  }
+.section p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-  .modal-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
+.info-box {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }

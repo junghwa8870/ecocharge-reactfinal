@@ -25,7 +25,6 @@ function ChargeSpotDetail() {
   };
 
   const handlePayment = () => {
-    // 여기에 카카오페이 결제 요청 로직을 추가
     console.log('결제 요청 진행');
     setOpen(false);
   };
@@ -36,68 +35,47 @@ function ChargeSpotDetail() {
 
   return (
     <div className='charge-spot-detail-container'>
-      <div className='GoFindCharge' onClick={() => navigate('/FindCharge')}>
+      <div className='GoFindCharge' onClick={handleBackToList}>
         <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
       </div>
       <div className='page-title'>
-        <h2 style={{ display: 'flex', alignItems: 'center' }}>
-          충전소 상세정보
-        </h2>
+        <h2>충전소 상세정보</h2>
+        <Button
+          onClick={handleReservation}
+          color='primary'
+          variant='contained'
+          className='reservation-button'
+        >
+          예약하기
+        </Button>
       </div>
+
+      <div className='info-box'>
+        <h3>충전소 위치 지도</h3>
+        <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
+      </div>
+
       <div className='charge-spot-detail-content'>
-        {/* 주차장명 */}
         <div className='section'>
           <h2>주차장명</h2>
-          <p>
-            여기에 주차장명 정보 표시 ㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ ㅈㅁㄹㄴㅁ
-          </p>
+          <p>여기에 주차장명 정보 표시</p>
         </div>
 
-        {/* 충전정보 */}
         <div className='section'>
           <h2>충전정보</h2>
-          <p>
-            여기에 충전정보 표시ㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ ㅈㅁㄹㄴㅁ
-          </p>
+          <p>여기에 충전정보 표시</p>
         </div>
 
-        {/* OO시 충전소 목록 */}
         <div className='section'>
           <h2>OO시 충전소 목록</h2>
-          <p>
-            여기에 충전소 목록 표시 ㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ
-            ㅈㅁㄹㄴㅁㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ ㅈㅁㄹㄴㅁ
-          </p>
+          <p>여기에 충전소 목록 표시</p>
         </div>
 
-        {/* 이용후기 */}
         <div className='section'>
           <h2>이용후기</h2>
-          <p>
-            여기에 이용후기 표시 ㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ
-            ㅈㅁㄹㄴㅁㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ
-            ㅈㅁㄹㄴㅁㅁㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ ㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
-            ㅇㄴㅁㄹㅇㅁㄹㅈㅂㄹㅈㅂㅎㄹㅈㅂㅎㅂㅈㄹ ㅈㅁㄹㄴㅁ
-          </p>
+          <p>여기에 이용후기 표시</p>
         </div>
       </div>
-
-      <Button onClick={handleReservation} color='primary'>
-        예약하기
-      </Button>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>예약</DialogTitle>
