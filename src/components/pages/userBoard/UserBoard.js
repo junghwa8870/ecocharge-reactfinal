@@ -1,67 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UserBoard.scss';
-import { useNavigate } from 'react-router-dom';
-import { BOARD, BOARD_REPLY } from '../../../config/host-config';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { API_BASE_URL, BOARD, BOARD_REPLY } from '../../../config/host-config';
 import axiosInstance from '../../../config/axios-config';
 import { dark } from '@mui/material/styles/createPalette';
 import { Grid } from '@mui/material';
 import { Button, Table } from 'reactstrap';
 import Paging from '../../layout/Paging';
+import axios from 'axios';
 
 const UserBoard = () => {
   const navigate = useNavigate();
+  const [boardList, setBoardList] = useState([]);
 
-  const data = [
-    {
-      no: '글번호',
-      title: '제목',
-      writer: '작성자',
-      date: '작성일',
-      view: '조회수',
-    },
-    {
-      no: 1,
-      title: 'First Post',
-      writer: 'Alice',
-      date: '2023-06-24',
-      view: '1',
-    },
-    {
-      no: 2,
-      title: 'Second Post',
-      writer: 'Bob',
-      date: '2023-06-23',
-      view: '1',
-    },
-    {
-      no: 3,
-      title: 'Third Post',
-      writer: 'Charlie',
-      date: '2023-06-22',
-      view: '1',
-    },
-    {
-      no: 4,
-      title: 'Forth Post',
-      writer: 'Charlie',
-      date: '2023-06-23',
-      view: '1',
-    },
-    {
-      no: 5,
-      title: 'Fifth Post',
-      writer: 'Younghee',
-      date: '2023-06-24',
-      view: '2',
-    },
-    // {
-    //   no: 6,
-    //   title: 'Sixth Post',
-    //   writer: 'Junhee',
-    //   date: '2023-06-25',
-    //   view: '2',
-    // },
-  ];
+  useEffect(() => {
+    const getBoardList = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}${BOARD}`);
+        const data = response.data; // API에서 반환되는 실제 데이터 위치에 따라 설정
+        console.log(data);
+        setBoardList(data.boards); // 게시물 목록 설정
+      } catch (error) {
+        console.error('게시물 목록을 가져오는 중 오류 발생:', error);
+        // 오류 처리 로직 추가 가능
+      }
+    };
+
+    getBoardList(); // 컴포넌트가 마운트될 때 게시물 목록을 가져옴
+  }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
 
   return (
     <Grid className='user-board-container'>
@@ -93,30 +59,24 @@ const UserBoard = () => {
       </div>
 
       <Table className='user-board-table'>
-        {/* <thead>
-          <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Date</th>
-            <th>View</th>
-          </tr>
-        </thead> */}
-        <div className='boardInnerBox'>
-          {data.map((post) => (
-            <div
-              key={post.no}
+        <tbody className='boardInnerBox'>
+          {boardList.map((board) => (
+            <tr
+              key={board.boardNo}
               className='bRow'
-              onClick={() => navigate('/userBoardDetail')}
+              onClick={() =>
+                navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                  state: board.boardNo,
+                })
+              }
             >
-              <div className='Bno'>{post.no}</div>
-              <div className='Btitle'>{post.title}</div>
-              <div className='Bwriter'>{post.writer}</div>
-              <div className='Bdate'>{post.date}</div>
-              <div className='Bview'>{post.view}</div>
-            </div>
+              <td className='Bno'>{board.boardNo}</td>
+              <td className='Btitle'>{board.btitle}</td>
+              <td className='Bwriter'>{board.bwriter}</td>
+              <td className='Bdate'>{board.createDate}</td>
+            </tr>
           ))}
-        </div>
+        </tbody>
       </Table>
 
       <div

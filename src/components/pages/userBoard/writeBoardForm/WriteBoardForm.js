@@ -15,6 +15,7 @@ const WriteBoardForm = () => {
   const [board, setBoard] = useState(false);
 
   const [formData, setFormData] = useState({
+    boardNo: '',
     bWriter: '',
     bTitle: '',
     bContent: '',
@@ -31,6 +32,7 @@ const WriteBoardForm = () => {
 
   const fetchBoard = async () => {
     const data = new FormData();
+    data.append('boardNo', formData.boardNo);
     data.append('bWriter', formData.bWriter);
     data.append('bTitle', formData.bTitle);
     data.append('bContent', formData.bContent);
@@ -41,7 +43,7 @@ const WriteBoardForm = () => {
     try {
       const res = await axios.post(REQUEST_URL, data);
       setBoard(res.data);
-      navigate('/userBoard');
+      navigate('/board');
     } catch (error) {
       alert(error.response.data);
     }
@@ -50,15 +52,13 @@ const WriteBoardForm = () => {
   const boardHandler = (e) => {
     e.preventDefault();
     fetchBoard();
+    alert('등록 되었습니다.');
   };
 
   return (
     <Grid className='WboardFormContainer'>
       <Grid className='WboardTop'>
-        <div
-          className='WgoWriteBoardBtn'
-          onClick={() => navigate('/userBoard')}
-        >
+        <div className='WgoWriteBoardBtn' onClick={() => navigate('/board')}>
           <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
         </div>
 

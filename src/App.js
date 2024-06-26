@@ -39,8 +39,8 @@ function App() {
           <Route path='/findCharge' element={<FindCharge />} />
           {/* <Route path='/newInfo' element={<NewInfo />} />
           <Route path='/newInfoWrite' element={<NewInfoWrite />} /> */}
-          <Route path='/userBoard' element={<UserBoard />} />
-          <Route path='/userBoardDetail' element={<UserBoardDetail />} />
+          <Route path='/board' element={<UserBoard />} />
+          <Route path='/board/detail' element={<UserBoardDetail />} />
           <Route path='/writeBoardForm' element={<WriteBoardForm />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/qna' element={<QnA />} />

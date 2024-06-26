@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -13,7 +13,12 @@ import {
 } from 'reactstrap';
 import './UserBoardDetail.scss';
 import { Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {
+  createSearchParams,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faThumbsUp,
@@ -21,9 +26,12 @@ import {
   faFontAwesome,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { API_BASE_URL, BOARD } from '../../../../config/host-config';
 
 const UserBoardDetail = () => {
   const navigate = useNavigate();
+
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [commentAuthor, setCommentAuthor] = useState('');
@@ -41,6 +49,24 @@ const UserBoardDetail = () => {
   });
   const [reporterText, setReporterText] = useState('');
 
+  const [detailBoard, setDetailBoard] = useState({});
+
+  const [searchParams] = useSearchParams();
+  const boardNo = parseInt(searchParams.get('boardNo')) || 1;
+
+  useEffect(() => {
+    const boardDetailRenderingHandler = async () => {
+      const boardDetail = await axios.get(
+        `${API_BASE_URL}${BOARD}/detail?boardNo=${boardNo}`,
+      );
+      console.log(boardDetail);
+      setDetailBoard(boardDetail.data);
+    };
+
+    boardDetailRenderingHandler();
+  }, []);
+
+  console.log(detailBoard);
   const toggleReportModal = () => {
     setIsReportModalOpen(!isReportModalOpen);
   };
@@ -90,7 +116,7 @@ const UserBoardDetail = () => {
 
   return (
     <Grid className='UBDcontainer'>
-      <div className='backUserBoard' onClick={() => navigate('/userBoard')}>
+      <div className='backUserBoard' onClick={() => navigate('/board')}>
         <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
       </div>
       <h1 className='UBDcontainerTitle'>게시글</h1>
@@ -106,29 +132,25 @@ const UserBoardDetail = () => {
       </Grid>
       <Card className='UBD-card-container'>
         <Grid className='UserBoardInfo'>
-          <div className='BoardInfoDetail'>글번호: 1</div>
-          <div className='BoardInfoDetail'>작성자: 이영섭</div>
-          <div className='BoardInfoDetail'>작성일: 2024-06-25</div>
+          <div className='BoardInfoDetail'>글번호: {detailBoard.boardNo}</div>
+          <div className='BoardInfoDetail'>작성자: {detailBoard.bwriter}</div>
+          <div className='BoardInfoDetail'>
+            작성일: {detailBoard.createDate}
+          </div>
           <div className='BoardInfoDetail'>조회수: 23</div>
         </Grid>
         <CardImg
           className='UBDcardIMG'
           alt='Card image cap'
-          src='https://imgnews.pstatic.net/image/056/2024/06/18/0011743536_001_20240618160910846.jpg?type=w647'
+          src={detailBoard.bprofileImage}
           top
           width='100%'
         />
         <CardBody className='UBDcardBody'>
           <CardTitle tag='h5' className='UBDcardTitle'>
-            전기차 추천 좀 해주세요.
+            {detailBoard.btitle}
           </CardTitle>
-          <CardText>
-            전기차를 사고 싶은데 한번도 구매해본 적이 없어서,, 회원님들이
-            보시기엔 어떤 제품이 좋을까요?
-          </CardText>
-          <CardText>
-            <small className='text-muted'>Last updated 3 mins ago</small>
-          </CardText>
+          <CardText>{detailBoard.bcontent}</CardText>
         </CardBody>
       </Card>
 

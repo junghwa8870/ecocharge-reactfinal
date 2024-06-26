@@ -101,7 +101,7 @@ const Header = () => {
             {[
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
-              { to: '/userBoard', text: '게시판' },
+              { to: '/board', text: '게시판' },
               { to: '/myPage', text: '마이페이지' },
               { to: '/qna', text: 'Q & A' },
             ].map((link, index) => (

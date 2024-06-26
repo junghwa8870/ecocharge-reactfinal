@@ -18,6 +18,6 @@ if (clientHostName === 'localhost') {
 export const API_BASE_URL = backEndHostName;
 export const TODO = '/api/todos';
 export const USER = '/api/auth';
-export const BOARD = '/ecocharge/board';
-export const BOARD_REPLY = '/ecocharge/board/reply';
+export const BOARD = '/board';
+export const BOARD_REPLY = '/board/reply';
 export const BOARD_REPLY_LIST = '/ecocharge/board/reply/list';
