@@ -6,27 +6,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { BOARD } from '../../../../config/host-config';
+import axiosInstance from '../../../../config/axios-config';
 
 const WriteBoardForm = () => {
   const navigate = useNavigate();
 
-  // const $
+  // const $bTitle = document.getElementById('writeBoardTitle');
+  // const $bContent = document.getElementById('writeBoardContent');
+  // const $bProfileImage = document.getElementById('writeBoardFile');
 
   // // 요소 취득 예정
-  // // const data = JSON.stringify({
-  // //   bWriter: $bWriter,
-  // //   bContent: $bContent,
-  // //   bAddress: $bAddress,
-  // //   bTitle: $bTitle,
-  // //   bProfileImage: $bProfileImage,
-  // // });
+  // const data = JSON.stringify({
+  //   bContent: $bContent,
+  //   // bAddress: $bAddress,
+  //   bTitle: $bTitle,
+  //   bProfileImage: $bProfileImage,
+  // });
 
   // // 게시판
   // const API_BASE_URL = BOARD;
 
   // const [board, setBoard] = useState([]);
 
-  // // const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
 
   // // 게시판 등록 추가 함수
   // const addBoard = async (
@@ -44,12 +46,12 @@ const WriteBoardForm = () => {
   //     bProfileImage: bProfileImage,
   //   };
   //   handleRequest(
-  //     () => axiosInstance.post(API_BASE_URL, newBoard),
-  //     (data) => setBoard(dark.board),
+  //     () => axiosInstance.post(`${API_BASE_URL}/${BOARD}`, newBoard),
+  //     (data) => setBoard(data.board),
   //   );
   // };
 
-  // // 할 일 삭제 처리 함수
+  // //할 일 삭제 처리 함수
   // const removeBoard = async (id) => {
   //   handleRequest(
   //     () => axiosInstance.delete(`${API_BASE_URL}/${id}`),
@@ -70,6 +72,16 @@ const WriteBoardForm = () => {
         <h2 className='wBTitle'>게시글 작성</h2>
       </Grid>
       <Form className='WboardFormBox'>
+        <FormGroup>
+          <Label for='writeBoardWriter'>작성자</Label>
+          <Input
+            id='writeBoardWriter'
+            name='name'
+            placeholder='이름을 입력해주세요.'
+            type='name'
+            className='wbwBox'
+          />
+        </FormGroup>
         <FormGroup>
           <Label for='writeBoardTitle'>제목</Label>
           <Input

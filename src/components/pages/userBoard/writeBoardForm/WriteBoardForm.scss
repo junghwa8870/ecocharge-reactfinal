@@ -1,95 +1,105 @@
 .WboardFormContainer {
-    width: 50%;
-    margin: 200px auto 100px;
-    border: 2px solid gray;
-    border-radius: 10px;
-    box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
-    padding: 2rem;
+  width: 50%;
+  margin: 200px auto 100px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
+  padding: 2rem;
 
-    .WboardTop {
-        .WgoWriteBoardBtn {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .wBTitle {
-            text-align: center;
-            margin-bottom: 3.5rem;
-            font-weight: 700;
-            font-size: 40px;
-        }
+  .WboardTop {
+    .WgoWriteBoardBtn {
+      cursor: pointer;
+      font-size: 20px;
     }
 
-    .WboardFormBox {
-        width: 80%;
-        margin: 10px auto;
+    .wBTitle {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      font-weight: 700;
+      font-size: 40px;
+    }
+  }
 
-        .wbtBox{
-            box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
-            
-            &:focus {
-                box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
-                border-color: #86b7fe;
-                outline: 0;
-            }
-        }
+  .WboardFormBox {
+    width: 80%;
+    margin: 10px auto;
 
-        .wbcBox {
-            height: 200px;
-            box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
-        
-            &:focus {
-                box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
-                border-color: #86b7fe;
-                outline: 0;
-            }
-        }
+    .wbwBox {
+      box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
 
-        .wbfBox {
-            box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
-                    
-            &:focus {
-                box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
-                border-color: #86b7fe;
-                outline: 0;
-            }
-        }
-
-        .fileComment {
-            margin-top: 5px;
-        
-            &:focus {
-                box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
-                border-color: #86b7fe;
-                outline: 0;
-            }
-        }
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+        outline: 0;
+      }
     }
 
-    .checkOuterBox{
-        margin-bottom: 1.5rem;
-    }
-    
-    .WBFSbtnBox {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
+    .wbtBox {
+      box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
 
-        .WBFSbtn {
-            padding: 0.75rem;
-            font-size: 1.2rem;
-            // margin-left: 400px;
-            text-wrap: nowrap;
-            background-color: #0D1245;
-            border: none;
-            color: #fff;
-            font-weight: 550;
-  
-            &:hover {
-              background-color: #0d124579;
-            }
-        }
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+        outline: 0;
+      }
     }
+
+    .wbcBox {
+      height: 200px;
+      box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+        outline: 0;
+      }
+    }
+
+    .wbfBox {
+      box-shadow: 0px 1px 4px rgba(0.6, 0.6, 0, 0.6);
+
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+        outline: 0;
+      }
+    }
+
+    .fileComment {
+      margin-top: 5px;
+
+      &:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        border-color: #86b7fe;
+        outline: 0;
+      }
+    }
+  }
+
+  .checkOuterBox {
+    margin-bottom: 1.5rem;
+  }
+
+  .WBFSbtnBox {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+
+    .WBFSbtn {
+      padding: 0.75rem;
+      font-size: 1.2rem;
+      // margin-left: 400px;
+      text-wrap: nowrap;
+      background-color: #0d1245;
+      border: none;
+      color: #fff;
+      font-weight: 550;
+
+      &:hover {
+        background-color: #0d124579;
+      }
+    }
+  }
 }
