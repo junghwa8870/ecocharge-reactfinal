@@ -5,59 +5,52 @@ import { Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { BOARD } from '../../../../config/host-config';
-import axiosInstance from '../../../../config/axios-config';
+import { API_BASE_URL, BOARD } from '../../../../config/host-config';
+import axios from 'axios';
 
 const WriteBoardForm = () => {
   const navigate = useNavigate();
+  const REQUEST_URL = API_BASE_URL + BOARD;
 
-  // const $bTitle = document.getElementById('writeBoardTitle');
-  // const $bContent = document.getElementById('writeBoardContent');
-  // const $bProfileImage = document.getElementById('writeBoardFile');
+  const [board, setBoard] = useState(false);
 
-  // // 요소 취득 예정
-  // const data = JSON.stringify({
-  //   bContent: $bContent,
-  //   // bAddress: $bAddress,
-  //   bTitle: $bTitle,
-  //   bProfileImage: $bProfileImage,
-  // });
+  const [formData, setFormData] = useState({
+    bWriter: '',
+    bTitle: '',
+    bContent: '',
+    bProfileImage: null,
+  });
 
-  // // 게시판
-  // const API_BASE_URL = BOARD;
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
+  };
 
-  // const [board, setBoard] = useState([]);
+  const fetchBoard = async () => {
+    const data = new FormData();
+    data.append('bWriter', formData.bWriter);
+    data.append('bTitle', formData.bTitle);
+    data.append('bContent', formData.bContent);
+    if (formData.bProfileImage) {
+      data.append('bProfileImage', formData.bProfileImage);
+    }
 
-  // const [token, setToken] = useState('');
+    try {
+      const res = await axios.post(REQUEST_URL, data);
+      setBoard(res.data);
+      navigate('/userBoard');
+    } catch (error) {
+      alert(error.response.data);
+    }
+  };
 
-  // // 게시판 등록 추가 함수
-  // const addBoard = async (
-  //   bWriter,
-  //   bContent,
-  //   bAddress,
-  //   bTitle,
-  //   bProfileImage,
-  // ) => {
-  //   const newBoard = {
-  //     bWriter: bWriter,
-  //     bContent: bContent,
-  //     bAddress: bAddress,
-  //     bTitle: bTitle,
-  //     bProfileImage: bProfileImage,
-  //   };
-  //   handleRequest(
-  //     () => axiosInstance.post(`${API_BASE_URL}/${BOARD}`, newBoard),
-  //     (data) => setBoard(data.board),
-  //   );
-  // };
-
-  // //할 일 삭제 처리 함수
-  // const removeBoard = async (id) => {
-  //   handleRequest(
-  //     () => axiosInstance.delete(`${API_BASE_URL}/${id}`),
-  //     (data) => setBoard(data.todos),
-  //   );
-  // };
+  const boardHandler = (e) => {
+    e.preventDefault();
+    fetchBoard();
+  };
 
   return (
     <Grid className='WboardFormContainer'>
@@ -71,25 +64,29 @@ const WriteBoardForm = () => {
 
         <h2 className='wBTitle'>게시글 작성</h2>
       </Grid>
-      <Form className='WboardFormBox'>
+      <Form className='WboardFormBox' onSubmit={boardHandler}>
         <FormGroup>
           <Label for='writeBoardWriter'>작성자</Label>
           <Input
             id='writeBoardWriter'
-            name='name'
+            name='bWriter'
             placeholder='이름을 입력해주세요.'
-            type='name'
+            type='text'
             className='wbwBox'
+            value={formData.bWriter}
+            onChange={handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Label for='writeBoardTitle'>제목</Label>
           <Input
             id='writeBoardTitle'
-            name='title'
+            name='bTitle'
             placeholder='제목을 입력해주세요.'
-            type='title'
+            type='text'
             className='wbtBox'
+            value={formData.bTitle}
+            onChange={handleChange}
           />
         </FormGroup>
 
@@ -97,18 +94,21 @@ const WriteBoardForm = () => {
           <Label for='writeBoardContent'>내용</Label>
           <Input
             id='writeBoardContent'
-            name='text'
+            name='bContent'
             type='textarea'
             className='wbcBox'
+            value={formData.bContent}
+            onChange={handleChange}
           />
         </FormGroup>
         <FormGroup>
           <Label for='writeBoardFile'>첨부파일</Label>
           <Input
             id='writeBoardFile'
-            name='file'
+            name='bProfileImage'
             type='file'
             className='wbfBox'
+            onChange={handleChange}
           />
           <Grid className='fileComment'>
             <FormText>
@@ -123,7 +123,9 @@ const WriteBoardForm = () => {
           <Label check>상업적 광고나 홍보 글은 금지되어 있습니다.</Label>
         </FormGroup>
         <Grid className='WBFSbtnBox'>
-          <Button className='WBFSbtn'>작성 완료</Button>
+          <Button type='submit' className='WBFSbtn'>
+            작성 완료
+          </Button>
         </Grid>
       </Form>
     </Grid>
