@@ -1,0 +1,27 @@
+.reservationListContainer {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.reservationItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.reservationItem:last-child {
+  border-bottom: none;
+}
+
+.reservationTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; 
+}
+
+.reservationDate {
+  font-size: 1rem;
+  color: #555; 
+}
