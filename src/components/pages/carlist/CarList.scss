@@ -7,10 +7,8 @@
 
   max-height: 2500px;
   justify-content: center;
-  // margin-bottom: 50px;
 
   .ecoCarTitle {
-    // font-family: "Jua";
     font-weight: 700;
     font-size: 50px;
     margin-top: 200px;
@@ -25,16 +23,10 @@
 
 
 .carInfoBox {
-display: flex;
-flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
-justify-content: space-between;
-gap: 20px; // 아이템 사이에 간격 추가
-
   height: 50%;
   display: flex;
   flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
   margin-top: 50px;
-  // justify-content: space-between;
   gap: 12.5%; // 아이템 사이에 간격 추가
   row-gap: 50px;
 }
@@ -57,17 +49,10 @@ gap: 20px; // 아이템 사이에 간격 추가
 .carInfo {
   display: flex;
   flex-wrap: wrap;
-
-  // border-radius: 10px;
-  // border: 2px solid gray;
   box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
-
   width: calc(25%); // 3개씩 배치되도록 너비 설정
   height: 580px; // 아이템 높이 설정
   margin-top: 40px; // 상단 여백 추가
-  // display: flex;
-  // flex-direction: column;
-
   cursor: pointer; /* 포인터 커서를 추가하여 클릭 가능하다는 것을 나타냅니다. */
   transition: background-color 0.3s ease; /* 배경색 전환을 부드럽게 합니다. */
 
@@ -98,12 +83,10 @@ gap: 20px; // 아이템 사이에 간격 추가
     position: relative; /* 절대 위치 설정 */
     top: -50%; /* 부모 요소의 중앙 정렬을 위해 top을 50%로 설정 */
     left: 45%; /* 부모 요소의 중앙 정렬을 위해 left을 50%로 설정 */
-    // transform: translate(-50%, -50%); /* 아이콘을 가운데 정렬 */
     font-size: 40px; /* 아이콘 크기 설정 */
     color: #0D1245; /* 아이콘 색상 설정 */
     opacity: 0; /* 초기에는 숨김 */
     transition: opacity 0.3s ease; /* 투명도 전환 애니메이션 추가 */
-    // z-index: 1; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
   }
   
 

@@ -7,49 +7,48 @@ import PageButton from '../pageButton/PageButton';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const CarList = () => {
-  const [searchText, setSearchText] = useState(''); // 검색어 상태 추가
-  ///////////
   // 버튼 동작 확인용
   const handleDetailClick = () => {
     window.location.href = 'https://www.naver.com';
   };
 
-  const handleSearchClick = () => {
-    const searchInput = document.querySelector('.search');
-    const searchText = searchInput.value.trim();
-
-    if (!searchText) {
-      alert(`차량의 이름이 입력되지 않았습니다.`);
-    } else {
-      // 검색어가 있을 경우에만 검색 기능을 실행하도록 추가 로직을 구현할 수 있습니다.
-      // alert(`검색어: ${searchText}`);
-      // const url = `http://localhost:8181/searchCars?keyword=${encodeURIComponent(searchText)}`;
-      // axios
-      //   .get(url)
-      //   .then((response) => {
-      //     // 서버에서 받은 데이터를 상태에 설정하거나 처리하는 로직
-      //   })
-      //   .catch((error) => {
-      //     console.error('검색 요청 실패:', error);
-      //   });
-    }
-  };
-
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page')) || 1;
+  const search = searchParams.get('search') || '';
 
   const [pageMaker, setPageMaker] = useState({});
   const [carInfoList, setCarInfoList] = useState([]);
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
   const location = useLocation();
+  const [searchText, setSearchText] = useState(search); // 검색어 상태 추가
 
   const pageButtonClickHandler = (no) => {
+    console.log(location.state);
+    console.log(search);
     setPageNo(no);
     if (location.pathname && pageNo !== no) {
-      navigate(`/carList?page=${no}`, { state: no });
+      if (search === '') {
+        navigate(`/carList?page=${no}`, {
+          state: { page: no, search },
+        });
+      } else {
+        navigate(`/carList?page=${no}&search=${search}`, {
+          state: { page: no, search },
+        });
+      }
     }
+  };
+
+  const handleSearchClick = () => {
+    const searchInput = document.querySelector('.search');
+    setSearchText(searchInput.value.trim());
+    console.log(searchText.trim());
+    setPageNo(1);
+    navigate(`/carList?page=1&search=${searchText.trim()}`, {
+      state: { page, search: searchText.trim() },
+    });
   };
 
   useEffect(() => {
@@ -67,13 +66,14 @@ const CarList = () => {
   }, []);
 
   const carListRendering = async () => {
-    const url = `http://localhost:8181/carList?pageNo=${pageNo}`;
+    const url = `http://localhost:8181/carList?pageNo=${pageNo}&search=${search}`;
     const res = await axios.get(url);
-
     try {
       setCarInfoList(res.data.subsidyCarList);
       setPageMaker(res.data.pageMaker);
       setPageButtonCount(res.data.pageMaker.end);
+      console.log(res.data.pageMaker.end);
+      console.log(res.data.pageMaker.finalPage);
     } catch (error) {
       console.error(error);
     }
@@ -81,7 +81,7 @@ const CarList = () => {
 
   useEffect(() => {
     carListRendering();
-  }, [pageNo]);
+  }, [location.state]);
 
   // 검색어 입력 핸들러
   const handleSearchInputChange = (event) => {
@@ -96,9 +96,9 @@ const CarList = () => {
   };
 
   // 실제 검색 로직 구현 부분
-  const filteredCarInfoList = carInfoList.filter((carInfo) =>
-    carInfo.carName.includes(searchText),
-  );
+  // const filteredCarInfoList = carInfoList.filter((carInfo) =>
+  //   carInfo.carName.includes(searchText),
+  // );
 
   return (
     <Grid
@@ -130,7 +130,7 @@ const CarList = () => {
             className='search'
             value={searchText}
             onChange={handleSearchInputChange} // 검색어 입력 핸들러 연결
-            onKeyPress={handleSearchInputKeyPress} // 엔터키 입력 핸들러 연결
+            onKeyUpCapture={handleSearchInputKeyPress} // 엔터키 입력 핸들러 연결
           />
           <Button
             className='searchBtn'
@@ -141,7 +141,7 @@ const CarList = () => {
           </Button>
         </div>
         <Grid container className='carInfoBox'>
-          {filteredCarInfoList.map((carInfo) => (
+          {carInfoList.map((carInfo) => (
             <CarListItem key={carInfo.id} info={carInfo} />
           ))}
 
