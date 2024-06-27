@@ -1,21 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../myInfo/MyInfo.scss';
 
 const MyInfo = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [userName, setUserName] = useState('사용자 이름');
+  const [email, setEmail] = useState('user@example.com');
+  const [phone, setPhone] = useState('010-1234-5678');
+  const [password, setPassword] = useState('');
+
+  const [originalUserName, setOriginalUserName] = useState(userName);
+  const [originalPhone, setOriginalPhone] = useState(phone);
+
   const handleEditProfile = () => {
-    // 이 함수는 수정 버튼 클릭 시 호출될 로직을 정의합니다.
-    // 예를 들어, 정보 수정 모달을 열거나 다른 작업을 수행할 수 있습니다.
-    console.log('Edit profile clicked');
+    setOriginalUserName(userName);
+    setOriginalPhone(phone);
+    setIsEditing(true);
+  };
+
+  const handleSaveProfile = () => {
+    setIsEditing(false);
+    console.log('Profile saved');
+  };
+
+  const handleCancelEdit = () => {
+    setUserName(originalUserName);
+    setPhone(originalPhone);
+    setPassword('');
+    setIsEditing(false);
+    console.log('Edit cancelled');
   };
 
   return (
     <div className='infoContainer'>
-      <div className='userName'>사용자 이름</div>
-      <div className='userInfo'>이메일: user@example.com</div>
-      <div className='userInfo'>전화번호: 010-1234-5678</div>
-      <button className='editProfileButton' onClick={handleEditProfile}>
-        내 정보 수정
-      </button>
+      {isEditing ? (
+        <>
+          <div className='inputGroup'>
+            <label htmlFor='userName'>사용자 이름</label>
+            <input
+              type='text'
+              id='userName'
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+          <div className='inputGroup'>
+            <label htmlFor='phone'>전화번호</label>
+            <input
+              type='tel'
+              id='phone'
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div className='inputGroup'>
+            <label htmlFor='password'>비밀번호 변경</label>
+            <input
+              type='password'
+              id='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className='buttonGroup'>
+            <button className='saveProfileButton' onClick={handleSaveProfile}>
+              저장
+            </button>
+            <button className='cancelEditButton' onClick={handleCancelEdit}>
+              취소
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className='userName'>{userName}</div>
+          <div className='userInfo'>이메일: {email}</div>
+          <div className='userInfo'>전화번호: {phone}</div>
+          <button className='editProfileButton' onClick={handleEditProfile}>
+            내 정보 수정
+          </button>
+        </>
+      )}
     </div>
   );
 };
