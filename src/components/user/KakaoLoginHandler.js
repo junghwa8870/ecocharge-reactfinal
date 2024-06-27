@@ -9,7 +9,7 @@ const KakaoLoginHandler = () => {
     '사용자가 동의화면을 통해 필수 정보 동의 후 Kakao 인증 서버에서 redirect를 진행함!',
   );
 
-  const { onLogin, userName } = useContext(AuthContext);
+  const { onLogin } = useContext(AuthContext);
   const redirection = useNavigate();
 
   const REQUEST_URL = API_BASE_URL + USER;
@@ -26,7 +26,7 @@ const KakaoLoginHandler = () => {
       console.log(phoneNumber);
 
       const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
-      onLogin(token, userName, role);
+      onLogin(token, userName, role, phoneNumber);
 
       redirection('/');
     };
