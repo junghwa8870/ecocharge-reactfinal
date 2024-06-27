@@ -5,6 +5,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false, // 로그인 했는지의 여부
   userName: '',
   role: '',
+  phoneNumber: '',
   onLogout: () => {},
   onLogin: () => {},
 });
@@ -15,19 +16,22 @@ export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
   const [role, setRole] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role) => {
+  const loginHandler = (token, userName, role, phoneNumber) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
     // 2. 세션 스토리지 - 브라우저가 종료 되면 사라짐.
     console.log(token);
     localStorage.setItem('ACCESS_TOKEN', token.access_token);
     localStorage.setItem('REFRESH_TOKEN', token.refresh_token);
-    localStorage.setItem('LOGIN_USERNAME', userName);
     setIsLoggedIn(true);
     setUserName(userName);
     setRole(role);
+    setPhoneNumber(phoneNumber);
+    console.log(userName);
+    console.log(phoneNumber);
   };
 
   // 로그아웃 핸들러
@@ -36,6 +40,7 @@ export const AuthContextProvider = (props) => {
     setIsLoggedIn(false);
     setUserName('');
     setRole('');
+    setPhoneNumber('');
   };
 
   useEffect(() => {
@@ -51,6 +56,7 @@ export const AuthContextProvider = (props) => {
         isLoggedIn,
         userName,
         role,
+        phoneNumber,
         onLogout: logoutHandler,
         onLogin: loginHandler,
       }}

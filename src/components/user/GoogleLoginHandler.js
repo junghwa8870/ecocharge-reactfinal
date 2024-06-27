@@ -12,14 +12,16 @@ const GoogleLoginHandler = () => {
   const REQUEST_URL = API_BASE_URL + USER;
 
   const code = new URL(window.location.href).searchParams.get('code');
+  const phoneNumber = localStorage.getItem('phoneNumber');
 
   useEffect(() => {
     const googleLogin = async () => {
-      const res = await fetch(REQUEST_URL + '/googlelogin?code=' + code);
-
+      const res = await fetch(
+        `${REQUEST_URL}/googlelogin?code=${code}&phoneNumber=${phoneNumber}`,
+      );
+      console.log(phoneNumber);
       const { token, userName, role } = await res.json();
-
-      onLogin(token, userName, role);
+      onLogin(token, userName, role, phoneNumber);
 
       redirection('/');
     };
