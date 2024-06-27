@@ -4,27 +4,54 @@ import './WriteQnA.scss';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { API_BASE_URL, QNA } from '../../../../config/host-config';
 
 const WriteQnA = () => {
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [writer, setWriter] = useState('');
-  const [category, setCategory] = useState(''); // New state for category
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const qnaFormData = {
-      title,
-      content,
-      category, // Include category in form data
-    };
-    console.log(qnaFormData);
-    navigate('/qna');
+  const REQUEST_URL = API_BASE_URL + QNA;
+
+  const [qna, setQna] = useState(false);
+
+  const [formData, setFormData] = useState({
+    qnaNo: '',
+    qTitle: '',
+    qContent: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log(value);
   };
 
-  const handleBack = () => {
-    navigate('/qna');
+  const fetchQna = async () => {
+    const data = new FormData();
+    data.append('qnaNo', formData.qnaNo);
+    data.append('qTitle', formData.qTitle);
+    data.append('qContent', formData.qContent);
+
+    console.log(data);
+
+    try {
+      const res = await axios.post(REQUEST_URL, data);
+      setQna(res.data);
+      navigate('/qna');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const qnaHandler = (e) => {
+    e.preventDefault();
+    fetchQna();
+    alert('등록 되었습니다.');
   };
 
   return (
@@ -42,24 +69,24 @@ const WriteQnA = () => {
         되돌아가기
       </Button> */}
       <div className='qnaFormBox'>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={qnaHandler}>
           <FormGroup className='qWriteForm'>
             <Label for='qcategory'>카테고리</Label>
             <Input
               className='qnaSelect'
               type='select'
-              name='qcategory'
+              name='qTitle'
               id='qcategory'
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={formData.qTitle}
+              onChange={handleChange}
             >
               <option value='' disabled>
                 카테고리를 선택하세요
               </option>
-              <option value='manyquestion'>자주 묻는 질문</option>
-              <option value='category1'>홈페이지</option>
-              <option value='category2'>전기차 충전소</option>
-              <option value='category3'>기타</option>
+              <option onChange={formData.qTitle}>자주 묻는 질문</option>
+              <option onChange={formData.qTitle}>홈페이지</option>
+              <option onChange={formData.qTitle}>전기차 충전소</option>
+              <option onChange={formData.qTitle}>기타</option>
             </Input>
           </FormGroup>
           <FormGroup className='qWriteForm'>
@@ -67,11 +94,11 @@ const WriteQnA = () => {
             <Input
               className='qTitleBox'
               type='text'
-              name='qtitle'
+              name='qContent'
               id='qtitle'
               placeholder='질문을 입력하세요'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formData.qContent}
+              onChange={handleChange}
             />
           </FormGroup>
           <FormGroup className='qWriteForm'>

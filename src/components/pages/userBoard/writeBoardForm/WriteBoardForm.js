@@ -28,6 +28,7 @@ const WriteBoardForm = () => {
       ...formData,
       [name]: files ? files[0] : value,
     });
+    console.log(value);
   };
 
   const fetchBoard = async () => {
