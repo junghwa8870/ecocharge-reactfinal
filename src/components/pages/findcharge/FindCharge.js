@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchComponent from './SearchComponent'; // SearchComponent를 임포트합니다.
 import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임포트합니다.
 import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
@@ -11,6 +11,39 @@ import NaverMapApi from './NaverMapApi';
 function FindCharge() {
   const [searchParams, setSearchParams] = useState(null);
   const [visible, setVisible] = useState(false);
+  const [{ mapLat, mapLng }, setGeometricData] = useState({
+    mapLat: 37.552546,
+    mapLng: 126.9377803,
+  });
+  const navigator = window.navigator;
+
+  useEffect(() => {
+    function getLocation() {
+      if (navigator.geolocation) {
+        // GPS를 지원하면
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            // alert(position.coords.latitude + ' ' + position.coords.longitude);
+            setGeometricData({
+              mapLat: position.coords.latitude,
+              mapLng: position.coords.longitude,
+            });
+          },
+          function (error) {
+            console.error(error);
+          },
+          {
+            enableHighAccuracy: false,
+            maximumAge: 0,
+            timeout: Infinity,
+          },
+        );
+      } else {
+        alert('GPS를 지원하지 않습니다');
+      }
+    }
+    getLocation();
+  }, []);
 
   const handleSearch = (params) => {
     setSearchParams(params);
@@ -37,7 +70,7 @@ function FindCharge() {
         </div>
         <div className='map-area'>
           <MapDiv>
-            <NaverMapApi />
+            <NaverMapApi lat={mapLat} lng={mapLng} />
           </MapDiv>
         </div>
       </div>

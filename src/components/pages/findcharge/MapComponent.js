@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
-function MapComponent({ searchParams }) {
+function MapComponent({ lat, lng }) {
   const navermaps = useNavermaps();
 
   return (
-    <NaverMap
-      defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)}
-      defaultZoom={15}
-    >
-      <Marker defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)} />
+    <NaverMap defaultCenter={new navermaps.LatLng(lat, lng)} defaultZoom={15}>
+      <Marker defaultPosition={new navermaps.LatLng(lat, lng)} />
     </NaverMap>
   );
 }

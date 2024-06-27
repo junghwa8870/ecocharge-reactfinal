@@ -25,17 +25,17 @@ const CarListItem = ({ info }) => {
 
   return (
     <Grid item className='carInfo' onClick={handleCarInfoBoxClick}>
-      <Typography variant='h6' className='carName'>
-        {carName}
-      </Typography>
+      <div className='carName'>{carName}</div>
       <Badge
         color='dark'
         // pill
         style={{
           width: 'fit-content',
+          height: 'fit-content',
           margin: '10px',
           padding: '10px',
-          fontSize: '17px',
+          textAlign: 'center',
+          fontSize: '15px',
         }}
       >
         {company}
