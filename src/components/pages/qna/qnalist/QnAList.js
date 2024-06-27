@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dropdown,
   DropdownToggle,
@@ -12,60 +12,19 @@ import Paging from '../../../layout/Paging';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { API_BASE_URL, QNA } from '../../../../config/host-config';
 
 const QnAList = () => {
+  const requestUrl = API_BASE_URL + QNA;
   const categories = [
     { name: '전체', value: 'all' },
-    { name: '홈페이지', value: 'category1' },
-    { name: '전기차 충전소', value: 'category2' },
-    { name: '기타', value: 'category3' },
+    { name: '홈페이지', value: 'homePage' },
+    { name: '전기차 충전소', value: 'chargeSpot' },
+    { name: '기타', value: 'etc' },
   ];
 
-  const qnaData = [
-    {
-      id: 1,
-      category: '홈페이지',
-      title: '접속이 잘 안돼요.',
-      writer: '홍길동',
-      date: '2024-06-19',
-    },
-    {
-      id: 2,
-      category: '전기차 충전소',
-      title: '충전 속도가 너무 느려요.',
-      writer: '이순신',
-      date: '2024-06-20',
-    },
-    {
-      id: 3,
-      category: '기타',
-      title: '기타 질문입니다.',
-      writer: '박세리',
-      date: '2024-06-21',
-    },
-    {
-      id: 4,
-      category: '홈페이지',
-      title: '클릭이 잘 안돼요.',
-      writer: '김신',
-      date: '2024-06-23',
-    },
-    {
-      id: 5,
-      category: '기타',
-      title: '로그인 방법이 어려워요.',
-      writer: '신짱구',
-      date: '2024-06-22',
-    },
-    {
-      id: 6,
-      category: '전기차 충전소',
-      title: '요금이 얼마해요?',
-      writer: '김유준',
-      date: '2024-06-22',
-    },
-    // 여기에 더 많은 Q&A 데이터를 추가할 수 있습니다.
-  ];
+  const [qnaData, setQnaData] = useState([]);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('전체');
@@ -87,6 +46,17 @@ const QnAList = () => {
     selectedCategory === '전체'
       ? qnaData
       : qnaData.filter((qna) => qna.category === selectedCategory);
+
+  useEffect(() => {
+    const qnaListRenderingHandler = async () => {
+      const res = await axios.get(requestUrl);
+
+      // console.log(res.data);
+      setQnaData(res.data.qnas);
+    };
+
+    qnaListRenderingHandler();
+  }, []);
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
@@ -142,12 +112,16 @@ const QnAList = () => {
 
       <div className='qnaListContainer'>
         {filteredQnaData.map((qna) => (
-          <div key={qna.id} className='qnaListInnerBox' onClick={handleTdClick}>
-            <div className='qlistNum'>{qna.id}</div>
-            <div className='qlistCategory'>{qna.category}</div>
-            <div className='qlistTitle'>{qna.title}</div>
-            <div className='qlistWriter'>{qna.writer}</div>
-            <div className='qlistDate'>{qna.date}</div>
+          <div
+            key={qna.qnaNo}
+            className='qnaListInnerBox'
+            onClick={handleTdClick}
+          >
+            <div className='qlistNum'>{qna.qnaNo}</div>
+            <div className='qlistCategory'>{qna.qcategory}</div>
+            <div className='qlistTitle'>{qna.qtitle}</div>
+            {/* <div className='qlistWriter'>{qna.qwriter}</div> */}
+            {/* <div className='qlistDate'>{qna.date}</div> */}
           </div>
         ))}
       </div>

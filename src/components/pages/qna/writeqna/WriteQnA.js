@@ -16,43 +16,13 @@ const WriteQnA = () => {
 
   const [qna, setQna] = useState(false);
 
-  const [formData, setFormData] = useState({
-    qnaNo: '',
-    qTitle: '',
-    qContent: '',
-  });
+  const [formData, setFormData] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    console.log(value);
-  };
+  const handleChange = (e) => {};
 
-  const fetchQna = async () => {
-    const data = new FormData();
-    data.append('qnaNo', formData.qnaNo);
-    data.append('qTitle', formData.qTitle);
-    data.append('qContent', formData.qContent);
+  const fetchQna = async () => {};
 
-    console.log(data);
-
-    try {
-      const res = await axios.post(REQUEST_URL, data);
-      setQna(res.data);
-      navigate('/qna');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const qnaHandler = (e) => {
-    e.preventDefault();
-    fetchQna();
-    alert('등록 되었습니다.');
-  };
+  const qnaHandler = (e) => {};
 
   return (
     <div className='qnaWriteContainer' style={{ padding: '2rem' }}>
@@ -83,10 +53,10 @@ const WriteQnA = () => {
               <option value='' disabled>
                 카테고리를 선택하세요
               </option>
-              <option onChange={formData.qTitle}>자주 묻는 질문</option>
-              <option onChange={formData.qTitle}>홈페이지</option>
-              <option onChange={formData.qTitle}>전기차 충전소</option>
-              <option onChange={formData.qTitle}>기타</option>
+              <option>자주 묻는 질문</option>
+              <option>홈페이지</option>
+              <option>전기차 충전소</option>
+              <option>기타</option>
             </Input>
           </FormGroup>
           <FormGroup className='qWriteForm'>
