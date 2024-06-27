@@ -16,16 +16,33 @@ const GoogleLoginHandler = () => {
 
   useEffect(() => {
     const googleLogin = async () => {
-      const res = await fetch(
-        `${REQUEST_URL}/googlelogin?code=${code}&phoneNumber=${phoneNumber}`,
-      );
-      console.log(phoneNumber);
-      const { token, userName, role } = await res.json();
-      onLogin(token, userName, role, phoneNumber);
+      try {
+        const res = await fetch(
+          REQUEST_URL +
+            '/googlelogin?code=' +
+            code +
+            '&phoneNumber=' +
+            phoneNumber,
+        );
+        if (!res.ok) {
+          throw new Error('Google login failed');
+        }
 
-      redirection('/');
+        const { token, userName, role } = await res.json();
+        onLogin(token, userName, role);
+        redirection('/');
+      } catch (error) {
+        console.error('Error during Google login:', error);
+        // Handle error here
+      }
     };
-    googleLogin();
+
+    if (code && phoneNumber) {
+      googleLogin();
+    } else {
+      console.error('Missing code or phoneNumber');
+      // Handle missing parameters error here
+    }
   }, []);
 
   return <div>GoogleLoginHandler</div>;
