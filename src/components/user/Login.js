@@ -15,6 +15,7 @@ import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
+import { Button } from 'bootstrap';
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const location = useLocation(); // useLocation 훅 사용
@@ -65,6 +66,9 @@ const Login = () => {
   ); // 의존성 배열을 비워놓으면, 첫 렌더링 때 함수가 선언되고 다시는 재선언되지 않습니다.
   // 만약 함수의 선언이 특정 상태가 변할 때 재선언 되어야 한다면, 의존성 배열에 상태 변수를 선언하시면 됩니다.
 
+  const IdFunction = () => {
+    debouncedUpdateState('id', 'pass', '새로운 메시지', true);
+  };
   // 이름 입력창 체인지 이벤트 핸들러
   const nameHandler = (e) => {
     console.log('nameHandler가 동작함!');
@@ -101,7 +105,7 @@ const Login = () => {
     } else if (!nameRegex.test(inputValue)) {
       msg = '영문자를 포함한 5글자 이상의 ID를 입력해주세요';
     } else {
-      msg = '사용 가능한 ID입니다.';
+      msg = '';
       flag = true;
     }
 
@@ -213,6 +217,36 @@ const Login = () => {
     setShowModal(false);
   };
 
+  const idCheckHandler = async (e) => {
+    e.preventDefault();
+    let flag = false;
+    let msg = '';
+    const idValue = document.getElementById('checkid').value.trim();
+    console.log('idValue: ', idValue);
+    try {
+      const response = await fetch(`${API_BASE_URL}${USER}/check`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(idValue), // idHandler에서 검증한 id 값을 포함
+      });
+
+      const result = await response.json(); // JSON 파싱을 기다립니다.
+
+      console.log('불린값 확인:', result);
+      if (result) {
+        alert('아이디가 중복되었습니다.');
+      } else {
+        alert('사용할 수 있는 아이디입니다.');
+        flag = true;
+        debouncedUpdateState('idCheck', idValue, msg, flag);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // 에러 처리
+    }
+  };
   const handleSendVerification = async (e) => {
     if (!phoneNumber) {
       alert('핸드폰번호를 입력해주세요');
@@ -260,6 +294,8 @@ const Login = () => {
 
       if (result) {
         alert('인증되었습니다.');
+      } else {
+        alert('인증에 실패했습니다');
       }
       console.log(`json 파일확인:${phoneNumber},${verificationCodeInput}`);
     } catch (error) {
@@ -432,7 +468,31 @@ const Login = () => {
               </label>
 
               <label>
-                <input type='text' placeholder='UserId' onChange={idHandler} />
+                <input
+                  type='text'
+                  id='checkid'
+                  placeholder='UserId'
+                  style={{
+                    width: '200px',
+                  }}
+                  onChange={idHandler}
+                />
+                <button
+                  type='button'
+                  onClick={idCheckHandler}
+                  style={{
+                    width: '135px',
+                    height: '40px',
+                    marginLeft: '10px',
+                    backgroundColor: '#007bff',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  ID 중복 확인
+                </button>
                 <br />
                 <span
                   style={correct.id ? { color: 'green' } : { color: 'red' }}

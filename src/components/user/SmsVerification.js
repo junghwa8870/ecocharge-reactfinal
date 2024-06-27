@@ -32,13 +32,14 @@ const SmsVerification = () => {
     }
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/send-sms`, {
+      const response = await fetch(`${API_BASE_URL}/api/socialSend-sms`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ phoneNumber }),
       });
+
       alert('인증 코드를 발송하였습니다.');
       setShowInput(true);
     } catch (error) {
@@ -48,9 +49,11 @@ const SmsVerification = () => {
   };
 
   const handleVerifyCode = async (e) => {
+    // 인증번호 확인 로직 추가 (예: API 호출)
     e.preventDefault();
+
     try {
-      const response = await fetch(`${API_BASE_URL}/api/Sverify-code`, {
+      const response = await fetch(`${API_BASE_URL}/api/Socialverify-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,17 +63,18 @@ const SmsVerification = () => {
           verificationCodeInput,
         }),
       });
-      console.log(`json 파일확인:${phoneNumber},${verificationCodeInput}`);
       const result = await response.json();
+
       if (result) {
-        alert('인증에 성공했습니다.');
+        alert('인증되었습니다.');
         localStorage.setItem('phoneNumber', phoneNumber);
 
         const { redirectUrl } = location.state;
         window.location.href = redirectUrl;
       } else {
-        alert('서버 오류');
+        alert('인증에 실패했습니다.');
       }
+      console.log(`json 파일확인:${phoneNumber},${verificationCodeInput}`);
     } catch (error) {
       console.error('Error verifying code:', error);
       alert('인증에 실패했습니다.');
