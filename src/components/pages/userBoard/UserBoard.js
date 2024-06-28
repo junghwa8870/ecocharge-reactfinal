@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './UserBoard.scss';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { API_BASE_URL, BOARD, BOARD_REPLY } from '../../../config/host-config';
+import {
+  API_BASE_URL,
+  BOARD,
+  BOARD_REPLY,
+  USER,
+} from '../../../config/host-config';
 import axiosInstance from '../../../config/axios-config';
 import { dark } from '@mui/material/styles/createPalette';
 import { Grid } from '@mui/material';
 import { Button, Table } from 'reactstrap';
 import Paging from '../../layout/Paging';
 import axios from 'axios';
+import handleRequest from '../../../utils/handleRequest';
+import AuthContext from '../../../utils/AuthContext';
 
 const UserBoard = () => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState([]);
+  const { onLogout } = useContext(AuthContext);
 
   useEffect(() => {
     const getBoardList = async () => {
@@ -28,6 +36,18 @@ const UserBoard = () => {
 
     getBoardList(); // 컴포넌트가 마운트될 때 게시물 목록을 가져옴
   }, []); // 빈 배열을 전달하여 한 번만 실행되도록 설정
+
+  const writeBoardFormHandler = async () => {
+    const onSuccess = () => {
+      navigate('/writeBoardForm');
+    };
+    handleRequest(
+      () => axiosInstance.get(`${API_BASE_URL}${USER}/validate`),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
+  };
 
   return (
     <Grid className='user-board-container'>
@@ -49,10 +69,7 @@ const UserBoard = () => {
           </div>
         </div>
         <div className='goBWriteBtnbox'>
-          <Button
-            className='goBwriteForm'
-            onClick={() => navigate('/writeBoardForm')}
-          >
+          <Button className='goBwriteForm' onClick={writeBoardFormHandler}>
             작성하기
           </Button>
         </div>

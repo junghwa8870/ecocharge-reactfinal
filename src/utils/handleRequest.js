@@ -10,11 +10,19 @@ const handleError = (error, onLogout, redirection) => {
       alert('로그인 시간이 만료되었습니다. 다시 로그인 해 주세요.');
       onLogout();
       redirection('/login');
+    } else if (error.response.data.message === 'INVALID_TOKEN') {
+      alert('유효하지 않은 접근입니다.');
+      onLogout();
+      redirection('/');
     }
   } else if (error.response && error.response.status === 400) {
     // 400 에러에 대한 내용...
+    alert('잘못된 요청입니다.');
+    redirection('/');
   } else if (error.response && error.response.status === 403) {
     // 403 에러에 대한 내용...
+    alert('요청하신 정보를 찾을 수 없습니다.');
+    redirection('/');
   }
 };
 
