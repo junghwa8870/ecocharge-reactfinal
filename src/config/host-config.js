@@ -20,5 +20,5 @@ export const TODO = '/api/todos';
 export const USER = '/api/auth';
 export const BOARD = '/board';
 export const BOARD_REPLY = '/board/reply';
-export const BOARD_REPLY_LIST = '/ecocharge/board/reply/list';
+export const BOARD_REPLY_LIST = '/board/reply/list';
 export const QNA = '/qna';
