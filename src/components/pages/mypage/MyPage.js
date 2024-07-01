@@ -8,7 +8,6 @@ import InquiryList from './inquiry/InquiryList';
 const MyPage = () => {
   return (
     <div className='mainContainer'>
-      <h1 className='pageTitle'>마이페이지</h1>
       <div className='myInfoContainer'>
         <MyInfo />
       </div>

@@ -12,8 +12,8 @@ function FindCharge() {
   const [searchParams, setSearchParams] = useState(null);
   const [visible, setVisible] = useState(false);
   const [{ mapLat, mapLng }, setGeometricData] = useState({
-    mapLat: 37.552546,
-    mapLng: 126.9377803,
+    mapLat: null,
+    mapLng: null,
   });
   const navigator = window.navigator;
 
