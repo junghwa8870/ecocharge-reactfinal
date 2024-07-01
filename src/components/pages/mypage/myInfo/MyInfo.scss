@@ -4,15 +4,23 @@
   align-items: center;
 }
 
-.userName{
-  margin: 10px 0;
+.userName {
+  margin: 30px 0;
   font-weight: bold;
   font-size: 40px;
 }
 
+.pageIndicator {
+  font-size: 24px;
+  color: #777;
+  margin-left: 10px;
+}
+
 .userInfo {
   margin: 10px 0;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #777;
 }
 
 .inputGroup {
@@ -21,37 +29,56 @@
 
 .inputGroup label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .inputGroup input {
   padding: 8px;
-  width: 300px;
+  width: 400px;
   max-width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.editProfileButton, .saveProfileButton, .cancelEditButton {
+.editProfileButton,
+.saveProfileButton,
+.cancelEditButton {
   padding: 10px 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .editProfileButton {
-  background-color: navy;
+  background-color: rgb(69, 69, 209);
   color: white;
+  font-size: 20px;
+}
+
+.editProfileButton:hover {
+  background-color: darkgray;
 }
 
 .saveProfileButton {
-  background-color: lightblue;
+  background-color: black;
   color: white;
+}
+
+.saveProfileButton:hover {
+  background-color: gray;
 }
 
 .cancelEditButton {
   background-color: #dc3545;
   color: white;
+}
+
+.cancelEditButton:hover {
+  background-color: lightcoral;
 }
