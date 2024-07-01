@@ -176,7 +176,9 @@ const UserBoardDetail = () => {
       {/* 댓글 목록 */}
       <Card className='UBD-card-container'>
         <CardBody>
-          <CardTitle tag='h5'>댓글</CardTitle>
+          <CardTitle tag='h5' style={{ fontWeight: '550', color: 'black' }}>
+            댓글
+          </CardTitle>
           {comments.length > 0 ? (
             comments.map((comment, index) => (
               <div key={index} className='comment'>
@@ -198,22 +200,29 @@ const UserBoardDetail = () => {
 
       {/* 댓글 작성 폼 */}
       <Card className='UBD-card-container'>
-        <CardBody>
+        <CardBody className='UBD-container-form'>
           <Form onSubmit={handleCommentSubmit}>
             {/* 백엔드 연동이 되어있지 않아 로그인 후 댓글 작성시 화면구현이 어려워서 예시용으로 넣음 */}
             <FormGroup>
-              <Label for='commentAuthor'>작성자</Label>
+              <Label
+                for='commentAuthor'
+                style={{ fontWeight: 'bold', color: 'black' }}
+              >
+                작성자
+              </Label>
               <Input
                 type='text'
                 name='author'
                 id='commentAuthor'
                 value={commentAuthor}
                 onChange={(e) => setCommentAuthor(e.target.value)}
-                placeholder='이름을 입력해주세요.'
+                placeholder='이메일을 입력해주세요.'
               />
             </FormGroup>
             <FormGroup>
-              <Label for='commentText'>댓글 작성</Label>
+              <Label for='commentText' style={{ fontWeight: 'bold' }}>
+                댓글 작성
+              </Label>
               <Input
                 type='textarea'
                 name='comment'
@@ -240,8 +249,8 @@ const UserBoardDetail = () => {
             zIndex: 9999,
             width: '400px',
             position: 'absolute',
-            top: '386px',
-            right: '10px',
+            top: '403px',
+            right: '40px',
           }}
         >
           <CardBody style={{ width: '400px' }}>
@@ -321,7 +330,9 @@ const UserBoardDetail = () => {
                   </Label>
                 </FormGroup>
                 <FormGroup>
-                  <Label for='reporterText'>사유</Label>
+                  <Label for='reporterText' style={{ marginTop: '10px' }}>
+                    기타
+                  </Label>
                   <Input
                     type='text'
                     name='text'
