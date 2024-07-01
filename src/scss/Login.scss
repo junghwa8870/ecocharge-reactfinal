@@ -94,13 +94,17 @@
   }
   
   .social-login-button.google-login-button {
-    width: 150px; 
+    width: 150px;
     border: 2px solid lightgray;
+    color: #8e8e8e;
+    font-size: 14px;
+    font-weight: 600;
   }
   
   .google-icon {
     width: 30px;
-    margin-right: 10px; 
+    margin-right: 8px;
+    margin-left: -10px;
   }
   
   .signup-section {
