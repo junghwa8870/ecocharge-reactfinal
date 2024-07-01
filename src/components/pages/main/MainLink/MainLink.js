@@ -146,7 +146,7 @@ const MainLink = () => {
           <Box
             className='goUserWrite'
             //   게시판 페이지가 없어서 막아놓음
-            onClick={() => navigate('/userBoard')}
+            onClick={() => navigate('/board')}
           >
             <div>
               <FontAwesomeIcon icon={faPenToSquare} />
