@@ -60,8 +60,10 @@ const QnAList = () => {
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
-      <div className='goBeforePageBtn' onClick={() => navigate('/qna')}>
-        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      <div className='goBeforePageBtnBox'>
+        <div className='goBeforePageBtn' onClick={() => navigate('/qna')}>
+          <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+        </div>
       </div>
       <div className='qnatitle'>1 : 1 문의</div>
 
