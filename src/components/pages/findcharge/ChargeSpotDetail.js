@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faStar as filledStar,
+} from '@fortawesome/free-solid-svg-icons';
+import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons';
 import {
   Button,
   Dialog,
@@ -20,6 +24,7 @@ function ChargeSpotDetail() {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [warning, setWarning] = useState('');
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const navigate = useNavigate();
 
   // 더미 데이터
@@ -40,6 +45,10 @@ function ChargeSpotDetail() {
 
   const handleBackToList = () => {
     navigate('/findCharge');
+  };
+
+  const handleBookmarkToggle = () => {
+    setIsBookmarked((prev) => !prev);
   };
 
   const generateTimeSlots = () => {
@@ -79,14 +88,35 @@ function ChargeSpotDetail() {
       </div>
       <div className='page-title'>
         <h2>충전소 상세정보</h2>
-        <Button
-          onClick={handleReservation}
-          color='primary'
-          variant='contained'
-          className='reservation-button'
-        >
-          예약하기
-        </Button>
+        <div className='button-group'>
+          <Button
+            onClick={handleReservation}
+            color='primary'
+            variant='contained'
+            className='reservation-button'
+          >
+            예약하기
+          </Button>
+          <div
+            className={`bookmark-button ${isBookmarked ? 'bookmarked' : ''}`}
+            onClick={handleBookmarkToggle}
+          >
+            <FontAwesomeIcon
+              icon={isBookmarked ? filledStar : emptyStar}
+              className='star-icon'
+              style={{
+                fontSize: '24px',
+                transition: 'transform 0.3s, color 0.3s',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = 'scale(1.5)')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = 'scale(1.0)')
+              }
+            />
+          </div>
+        </div>
       </div>
 
       <div className='info-box'>
@@ -134,7 +164,7 @@ function ChargeSpotDetail() {
             <MenuItem value='charger1'>충전기 1</MenuItem>
             <MenuItem value='charger2'>충전기 2</MenuItem>
             <MenuItem value='charger3'>충전기 3</MenuItem>
-            <MenuItem value='charger3'>충전기 3</MenuItem>
+            <MenuItem value='charger4'>충전기 4</MenuItem>
           </TextField>
 
           <TextField

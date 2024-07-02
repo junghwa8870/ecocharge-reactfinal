@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import '../myInfo/MyInfo.scss';
+import './MyInfo.scss';
 
 const MyInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState('사용자 이름');
-  const [email, setEmail] = useState('user@example.com');
-  const [phone, setPhone] = useState('010-1234-5678');
+  const email = 'example@example.com';
+  const [phone, setPhone] = useState('010 - 1234 - 5678');
   const [password, setPassword] = useState('');
 
   const [originalUserName, setOriginalUserName] = useState(userName);
@@ -72,9 +72,11 @@ const MyInfo = () => {
         </>
       ) : (
         <>
-          <div className='userName'>{userName}</div>
-          <div className='userInfo'>이메일: {email}</div>
-          <div className='userInfo'>전화번호: {phone}</div>
+          <div className='userName'>
+            {userName} <span className='pageIndicator'>님의 마이페이지</span>
+          </div>
+          <div className='userInfo'>{email}</div>
+          <div className='userInfo'>{phone}</div>
           <button className='editProfileButton' onClick={handleEditProfile}>
             내 정보 수정
           </button>

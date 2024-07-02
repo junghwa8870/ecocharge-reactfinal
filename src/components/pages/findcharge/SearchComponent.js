@@ -3,19 +3,19 @@ import '../../../scss/SearchComponent.scss';
 
 function SearchComponent({ onSearch, params }) {
   const [filters, setFilters] = useState({
-    searchKey: null,
-    connector: null,
-    speed: null,
-    free: null,
-    parkingFree: null,
-    location: null,
-    availability: null,
-    publicAccess: null,
-    wheelchairAccess: null,
+    searchKey: '',
+    connector: '',
+    speed: '',
+    free: '',
+    parkingFree: '',
+    location: '',
+    availability: '',
+    publicAccess: '',
+    wheelchairAccess: '',
   });
 
   const handleChange = (e) => {
-    if (params !== null) {
+    if (params !== '') {
       setFilters(params);
     }
     const { name, value } = e.target;

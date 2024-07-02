@@ -36,7 +36,7 @@ const PageButton = ({ pageMaker, buttonCount, clickHandler, page }) => {
         />
       ))}
       {pageMaker.next && (
-        <Button onClick={() => clickHandler(pageMaker.page.pageNo - 1)}>
+        <Button onClick={() => clickHandler(pageMaker.page.pageNo + 1)}>
           {'>'}
         </Button>
       )}
