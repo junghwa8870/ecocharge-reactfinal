@@ -8,12 +8,13 @@ import {
 } from 'reactstrap';
 import './QnAList.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Paging from '../../../layout/Paging';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_BASE_URL, QNA } from '../../../../config/host-config';
+import axiosInstance from '../../../../config/axios-config';
+import PageButton from '../../pageButton/PageButton';
 
 const QnAList = () => {
   const requestUrl = API_BASE_URL + QNA;
@@ -23,6 +24,8 @@ const QnAList = () => {
     { name: '전기차 충전소', value: 'chargeSpot' },
     { name: '기타', value: 'etc' },
   ];
+  const [searchParams] = useSearchParams();
+  const page = parseInt(searchParams.get('page')) || 1;
 
   const [qnaData, setQnaData] = useState([]);
 
@@ -30,16 +33,35 @@ const QnAList = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const navigate = useNavigate(); // useNavigate 훅 사용
 
+  const [pageMaker, setPageMaker] = useState({});
+  const [pageButtonCount, setPageButtonCount] = useState(0);
+  const [pageNo, setPageNo] = useState(page);
+  const location = useLocation();
+
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category.name);
   };
 
-  const handleTdClick = () => {
+  const handleTdClick = async (qnaNo) => {
+    const res = await axiosInstance.get(requestUrl + `/${qnaNo}`);
+
+    console.log(res.data);
+
     alert(
       '비밀글은 본인만 확인 가능합니다.\n로그인을 하시고 이용해주시길 바랍니다.',
     );
+  };
+
+  const pageButtonClickHandler = (no) => {
+    console.log(location.state);
+    setPageNo(no);
+    if (location.pathname && pageNo !== no) {
+      navigate(`/qnalist?page=${no}`, {
+        state: { page: no },
+      });
+    }
   };
 
   const filteredQnaData =
@@ -47,15 +69,38 @@ const QnAList = () => {
       ? qnaData
       : qnaData.filter((qna) => qna.category === selectedCategory);
 
-  useEffect(() => {
-    const qnaListRenderingHandler = async () => {
-      const res = await axios.get(requestUrl);
+  const qnaListRenderingHandler = async () => {
+    let url = requestUrl;
+    if (location.data !== null) {
+      url += `?page=${page}`;
+    }
+    const res = await axios.get(url);
 
-      // console.log(res.data);
-      setQnaData(res.data.qnas);
+    // console.log(res.data);
+    setQnaData(res.data.qnas);
+    setPageMaker(res.data.pageMaker);
+    setPageButtonCount(res.data.pageMaker.end);
+  };
+
+  useEffect(() => {
+    qnaListRenderingHandler();
+  }, [location.state]);
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      console.log(location.state);
+      if (event.state.usr !== null) {
+        console.log('e.state: ', event.state);
+        setPageNo(event.state.usr.page);
+      } else {
+        setPageNo(1);
+      }
     };
 
-    qnaListRenderingHandler();
+    window.addEventListener('popstate', handleBackButton);
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
   }, []);
 
   return (
@@ -115,9 +160,9 @@ const QnAList = () => {
           <div
             key={qna.qnaNo}
             className='qnaListInnerBox'
-            onClick={handleTdClick}
+            onClick={() => handleTdClick(qna.qnaNo)}
           >
-            <div className='qlistNum'>{qna.qnaNo}</div>
+            <div className='qlistNum'>{qna.count}</div>
             <div className='qlistCategory'>{qna.qcategory}</div>
             <div className='qlistTitle'>{qna.qtitle}</div>
             {/* <div className='qlistWriter'>{qna.qwriter}</div> */}
@@ -133,7 +178,12 @@ const QnAList = () => {
           marginTop: '100px',
         }}
       >
-        <Paging />
+        <PageButton
+          pageMaker={pageMaker}
+          buttonCount={pageButtonCount}
+          clickHandler={pageButtonClickHandler}
+          page={pageNo}
+        />
       </div>
     </div>
   );
