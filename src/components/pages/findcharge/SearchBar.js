@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../../scss/SearchBar.scss';
+import Checkout from '../toss/Checkout';
 
 function SearchBar({ onSearch, params }) {
   const [searchType, setSearchType] = useState('주변충전소'); // 초기 검색 타입 설정
