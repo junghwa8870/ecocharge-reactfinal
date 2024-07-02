@@ -69,8 +69,10 @@ const WriteBoardForm = () => {
   return (
     <Grid className='WboardFormContainer'>
       <Grid className='WboardTop'>
-        <div className='WgoWriteBoardBtn' onClick={() => navigate('/board')}>
-          <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+        <div className='WgoWriteBoardBtnBox'>
+          <div className='WgoWriteBoardBtn' onClick={() => navigate('/board')}>
+            <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+          </div>
         </div>
 
         <h2 className='wBTitle'>게시글 작성</h2>
