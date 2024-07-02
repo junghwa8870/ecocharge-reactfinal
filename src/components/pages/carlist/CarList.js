@@ -5,12 +5,10 @@ import CarListItem from './carListItem/CarListItem';
 import axios from 'axios';
 import PageButton from '../pageButton/PageButton';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { API_BASE_URL, CAR_LIST } from '../../../config/host-config';
 
 const CarList = () => {
-  // 버튼 동작 확인용
-  const handleDetailClick = () => {
-    window.location.href = 'https://www.naver.com';
-  };
+  const baseUrl = API_BASE_URL + CAR_LIST;
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -30,11 +28,11 @@ const CarList = () => {
     setPageNo(no);
     if (location.pathname && pageNo !== no) {
       if (search === '') {
-        navigate(`/carList?page=${no}`, {
+        navigate(`${CAR_LIST}?page=${no}`, {
           state: { page: no, search },
         });
       } else {
-        navigate(`/carList?page=${no}&search=${search}`, {
+        navigate(`${CAR_LIST}?page=${no}&search=${search}`, {
           state: { page: no, search },
         });
       }
@@ -46,16 +44,18 @@ const CarList = () => {
     setSearchText(searchInput.value.trim());
     console.log(searchText.trim());
     setPageNo(1);
-    navigate(`/carList?page=1&search=${searchText.trim()}`, {
+    navigate(`${CAR_LIST}?page=1&search=${searchText.trim()}`, {
       state: { page, search: searchText.trim() },
     });
   };
 
   useEffect(() => {
     const handleBackButton = (event) => {
-      console.log(event.state.usr);
+      console.log(location.state);
       if (event.state.usr !== null) {
-        setPageNo(event.state.usr);
+        setPageNo(event.state.usr.page);
+      } else {
+        setPageNo(1);
       }
     };
 
@@ -66,7 +66,7 @@ const CarList = () => {
   }, []);
 
   const carListRendering = async () => {
-    const url = `http://localhost:8181/carList?pageNo=${pageNo}&search=${search}`;
+    const url = `${baseUrl}?pageNo=${pageNo}&search=${search}`;
     const res = await axios.get(url);
     try {
       setCarInfoList(res.data.subsidyCarList);
