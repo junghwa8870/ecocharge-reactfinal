@@ -19,8 +19,8 @@ const Checkout = () => {
           orderId: randomId,
           orderName: '결제 주문명', // 실제 주문명으로 교체
           customerName: '테스트', // 실제 고객명으로 교체
-          // successUrl: process.env.REACT_APP_TOSS_SUCCESS,
-          // failUrl: process.env.REACT_APP_TOSS_FAIL,
+          successUrl: 'http://localhost:3000/ChargeSpotDetail',
+          failUrl: 'http://localhost:3000/ChargeSpotDetail',
         });
       });
     }

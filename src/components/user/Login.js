@@ -52,6 +52,22 @@ const Login = () => {
       key,
       value: flag,
     });
+    key !== 'phoneNumberCheck' &&
+      dispatch({
+        type: 'SET_USER_VALUE',
+        key,
+        value: inputValue,
+      });
+    dispatch({
+      type: 'SET_MESSAGE',
+      key,
+      value: msg,
+    });
+    dispatch({
+      type: 'SET_CORRECT',
+      key,
+      value: flag,
+    });
   };
 
   // 각각의 핸들러에 붙어 있는 디바운스 함수를 일괄적 처리
@@ -253,8 +269,8 @@ const Login = () => {
       } else {
         alert('사용할 수 있는 아이디입니다.');
         flag = true;
-        debouncedUpdateState('idCheck', idValue, msg, flag);
       }
+      debouncedUpdateState('idCheck', idValue, msg, flag);
     } catch (error) {
       console.error('Error:', error);
       // 에러 처리
@@ -264,8 +280,11 @@ const Login = () => {
     if (!phoneNumber) {
       alert('핸드폰번호를 입력해주세요');
       return;
-    } else if (phoneNumber.length !== '11' && !phoneNumber.startsWith('010')) {
+    } else if (!phoneNumber.startsWith('010')) {
       alert("'-'을 제외한 번호를 입력해 주세요.");
+      return;
+    } else if (phoneNumber.length !== 11) {
+      alert('유효하지 않은 번호입니다.');
       return;
     }
     // 인증번호 전송 로직 추가 (예: API 호출)
@@ -291,6 +310,8 @@ const Login = () => {
   const handleVerifyCode = async (e) => {
     // 인증번호 확인 로직 추가 (예: API 호출)
     e.preventDefault();
+    let flag = false;
+    let msg = '';
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
@@ -307,6 +328,7 @@ const Login = () => {
 
       if (result) {
         alert('인증되었습니다.');
+        flag = true;
       } else {
         alert('인증에 실패했습니다');
       }
@@ -315,6 +337,7 @@ const Login = () => {
       console.error('Error verifying code:', error);
       alert('인증에 실패했습니다.');
     }
+    debouncedUpdateState('phoneNumberCheck', 'check', msg, flag);
   };
 
   const phonehandler = (e) => {
@@ -348,6 +371,7 @@ const Login = () => {
     for (let key in correct) {
       const flag = correct[key];
       console.log(key);
+      console.log(flag);
       if (!flag) return false;
     }
     return true;
@@ -386,18 +410,22 @@ const Login = () => {
     const userFormData = new FormData();
     userFormData.append('user', userJsonBlob);
 
-    const res = await fetch(API_BASE_URL + USER, {
-      method: 'POST',
-      body: userFormData,
-    });
+    try {
+      const res = await fetch(API_BASE_URL + USER, {
+        method: 'POST',
+        body: userFormData,
+      });
 
-    if (res.status === 200) {
-      const data = await res.json();
-      alert(`${data.userName}(${data.id})님 회원가입에 성공했습니다.`);
-      // 로그인 페이지로 리다이렉트
-      setShowModal(false);
-    } else {
-      alert('이미 가입 된 계정입니다.');
+      if (res.status === 200) {
+        const data = await res.json();
+        alert(`${data.userName}(${data.id})님 회원가입에 성공했습니다.`);
+        // 로그인 페이지로 리다이렉트
+        setShowModal(false);
+      } else {
+        alert('이미 가입 된 계정입니다.');
+      }
+    } catch {
+      alert('서버 오류');
     }
   };
 

@@ -1,6 +1,7 @@
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
 import React from 'react';
+import { API_BASE_URL } from '../../../config/host-config';
 
 const Success = () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -10,12 +11,12 @@ const Success = () => {
 
   async function confirm() {
     const requestData = {
-      paymentKey: paymentKey,
-      orderId: orderId,
-      amount: amount,
+      paymentKey,
+      orderId,
+      amount,
     };
 
-    const response = await fetch('/confirm', {
+    const response = await fetch(`/confirm`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

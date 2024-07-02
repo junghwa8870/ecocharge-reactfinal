@@ -4,6 +4,8 @@ export const initialState = {
     password: '',
     phoneNumber: '',
     id: '',
+    phoneNumberCheck: '',
+    idCheck: '',
   },
   message: {
     userName: '',
@@ -11,6 +13,8 @@ export const initialState = {
     passwordCheck: '',
     phoneNumber: '',
     id: '',
+    phoneNumberCheck: '',
+    idCheck: '',
   },
   correct: {
     userName: false,
@@ -18,6 +22,8 @@ export const initialState = {
     passwordCheck: false,
     phoneNumber: false,
     id: false,
+    phoneNumberCheck: false,
+    idCheck: false,
   },
 };
 
