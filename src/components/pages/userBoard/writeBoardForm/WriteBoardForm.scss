@@ -7,9 +7,14 @@
   padding: 2rem;
 
   .WboardTop {
+    .WgoWriteBoardBtnBox {
+      width: 100%;
+      margin: 0 auto;
+    }
     .WgoWriteBoardBtn {
       cursor: pointer;
       font-size: 20px;
+      width: 10%;
     }
 
     .wBTitle {

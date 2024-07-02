@@ -69,8 +69,9 @@
   /* .category-filter */
   .category-filter {
     display: flex;
-    justify-content: center; /* Center align items */
-    margin: 20px 0;
+    justify-content: center;
+    margin: 20px auto;
+    width: fit-content;
   }
 
   .category-button {
@@ -96,10 +97,26 @@
     color: white;
   }
 
-  .go-direct-question-button {
+  .questionButtonsBox {
+    display: flex;
+    width: 20%;
     position: absolute;
-    right: 350px;
-    top: 400px;
+    right: 280px;
+    top: 395px;
+    
+  }
+
+  .questionButtons {
+    display: flex;
+    
+    margin: 0 auto;
+    justify-content: end;
+  }
+
+  .go-direct-question-button {
+    // position: absolute;
+    // right: 350px;
+    // top: 400px;
     // background-color: rgb(145, 151, 223);
     background-color: #0d1245;
     // background-color: #9eb1c5;
@@ -122,36 +139,37 @@
   }
 }
 
+// .add-question-button {
+//   // position: absolute;
+//   // right: 460px;
+//   // top: 400px;
+//   // background-color: rgb(145, 151, 223);
+//   background-color: #0d1245;
+//   // background-color: #9eb1c5;
+//   color: white;
+//   padding: 10px 20px;
+//   font-size: 16px;
+//   border: none;
+//   cursor: pointer;
+//   outline: none;
+//   border-radius: 5px;
+//   transition: background-color 0.3s ease;
+
+//   &:hover {
+//     background-color: #0d124579;
+//   }
+
+//   &:active {
+//     background-color: #0d124569;
+//   }
+// }
+
 .add-question-button {
-  position: absolute;
-  right: 460px;
-  top: 400px;
-  // background-color: rgb(145, 151, 223);
-  background-color: #0d1245;
-  // background-color: #9eb1c5;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  // position: absolute;
+  // right: 460px;
+  // top: 400px;
 
-  &:hover {
-    background-color: #0d124579;
-  }
-
-  &:active {
-    background-color: #0d124569;
-  }
-}
-
-.add-question-button {
-  position: absolute;
-  right: 460px;
-  top: 400px;
-
+  margin-right: 10px;
   background-color: #9eb1c5;
   color: #fff;
   border: 1px solid #2f4f4f;

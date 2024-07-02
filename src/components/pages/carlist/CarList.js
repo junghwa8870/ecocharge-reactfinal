@@ -111,15 +111,20 @@ const CarList = () => {
         justifyContent: 'center',
       }}
     >
-      <Typography variant='h1' className='ecoCarTitle'>
-        구매보조금 지원 차종
-      </Typography>
+      <Grid className='carContainerHead'>
+        <Typography variant='h1' className='ecoCarTitle'>
+          구매보조금 지원 차종
+        </Typography>
+        <Typography variant='h5' className='ecoCarTcomment'>
+          보조금을 활용하여 경제적으로 차량을 구입하세요.
+        </Typography>
+      </Grid>
 
       <Grid
         item
         className='carbox'
         style={{
-          marginTop: '20px',
+          // marginTop: '20px',
           marginBottom: '100px',
         }}
       >
