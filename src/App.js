@@ -26,6 +26,7 @@ import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CheckoutPage } from './components/pages/toss/Checkout.js';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
+import FindIdPw from './components/user/FindIdPw.js';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path='/myquestionlist' element={<MyQuestionList />} />
           <Route path='/login' element={<Login />} />
           <Route path='/ChargeSpotDetail' element={<ChargeSpotDetail />} />
+          <Route path='/FindIdPw' element={<FindIdPw />} />
           <Route path='/oauth/kakao' element={<KakaoLoginHandler />} />
           <Route path='/oauth/naver' element={<NaverLoginHandler />} />
           <Route path='/oauth/google' element={<GoogleLoginHandler />} />
