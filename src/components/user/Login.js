@@ -200,10 +200,10 @@ const Login = () => {
       return;
     }
 
-    const { token, userName, role } = await res.data;
+    const { token, userName, role, phoneNumber } = await res.data;
 
     // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-    onLogin(token, userName, role);
+    onLogin(token, userName, role, phoneNumber);
 
     // 홈으로 리다이렉트
     navigate('/');
