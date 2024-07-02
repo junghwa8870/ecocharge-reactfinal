@@ -3,6 +3,7 @@ import { API_BASE_URL, USER } from '../../config/host-config';
 import AuthContext from '../../utils/AuthContext';
 
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const KakaoLoginHandler = () => {
   console.log(
@@ -20,12 +21,14 @@ const KakaoLoginHandler = () => {
 
   useEffect(() => {
     const kakaoLogin = async () => {
-      const res = await fetch(
+      const res = await axios.get(
         `${REQUEST_URL}/kakaologin?code=${code}&phoneNumber=${phoneNumber}`,
       );
       console.log(phoneNumber);
+      console.log(await res.data);
 
-      const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
+      const { token, userName, role } = await res.data; // 서버에서 온 json 읽기
+      console.log('token: ', token);
       onLogin(token, userName, role, phoneNumber);
 
       redirection('/');
