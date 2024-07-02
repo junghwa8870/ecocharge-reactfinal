@@ -1,9 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
+import {
+  AppBar,
+  Grid,
+  Toolbar,
+  Link as MuiLink,
+  Button,
+  styled,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
 import AuthContext from '../../utils/AuthContext';
 import { API_BASE_URL, USER } from '../../config/host-config';
+import zIndex from '@mui/material/styles/zIndex';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -102,8 +110,14 @@ const Header = () => {
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
               { to: '/board', text: '게시판' },
-              { to: '/myPage', text: '마이페이지' },
-              { to: '/qna', text: 'Q & A' },
+              isLoggedIn && { to: '/myPage', text: '마이페이지' },
+              {
+                to: '/qna',
+                text: 'Q & A',
+                style: {
+                  marginLeft: '-70px', // 예시로 추가한 스타일
+                },
+              },
             ].map((link, index) => (
               <MuiLink
                 key={index}
@@ -117,6 +131,9 @@ const Header = () => {
                 fontWeight='700'
                 textAlign='center'
                 paddingRight='80px'
+                style={{
+                  ...(link.style && !isLoggedIn ? link.style : {}), // isLoggedIn이 false이고, 링크에 style이 있으면 적용
+                }}
               >
                 {link.text}
               </MuiLink>
