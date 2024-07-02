@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './WriteBoardForm.scss';
 import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
 import { Grid } from '@mui/material';
@@ -13,6 +13,8 @@ const WriteBoardForm = () => {
   const REQUEST_URL = API_BASE_URL + BOARD;
 
   const [board, setBoard] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const [formData, setFormData] = useState({
     boardNo: '',
@@ -22,13 +24,21 @@ const WriteBoardForm = () => {
     bProfileImage: null,
   });
 
+  useEffect(() => {
+    const { bWriter, bTitle, bContent } = formData;
+    setIsFormValid(bWriter && bTitle && bContent && isChecked);
+  }, [formData, isChecked]);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
       [name]: files ? files[0] : value,
     });
-    console.log(value);
+  };
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
   };
 
   const fetchBoard = async () => {
@@ -120,11 +130,15 @@ const WriteBoardForm = () => {
         </FormGroup>
 
         <FormGroup check className='checkOuterBox'>
-          <Input type='checkbox' />{' '}
+          <Input
+            type='checkbox'
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />{' '}
           <Label check>상업적 광고나 홍보 글은 금지되어 있습니다.</Label>
         </FormGroup>
         <Grid className='WBFSbtnBox'>
-          <Button type='submit' className='WBFSbtn'>
+          <Button type='submit' className='WBFSbtn' disabled={!isFormValid}>
             작성 완료
           </Button>
         </Grid>
