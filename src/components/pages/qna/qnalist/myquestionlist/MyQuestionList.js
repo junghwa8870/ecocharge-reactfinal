@@ -72,7 +72,7 @@ const QnAList = () => {
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
       <div className='goBeforePageBtnBox'>
-        <div className='goBeforePageBtn' onClick={() => navigate('/qnalist')}>
+        <div className='goBeforePageBtn2' onClick={() => navigate('/qnalist')}>
           <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
         </div>
       </div>
