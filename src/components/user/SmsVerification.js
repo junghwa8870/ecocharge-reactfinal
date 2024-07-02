@@ -93,6 +93,7 @@ const SmsVerification = () => {
             name='phoneNumber'
             value={phoneNumber}
             onChange={handleChange}
+            placeholder="'-'을 제외한 핸드폰번호를 입력하세요."
           />
         </label>
         <button className='sendCodeBtn' type='submit'>
