@@ -54,6 +54,7 @@ function App() {
           <Route path='/oauth/naver' element={<NaverLoginHandler />} />
           <Route path='/oauth/google' element={<GoogleLoginHandler />} />
           <Route path='/sms' element={<SmsVerification />} />
+          <Route path='/toss' element={<test />} />
           {/*  */}
           {/* 필요한 다른 라우트 추가 */}
           <Route

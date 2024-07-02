@@ -16,6 +16,8 @@ import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
 import { Button } from 'bootstrap';
+import { loadTossPayments } from '@tosspayments/payment-sdk';
+
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const location = useLocation(); // useLocation 훅 사용
