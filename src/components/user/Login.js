@@ -16,6 +16,7 @@ import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
 import { Button } from 'bootstrap';
+import { Label } from 'reactstrap';
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const location = useLocation(); // useLocation 훅 사용
@@ -478,7 +479,7 @@ const Login = () => {
             <span className='close' onClick={handleCloseModal}>
               &times;
             </span>
-            <h2>SIGN UP</h2>
+            <h2 style={{ margin: '20px auto' }}>회원가입</h2>
             <form onSubmit={joinButtonClickHandler}>
               <div
                 className='thumbnail-box'
@@ -486,7 +487,12 @@ const Login = () => {
               ></div>
 
               <label>
-                <input type='text' placeholder='Name' onChange={nameHandler} />
+                <Label for='Uname'>이름</Label>
+                <input
+                  type='text'
+                  placeholder='2~5자 이내'
+                  onChange={nameHandler}
+                />
                 <br />
                 <span
                   style={
@@ -498,30 +504,35 @@ const Login = () => {
               </label>
 
               <label>
+                <Label for='Uid' style={{ marginBottom: '0' }}>
+                  아이디
+                </Label>
                 <input
                   type='text'
                   id='checkid'
-                  placeholder='UserId'
+                  placeholder='16자 이내'
                   style={{
-                    width: '200px',
+                    width: '300px',
                   }}
                   onChange={idHandler}
                 />
                 <button
+                  className='UidIn'
                   type='button'
                   onClick={idCheckHandler}
                   style={{
                     width: '135px',
                     height: '40px',
                     marginLeft: '10px',
-                    backgroundColor: '#007bff',
+                    backgroundColor: '#0d1245ab',
                     color: 'white',
                     border: 'none',
                     borderRadius: '5px',
                     cursor: 'pointer',
+                    fontWeight: 'bold',
                   }}
                 >
-                  ID 중복 확인
+                  중복 확인
                 </button>
                 <br />
                 <span
@@ -531,9 +542,10 @@ const Login = () => {
                 </span>
               </label>
               <label>
+                <Label for='Upw'>비밀번호</Label>
                 <input
                   type='password'
-                  placeholder='Password'
+                  placeholder='특수문자를 포함하여 8~16자 이내'
                   onChange={passwordHandler}
                 />
                 <br />
@@ -546,10 +558,11 @@ const Login = () => {
                 </span>
               </label>
               <label>
+                <Label for='Upw2'>비밀번호 확인</Label>
                 <input
                   type='password'
                   id='password-check'
-                  placeholder='Password Check'
+                  placeholder='다시 입력'
                   onChange={pwCheckHandler}
                 />
                 <br />
@@ -564,13 +577,32 @@ const Login = () => {
                 </span>
               </label>
               <label className='phone-verification'>
+                <Label
+                  for='UphoneNum'
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    marginBottom: '0',
+                  }}
+                >
+                  휴대전화번호
+                </Label>
                 <input
                   type='phoneNumber'
-                  placeholder='PhoneNum'
+                  placeholder='11자로 입력'
                   onChange={phonehandler}
                   id='phoneinput'
+                  style={{ width: '300px' }}
                 />
-                <button type='button' onClick={handleSendVerification}>
+                <button
+                  type='button'
+                  onClick={handleSendVerification}
+                  style={{
+                    width: '135px',
+                    marginLeft: '10px',
+                    fontWeight: 'bold',
+                  }}
+                >
                   인증번호 전송
                 </button>
               </label>
@@ -586,7 +618,19 @@ const Login = () => {
                 {message.phoneNumber}
               </span>
               {showVerificationInput && (
-                <label className='verification-code'>
+                <label
+                  className='verification-code'
+                  style={{ marginTop: '-25px' }}
+                >
+                  <Label
+                    for='confirmNum'
+                    style={{
+                      width: '100%',
+                      marginBottom: '0',
+                    }}
+                  >
+                    인증번호
+                  </Label>
                   <input
                     type='text'
                     placeholder='4자리'
@@ -597,7 +641,16 @@ const Login = () => {
                   </button>
                 </label>
               )}
-              <button type='submit'>SIGN UP</button>
+              <button
+                type='submit'
+                style={{
+                  fontWeight: 'bold',
+                  marginTop: '-10px',
+                  backgroundColor: '#0d1245',
+                }}
+              >
+                회원가입
+              </button>
             </form>
           </div>
         </div>
