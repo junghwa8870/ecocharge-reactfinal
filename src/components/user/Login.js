@@ -409,7 +409,12 @@ const Login = () => {
               placeholder='비밀번호 입력'
             />
           </label>
-          <button type='submit'>로그인</button>
+          <button
+            type='submit'
+            style={{ backgroundColor: '#0d1245', fontWeight: 'bold' }}
+          >
+            로그인
+          </button>
         </form>
       </div>
 
