@@ -151,15 +151,22 @@ const QnA = () => {
   return (
     <div className='qnacontainer'>
       <div className='qnatitle'>Q & A</div>
-      <button
-        className='add-question-button'
-        onClick={() => navigate('/writeqna')}
-      >
-        작성하기
-      </button>
-      <button className='go-direct-question-button' onClick={naviagteHandler}>
-        1:1 문의
-      </button>
+      <div className='questionButtonsBox'>
+        <div className='questionButtons'>
+          <button
+            className='add-question-button'
+            onClick={() => navigate('/writeqna')}
+          >
+            작성하기
+          </button>
+          <button
+            className='go-direct-question-button'
+            onClick={() => navigate('/qnalist')}
+          >
+            1:1 문의
+          </button>
+        </div>
+      </div>
 
       <CategoryFilter
         categories={categories}

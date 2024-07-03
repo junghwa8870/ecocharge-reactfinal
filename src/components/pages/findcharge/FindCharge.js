@@ -50,7 +50,11 @@ function FindCharge() {
   const handleSearch = (params) => {
     setSearchParams(params);
     setVisible(Object.values(params).some((value) => value !== null));
-    if (params.searchKey !== null) {
+    if (
+      params.searchKey !== null &&
+      params.searchKey !== '' &&
+      params.searchKey !== undefined
+    ) {
       console.log(params.searchKey);
       setAddr(params.searchKey);
     }

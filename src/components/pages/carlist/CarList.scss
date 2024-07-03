@@ -15,6 +15,18 @@
     height: fit-content;
   }
 
+  .ecoCarTcomment {
+    width: 90%;
+    height: 20px;
+    font-size: 17px;
+    margin: 20px auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(82, 80, 80);
+    font-weight: 600;
+  }
+
   .carbox {
     width: 90%;
     height: 80%;
@@ -28,7 +40,9 @@
   flex-wrap: wrap; // flex-wrap을 사용하여 아이템을 여러 줄로 배치
   margin-top: 50px;
   gap: 12.5%; // 아이템 사이에 간격 추가
-  row-gap: 50px;
+  row-gap: 80px;
+  width: 80% !important;
+  margin: 50px auto !important;
 }
 
 .carName {

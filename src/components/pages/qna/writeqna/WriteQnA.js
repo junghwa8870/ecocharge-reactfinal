@@ -26,8 +26,10 @@ const WriteQnA = () => {
 
   return (
     <div className='qnaWriteContainer' style={{ padding: '2rem' }}>
-      <div className='goQnatBtn' onClick={() => navigate('/qna')}>
-        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      <div className='goQnatBtnBox'>
+        <div className='goQnatBtn' onClick={() => navigate('/qna')}>
+          <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+        </div>
       </div>
       <h2 className='qWriteTitle'>새 글 작성</h2>
       {/* <Button
