@@ -1,17 +1,11 @@
 import React, { useContext, useState } from 'react';
-import {
-  AppBar,
-  Grid,
-  Toolbar,
-  Link as MuiLink,
-  Button,
-  styled,
-} from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
 import AuthContext from '../../utils/AuthContext';
 import { API_BASE_URL, USER } from '../../config/host-config';
-import zIndex from '@mui/material/styles/zIndex';
+import axiosInstance from '../../config/axios-config';
+import handleRequest from '../../utils/handleRequest';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,19 +18,30 @@ const Header = () => {
 
   // 로그아웃 핸들러
   const logoutHandler = async () => {
-    const res = await fetch(`${API_BASE_URL}${USER}/logout`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN'),
-      },
-    });
-
-    console.log(res);
-
-    if (res.status === 200) {
+    const onSuccess = () => {
       onLogout();
       navigate('/login');
-    }
+    };
+
+    handleRequest(
+      () => axiosInstance.get(`${API_BASE_URL}${USER}/logout`),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
+  };
+
+  const naviagteHandler = async () => {
+    const onSuccess = () => {
+      navigate('/myPage');
+    };
+
+    handleRequest(
+      () => axiosInstance.get(`${API_BASE_URL}${USER}/validate`),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
   };
 
   return (
@@ -110,14 +115,8 @@ const Header = () => {
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
               { to: '/board', text: '게시판' },
-              isLoggedIn && { to: '/myPage', text: '마이페이지' },
-              {
-                to: '/qna',
-                text: 'Q & A',
-                style: {
-                  marginLeft: '-70px', // 예시로 추가한 스타일
-                },
-              },
+              { text: '마이페이지', onClick: naviagteHandler },
+              { to: '/qna', text: 'Q & A' },
             ].map((link, index) => (
               <MuiLink
                 key={index}
@@ -131,9 +130,7 @@ const Header = () => {
                 fontWeight='700'
                 textAlign='center'
                 paddingRight='80px'
-                style={{
-                  ...(link.style && !isLoggedIn ? link.style : {}), // isLoggedIn이 false이고, 링크에 style이 있으면 적용
-                }}
+                onClick={link.onClick}
               >
                 {link.text}
               </MuiLink>

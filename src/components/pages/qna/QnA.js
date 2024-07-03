@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './QnA.scss';
 import CategoryFilter from './CategoryFilter';
 import { useNavigate } from 'react-router-dom';
+import handleRequest from '../../../utils/handleRequest';
+import axiosInstance from '../../../config/axios-config';
+import { API_BASE_URL, USER } from '../../../config/host-config';
+import AuthContext from '../../../utils/AuthContext';
 
 const categories = [
   {
@@ -89,6 +93,7 @@ const QnA = () => {
   const [category, setCatecory] = useState('all');
   const [cardOnOff, setCardOnOff] = useState(qnaList);
   const [showList, setShowList] = useState(qnaList);
+  const { onLogout } = useContext(AuthContext);
 
   const getQnACard = (item, index) => {
     return (
@@ -130,6 +135,19 @@ const QnA = () => {
 
   const navigate = useNavigate();
 
+  const naviagteHandler = async () => {
+    const onSuccess = () => {
+      navigate('/qnalist');
+    };
+
+    handleRequest(
+      () => axiosInstance.get(`${API_BASE_URL}${USER}/validate`),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
+  };
+
   return (
     <div className='qnacontainer'>
       <div className='qnatitle'>Q & A</div>
@@ -139,10 +157,7 @@ const QnA = () => {
       >
         작성하기
       </button>
-      <button
-        className='go-direct-question-button'
-        onClick={() => navigate('/qnalist')}
-      >
+      <button className='go-direct-question-button' onClick={naviagteHandler}>
         1:1 문의
       </button>
 

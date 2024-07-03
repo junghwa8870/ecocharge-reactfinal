@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './UserBoard.scss';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { API_BASE_URL, BOARD } from '../../../config/host-config';
+import {
+  API_BASE_URL,
+  BOARD,
+  BOARD_REPLY,
+  USER,
+} from '../../../config/host-config';
+import axiosInstance from '../../../config/axios-config';
+import { dark } from '@mui/material/styles/createPalette';
+
 import { Grid } from '@mui/material';
 import { Button, Table } from 'reactstrap';
 import axios from 'axios';
+import handleRequest from '../../../utils/handleRequest';
+import AuthContext from '../../../utils/AuthContext';
 import PageButton from '../pageButton/PageButton';
 
 const UserBoard = () => {
@@ -13,11 +23,12 @@ const UserBoard = () => {
   const page = parseInt(searchParams.get('page')) || 1;
 
   const [boardList, setBoardList] = useState([]);
+  const { onLogout } = useContext(AuthContext);
+
   const [pageMaker, setPageMaker] = useState({});
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
   const location = useLocation();
-
   const pageButtonClickHandler = (no) => {
     console.log(location.state);
     setPageNo(no);
@@ -27,7 +38,6 @@ const UserBoard = () => {
       });
     }
   };
-
   const getBoardList = async () => {
     console.log(location.state);
     let requestUrl = API_BASE_URL + BOARD;
@@ -47,6 +57,17 @@ const UserBoard = () => {
     }
   };
 
+  const writeBoardFormHandler = async () => {
+    const onSuccess = () => {
+      navigate('/writeBoardForm');
+    };
+    handleRequest(
+      () => axiosInstance.get(`${API_BASE_URL}${USER}/validate`),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
+  };
   useEffect(() => {
     const handleBackButton = (event) => {
       console.log(location.state);
@@ -88,10 +109,7 @@ const UserBoard = () => {
           </div>
         </div>
         <div className='goBWriteBtnbox'>
-          <Button
-            className='goBwriteForm'
-            onClick={() => navigate('/writeBoardForm')}
-          >
+          <Button className='goBwriteForm' onClick={writeBoardFormHandler}>
             작성하기
           </Button>
         </div>
