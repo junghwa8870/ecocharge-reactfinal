@@ -198,6 +198,11 @@ const Login = () => {
 
       console.log(res.data);
 
+      const { token, userName, role, phoneNumber } = await res.data;
+
+      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+      onLogin(token, userName, role, phoneNumber);
+
       if (res.status === 400) {
         console.log('400에러표시');
         const { error } = res.data;
@@ -207,10 +212,9 @@ const Login = () => {
         alert('Invalid credentials'); // 인증 예외 처리
         return;
       }
-      const { token, userName, role } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, role);
+      onLogin(token, userName, role, phoneNumber);
 
       // 홈으로 리다이렉트
       navigate('/');
