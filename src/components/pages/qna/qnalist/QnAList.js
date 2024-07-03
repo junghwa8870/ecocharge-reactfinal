@@ -167,8 +167,8 @@ const QnAList = () => {
             <div className='qlistNum'>{qna.count}</div>
             <div className='qlistCategory'>{qna.qcategory}</div>
             <div className='qlistTitle'>{qna.qtitle}</div>
-            {/* <div className='qlistWriter'>{qna.qwriter}</div> */}
-            {/* <div className='qlistDate'>{qna.date}</div> */}
+            <div className='qlistWriter'>{qna.qwriter}</div>
+            <div className='qlistDate'>{qna.date}</div>
           </div>
         ))}
       </div>

@@ -179,34 +179,49 @@ const Login = () => {
       }),
     });
     */
-
-    const data = JSON.stringify({
-      id: $id,
-      password: $password,
-    });
-    console.log($id);
-    console.log($password);
-
-    const res = await axios.post(`${API_BASE_URL}${USER}/signin`, data, {
-      headers: { 'content-type': 'application/json' },
-      // url, 넣을 데이터
-    });
-
-    console.log(res.data);
-
-    if (res.status === 400) {
-      const text = await res.text();
-      alert(text);
+    if ($password === '') {
+      alert('비밀번호를 입력해 주세요.');
       return;
     }
+    try {
+      const data = JSON.stringify({
+        id: $id,
+        password: $password,
+      });
+      console.log($id);
+      console.log($password);
 
-    const { token, userName, role } = await res.data;
+      const res = await axios.post(`${API_BASE_URL}${USER}/signin`, data, {
+        headers: { 'content-type': 'application/json' },
+        // url, 넣을 데이터
+      });
 
-    // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-    onLogin(token, userName, role);
+      console.log(res.data);
 
-    // 홈으로 리다이렉트
-    navigate('/');
+      const { token, userName, role, phoneNumber } = await res.data;
+
+      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+      onLogin(token, userName, role, phoneNumber);
+
+      if (res.status === 400) {
+        console.log('400에러표시');
+        const { error } = res.data;
+        alert(error); // 백엔드에서 반환한 예외 메시지를 표시
+        return;
+      } else if (res.status === 401) {
+        alert('Invalid credentials'); // 인증 예외 처리
+        return;
+      }
+
+      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+      onLogin(token, userName, role, phoneNumber);
+
+      // 홈으로 리다이렉트
+      navigate('/');
+    } catch (error) {
+      console.log('Login error:', error);
+      alert('잘못된 비밀번호 입니다.');
+    }
   };
 
   const handleSignup = () => {

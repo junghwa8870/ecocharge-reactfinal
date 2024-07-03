@@ -17,6 +17,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import '../../../scss/ChargeSpotDetail.scss';
+import Checkout from '../toss/Checkout';
 
 function ChargeSpotDetail() {
   const [open, setOpen] = useState(false);
@@ -204,9 +205,7 @@ function ChargeSpotDetail() {
           </TextField>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handlePayment} color='primary' disabled={!!warning}>
-            예약하기
-          </Button>
+          <Checkout />
           <Button onClick={handleClose} color='primary'>
             닫기
           </Button>

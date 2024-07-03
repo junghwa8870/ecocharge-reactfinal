@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './WriteBoardForm.scss';
 import { Button, Form, FormGroup, FormText, Input, Label } from 'reactstrap';
 import { Grid } from '@mui/material';
@@ -7,10 +7,14 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL, BOARD } from '../../../../config/host-config';
 import axios from 'axios';
+import handleRequest from '../../../../utils/handleRequest';
+import axiosInstance from '../../../../config/axios-config';
+import AuthContext from '../../../../utils/AuthContext';
 
 const WriteBoardForm = () => {
   const navigate = useNavigate();
   const REQUEST_URL = API_BASE_URL + BOARD;
+  const { onLogout } = useContext(AuthContext);
 
   const [board, setBoard] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -51,19 +55,30 @@ const WriteBoardForm = () => {
       data.append('bProfileImage', formData.bProfileImage);
     }
 
-    try {
-      const res = await axios.post(REQUEST_URL, data);
-      setBoard(res.data);
-      navigate('/board');
-    } catch (error) {
-      alert(error.response.data);
-    }
+    const onSuccess = (data) => {
+      setBoard(data);
+      alert('등록되었습니다.');
+    };
+
+    handleRequest(
+      () => axiosInstance.post(REQUEST_URL, data),
+      onSuccess,
+      onLogout,
+      navigate,
+    );
+
+    // try {
+    //   const res = await axios.post(REQUEST_URL, data);
+    //   setBoard(res.data);
+    //   navigate('/board');
+    // } catch (error) {
+    //   alert(error.response.data);
+    // }
   };
 
   const boardHandler = (e) => {
     e.preventDefault();
     fetchBoard();
-    alert('등록 되었습니다.');
   };
 
   return (

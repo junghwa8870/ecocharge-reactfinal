@@ -24,8 +24,8 @@ import { AuthContextProvider } from './utils/AuthContext.js';
 import WriteBoardForm from './components/pages/userBoard/writeBoardForm/WriteBoardForm.js';
 import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBoardDetail.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CheckoutPage } from './components/pages/toss/Checkout.js';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
+import Checkout from './components/pages/toss/Checkout.js';
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
           <Route path='/oauth/naver' element={<NaverLoginHandler />} />
           <Route path='/oauth/google' element={<GoogleLoginHandler />} />
           <Route path='/sms' element={<SmsVerification />} />
-          <Route path='/toss' element={<CheckoutPage />}></Route>
+          <Route path='/toss' element={<Checkout />}></Route>
           {/*  */}
           {/* 필요한 다른 라우트 추가 */}
           <Route
