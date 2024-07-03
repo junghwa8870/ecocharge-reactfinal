@@ -27,9 +27,9 @@ const Service = () => {
           'Content-Type': 'application/json',
         },
         json: {
-          orderId: orderId,
-          amount: amount,
-          paymentKey: paymentKey,
+          orderId,
+          amount,
+          paymentKey,
         },
         responseType: 'json',
       })

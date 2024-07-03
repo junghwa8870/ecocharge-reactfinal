@@ -1,17 +1,9 @@
-import React, { useContext, useState } from 'react';
-import {
-  AppBar,
-  Grid,
-  Toolbar,
-  Link as MuiLink,
-  Button,
-  styled,
-} from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
 import AuthContext from '../../utils/AuthContext';
 import { API_BASE_URL, USER } from '../../config/host-config';
-import zIndex from '@mui/material/styles/zIndex';
 
 const Header = () => {
   const navigate = useNavigate();
