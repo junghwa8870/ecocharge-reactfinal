@@ -8,9 +8,16 @@
     // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
 
+    .goQnatBtnBox {
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .goQnatBtn {
       cursor: pointer;
       font-size: 20px;
+      width: 10%;
+      
     }
 
     .qWriteTitle {

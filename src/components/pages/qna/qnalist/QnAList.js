@@ -105,8 +105,10 @@ const QnAList = () => {
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
-      <div className='goBeforePageBtn' onClick={() => navigate('/qna')}>
-        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      <div className='goBeforePageBtnBox'>
+        <div className='goBeforePageBtn1' onClick={() => navigate('/qna')}>
+          <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+        </div>
       </div>
       <div className='qnatitle'>1 : 1 문의</div>
 
@@ -165,8 +167,8 @@ const QnAList = () => {
             <div className='qlistNum'>{qna.count}</div>
             <div className='qlistCategory'>{qna.qcategory}</div>
             <div className='qlistTitle'>{qna.qtitle}</div>
-            {/* <div className='qlistWriter'>{qna.qwriter}</div> */}
-            {/* <div className='qlistDate'>{qna.date}</div> */}
+            <div className='qlistWriter'>{qna.qwriter}</div>
+            <div className='qlistDate'>{qna.date}</div>
           </div>
         ))}
       </div>

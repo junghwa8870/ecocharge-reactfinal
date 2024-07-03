@@ -66,6 +66,7 @@ axiosInstance.interceptors.response.use(
         if (res.status === 200) {
           // ${USER_URL}/refresh 요청이 성공했다면 서버가 넘겨준 새로운 accessToken을 json에서 꺼내기.
           const { accessToken } = res.data; // axios는 json()함수 안씁니다. data라고 하면 json 객체 바로 리턴.
+          console.log(accessToken);
           localStorage.setItem('ACCESS_TOKEN', accessToken); // 동일한 이름으로 localStorage에 담자.
           // 실패한 원본 요청 정보에서 Authorization의 값을 새 토큰으로 바꿔주자.
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;

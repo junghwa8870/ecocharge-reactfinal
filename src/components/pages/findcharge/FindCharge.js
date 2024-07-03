@@ -4,8 +4,9 @@ import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임�
 import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
 import '../findcharge/ChargeSpotDetail';
-import { Container as MapDiv } from 'react-naver-maps';
+import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
 import NaverMapApi from './NaverMapApi';
+import axios from 'axios';
 // import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
 
 function FindCharge() {
@@ -16,6 +17,7 @@ function FindCharge() {
     mapLng: null,
   });
   const navigator = window.navigator;
+  const [addr, setAddr] = useState('');
 
   useEffect(() => {
     function getLocation() {
@@ -48,6 +50,14 @@ function FindCharge() {
   const handleSearch = (params) => {
     setSearchParams(params);
     setVisible(Object.values(params).some((value) => value !== null));
+    if (
+      params.searchKey !== null &&
+      params.searchKey !== '' &&
+      params.searchKey !== undefined
+    ) {
+      console.log(params.searchKey);
+      setAddr(params.searchKey);
+    }
   };
 
   return (
@@ -70,7 +80,12 @@ function FindCharge() {
         </div>
         <div className='map-area'>
           <MapDiv>
-            <NaverMapApi lat={mapLat} lng={mapLng} />
+            <NaverMapApi
+              lat={mapLat}
+              lng={mapLng}
+              addr={addr}
+              setGeometricData={setGeometricData}
+            />
           </MapDiv>
         </div>
       </div>

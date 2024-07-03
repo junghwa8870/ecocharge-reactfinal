@@ -55,7 +55,7 @@ const QuestionForm = () => {
       category, // Include category in form data
     };
     console.log(questionFormData);
-    navigate('/qnalist');
+    navigate('/myquestionlist');
   };
 
   // const handleBack = () => {
@@ -64,11 +64,13 @@ const QuestionForm = () => {
 
   return (
     <div className='QquestionWriteContainer' style={{ padding: '2rem' }}>
-      <div
-        className='gomyquestionlistBtn'
-        onClick={() => navigate('/myquestionlist')}
-      >
-        <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+      <div className='gomyquestionlistBtnBox'>
+        <div
+          className='gomyquestionlistBtn'
+          onClick={() => navigate('/qnalist')}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
+        </div>
       </div>
 
       <h2 className='questionWriteTitle'>1:1 문의</h2>

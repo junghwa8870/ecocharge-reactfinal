@@ -216,6 +216,11 @@ const Login = () => {
 
       console.log(res.data);
 
+      const { token, userName, role, phoneNumber } = await res.data;
+
+      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
+      onLogin(token, userName, role, phoneNumber);
+
       if (res.status === 400) {
         console.log('400에러표시');
         const { error } = res.data;
@@ -225,10 +230,9 @@ const Login = () => {
         alert('Invalid credentials'); // 인증 예외 처리
         return;
       }
-      const { token, userName, role } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, role);
+      onLogin(token, userName, role, phoneNumber);
 
       // 홈으로 리다이렉트
       navigate('/');
@@ -240,6 +244,10 @@ const Login = () => {
 
   const handleSignup = () => {
     setShowModal(true);
+  };
+
+  const handleFind = () => {
+    navigate('/findIdPw');
   };
 
   const handleCloseModal = () => {
@@ -431,47 +439,45 @@ const Login = () => {
 
   return (
     <div className='login-container'>
-      <h2>LOGIN</h2>
+      <h2>로그인</h2>
 
       <div className='regular-login-section'>
         <form onSubmit={handleRegularLogin}>
           <label>
-            <input type='text' name='id' id='id' placeholder='Id' />
+            <input type='text' name='id' id='id' placeholder='아이디 입력' />
           </label>
           <label>
             <input
               type='password'
               name='password'
               id='password'
-              placeholder='Password'
+              placeholder='비밀번호 입력'
             />
           </label>
-          <button type='submit'>SIGN IN</button>
+          <button
+            type='submit'
+            style={{ backgroundColor: '#0d1245', fontWeight: 'bold' }}
+          >
+            로그인
+          </button>
         </form>
-      </div>
-
-      <div className='signup-section'>
-        <p>Forgot your password?</p>
-        <button className='signup-button' onClick={handleSignup}>
-          SIGN UP
-        </button>
       </div>
 
       <div className='social-login-images'>
         <button
-          className='social-login-button'
+          className='social-login-button1'
           onClick={() => handleSocialLogin(KAKAO_AUTH_URL)}
         >
-          <img src={'kakaoLogo.png'} className='social-icon' alt='kakao' />
+          <img src={'kakaoLogo.png'} className='social-icon1' alt='kakao' />
         </button>
         <button
-          className='social-login-button'
+          className='social-login-button2'
           onClick={() => handleSocialLogin(NAVER_AUTH_URL)}
         >
-          <img src={'naverLogo.png'} className='social-icon' alt='naver' />
+          <img src={'naverLogo.png'} className='social-icon2' alt='naver' />
         </button>
         <button
-          className='social-login-button google-login-button'
+          className='social-login-button1 google-login-button'
           onClick={() => handleSocialLogin(GOOGLE_AUTH_URL)}
         >
           <img
@@ -481,6 +487,19 @@ const Login = () => {
           />
           구글 로그인
         </button>
+      </div>
+
+      <div className='signup-section'>
+        <p>⊙ 신규회원자라면 회원가입 후 이용해 주세요.</p>
+        <a className='signup-button' onClick={handleSignup}>
+          회원가입하기
+        </a>
+      </div>
+      <div className='find-section'>
+        <p>⊙ 로그인 정보를 분실하셨나요?</p>
+        <a className='find-button' onClick={handleFind}>
+          아이디/비밀번호 찾기
+        </a>
       </div>
 
       {showModal && (
