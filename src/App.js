@@ -26,6 +26,7 @@ import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBo
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
 import Checkout from './components/pages/toss/Checkout.js';
+import End from './components/pages/toss/End.js';
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
           <Route path='/oauth/naver' element={<NaverLoginHandler />} />
           <Route path='/oauth/google' element={<GoogleLoginHandler />} />
           <Route path='/sms' element={<SmsVerification />} />
-          <Route path='/toss' element={<Checkout />}></Route>
+          <Route path='/success' element={<End />}></Route>
           {/*  */}
           {/* 필요한 다른 라우트 추가 */}
           <Route
