@@ -60,7 +60,8 @@
         
         .feature1 {
             width: 40%;
-            height: 100%;
+            height: 110%;
+            border-radius: 50%;
         }
 
         .mini-car-box {
@@ -76,13 +77,22 @@
             height: 200px;
             margin-right: 50px;
             margin-left: 10px;
+            transition: transform 0.3s ease;
             
         }
         .feature3 {
             width: 50%;
             height: 200px;
+            transition: transform 0.3s ease;
         }
+
+        
     }
+
+    .mini-car-box .feature2:hover,
+    .mini-car-box .feature3:hover {
+    transform: scale(1.2); 
+}
     }
 }
 

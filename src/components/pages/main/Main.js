@@ -41,6 +41,7 @@ const Main = () => {
         justifyContent: 'center',
         opacity: imagesLoaded ? 1 : 0,
         transition: 'opacity 2s ease-in-out',
+        background: 'floralwhite',
       }}
     >
       <SimpleSlider />
