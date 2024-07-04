@@ -26,6 +26,7 @@ function ChargeSpotDetail() {
   const [endTime, setEndTime] = useState('');
   const [warning, setWarning] = useState('');
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [review, setReview] = useState('');
   const navigate = useNavigate();
 
   // 더미 데이터
@@ -39,9 +40,9 @@ function ChargeSpotDetail() {
     setOpen(false);
   };
 
-  const handlePayment = () => {
-    console.log('결제 요청 진행');
-    setOpen(false);
+  const handleSubmitReview = () => {
+    // 이용후기 제출 로직 ㄱㄱ
+    console.log('이용후기가 등록되었습니다 :', review);
   };
 
   const handleBackToList = () => {
@@ -122,7 +123,30 @@ function ChargeSpotDetail() {
 
       <div className='info-box'>
         <h3>충전소 위치 지도</h3>
-        <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
+        <div className='map-review-container'>
+          <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
+          <div className='review-input-container'>
+            <h3>이용후기 작성하기</h3>
+            <TextField
+              label='이용 후기'
+              multiline
+              rows={6}
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              variant='outlined'
+              fullWidth
+              style={{ marginTop: '20px' }}
+            />
+            <Button
+              variant='contained'
+              color='primary'
+              style={{ marginTop: '20px' }}
+              onClick={handleSubmitReview}
+            >
+              등록
+            </Button>
+          </div>
+        </div>
       </div>
 
       <div className='charge-spot-detail-content'>
