@@ -19,19 +19,19 @@ export const AuthContextProvider = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role, phoneNumber) => {
+  const loginHandler = (token, userName, role, phoneNumber, userId) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
     // 2. 세션 스토리지 - 브라우저가 종료 되면 사라짐.
     console.log(token);
     localStorage.setItem('ACCESS_TOKEN', token.access_token);
     localStorage.setItem('REFRESH_TOKEN', token.refresh_token);
+    localStorage.setItem('USER_ID', userId);
     setIsLoggedIn(true);
     setUserName(userName);
     setRole(role);
     setPhoneNumber(phoneNumber);
-    console.log(userName);
-    console.log(phoneNumber);
+    console.log(userId);
   };
 
   // 로그아웃 핸들러

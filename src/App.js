@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './components/layout/Header.js';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import CarList from './components/pages/carlist/CarList.js';
@@ -20,7 +20,7 @@ import GoogleLoginHandler from './components/user/GoogleLoginHandler.js';
 import QnAList from './components/pages/qna/qnalist/QnAList.js';
 import QuestionForm from './components/pages/qna/qnalist/questionform/QuestionForm.js';
 import MyQuestionList from './components/pages/qna/qnalist/myquestionlist/MyQuestionList.js';
-import { AuthContextProvider } from './utils/AuthContext.js';
+import AuthContext, { AuthContextProvider } from './utils/AuthContext.js';
 import WriteBoardForm from './components/pages/userBoard/writeBoardForm/WriteBoardForm.js';
 import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBoardDetail.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,6 +30,8 @@ import End from './components/pages/toss/End.js';
 import FindIdPw from './components/user/FindIdPw.js';
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <AuthContextProvider>
       {/* <Favicon url='/favicon-32x32.png' /> */}

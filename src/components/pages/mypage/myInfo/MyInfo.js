@@ -267,14 +267,17 @@ const MyInfo = () => {
   // 렌더링 핸들러
   useEffect(() => {
     const renderingMyInfo = async () => {
-      console.log(phoneNumber);
       handleRequest(
         () =>
-          axiosInstance.post(`${API_BASE_URL}${USER}/myPage`, phoneNumber, {
-            headers: {
-              'Content-Type': 'text/plain',
+          axiosInstance.post(
+            `${API_BASE_URL}${USER}/myPage`,
+            localStorage.getItem('USER_ID'),
+            {
+              headers: {
+                'Content-Type': 'text/plain',
+              },
             },
-          }),
+          ),
         (data) => {
           setUserName(data.userName);
           setPhone(data.phoneNumber);
