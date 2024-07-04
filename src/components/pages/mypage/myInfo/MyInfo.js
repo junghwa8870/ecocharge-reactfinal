@@ -268,7 +268,7 @@ const MyInfo = () => {
   useEffect(() => {
     const renderingMyInfo = async () => {
       console.log(phoneNumber);
-      handleRequest(
+      await handleRequest(
         () =>
           axiosInstance.post(`${API_BASE_URL}${USER}/myPage`, phoneNumber, {
             headers: {
@@ -286,8 +286,10 @@ const MyInfo = () => {
         navigate,
       );
     };
-    renderingMyInfo();
-  }, [setUserName, setPhone, setPassword, setOriginalPhone]);
+    if (phoneNumber !== null) {
+      renderingMyInfo();
+    }
+  }, [userName, phone, password, originalPhone]);
 
   return (
     <div className='infoContainer'>

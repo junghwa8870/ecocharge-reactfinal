@@ -49,7 +49,9 @@ function App() {
           <Route path='/newInfoWrite' element={<NewInfoWrite />} /> */}
           <Route path='/board' element={<UserBoard />} />
           <Route path='/board/detail' element={<UserBoardDetail />} />
-          <Route path='/writeBoardForm' element={<WriteBoardForm />} />
+          <Route element={<PrivateRoute />}>
+            <Route path='/writeBoardForm' element={<WriteBoardForm />} />
+          </Route>
           <Route element={<PrivateRoute />}>
             <Route path='/myPage' element={<MyPage />} />
           </Route>
