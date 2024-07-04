@@ -1,14 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Header from './components/layout/Header.js';
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useNavigate,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import CarList from './components/pages/carlist/CarList.js';
 import FindCharge from './components/pages/findcharge/FindCharge.js';
-import NewInfo from './components/pages/newinfo/NewInfo.js';
 import MyPage from './components/pages/mypage/MyPage.js';
 import QnA from './components/pages/qna/QnA.js';
 import Login from './components/user/Login.js';
@@ -29,14 +23,11 @@ import WriteBoardForm from './components/pages/userBoard/writeBoardForm/WriteBoa
 import UserBoardDetail from './components/pages/userBoard/userBoardDetail/UserBoardDetail.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserBoard from './components/pages/userBoard/UserBoard.js';
-import Checkout from './components/pages/toss/Checkout.js';
 import End from './components/pages/toss/End.js';
 import FindIdPw from './components/user/FindIdPw.js';
 
 import PrivateRoute from './config/PrivateRoute.js';
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
-
   return (
     <AuthContextProvider>
       {/* <Favicon url='/favicon-32x32.png' /> */}

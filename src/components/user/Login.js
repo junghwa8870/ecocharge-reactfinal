@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useNavigate, useLocation, Await } from 'react-router-dom'; // useLocation 추가
+import { useNavigate } from 'react-router-dom'; // useLocation 추가
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
@@ -15,17 +15,14 @@ import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
-import { Button } from 'bootstrap';
-import { loadTossPayments } from '@tosspayments/payment-sdk';
 
 import { Label } from 'reactstrap';
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
-  const location = useLocation(); // useLocation 훅 사용
   const [showModal, setShowModal] = useState(false);
   const [showVerificationInput, setShowVerificationInput] = useState(false);
   const [state, dispatch] = useReducer(joinReducer, initialState);
-  const { onLogin, isLoggedIn } = useContext(AuthContext);
+  const { onLogin } = useContext(AuthContext);
   const handleSocialLogin = (authUrl) => {
     navigate('/sms', { state: { redirectUrl: authUrl } }); // 페이지 이동 처리
   };

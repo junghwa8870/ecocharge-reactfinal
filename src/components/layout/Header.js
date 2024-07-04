@@ -9,7 +9,6 @@ import axiosInstance from '../../config/axios-config';
 
 const Header = () => {
   const navigate = useNavigate();
-  // const { isLoggedIn, onLogout } = useContext(AuthContext);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

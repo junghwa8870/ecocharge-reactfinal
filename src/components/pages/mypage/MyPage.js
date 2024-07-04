@@ -3,7 +3,7 @@ import '../mypage/MyPage.scss';
 import Chargespace from './chargespace/Chargespace';
 import MyInfo from './myInfo/MyInfo';
 import ReservationDetails from './reservationDetails/ReservationDetails';
-import InquiryList from './inquiry/InquiryList';
+import InquiryList from './myInfo/inquiry/InquiryList';
 
 const MyPage = () => {
   return (
