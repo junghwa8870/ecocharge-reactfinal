@@ -115,7 +115,7 @@ const Header = () => {
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
               { to: '/board', text: '게시판' },
-              { text: '마이페이지', onClick: naviagteHandler },
+              isLoggedIn && { text: '마이페이지', onClick: naviagteHandler },
               { to: '/qna', text: 'Q & A' },
             ].map((link, index) => (
               <MuiLink
