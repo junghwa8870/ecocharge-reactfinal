@@ -1,6 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from './components/layout/Header.js';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useNavigate,
+} from 'react-router-dom';
 import CarList from './components/pages/carlist/CarList.js';
 import FindCharge from './components/pages/findcharge/FindCharge.js';
 import NewInfo from './components/pages/newinfo/NewInfo.js';
@@ -11,7 +16,6 @@ import Footer from './components/layout/Footer.js';
 import Main from './components/pages/main/Main.js';
 import ScrollToTopButton from './components/layout/ScrollToTopButton.js';
 import ChargeSpotDetail from './components/pages/findcharge/ChargeSpotDetail.js';
-import NewInfoWrite from './components/pages/newinfo/newInfoWrite/NewInfoWrite.js';
 import WriteQnA from './components/pages/qna/writeqna/WriteQnA.js';
 import SmsVerification from './components/user/SmsVerification.js';
 import KakaoLoginHandler from './components/user/KakaoLoginHandler.js';
@@ -29,6 +33,7 @@ import Checkout from './components/pages/toss/Checkout.js';
 import End from './components/pages/toss/End.js';
 import FindIdPw from './components/user/FindIdPw.js';
 
+import PrivateRoute from './config/PrivateRoute.js';
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -53,8 +58,12 @@ function App() {
           <Route path='/newInfoWrite' element={<NewInfoWrite />} /> */}
           <Route path='/board' element={<UserBoard />} />
           <Route path='/board/detail' element={<UserBoardDetail />} />
-          <Route path='/writeBoardForm' element={<WriteBoardForm />} />
-          <Route path='/myPage' element={<MyPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path='/writeBoardForm' element={<WriteBoardForm />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path='/myPage' element={<MyPage />} />
+          </Route>
           <Route path='/qna' element={<QnA />} />
           <Route path='/writeqna' element={<WriteQnA />} />
           <Route path='/qnalist' element={<QnAList />} />
@@ -70,6 +79,7 @@ function App() {
           <Route path='/success' element={<End />}></Route>
           {/*  */}
           {/* 필요한 다른 라우트 추가 */}
+
           <Route
             path='/'
             element={

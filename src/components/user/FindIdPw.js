@@ -1,8 +1,10 @@
 import { FormGroup, Form, Input, Label, Button } from 'reactstrap';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../scss/FindIdPw.scss';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL, USER } from '../../config/host-config';
+import axios from 'axios';
 
 const FindIdPw = () => {
   const navigate = useNavigate();
@@ -14,31 +16,89 @@ const FindIdPw = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(true); // 비밀번호 유효성 상태 변수
   const [passwordsMatch, setPasswordsMatch] = useState(true); // 비밀번호 일치 여부 상태 변수
   const [isConfirmPasswordDirty, setIsConfirmPasswordDirty] = useState(false); // 비밀번호 확인 입력 필드가 수정되었는지 여부
-  const [isChecked, setIsChecked] = useState(false); // 체크박스 상태 변수
   const [phoneNum, setPhoneNum] = useState(''); // 휴대전화번호 상태 변수
   const [chkNum, setChkNum] = useState(''); // 인증번호 상태 변수
+  const [showedId, setShowedId] = useState('');
+  const inputRef = useRef(null);
 
-  const handleChkButtonClick = () => {
-    alert('인증번호가 전송되었습니다. 인증번호를 입력해주세요.');
+  const handleChkButtonClick = (e) => {
+    if (!phoneNum) {
+      alert('핸드폰번호를 입력해주세요');
+      return;
+    } else if (!phoneNum.startsWith('010')) {
+      alert("'-'을 제외한 번호를 입력해 주세요.");
+      return;
+    } else if (phoneNum.length !== 11) {
+      alert('유효하지 않은 번호입니다.');
+      return;
+    }
+    e.preventDefault();
+    try {
+      fetch(`${API_BASE_URL}/api/send-sms`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phoneNumber: `${phoneNum}` }),
+      });
+
+      alert('인증 코드를 발송하였습니다.');
+      inputRef.current.readOnly = false;
+    } catch (error) {
+      console.log('phoneNumber:', phoneNum);
+      alert('인증 코드 발송에 실패했습니다.');
+    }
   };
 
-  const handleChkButtonClick2 = () => {
-    setShowId(true);
-    setShowPw(true);
-    setShowComplete(true);
-  };
+  const handleChkButtonClick2 = async (e) => {
+    e.preventDefault();
 
-  const handleChkButtonClick3 = () => {
-    alert('아이디가 확인되었습니다. 비밀번호 재설정을 진행해주세요.');
-    setShowPw(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phoneNumber: `${phoneNum}`,
+          verificationCodeInput: `${chkNum}`,
+        }),
+      });
+      const result = await response.json();
+      console.log('result:', result);
+
+      if (result) {
+        alert('인증되었습니다. 비밀번호 재설정을 진행해주세요.');
+        const response = await axios.post(
+          `${API_BASE_URL}${USER}/showid`,
+          phoneNum,
+          {
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+          },
+        );
+        const id = response.data;
+        console.log('idChecked:', id);
+        setShowedId(id);
+        setShowId(true);
+        setShowPw(true);
+        setShowComplete(true);
+
+        // const { redirectUrl } = location.state;
+        // window.location.href = redirectUrl;
+      } else {
+        alert('인증에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('Error verifying code:', error);
+      alert('인증에 실패했습니다.');
+    }
   };
 
   // 휴대전화번호 입력 상태 업데이트
-  const handlePhoneNumChange = (e) => {
-    const input = e.target.value.replace(/[^0-9]/g, ''); // 숫자만 입력되도록 필터링
-    if (input.length <= 11) {
-      setPhoneNum(input);
-    }
+  const handlePhoneNumChange = async (e) => {
+    setPhoneNum(e.target.value.trim());
   };
 
   // 인증번호 입력 상태 업데이트
@@ -76,9 +136,40 @@ const FindIdPw = () => {
     checkPasswordsMatch(password, input);
   };
 
-  // 체크박스 상태 업데이트
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
+  const changePassword = async () => {
+    console.log('passwordchecked:', password);
+    if (isConfirmPasswordDirty && !passwordsMatch) {
+      console.log('비밀번호 틀림');
+      alert('비밀번호를 확인해주세요');
+      return;
+    } else if (password.length < 5) {
+      console.log('비밀번호 미 입력');
+      alert('비밀번호를 확인해주세요');
+      return;
+    }
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}${USER}/pwsearch`,
+        { phoneNumber: phoneNum, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      console.log('응답:', response);
+      console.log('받아온 값:', response.data); // response.data로 응답 데이터에 접근
+
+      if (response.data) {
+        alert('비밀번호가 변경되었습니다.');
+        navigate('/login');
+      } else {
+        alert('비밀번호를 다시 확인해주세요');
+      }
+    } catch (error) {
+      alert('잘못된 요청입니다');
+    }
   };
 
   return (
@@ -101,11 +192,7 @@ const FindIdPw = () => {
               onChange={handlePhoneNumChange}
             />
             <Grid className='chkButtonBox1'>
-              <Button
-                className='chkButton1'
-                onClick={handleChkButtonClick}
-                disabled={phoneNum.length !== 11}
-              >
+              <Button className='chkButton1' onClick={handleChkButtonClick}>
                 인증
               </Button>
             </Grid>
@@ -124,13 +211,11 @@ const FindIdPw = () => {
               maxLength='4'
               value={chkNum}
               onChange={handleChkNumChange}
+              ref={inputRef}
+              readOnly
             />
             <Grid className='chkButtonBox2'>
-              <Button
-                className='chkButton2'
-                onClick={handleChkButtonClick2}
-                disabled={chkNum.length !== 4}
-              >
+              <Button className='chkButton2' onClick={handleChkButtonClick2}>
                 인증
               </Button>
             </Grid>
@@ -139,7 +224,7 @@ const FindIdPw = () => {
 
         {showId && (
           <FormGroup className='show'>
-            <Grid className='showId'>회원님의 아이디는 `abc1234`입니다.</Grid>
+            <Grid className='showId'>회원님의 아이디는 {showedId}입니다.</Grid>
             <Grid className='showComment'>비밀번호 재설정을 진행해주세요.</Grid>
           </FormGroup>
         )}
@@ -181,27 +266,9 @@ const FindIdPw = () => {
           </Grid>
         )}
 
-        {showComplete && (
-          <FormGroup check>
-            <Input
-              id='exampleCheck'
-              name='check'
-              type='checkbox'
-              onChange={handleCheckboxChange}
-            />
-            <Label check for='exampleCheck'>
-              변경하시겠습니까?
-            </Label>
-          </FormGroup>
-        )}
-
         <Grid className='FindIdPwCompleteBox'>
           {showComplete && (
-            <Button
-              className='FindIdPwComplete'
-              onClick={() => navigate('/login')}
-              disabled={(!isChecked === !isPasswordValid) === !passwordsMatch}
-            >
+            <Button className='FindIdPwComplete' onClick={changePassword}>
               변경완료
             </Button>
           )}
