@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppBar, Grid, Toolbar, Link as MuiLink, Button } from '@mui/material';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
 import AuthContext from '../../utils/AuthContext';
 import { API_BASE_URL, USER } from '../../config/host-config';
@@ -9,14 +9,29 @@ import handleRequest from '../../utils/handleRequest';
 
 const Header = () => {
   const navigate = useNavigate();
-
   const { isLoggedIn, onLogout } = useContext(AuthContext);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      if (scrollTop > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleLogin = () => {
     navigate('/login');
   };
 
-  // 로그아웃 핸들러
   const logoutHandler = async () => {
     const onSuccess = () => {
       onLogout();
@@ -50,20 +65,16 @@ const Header = () => {
       style={{
         width: '100%',
         height: 120,
-        backgroundColor: '#fff',
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : '#fff',
+        backdropFilter: isScrolled ? 'blur(1px)' : 'none',
+        boxShadow: 'none',
+        transition: 'background-color 0.3s, backdrop-filter 0.3s',
+        borderBottom: '2px solid gray',
       }}
     >
       <Toolbar>
-        <Grid
-          container
-          justifyContent='space-between'
-          // style={{ backgroundColor: 'white' }}
-        >
-          <Grid
-            item
-            flex={2}
-            style={{ alignContent: 'center', display: 'flex' }}
-          >
+        <Grid container justifyContent='space-between'>
+          <Grid item flex={2} style={{ display: 'flex' }}>
             <Link
               to='/'
               style={{
@@ -82,33 +93,15 @@ const Header = () => {
                   paddingBottom: 10,
                 }}
               />
-              {/* <div
-                className='logo-title'
-                style={{
-                  color: 'rgb(13, 110, 253)',
-                  fontWeight: 700,
-                  marginLeft: 20,
-                  fontSize: 25,
-                  marginTop: 20,
-                  textAlign: 'center',
-                  fontFamily: 'Jua',
-                }}
-              >
-                E C O
-                <br />
-                CHARGE
-              </div> */}
             </Link>
           </Grid>
           <Grid
             item
             flex={6}
             style={{
-              alignContent: 'center',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: 20,
             }}
           >
             {[
@@ -136,12 +129,10 @@ const Header = () => {
               </MuiLink>
             ))}
           </Grid>
-
           <Grid
             item
             flex={2}
             style={{
-              alignContent: 'center',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
