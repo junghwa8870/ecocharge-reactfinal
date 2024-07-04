@@ -95,16 +95,16 @@ const UserBoard = () => {
       <div className='Bcomentbox'>
         <div className='Bcomment-inner'>
           <div className='Bcoment'>
-            ●게시글 작성 및 댓글 달기는{' '}
+            ● 게시글 작성 및 댓글 달기는{' '}
             <span className='bold'>회원가입 후 가능</span>합니다.
           </div>
           <div className='Bcoment'>
-            ●게시글에 대한 피드백은{' '}
+            ● 게시글에 대한 피드백은{' '}
             <span className='bold'>예의 바르고 존중하는 태도</span>로
             남겨주세요.
           </div>
           <div className='Bcoment'>
-            ●부적절한 글이나 댓글은 <span className='bold'>신고 기능</span>을
+            ● 부적절한 글이나 댓글은 <span className='bold'>신고 기능</span>을
             통해 알려주세요.
           </div>
         </div>
@@ -141,7 +141,6 @@ const UserBoard = () => {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          // marginTop: '100px',
         }}
       >
         <PageButton

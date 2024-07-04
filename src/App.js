@@ -34,7 +34,14 @@ function App() {
     <AuthContextProvider>
       {/* <Favicon url='/favicon-32x32.png' /> */}
 
-      <div className='app' style={{ display: 'flex', flexDirection: 'column' }}>
+      <div
+        className='app'
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          background: 'floralwhite',
+        }}
+      >
         <Header />
         {/* <Main /> */}
         <Routes>

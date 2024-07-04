@@ -40,6 +40,8 @@
         height: 560px;
         box-shadow: none; /* 그림자 없애기 */
         // background-color: aqua;
+        border: 2px solid;
+        margin-bottom: 30px;
         
     }
     
@@ -69,6 +71,7 @@
             background-color: #f6f3f2;
             font-weight: 2rem;
             width: 95%;
+            border: 2px solid;
 
             .go-spot-title {
                 margin-bottom: 10px;
@@ -98,30 +101,32 @@
     position: relative;
     text-align: center;
     // background-color: aqua;
-    top: -10px;
+    top: 20px;
     
     
     .support-car-name {
         text-align: center;
         width: 95%;
+        height: 45px;
        
     }
 
     .img-left-btn {
-        // align-items: center;
-        // margin-top: 20px;
-        font-size: 50px;
-        position: relative;
-        top: 70px;
-        color: rgba(0, 0, 0, 0.5);
-        
+        // // align-items: center;
+        // // margin-top: 20px;
+        // font-size: 50px;
+        // position: relative;
+        // top: 70px;
+        // color: rgba(0, 0, 0, 0.5);
+        display: none;
 
     }
     .img-right-btn {   
-        font-size: 50px;
-        position: relative;
-        top: 70px;
-        color: rgba(0, 0, 0, 0.5);
+        // font-size: 50px;
+        // position: relative;
+        // top: 70px;
+        // color: rgba(0, 0, 0, 0.5);
+        display: none;
 
         
     }
@@ -139,7 +144,7 @@
   
   .support-car-name {
     position: absolute;
-    top: 10px;
+    top: 20px;
     left: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
@@ -180,6 +185,7 @@
         font-size: 20px;
         background-color: hsla(234, 69%, 16%, 0.788);
         border: none;
+        margin-top: 20px;
     }
     
   }
@@ -190,6 +196,7 @@
     background-color: #f6f3f2;
     // margin-bottom: 0;
     margin: 0 auto;
+    margin-top: 40px;
     
 }
 
@@ -222,6 +229,7 @@
             background-color: #f6f3f2;
             font-weight: bold;
             cursor: pointer;
+            border: 2px solid;
 
             &:hover {
                 background-color: hsl(235, 68%, 16%);
@@ -249,6 +257,7 @@
             background-color: #f6f3f2;
             font-weight: bold;
             cursor: pointer;
+            border: 2px solid;
 
             &:hover {
                 background-color: hsl(235, 68%, 16%);
@@ -276,6 +285,7 @@
             background-color: #f6f3f2;
             font-weight: bold;
             cursor: pointer;
+            border: 2px solid;
 
             &:hover {
                 background-color: hsl(235, 68%, 16%);

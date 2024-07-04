@@ -1,13 +1,14 @@
 .user-board-container {
     width: 80%;
     margin: 200px auto;
-    // background-color: yellow;
+    
 
     .user-board-title {
         font-size: 50px;
         font-weight: 700;
         text-align: center;
         margin-bottom: 100px;
+        
     }
 
     .Bcomentbox {
@@ -17,6 +18,7 @@
         display: flex;
         background-color: rgb(223, 222, 222);
         border-radius: 10px;
+        
     
         .Bcoment {
             width: 100%;
@@ -25,8 +27,8 @@
 
             .bold {
                 font-weight: bold;
-                font-size: 17px;
-                color: DARKBLUE;
+                font-size: 20px;
+                color: navy;
             }
         }
 
@@ -43,6 +45,7 @@
             width: 130px;
             height: 50px;
             background-color: #0D1245;
+            font-weight: bold;
         
                 &:hover {
                     background-color: #0d124579;
@@ -56,9 +59,8 @@
 
     .user-board-table {
         width: 100px;
-        margin-top: 50px;
+        margin-top: 80px;
         // background: red;
-        margin-left: 15px;
         // margin: 100px auto;
         // cursor: pointer;
         // background-color: green;
@@ -80,6 +82,7 @@
                 .Bno{
                     width: 200px;
                     border-style: none;
+                    background: floralwhite;
                     
                 }
 
@@ -89,12 +92,17 @@
                     margin-right: 50px;
                     text-align: start;
                     border-style: none;
+                    background: floralwhite;
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: navy;
                     
                 }
 
                 .Bwriter{
                     width: 200px;
                     border-style: none;
+                    background: floralwhite;
                     
                 }
 
@@ -102,6 +110,7 @@
                     width: 400px;
                     margin-left: 50px;
                     border-style: none;
+                    background: floralwhite;
                     
                 }
 
@@ -109,6 +118,7 @@
                     width: 200px;
                     border-style: none;
                     // background-color: transparent !important;
+                    background: floralwhite;
                 }
             }
 
