@@ -70,8 +70,24 @@ const QnAList = () => {
   };
 
   // const handleTdClick = () => {};
-  const handleQNADeleteClick = () => {
+  const handleQNADeleteClick = async (No) => {
     // 삭제처리함수
+    console.log('삭제로직 작동');
+    try {
+      const response = await axios.delete(`${API_BASE_URL}${QNA}/${No}`, {
+        headers: { 'content-type': 'application/json' },
+      });
+      const res = response.data;
+
+      if (res) {
+        alert('게시글이 삭제되었습니다');
+        qnaListRenderingHandler();
+      } else {
+        alert('이미 삭제된 게시글입니다.');
+      }
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
   };
   const pageButtonClickHandler = (no) => {
     setPageNo(no);
@@ -282,7 +298,7 @@ const QnAList = () => {
               </div>
               <div
                 className='mqlistDeleteBtn'
-                onClick={() => handleQNADeleteClick()}
+                onClick={() => handleQNADeleteClick(qna.qnaNo)}
               >
                 <FontAwesomeIcon icon={faSquareMinus} />
               </div>
