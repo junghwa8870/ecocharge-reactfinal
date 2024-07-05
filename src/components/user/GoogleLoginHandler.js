@@ -29,8 +29,8 @@ const GoogleLoginHandler = () => {
           throw new Error('Google login failed');
         }
 
-        const { token, userName, role } = await res.data;
-        onLogin(token, userName, role);
+        const { token, userName, role, userId } = await res.data;
+        onLogin(token, userName, role, userId);
         redirection('/');
       } catch (error) {
         console.error('Error during Google login:', error);

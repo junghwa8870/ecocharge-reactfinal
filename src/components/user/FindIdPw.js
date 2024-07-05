@@ -43,7 +43,6 @@ const FindIdPw = () => {
       });
 
       alert('인증 코드를 발송하였습니다.');
-      inputRef.current.readOnly = false;
     } catch (error) {
       console.log('phoneNumber:', phoneNum);
       alert('인증 코드 발송에 실패했습니다.');
@@ -211,8 +210,6 @@ const FindIdPw = () => {
               maxLength='4'
               value={chkNum}
               onChange={handleChkNumChange}
-              ref={inputRef}
-              readOnly
             />
             <Grid className='chkButtonBox2'>
               <Button className='chkButton2' onClick={handleChkButtonClick2}>

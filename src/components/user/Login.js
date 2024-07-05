@@ -215,6 +215,7 @@ const Login = () => {
       console.log(res.data);
 
       const { token, userName, role, phoneNumber, userId } = await res.data;
+      console.log('role체크:', role);
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
       onLogin(token, userName, role, phoneNumber, userId);
@@ -238,6 +239,7 @@ const Login = () => {
   };
 
   const handleSignup = () => {
+    console.log('모달 작동');
     setShowModal(true);
   };
 
@@ -250,6 +252,16 @@ const Login = () => {
   };
 
   const idCheckHandler = async (e) => {
+    const id = document.getElementById('checkid').value.trim();
+    const nameRegex = /^[a-zA-Z0-9]{5,20}$/;
+
+    if (id === '') {
+      alert('아이디를 입력해주세요');
+      return;
+    } else if (!nameRegex.test(id)) {
+      alert('영문자를 포함한 5글자 이상의 ID를 입력해주세요');
+      return;
+    }
     e.preventDefault();
     let flag = false;
     let msg = '';
@@ -497,7 +509,7 @@ const Login = () => {
         </a>
       </div>
 
-      {showModal && (
+      {!showModal || (
         <div className='modal'>
           <div className='modal-content'>
             <span className='close' onClick={handleCloseModal}>
