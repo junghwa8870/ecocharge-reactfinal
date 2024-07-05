@@ -293,7 +293,7 @@ const MyInfo = () => {
     if (phoneNumber !== null) {
       renderingMyInfo();
     }
-  }, [userName, phone, password, originalPhone]);
+  }, []);
 
   return (
     <div className='infoContainer'>

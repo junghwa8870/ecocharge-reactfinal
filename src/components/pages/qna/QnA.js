@@ -93,7 +93,7 @@ const QnA = () => {
   const [category, setCatecory] = useState('all');
   const [cardOnOff, setCardOnOff] = useState(qnaList);
   const [showList, setShowList] = useState(qnaList);
-  const { onLogout } = useContext(AuthContext);
+  const { onLogout, role } = useContext(AuthContext);
 
   const getQnACard = (item, index) => {
     return (
@@ -153,12 +153,14 @@ const QnA = () => {
       <div className='qnatitle'>Q & A</div>
       <div className='questionButtonsBox'>
         <div className='questionButtons'>
-          <button
-            className='add-question-button'
-            onClick={() => navigate('/writeqna')}
-          >
-            작성하기
-          </button>
+          {role === 'ADMIN' && (
+            <button
+              className='add-question-button'
+              onClick={() => navigate('/writeqna')}
+            >
+              작성하기
+            </button>
+          )}
           <button
             className='go-direct-question-button'
             onClick={() => navigate('/qnalist')}

@@ -27,9 +27,9 @@ const KakaoLoginHandler = () => {
       console.log(phoneNumber);
       console.log(await res.data);
 
-      const { token, userName, role } = await res.data; // 서버에서 온 json 읽기
+      const { token, userName, role, userId } = await res.data; // 서버에서 온 json 읽기
       console.log('token: ', token);
-      onLogin(token, userName, role, phoneNumber);
+      onLogin(token, userName, role, phoneNumber, userId);
 
       redirection('/');
     };
