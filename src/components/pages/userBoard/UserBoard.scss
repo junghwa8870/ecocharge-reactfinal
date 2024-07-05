@@ -1,7 +1,6 @@
 .user-board-container {
     width: 80%;
     margin: 200px auto;
-    
 
     .user-board-title {
         font-size: 50px;
@@ -119,6 +118,20 @@
                     border-style: none;
                     // background-color: transparent !important;
                     background: floralwhite;
+                }
+
+                .boardDeleteBtn {
+                    font-size: 20px;
+                    margin-left: 15px;
+                    background-color: floralwhite;
+                    border: none;
+                    &:hover {
+                        // width: 45px;
+                        background: red;
+                        padding: 0 5px;
+                        border-radius: 5px;
+                        height: 35px;
+                    }
                 }
             }
 

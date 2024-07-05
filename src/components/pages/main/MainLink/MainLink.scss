@@ -186,6 +186,10 @@
         background-color: hsla(234, 69%, 16%, 0.788);
         border: none;
         margin-top: 20px;
+
+        &:hover {
+            background-color: rgb(12, 12, 88);
+        }
     }
     
   }
