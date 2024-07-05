@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useNavigate, useLocation, Await } from 'react-router-dom'; // useLocation 추가
+import { useNavigate } from 'react-router-dom'; // useLocation 추가
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { GOOGLE_AUTH_URL } from '../../config/google-config';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
@@ -15,15 +15,14 @@ import { debounce } from 'lodash'; // lodash.debounce 사용
 import { initialState, joinReducer } from './JoinReducer';
 import AuthContext from '../../utils/AuthContext';
 import axios from 'axios';
-import { Button } from 'bootstrap';
+
 import { Label } from 'reactstrap';
 const Login = () => {
   const navigate = useNavigate(); // useNavigate 훅 사용
-  const location = useLocation(); // useLocation 훅 사용
   const [showModal, setShowModal] = useState(false);
   const [showVerificationInput, setShowVerificationInput] = useState(false);
   const [state, dispatch] = useReducer(joinReducer, initialState);
-  const { onLogin, isLoggedIn } = useContext(AuthContext);
+  const { onLogin } = useContext(AuthContext);
   const handleSocialLogin = (authUrl) => {
     navigate('/sms', { state: { redirectUrl: authUrl } }); // 페이지 이동 처리
   };
@@ -36,6 +35,22 @@ const Login = () => {
   // 각각의 핸들러에서 호출하는 dispatch 처리를 중앙화 하자.
   const updateState = (key, inputValue, msg, flag) => {
     key !== 'passwordCheck' &&
+      dispatch({
+        type: 'SET_USER_VALUE',
+        key,
+        value: inputValue,
+      });
+    dispatch({
+      type: 'SET_MESSAGE',
+      key,
+      value: msg,
+    });
+    dispatch({
+      type: 'SET_CORRECT',
+      key,
+      value: flag,
+    });
+    key !== 'phoneNumberCheck' &&
       dispatch({
         type: 'SET_USER_VALUE',
         key,
@@ -199,10 +214,10 @@ const Login = () => {
 
       console.log(res.data);
 
-      const { token, userName, role, phoneNumber } = await res.data;
+      const { token, userName, role, phoneNumber, userId } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, role, phoneNumber);
+      onLogin(token, userName, role, phoneNumber, userId);
 
       if (res.status === 400) {
         console.log('400에러표시');
@@ -213,9 +228,6 @@ const Login = () => {
         alert('Invalid credentials'); // 인증 예외 처리
         return;
       }
-
-      // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, role, phoneNumber);
 
       // 홈으로 리다이렉트
       navigate('/');
@@ -260,8 +272,8 @@ const Login = () => {
       } else {
         alert('사용할 수 있는 아이디입니다.');
         flag = true;
-        debouncedUpdateState('idCheck', idValue, msg, flag);
       }
+      debouncedUpdateState('idCheck', idValue, msg, flag);
     } catch (error) {
       console.error('Error:', error);
       // 에러 처리
@@ -271,8 +283,11 @@ const Login = () => {
     if (!phoneNumber) {
       alert('핸드폰번호를 입력해주세요');
       return;
-    } else if (phoneNumber.length !== '11' && !phoneNumber.startsWith('010')) {
+    } else if (!phoneNumber.startsWith('010')) {
       alert("'-'을 제외한 번호를 입력해 주세요.");
+      return;
+    } else if (phoneNumber.length !== 11) {
+      alert('유효하지 않은 번호입니다.');
       return;
     }
     // 인증번호 전송 로직 추가 (예: API 호출)
@@ -298,6 +313,8 @@ const Login = () => {
   const handleVerifyCode = async (e) => {
     // 인증번호 확인 로직 추가 (예: API 호출)
     e.preventDefault();
+    let flag = false;
+    let msg = '';
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/verify-code`, {
@@ -314,6 +331,7 @@ const Login = () => {
 
       if (result) {
         alert('인증되었습니다.');
+        flag = true;
       } else {
         alert('인증에 실패했습니다');
       }
@@ -322,6 +340,7 @@ const Login = () => {
       console.error('Error verifying code:', error);
       alert('인증에 실패했습니다.');
     }
+    debouncedUpdateState('phoneNumberCheck', 'check', msg, flag);
   };
 
   const phonehandler = (e) => {
@@ -355,6 +374,7 @@ const Login = () => {
     for (let key in correct) {
       const flag = correct[key];
       console.log(key);
+      console.log(flag);
       if (!flag) return false;
     }
     return true;
@@ -393,18 +413,22 @@ const Login = () => {
     const userFormData = new FormData();
     userFormData.append('user', userJsonBlob);
 
-    const res = await fetch(API_BASE_URL + USER, {
-      method: 'POST',
-      body: userFormData,
-    });
+    try {
+      const res = await fetch(API_BASE_URL + USER, {
+        method: 'POST',
+        body: userFormData,
+      });
 
-    if (res.status === 200) {
-      const data = await res.json();
-      alert(`${data.userName}(${data.id})님 회원가입에 성공했습니다.`);
-      // 로그인 페이지로 리다이렉트
-      setShowModal(false);
-    } else {
-      alert('이미 가입 된 계정입니다.');
+      if (res.status === 200) {
+        const data = await res.json();
+        alert(`${data.userName}(${data.id})님 회원가입에 성공했습니다.`);
+        // 로그인 페이지로 리다이렉트
+        setShowModal(false);
+      } else {
+        alert('이미 가입 된 계정입니다.');
+      }
+    } catch {
+      alert('서버 오류');
     }
   };
 

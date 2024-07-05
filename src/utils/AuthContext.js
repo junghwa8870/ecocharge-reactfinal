@@ -13,25 +13,32 @@ const AuthContext = React.createContext({
 // 바로 위에서 생성한 Context를 제공하는 provider
 // 이 컴포넌트를 통해 자식 컴포넌트(consumer)에게 인증 상태와 관련된 값, 함수를 전달할 수 있음.
 export const AuthContextProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem('ACCESS_TOKEN'),
+  );
   const [userName, setUserName] = useState('');
   const [role, setRole] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(
+    localStorage.getItem('PHONE_NUMBER')
+      ? localStorage.getItem('PHONE_NUMBER')
+      : '',
+  );
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role, phoneNumber) => {
+  const loginHandler = (token, userName, role, phoneNumber, userId) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
     // 2. 세션 스토리지 - 브라우저가 종료 되면 사라짐.
     console.log(token);
     localStorage.setItem('ACCESS_TOKEN', token.access_token);
     localStorage.setItem('REFRESH_TOKEN', token.refresh_token);
+    localStorage.setItem('USER_ID', userId);
+    localStorage.setItem('PHONE_NUMBER', phoneNumber);
     setIsLoggedIn(true);
     setUserName(userName);
     setRole(role);
     setPhoneNumber(phoneNumber);
-    console.log(userName);
-    console.log(phoneNumber);
+    console.log(userId);
   };
 
   // 로그아웃 핸들러
@@ -47,6 +54,9 @@ export const AuthContextProvider = (props) => {
     if (localStorage.getItem('ACCESS_TOKEN')) {
       setIsLoggedIn(true);
       setUserName(localStorage.getItem('LOGIN_USERNAME'));
+    }
+    if (localStorage.getItem('PHONE_NUMBER')) {
+      setPhoneNumber(localStorage.getItem('PHONE_NUMBER'));
     }
   }, []);
 

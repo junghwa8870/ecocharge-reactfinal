@@ -4,12 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../../scss/Header.scss';
 import AuthContext from '../../utils/AuthContext';
 import { API_BASE_URL, USER } from '../../config/host-config';
-import axiosInstance from '../../config/axios-config';
 import handleRequest from '../../utils/handleRequest';
+import axiosInstance from '../../config/axios-config';
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, onLogout } = useContext(AuthContext);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,6 +27,15 @@ const Header = () => {
     };
   }, []);
 
+  const { isLoggedIn, onLogout, phoneNumber, userName } =
+    useContext(AuthContext);
+
+  useEffect(() => {
+    console.log(phoneNumber);
+    console.log(userName);
+    console.log(isLoggedIn);
+  }, []);
+
   const handleLogin = () => {
     navigate('/login');
   };
@@ -40,19 +48,6 @@ const Header = () => {
 
     handleRequest(
       () => axiosInstance.get(`${API_BASE_URL}${USER}/logout`),
-      onSuccess,
-      onLogout,
-      navigate,
-    );
-  };
-
-  const naviagteHandler = async () => {
-    const onSuccess = () => {
-      navigate('/myPage');
-    };
-
-    handleRequest(
-      () => axiosInstance.get(`${API_BASE_URL}${USER}/validate`),
       onSuccess,
       onLogout,
       navigate,
@@ -108,8 +103,14 @@ const Header = () => {
               { to: '/carList', text: '보조금 지원 차종' },
               { to: '/findCharge', text: '충전소 찾기' },
               { to: '/board', text: '게시판' },
-              { text: '마이페이지', onClick: naviagteHandler },
-              { to: '/qna', text: 'Q & A' },
+              isLoggedIn && { to: '/myPage', text: '마이페이지' },
+              {
+                to: '/qna',
+                text: 'Q & A',
+                style: {
+                  marginLeft: '-70px', // 예시로 추가한 스타일
+                },
+              },
             ].map((link, index) => (
               <MuiLink
                 key={index}
@@ -123,7 +124,9 @@ const Header = () => {
                 fontWeight='700'
                 textAlign='center'
                 paddingRight='80px'
-                onClick={link.onClick}
+                style={{
+                  ...(link.style && !isLoggedIn ? link.style : {}), // isLoggedIn이 false이고, 링크에 style이 있으면 적용
+                }}
               >
                 {link.text}
               </MuiLink>
