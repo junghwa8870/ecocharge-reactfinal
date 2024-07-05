@@ -51,13 +51,11 @@ function App() {
           <Route path='/board/detail' element={<UserBoardDetail />} />
           <Route element={<PrivateRoute />}>
             <Route path='/writeBoardForm' element={<WriteBoardForm />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
             <Route path='/myPage' element={<MyPage />} />
+            <Route path='/qnalist' element={<QnAList />} />
+            <Route path='/writeqna' element={<WriteQnA />} />
           </Route>
           <Route path='/qna' element={<QnA />} />
-          <Route path='/writeqna' element={<WriteQnA />} />
-          <Route path='/qnalist' element={<QnAList />} />
           <Route path='/questionform' element={<QuestionForm />} />
           <Route path='/myquestionlist' element={<MyQuestionList />} />
           <Route path='/login' element={<Login />} />
