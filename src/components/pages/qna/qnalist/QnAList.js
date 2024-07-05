@@ -28,7 +28,7 @@ const QnAList = () => {
     { name: '기타', value: 'etc' },
   ];
   const [searchParams] = useSearchParams();
-  const page = parseInt(searchParams.get('page')) || 1;
+  const initialPage = parseInt(searchParams.get('page')) || 1;
 
   const [qnaData, setQnaData] = useState([]);
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
@@ -37,7 +37,7 @@ const QnAList = () => {
   const [filteredQnaData, setFilteredQnaData] = useState([]);
   const [pageMaker, setPageMaker] = useState({});
   const [pageButtonCount, setPageButtonCount] = useState(0);
-  const [pageNo, setPageNo] = useState(page);
+  const [pageNo, setPageNo] = useState(initialPage);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
   const navigate = useNavigate();
@@ -68,17 +68,17 @@ const QnAList = () => {
   };
 
   const qnaListRenderingHandler = async () => {
-    let url = requestUrl;
+    let url = `${requestUrl}?page=${pageNo}`;
     const res = await axios.get(url);
     setQnaData(res.data.qnas);
     setPageMaker(res.data.pageMaker);
     setPageButtonCount(res.data.pageMaker.end);
-    setFilteredQnaData(res.data.qnas); // 초기 데이터 설정
+    filterQnaData(res.data.qnas); // 초기 데이터 설정
   };
 
   useEffect(() => {
     qnaListRenderingHandler();
-  }, [location.state]);
+  }, [location.state, pageNo]);
 
   useEffect(() => {
     const handleBackButton = (event) => {
@@ -96,11 +96,11 @@ const QnAList = () => {
   }, []);
 
   useEffect(() => {
-    filterQnaData();
-  }, [selectedCategory, qnaData, searchQuery, searchType]);
+    filterQnaData(qnaData); // qnaData가 변경될 때마다 필터링 적용
+  }, [selectedCategory, searchQuery, searchType, qnaData]);
 
-  const filterQnaData = () => {
-    let filteredData = qnaData;
+  const filterQnaData = (data) => {
+    let filteredData = data || qnaData;
 
     if (selectedCategory !== '전체') {
       filteredData = filteredData.filter(
@@ -111,11 +111,11 @@ const QnAList = () => {
     if (searchQuery) {
       filteredData = filteredData.filter((qna) => {
         if (searchType === 'title') {
-          return qna.qtitle.includes(searchQuery);
+          return qna.qtitle.toLowerCase().includes(searchQuery.toLowerCase());
         } else if (searchType === 'writer') {
-          return qna.qwriter.includes(searchQuery);
+          return qna.qwriter.toLowerCase().includes(searchQuery.toLowerCase());
         }
-        return true;
+        return true; // 이 부분은 선택적으로 추가할 수 있습니다.
       });
     }
 
@@ -209,9 +209,6 @@ const QnAList = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={`Search by ${searchType === 'title' ? '제목' : '작성자'}`}
           />
-          {/* <InputGroupText>
-          <Button onClick={filterQnaData}>검색</Button>
-        </InputGroupText> */}
         </InputGroup>
       </div>
 
