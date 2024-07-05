@@ -8,12 +8,20 @@ import {
   InputGroup,
   Input,
   InputGroupText,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from 'reactstrap';
 import './QnAList.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faPenToSquare,
+  faSquareMinus,
+} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_BASE_URL, QNA } from '../../../../config/host-config';
 import axiosInstance from '../../../../config/axios-config';
@@ -40,6 +48,8 @@ const QnAList = () => {
   const [pageNo, setPageNo] = useState(initialPage);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchType, setSearchType] = useState('title');
+  const [modalOpen, setModalOpen] = useState(false); // 답변 모달 창 상태 추가
+  const [selectedQna, setSelectedQna] = useState(null); // 선택된 질문 상태 추가
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -47,19 +57,22 @@ const QnAList = () => {
     setCategoryDropdownOpen((prevState) => !prevState);
   const toggleSearchTypeDropdown = () =>
     setSearchTypeDropdownOpen((prevState) => !prevState);
+  const toggleModal = () => setModalOpen((prevState) => !prevState);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category.name);
   };
 
-  const handleTdClick = async (qnaNo) => {
+  const handleAnswerClick = async (qnaNo) => {
     const res = await axiosInstance.get(requestUrl + `/${qnaNo}`);
-    console.log(res.data);
-    alert(
-      '비밀글은 본인만 확인 가능합니다.\n로그인을 하시고 이용해주시길 바랍니다.',
-    );
+    setSelectedQna(res.data); // 선택된 질문 설정
+    toggleModal(); // 모달 창 열기
   };
 
+  // const handleTdClick = () => {};
+  const handleQNADeleteClick = () => {
+    // 삭제처리함수
+  };
   const pageButtonClickHandler = (no) => {
     setPageNo(no);
     if (location.pathname && pageNo !== no) {
@@ -122,6 +135,49 @@ const QnAList = () => {
     setFilteredQnaData(filteredData);
   };
 
+  // 답변 모달 창 내용
+  const renderAnswerModal = () => (
+    <Modal
+      isOpen={modalOpen}
+      toggle={toggleModal}
+      style={{ marginTop: '200px' }}
+    >
+      <ModalHeader toggle={toggleModal} style={{ fontWeight: 'bold' }}>
+        <h5 className='modal-header2'>답변 작성</h5>
+      </ModalHeader>
+      <ModalBody>
+        <div>질문: {selectedQna?.qtitle}</div>
+        <InputGroup style={{ marginTop: '10px' }}>
+          <InputGroupText>답변:</InputGroupText>
+          <Input type='textarea' />
+        </InputGroup>
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          style={{ backgroundColor: '#0d1245', fontWeight: 'bold' }}
+          onClick={handleAnswerSubmit}
+        >
+          작성 완료
+        </Button>{' '}
+        <Button
+          color='secondary'
+          onClick={toggleModal}
+          style={{ fontWeight: 'bold' }}
+        >
+          취소
+        </Button>
+      </ModalFooter>
+    </Modal>
+  );
+
+  // 답변 작성 완료 핸들러
+  const handleAnswerSubmit = async () => {
+    // 여기서 답변 작성 처리 로직을 구현합니다.
+    // axios 등을 사용하여 서버로 답변 데이터를 전송합니다.
+    // 성공 시 모달을 닫거나 새로고침 등의 작업을 수행할 수 있습니다.
+    toggleModal(); // 모달 닫기
+  };
+
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
       <div className='goBeforePageBtnBox'>
@@ -130,7 +186,6 @@ const QnAList = () => {
         </div>
       </div>
       <div className='qnatitle'>1 : 1 문의</div>
-
       <div className='comentbox'>
         <div className='comment-inner'>
           <div className='coment'>
@@ -151,7 +206,6 @@ const QnAList = () => {
           </Button>
         </div>
       </div>
-
       <div
         className='dropdown-container'
         style={{
@@ -211,22 +265,59 @@ const QnAList = () => {
           />
         </InputGroup>
       </div>
-
       <div className='qnaListContainer'>
         {filteredQnaData.map((qna) => (
-          <div
-            key={qna.qnaNo}
-            className='qnaListInnerBox'
-            onClick={() => handleTdClick(qna.qnaNo)}
-          >
-            <div className='qlistNum'>{qna.count}</div>
-            <div className='qlistCategory'>{qna.qcategory}</div>
-            <div className='qlistTitle'>{qna.qtitle}</div>
-            <div className='qlistWriter'>{qna.qwriter}</div>
-            <div className='qlistDate'>{qna.date}</div>
+          <div key={qna.qnaNo}>
+            <div className='qnaListInnerBox'>
+              <div className='qlistNum'>{qna.count}</div>
+              <div className='qlistCategory'>{qna.qcategory}</div>
+              <div className='qlistTitle'>{qna.qtitle}</div>
+              <div className='qlistWriter'>{qna.qwriter}</div>
+              <div className='qlistDate'>{qna.date}</div>
+              <div
+                className='qlistAnswer'
+                onClick={() => handleAnswerClick(qna.qnaNo)}
+              >
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </div>
+              <div
+                className='mqlistDeleteBtn'
+                onClick={() => handleQNADeleteClick()}
+              >
+                <FontAwesomeIcon icon={faSquareMinus} />
+              </div>
+            </div>
+            <div
+              className='ansbox'
+              style={{
+                margin: '20px',
+                display: 'flex',
+                // backgroundColor: 'lightgray',
+                borderRadius: '20px',
+                padding: '20px',
+                alignItems: 'center',
+                border: '1px solid gray',
+                backgroundColor: '#9EB1C51C',
+              }}
+            >
+              <span
+                className='ansmark'
+                style={{
+                  color: 'skyblue',
+                  fontSize: '20px',
+                  marginRight: '30px',
+                  marginLeft: '10px',
+                }}
+              >
+                A.
+              </span>
+              <div className='ans'>답변내용:</div>
+            </div>
           </div>
         ))}
       </div>
+      {selectedQna && renderAnswerModal()}{' '}
+      {/* 선택된 질문이 있을 때만 모달 렌더링 */}
       <div
         className='paging-container'
         style={{
