@@ -14,8 +14,6 @@ const PrivateRoute = () => {
 
   if (!isLoggedIn) {
     alert('로그인이 필요한 서비스입니다.');
-  } else if (role !== 'ADMIN') {
-    alert('접근권한이 없습니다.');
   }
   return isLoggedIn ? <Outlet /> : <Navigate to='/login' />;
 };
