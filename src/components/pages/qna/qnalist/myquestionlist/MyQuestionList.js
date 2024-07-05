@@ -11,7 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Paging from '../../../../layout/Paging.js';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faSquareMinus,
+} from '@fortawesome/free-solid-svg-icons';
 
 const QnAList = () => {
   const categories = [
@@ -62,6 +65,10 @@ const QnAList = () => {
 
   const handleRowClick = (id) => {
     setActiveQuestion(activeQuestion === id ? null : id);
+  };
+
+  const handleDeleteClick = () => {
+    // 삭제기능 구현
   };
 
   const filteredQnaData =
@@ -125,13 +132,43 @@ const QnAList = () => {
           <div key={qna.id} className='myQnaListOuterBox'>
             <div
               className='myQnaListInnerBox'
-              onClick={() => handleRowClick(qna.id)}
+              // style={{ cursor: 'pointer' }}
+              // onClick={() => handleRowClick(qna.id)}
             >
-              <div className='mqlistNum'>{qna.id}</div>
-              <div className='mqlistCategory'>{qna.category}</div>
-              <div className='mqlistTitle'>{qna.title}</div>
-              <div className='mqlistWriter'>{qna.writer}</div>
-              <div className='mqlistDate'>{qna.date}</div>
+              <div className='mqlistNum' onClick={() => handleRowClick(qna.id)}>
+                {qna.id}
+              </div>
+              <div
+                className='mqlistCategory'
+                onClick={() => handleRowClick(qna.id)}
+              >
+                {qna.category}
+              </div>
+              <div
+                className='mqlistTitle'
+                onClick={() => handleRowClick(qna.id)}
+              >
+                {qna.title}
+              </div>
+              <div
+                className='mqlistWriter'
+                onClick={() => handleRowClick(qna.id)}
+              >
+                {qna.writer}
+              </div>
+              <div
+                className='mqlistDate'
+                onClick={() => handleRowClick(qna.id)}
+              >
+                {qna.date}
+              </div>
+
+              <div
+                className='mqlistDeleteBtn'
+                onClick={() => handleDeleteClick()}
+              >
+                <FontAwesomeIcon icon={faSquareMinus} />
+              </div>
             </div>
             {activeQuestion === qna.id && (
               <div className='responseBox'>
