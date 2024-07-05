@@ -52,7 +52,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   text-align: center;
-  padding: 30px;
+  padding: 20px;
 }
 
 .carInfo {
@@ -60,7 +60,7 @@
   flex-wrap: wrap;
   box-shadow: 0px 1px 4px rgba(1, 1, 0, 0.6);
   width: calc(25%); // 3개씩 배치되도록 너비 설정
-  height: 580px; // 아이템 높이 설정
+  height: 600px; // 아이템 높이 설정
   margin-top: 40px; // 상단 여백 추가
   cursor: pointer; /* 포인터 커서를 추가하여 클릭 가능하다는 것을 나타냅니다. */
   transition: background-color 0.3s ease; /* 배경색 전환을 부드럽게 합니다. */

@@ -68,7 +68,7 @@
 .qnaListContainer {
   width: 80%;
   margin: 0 auto;
-  cursor: pointer;
+  // cursor: pointer;
 
   .qnaListInnerBox {
     display: flex;
@@ -102,6 +102,28 @@
       width: 400px;
       margin-left: 50px;
     }
+
+    .qlistAnswer {
+      font-size: 20px;
+
+      &:hover {
+          background: #0d12459f;
+          padding: 0 5px;
+          border-radius: 5px;
+          color: white;
+      }
+    }
+
+    .mqlistDeleteBtn {
+      font-size: 20px;
+      margin-left: 15px;
+
+      &:hover {
+          background: red;
+          padding: 0 5px;
+          border-radius: 5px;
+      }
+  }
   }
 }
 
@@ -109,4 +131,16 @@
   background: none;
   border: 1px solid gray;
   color: darkslategray;
+}
+
+.modal-content {
+  .modal-header2 {
+    font-weight: bold !important;
+    text-decoration: none;
+    // border: none;
+    
+  }
+  .btn-close {
+    width: 20px;
+  }
 }
