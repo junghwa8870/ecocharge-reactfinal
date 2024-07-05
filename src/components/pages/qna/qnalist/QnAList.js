@@ -28,14 +28,13 @@ const QnAList = () => {
   const page = parseInt(searchParams.get('page')) || 1;
 
   const [qnaData, setQnaData] = useState([]);
-
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('전체');
-  const navigate = useNavigate(); // useNavigate 훅 사용
-
+  const [filteredQnaData, setFilteredQnaData] = useState([]);
   const [pageMaker, setPageMaker] = useState({});
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
+  const navigate = useNavigate();
   const location = useLocation();
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
@@ -46,28 +45,18 @@ const QnAList = () => {
 
   const handleTdClick = async (qnaNo) => {
     const res = await axiosInstance.get(requestUrl + `/${qnaNo}`);
-
     console.log(res.data);
-
     alert(
       '비밀글은 본인만 확인 가능합니다.\n로그인을 하시고 이용해주시길 바랍니다.',
     );
   };
 
   const pageButtonClickHandler = (no) => {
-    console.log(location.state);
     setPageNo(no);
     if (location.pathname && pageNo !== no) {
-      navigate(`/qnalist?page=${no}`, {
-        state: { page: no },
-      });
+      navigate(`/qnalist?page=${no}`, { state: { page: no } });
     }
   };
-
-  const filteredQnaData =
-    selectedCategory === '전체'
-      ? qnaData
-      : qnaData.filter((qna) => qna.category === selectedCategory);
 
   const qnaListRenderingHandler = async () => {
     let url = requestUrl;
@@ -75,11 +64,10 @@ const QnAList = () => {
       url += `?page=${page}`;
     }
     const res = await axios.get(url);
-
-    // console.log(res.data);
     setQnaData(res.data.qnas);
     setPageMaker(res.data.pageMaker);
     setPageButtonCount(res.data.pageMaker.end);
+    setFilteredQnaData(res.data.qnas); // 초기 데이터 설정
   };
 
   useEffect(() => {
@@ -88,9 +76,7 @@ const QnAList = () => {
 
   useEffect(() => {
     const handleBackButton = (event) => {
-      console.log(location.state);
       if (event.state.usr !== null) {
-        console.log('e.state: ', event.state);
         setPageNo(event.state.usr.page);
       } else {
         setPageNo(1);
@@ -102,6 +88,17 @@ const QnAList = () => {
       window.removeEventListener('popstate', handleBackButton);
     };
   }, []);
+
+  // selectedCategory가 변경될 때마다 필터링된 데이터를 설정하는 useEffect
+  useEffect(() => {
+    if (selectedCategory === '전체') {
+      setFilteredQnaData(qnaData);
+    } else {
+      setFilteredQnaData(
+        qnaData.filter((qna) => qna.qcategory === selectedCategory),
+      );
+    }
+  }, [selectedCategory, qnaData]);
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
