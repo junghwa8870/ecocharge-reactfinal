@@ -21,8 +21,8 @@ const NaverLoginHandler = () => {
         `${REQUEST_URL}/naverlogin?code=${code}&phoneNumber=${phoneNumber}`,
       );
 
-      const { token, userName, role } = await res.data; // 서버에서 온 json 읽기
-      onLogin(token, userName, role, phoneNumber);
+      const { token, userName, role, userId } = await res.data; // 서버에서 온 json 읽기
+      onLogin(token, userName, role, phoneNumber, userId);
 
       redirection('/');
     };
