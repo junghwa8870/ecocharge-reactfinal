@@ -33,7 +33,6 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('ACCESS_TOKEN', token.access_token);
     localStorage.setItem('REFRESH_TOKEN', token.refresh_token);
     localStorage.setItem('USER_ID', userId);
-    localStorage.setItem('PHONE_NUMBER', phoneNumber);
     localStorage.setItem('ROLE', role);
     setIsLoggedIn(true);
     setUserName(userName);
@@ -55,9 +54,6 @@ export const AuthContextProvider = (props) => {
     if (localStorage.getItem('ACCESS_TOKEN')) {
       setIsLoggedIn(true);
       setUserName(localStorage.getItem('LOGIN_USERNAME'));
-    }
-    if (localStorage.getItem('PHONE_NUMBER')) {
-      setPhoneNumber(localStorage.getItem('PHONE_NUMBER'));
     }
     if (localStorage.getItem('ROLE')) {
       setRole(localStorage.getItem('ROLE'));
