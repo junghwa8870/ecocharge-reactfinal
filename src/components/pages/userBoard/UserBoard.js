@@ -16,6 +16,8 @@ import axios from 'axios';
 import handleRequest from '../../../utils/handleRequest';
 import AuthContext from '../../../utils/AuthContext';
 import PageButton from '../pageButton/PageButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenNib, faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 
 const UserBoard = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const UserBoard = () => {
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
   const location = useLocation();
+
   const pageButtonClickHandler = (no) => {
     console.log(location.state);
     setPageNo(no);
@@ -56,6 +59,14 @@ const UserBoard = () => {
       // 오류 처리 로직 추가 가능
     }
   };
+
+  const handleBoardDeleteClick = () => {
+    // 삭제함수 필요
+  };
+
+  // const handleBoardEditClick = () => {
+  //   // 수정함수 필요
+  // };
 
   const writeBoardFormHandler = async () => {
     const onSuccess = () => {
@@ -118,19 +129,59 @@ const UserBoard = () => {
       <Table className='user-board-table'>
         <tbody className='boardInnerBox'>
           {boardList.map((board) => (
-            <tr
-              key={board.boardNo}
-              className='bRow'
-              onClick={() =>
-                navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
-                  state: board.boardNo,
-                })
-              }
-            >
-              <td className='Bno'>{board.count}</td>
-              <td className='Btitle'>{board.btitle}</td>
-              <td className='Bwriter'>{board.bwriter}</td>
-              <td className='Bdate'>{board.createDate}</td>
+            <tr key={board.boardNo} className='bRow'>
+              <td
+                className='Bno'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.count}
+              </td>
+              <td
+                className='Btitle'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.btitle}
+              </td>
+              <td
+                className='Bwriter'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.bwriter}
+              </td>
+              <td
+                className='Bdate'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.createDate}
+              </td>
+              {/* <td
+                className='boardEditBtn'
+                // onClick={() => handleBoardEditClick()}
+              >
+                <FontAwesomeIcon icon={faPenNib} />
+              </td> */}
+              <td
+                className='boardDeleteBtn'
+                onClick={() => handleBoardDeleteClick()}
+              >
+                <FontAwesomeIcon icon={faSquareMinus} />
+              </td>
             </tr>
           ))}
         </tbody>
