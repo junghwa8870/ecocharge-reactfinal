@@ -109,6 +109,7 @@ const CarList = () => {
         height: 'auto',
         display: 'flex',
         justifyContent: 'center',
+        marginBottom: '50px',
       }}
     >
       <Grid className='carContainerHead'>
