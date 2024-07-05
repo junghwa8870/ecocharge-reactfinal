@@ -5,6 +5,9 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  InputGroup,
+  Input,
+  InputGroupText,
 } from 'reactstrap';
 import './QnAList.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,16 +31,22 @@ const QnAList = () => {
   const page = parseInt(searchParams.get('page')) || 1;
 
   const [qnaData, setQnaData] = useState([]);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const [searchTypeDropdownOpen, setSearchTypeDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [filteredQnaData, setFilteredQnaData] = useState([]);
   const [pageMaker, setPageMaker] = useState({});
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState('title');
   const navigate = useNavigate();
   const location = useLocation();
 
-  const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+  const toggleCategoryDropdown = () =>
+    setCategoryDropdownOpen((prevState) => !prevState);
+  const toggleSearchTypeDropdown = () =>
+    setSearchTypeDropdownOpen((prevState) => !prevState);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category.name);
@@ -60,9 +69,6 @@ const QnAList = () => {
 
   const qnaListRenderingHandler = async () => {
     let url = requestUrl;
-    if (location.data !== null) {
-      url += `?page=${page}`;
-    }
     const res = await axios.get(url);
     setQnaData(res.data.qnas);
     setPageMaker(res.data.pageMaker);
@@ -89,16 +95,32 @@ const QnAList = () => {
     };
   }, []);
 
-  // selectedCategory가 변경될 때마다 필터링된 데이터를 설정하는 useEffect
   useEffect(() => {
-    if (selectedCategory === '전체') {
-      setFilteredQnaData(qnaData);
-    } else {
-      setFilteredQnaData(
-        qnaData.filter((qna) => qna.qcategory === selectedCategory),
+    filterQnaData();
+  }, [selectedCategory, qnaData, searchQuery, searchType]);
+
+  const filterQnaData = () => {
+    let filteredData = qnaData;
+
+    if (selectedCategory !== '전체') {
+      filteredData = filteredData.filter(
+        (qna) => qna.qcategory === selectedCategory,
       );
     }
-  }, [selectedCategory, qnaData]);
+
+    if (searchQuery) {
+      filteredData = filteredData.filter((qna) => {
+        if (searchType === 'title') {
+          return qna.qtitle.includes(searchQuery);
+        } else if (searchType === 'writer') {
+          return qna.qwriter.includes(searchQuery);
+        }
+        return true;
+      });
+    }
+
+    setFilteredQnaData(filteredData);
+  };
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
@@ -130,29 +152,68 @@ const QnAList = () => {
         </div>
       </div>
 
-      <Dropdown
-        className='qnaListDropdown'
-        isOpen={dropdownOpen}
-        toggle={toggleDropdown}
+      <div
+        className='dropdown-container'
         style={{
-          margin: '20px auto',
-          width: '80%',
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
+          margin: '0 auto',
+          width: '80%',
+          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
-        <DropdownToggle caret>{selectedCategory}</DropdownToggle>
-        <DropdownMenu>
-          {categories.map((category) => (
-            <DropdownItem
-              key={category.value}
-              onClick={() => handleCategorySelect(category)}
-            >
-              {category.name}
+        <Dropdown
+          className='qnaListDropdown'
+          isOpen={categoryDropdownOpen}
+          toggle={toggleCategoryDropdown}
+          style={{ marginRight: '10px' }}
+        >
+          <DropdownToggle caret>{selectedCategory}</DropdownToggle>
+          <DropdownMenu>
+            {categories.map((category) => (
+              <DropdownItem
+                key={category.value}
+                onClick={() => handleCategorySelect(category)}
+              >
+                {category.name}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+
+        <Dropdown
+          isOpen={searchTypeDropdownOpen}
+          toggle={toggleSearchTypeDropdown}
+        >
+          <DropdownToggle caret>
+            {searchType === 'title' ? '제목' : '작성자'}
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={() => setSearchType('title')}>
+              제목
             </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
+            <DropdownItem onClick={() => setSearchType('writer')}>
+              작성자
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <InputGroup
+          className='search-bar'
+          style={{ width: '40%', paddingTop: '20px' }}
+        >
+          <Input
+            style={{ width: '100%' }}
+            type='text'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={`Search by ${searchType === 'title' ? '제목' : '작성자'}`}
+          />
+          {/* <InputGroupText>
+          <Button onClick={filterQnaData}>검색</Button>
+        </InputGroupText> */}
+        </InputGroup>
+      </div>
 
       <div className='qnaListContainer'>
         {filteredQnaData.map((qna) => (
