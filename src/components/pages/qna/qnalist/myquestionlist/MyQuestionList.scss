@@ -105,6 +105,16 @@
             width: 400px;
             margin-left: 50px;
         }
+        
+        .mqlistDeleteBtn {
+            font-size: 20px;
+
+            &:hover {
+                background: red;
+                padding: 0 5px;
+                border-radius: 5px;
+            }
+        }
     }
 }
 
