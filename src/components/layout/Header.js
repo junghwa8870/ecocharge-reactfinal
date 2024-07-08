@@ -56,6 +56,7 @@ const Header = () => {
 
   return (
     <AppBar
+      className='HeaderContainer'
       position='fixed'
       style={{
         width: '100%',
@@ -79,6 +80,7 @@ const Header = () => {
               }}
             >
               <img
+                className='header-logo-img'
                 src='MainLogo.png'
                 alt='Logo'
                 style={{
@@ -91,6 +93,7 @@ const Header = () => {
             </Link>
           </Grid>
           <Grid
+            className='headerTextGroup'
             item
             flex={6}
             style={{
@@ -133,6 +136,7 @@ const Header = () => {
             ))}
           </Grid>
           <Grid
+            className='logInOutBtn'
             item
             flex={2}
             style={{

@@ -119,3 +119,54 @@
       z-index: 1; 
     }
     
+
+
+    /////////////////////////////////////
+    /// 미디어쿼리
+    /// 
+    @media (min-width: 1024px) {
+      // 넓은 화면 (데스크탑, 큰태블릿) 1280x1024 (SXGA)
+      .HeaderContainer {
+        width: 80%;
+        
+        .header-logo-img {
+          margin-left: 10px !important;
+          width: 200px !important;
+        }
+
+        .headerTextGroup {
+          white-space: nowrap;
+          font-size: 10px;
+          margin-left: -20px;
+          
+        }
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 1024px) {
+      // 중간화면 (태플릿) 600x1024 (세로 모드 태블릿)
+
+      .HeaderContainer {
+        width: 60%;
+        
+        .header-logo-img {
+          margin-left: -20px !important;
+          width: 100px !important;
+          margin-top: 20px;
+        }
+
+        .headerTextGroup {
+          white-space: nowrap;
+          font-size: 10px !important;
+          margin-left: -20px;
+          width: 40px;
+          margin-top: 20px;
+        }
+
+        .logInOutBtn {
+          width: 100px;
+        }
+      }
+    }
+
+    
