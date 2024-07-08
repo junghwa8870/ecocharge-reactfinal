@@ -20,6 +20,7 @@ function FindCharge() {
   const navigator = window.navigator;
   const [addr, setAddr] = useState('');
   const [markerLatLng, setMarkerLatLng] = useState();
+  const [timeoutId, setTimeoutId] = useState(null);
 
   useEffect(() => {
     function getLocation() {
@@ -51,20 +52,27 @@ function FindCharge() {
 
   useEffect(() => {
     const makersRender = async () => {
-      if (mapLat !== null && mapLng !== null) {
-        const res = await axios.get(
-          API_BASE_URL + CHARGESPOT + `/marker?lat=${mapLat}&lng=${mapLng}`,
-        );
-        console.log(res.data);
-
-        const data = res.data;
-        console.log(data.length);
-        const array = [];
-        for (let index = 0; index < data.length; index++) {
-          array.push({ lat: data[index].lat, lng: data[index].lng });
-        }
-        setMarkerLatLng(array);
+      if (timeoutId) {
+        clearTimeout();
       }
+
+      const id = setTimeout(async () => {
+        if (mapLat !== null && mapLng !== null) {
+          const res = await axios.get(
+            API_BASE_URL + CHARGESPOT + `/marker?lat=${mapLat}&lng=${mapLng}`,
+          );
+          console.log(res.data);
+
+          const data = res.data;
+          console.log(data.length);
+          const array = [];
+          for (let index = 0; index < data.length; index++) {
+            array.push({ lat: data[index].lat, lng: data[index].lng });
+          }
+          setMarkerLatLng(array);
+        }
+      }, 300);
+      setTimeoutId(id);
     };
     makersRender();
   }, [mapLat || mapLng]);
