@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
-function MapComponent({ lat, lng, addr, setGeometricData }) {
+function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
   const navermaps = useNavermaps();
   useEffect(() => {
     if (addr !== null && addr !== '') {
@@ -37,7 +37,12 @@ function MapComponent({ lat, lng, addr, setGeometricData }) {
 
   return (
     <NaverMap center={new navermaps.LatLng(lat, lng)} defaultZoom={15}>
-      <Marker position={new navermaps.LatLng(lat, lng)} />
+      {markerLatLng &&
+        markerLatLng.map((marker) => {
+          return (
+            <Marker position={new navermaps.LatLng(marker.lat, marker.lng)} />
+          );
+        })}
     </NaverMap>
   );
 }

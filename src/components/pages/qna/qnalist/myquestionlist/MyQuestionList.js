@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Dropdown,
   DropdownToggle,
@@ -15,6 +15,9 @@ import {
   faChevronLeft,
   faSquareMinus,
 } from '@fortawesome/free-solid-svg-icons';
+import AuthContext from '../../../../../utils/AuthContext.js';
+import axios from 'axios';
+import { API_BASE_URL, QNA } from '../../../../../config/host-config.js';
 
 const QnAList = () => {
   const categories = [
@@ -56,6 +59,13 @@ const QnAList = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [activeQuestion, setActiveQuestion] = useState(null);
   const navigate = useNavigate(); // useNavigate 훅 사용
+  const { role } = useContext(AuthContext);
+  const requestUrl = API_BASE_URL + QNA;
+
+  // const qnaListRenderingHandler = () => {
+  //   let url = `${requestUrl}?page=${}`;
+
+  // };
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
 
@@ -67,8 +77,22 @@ const QnAList = () => {
     setActiveQuestion(activeQuestion === id ? null : id);
   };
 
-  const handleDeleteClick = () => {
-    // 삭제기능 구현
+  const handleDeleteClick = async (id) => {
+    console.log('삭제로직 작동');
+    try {
+      const response = await axios.delete(`${API_BASE_URL}${QNA}/${id}`, {
+        headers: { 'content-type': 'application/json' },
+      });
+      const res = response.data;
+
+      if (res) {
+        alert('게시글이 삭제되었습니다');
+      } else {
+        alert('이미 삭제된 게시글입니다.');
+      }
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
   };
 
   const filteredQnaData =
@@ -163,12 +187,14 @@ const QnAList = () => {
                 {qna.date}
               </div>
 
-              <div
-                className='mqlistDeleteBtn'
-                onClick={() => handleDeleteClick()}
-              >
-                <FontAwesomeIcon icon={faSquareMinus} />
-              </div>
+              {role === 'ADMIN' && (
+                <div
+                  className='mqlistDeleteBtn'
+                  onClick={() => handleDeleteClick(qna.id)}
+                >
+                  <FontAwesomeIcon icon={faSquareMinus} />
+                </div>
+              )}
             </div>
             {activeQuestion === qna.id && (
               <div className='responseBox'>

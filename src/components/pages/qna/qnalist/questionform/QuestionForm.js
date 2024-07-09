@@ -7,18 +7,12 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Grid } from '@mui/material';
 import { API_BASE_URL, QNA } from '../../../../../config/host-config';
 import axios from 'axios';
+import axiosInstance from '../../../../../config/axios-config';
 
 const QuestionForm = () => {
-  const [title, setTitle] = useState('');
-  const [writer, setWriter] = useState('');
-  const [category, setCategory] = useState(''); // New state for category
   const navigate = useNavigate();
 
-  const [content, setContent] = useState('');
-
   const REQUEST_URL = API_BASE_URL + QNA;
-
-  const [qna, setQna] = useState(false);
 
   const [formData, setFormData] = useState({});
 
@@ -31,31 +25,15 @@ const QuestionForm = () => {
     console.log(value);
   };
 
-  const fetchQna = async () => {
-    const data = formData;
-    console.log(formData);
-    const body = JSON.stringify(data);
-
-    const headers = { 'Content-Type': 'application/json' };
+  const fetchQna = async (e) => {
+    e.preventDefault();
     try {
-      const res = await axios.post(REQUEST_URL, body, { headers });
-      console.log(res);
-      setQna(res.data);
+      const res = await axiosInstance.post(REQUEST_URL, formData);
+      console.log(res.data);
       navigate('/qna');
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const questionFormData = {
-      title,
-      content,
-      category, // Include category in form data
-    };
-    console.log(questionFormData);
-    navigate('/myquestionlist');
   };
 
   // const handleBack = () => {
@@ -83,15 +61,15 @@ const QuestionForm = () => {
         되돌아가기
       </Button> */}
       <div className='QquestionFormBox'>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={fetchQna}>
           <FormGroup className='questionWriteForm'>
             <Label for='qcategory'>카테고리</Label>
             <Input
               className='qnaSelect'
               type='select'
-              name='qcategory'
+              name='qCategory'
               id='qcategory'
-              value={formData.qcategory}
+              value={formData.qCategory}
               onChange={handleChange}
             >
               <option value='' disabled>
@@ -108,10 +86,10 @@ const QuestionForm = () => {
             <Input
               className='qTitleBox'
               type='text'
-              name='qtitle'
+              name='qTitle'
               id='qtitle'
               placeholder='제목을 입력하세요'
-              value={formData.qtitle}
+              value={formData.qTitle}
               onChange={handleChange}
             />
           </FormGroup>
@@ -119,11 +97,11 @@ const QuestionForm = () => {
             <Label for='qcontent'>내용</Label>
             <Input
               type='textarea'
-              name='qcontent'
+              name='qContent'
               id='qcontent'
               placeholder='내용을 입력하세요'
               className='qcontentbox'
-              value={formData.qcontent}
+              value={formData.qContent}
               onChange={handleChange}
             />
           </FormGroup>
@@ -132,7 +110,6 @@ const QuestionForm = () => {
               type='submit'
               color='primary'
               className='QquestionWirteCompleteBtn'
-              onClick={fetchQna}
             >
               작성 완료
             </Button>

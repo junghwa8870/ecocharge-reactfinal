@@ -18,11 +18,20 @@ const WriteQnA = () => {
 
   const [formData, setFormData] = useState({});
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const fetchQna = async () => {};
 
-  const qnaHandler = (e) => {};
+  const qnaHandler = (e) => {
+    e.preventDefault();
+    fetchQna();
+  };
 
   return (
     <div className='qnaWriteContainer' style={{ padding: '2rem' }}>
@@ -47,7 +56,7 @@ const WriteQnA = () => {
             <Input
               className='qnaSelect'
               type='select'
-              name='qTitle'
+              name='qCategory'
               id='qcategory'
               value={formData.qTitle}
               onChange={handleChange}
@@ -66,7 +75,7 @@ const WriteQnA = () => {
             <Input
               className='qTitleBox'
               type='text'
-              name='qContent'
+              name='qTitle'
               id='qtitle'
               placeholder='질문을 입력하세요'
               value={formData.qContent}
@@ -77,7 +86,7 @@ const WriteQnA = () => {
             <Label for='qcontent'>답변</Label>
             <Input
               type='textarea'
-              name='qcontent'
+              name='qContent'
               id='qcontent'
               placeholder='답변을 입력하세요'
               className='qcontentbox'

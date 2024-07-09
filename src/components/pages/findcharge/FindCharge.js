@@ -4,9 +4,10 @@ import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임�
 import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
 import '../findcharge/ChargeSpotDetail';
-import { Container as MapDiv, NaverMap, useNavermaps } from 'react-naver-maps';
+import { Container as MapDiv } from 'react-naver-maps';
 import NaverMapApi from './NaverMapApi';
 import axios from 'axios';
+import { API_BASE_URL, CHARGESPOT } from '../../../config/host-config';
 // import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
 
 function FindCharge() {
@@ -18,6 +19,7 @@ function FindCharge() {
   });
   const navigator = window.navigator;
   const [addr, setAddr] = useState('');
+  const [markerLatLng, setMarkerLatLng] = useState();
 
   useEffect(() => {
     function getLocation() {
@@ -47,7 +49,28 @@ function FindCharge() {
     getLocation();
   }, []);
 
+  useEffect(() => {
+    const makersRender = async () => {
+      if (mapLat !== null && mapLng !== null) {
+        const res = await axios.get(
+          API_BASE_URL + CHARGESPOT + `/marker?lat=${mapLat}&lng=${mapLng}`,
+        );
+        console.log(res.data);
+
+        const data = res.data;
+        console.log(data.length);
+        const array = [];
+        for (let index = 0; index < data.length; index++) {
+          array.push({ lat: data[index].lat, lng: data[index].lng });
+        }
+        setMarkerLatLng(array);
+      }
+    };
+    makersRender();
+  }, [mapLat || mapLng]);
+
   const handleSearch = (params) => {
+    setMarkerLatLng();
     setSearchParams(params);
     setVisible(Object.values(params).some((value) => value !== null));
     if (
@@ -85,6 +108,7 @@ function FindCharge() {
               lng={mapLng}
               addr={addr}
               setGeometricData={setGeometricData}
+              markerLatLng={markerLatLng}
             />
           </MapDiv>
         </div>
