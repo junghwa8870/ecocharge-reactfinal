@@ -13,7 +13,7 @@ const MyPage = () => {
       </div>
       <div className='contentContainer'>
         <div className='subContainer'>
-          <h2 className='titles'>충전소 예약 내역</h2>
+          <h2 className='titles'>충전소 예약내역</h2>
           <ReservationDetails />
         </div>
         <div className='subContainer'>

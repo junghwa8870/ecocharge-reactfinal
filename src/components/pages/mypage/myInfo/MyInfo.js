@@ -340,7 +340,7 @@ const MyInfo = () => {
             {message.phone}
           </span>
           <button
-            className='phoneNumbereButton'
+            className='phoneNumberButton'
             onClick={handleSendVerification}
           >
             인증
@@ -387,8 +387,8 @@ const MyInfo = () => {
       ) : (
         <>
           <div className='userName'>{userName}</div>
-          <div className='userInfo'>전화번호: {phone}</div>
-          <div className='userInfo'>로그인 유형: {loginMethod}</div>
+          <div className='userInfo'>전화번호 : {phone}</div>
+          <div className='userInfo'>로그인 종류 - {loginMethod}</div>
           <button className='editProfileButton' onClick={handleEditProfile}>
             내 정보 수정
           </button>
