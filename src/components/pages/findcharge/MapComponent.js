@@ -3,6 +3,8 @@ import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
 function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
   const navermaps = useNavermaps();
+  const [center, setCenter] = useState({ lat, lng });
+
   useEffect(() => {
     if (addr !== null && addr !== '') {
       navermaps.Service.geocode(
@@ -35,14 +37,35 @@ function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
     }
   }, [addr]);
 
+  useEffect(() => {
+    setCenter({ lat, lng });
+  }, [lat, lng]);
+
+  const handleCenterChanged = (e) => {
+    setCenter({ lat: e._lat, lng: e._lng });
+  };
+
+  const handleIdle = () => {
+    console.log(center);
+
+    setGeometricData({ mapLat: center.lat, mapLng: center.lng });
+  };
+
   return (
-    <NaverMap center={new navermaps.LatLng(lat, lng)} defaultZoom={15}>
+    <NaverMap
+      mapDivId={'maps-getting-started-uncontrolled'}
+      center={new navermaps.LatLng(center.lat, center.lng)}
+      defaultZoom={15}
+      onCenterChanged={handleCenterChanged}
+      onIdle={handleIdle}
+    >
       {markerLatLng &&
-        markerLatLng.map((marker) => {
-          return (
-            <Marker position={new navermaps.LatLng(marker.lat, marker.lng)} />
-          );
-        })}
+        markerLatLng.map((marker, index) => (
+          <Marker
+            key={index}
+            position={new navermaps.LatLng(marker.lat, marker.lng)}
+          ></Marker>
+        ))}
     </NaverMap>
   );
 }
