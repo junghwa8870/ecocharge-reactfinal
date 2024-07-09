@@ -290,10 +290,8 @@ const MyInfo = () => {
         navigate,
       );
     };
-    if (phoneNumber !== null) {
-      renderingMyInfo();
-    }
-  }, []);
+    renderingMyInfo();
+  }, [isEditing]);
 
   return (
     <div className='infoContainer'>
