@@ -38,7 +38,7 @@ const ReservationDetails = () => {
     <Grid container className='reservationListContainer'>
       {reservationList.length > 0 ? (
         reservationList.map((reservation) => (
-          <ReservationItem key={reservation.id} info={reservation} />
+          <ReservationItem key={reservation.reservationNo} info={reservation} />
         ))
       ) : (
         <div>예약이 없습니다.</div>
