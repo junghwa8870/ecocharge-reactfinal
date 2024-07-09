@@ -110,7 +110,7 @@ const QuestionForm = () => {
               value={formData.qcategory}
               onChange={handleChange}
             >
-              <option value='' disabled>
+              <option value='' disabled selected>
                 카테고리를 선택하세요
               </option>
               <option>홈페이지</option>

@@ -8,14 +8,22 @@ import {
   USER,
 } from '../../../config/host-config';
 import axiosInstance from '../../../config/axios-config';
-import { dark } from '@mui/material/styles/createPalette';
 
-import { Grid } from '@mui/material';
+import {
+  Grid,
+  Input,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from '@mui/material';
 import { Button, Table } from 'reactstrap';
 import axios from 'axios';
 import handleRequest from '../../../utils/handleRequest';
 import AuthContext from '../../../utils/AuthContext';
 import PageButton from '../pageButton/PageButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenNib, faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 
 const UserBoard = () => {
   const navigate = useNavigate();
@@ -29,6 +37,11 @@ const UserBoard = () => {
   const [pageButtonCount, setPageButtonCount] = useState(0);
   const [pageNo, setPageNo] = useState(page);
   const location = useLocation();
+
+  // 검색 관련 상태 변수 추가
+  const [searchType, setSearchType] = useState('title');
+  const [searchQuery, setSearchQuery] = useState('');
+
   const pageButtonClickHandler = (no) => {
     console.log(location.state);
     setPageNo(no);
@@ -38,6 +51,7 @@ const UserBoard = () => {
       });
     }
   };
+
   const getBoardList = async () => {
     console.log(location.state);
     let requestUrl = API_BASE_URL + BOARD;
@@ -57,6 +71,10 @@ const UserBoard = () => {
     }
   };
 
+  const handleBoardDeleteClick = () => {
+    // 삭제함수 필요
+  };
+
   const writeBoardFormHandler = async () => {
     const onSuccess = () => {
       navigate('/writeBoardForm');
@@ -68,6 +86,16 @@ const UserBoard = () => {
       navigate,
     );
   };
+
+  const filteredBoardList = boardList.filter((board) => {
+    if (searchType === 'title') {
+      return board.btitle.toLowerCase().includes(searchQuery.toLowerCase());
+    } else if (searchType === 'writer') {
+      return board.bwriter.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+    return true;
+  });
+
   useEffect(() => {
     const handleBackButton = (event) => {
       console.log(location.state);
@@ -115,22 +143,92 @@ const UserBoard = () => {
         </div>
       </div>
 
+      <div
+        className='search-bar2'
+        style={{
+          margin: '20px auto',
+          width: '80%',
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <FormControl
+          variant='outlined'
+          style={{ marginRight: '10px', minWidth: 120 }}
+        >
+          <InputLabel id='search-type-label'>검색 유형</InputLabel>
+          <Select
+            labelId='search-type-label'
+            id='search-type'
+            value={searchType}
+            onChange={(e) => setSearchType(e.target.value)}
+            label='검색 유형'
+          >
+            <MenuItem value='title'>제목</MenuItem>
+            <MenuItem value='writer'>작성자</MenuItem>
+          </Select>
+        </FormControl>
+        <Input
+          style={{ width: '320px' }}
+          type='text'
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={`Search by ${searchType === 'title' ? '제목' : '작성자'}`}
+        />
+      </div>
+
       <Table className='user-board-table'>
         <tbody className='boardInnerBox'>
-          {boardList.map((board) => (
-            <tr
-              key={board.boardNo}
-              className='bRow'
-              onClick={() =>
-                navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
-                  state: board.boardNo,
-                })
-              }
-            >
-              <td className='Bno'>{board.count}</td>
-              <td className='Btitle'>{board.btitle}</td>
-              <td className='Bwriter'>{board.bwriter}</td>
-              <td className='Bdate'>{board.createDate}</td>
+          {filteredBoardList.map((board) => (
+            <tr key={board.boardNo} className='bRow'>
+              <td
+                className='Bno'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.count}
+              </td>
+              <td
+                className='Btitle'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.btitle}
+              </td>
+              <td
+                className='Bwriter'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.bwriter}
+              </td>
+              <td
+                className='Bdate'
+                onClick={() =>
+                  navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
+                    state: board.boardNo,
+                  })
+                }
+              >
+                {board.createDate}
+              </td>
+              <td
+                className='boardDeleteBtn'
+                onClick={() => handleBoardDeleteClick()}
+              >
+                <FontAwesomeIcon icon={faSquareMinus} />
+              </td>
             </tr>
           ))}
         </tbody>

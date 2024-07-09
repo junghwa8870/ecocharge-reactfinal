@@ -25,6 +25,7 @@ import {
   faThumbsDown,
   faFontAwesome,
   faChevronLeft,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_BASE_URL, BOARD } from '../../../../config/host-config';
@@ -69,6 +70,10 @@ const UserBoardDetail = () => {
   console.log(detailBoard);
   const toggleReportModal = () => {
     setIsReportModalOpen(!isReportModalOpen);
+  };
+
+  const handleBoardDetailDelete = () => {
+    // 게시글 삭제 처리 함수 필요
   };
 
   const handleCommentSubmit = (e) => {
@@ -120,15 +125,36 @@ const UserBoardDetail = () => {
         <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Back
       </div>
       <h1 className='UBDcontainerTitle'>게시글</h1>
-      <Grid className='accuseBtnBox' onClick={toggleReportModal}>
-        <div className='accuseText'>
-          신고하기&nbsp;
-          <FontAwesomeIcon
-            icon={faFontAwesome}
-            className='accuseBtn'
-            style={{ cursor: 'pointer' }}
-          />
-        </div>
+      <Grid
+        className='btnBoxes'
+        style={{
+          width: '70%',
+          margin: '0 auto 10px',
+          display: 'flex',
+          justifyContent: 'end',
+        }}
+      >
+        <Grid
+          className='boardDetailDeleteBtn'
+          onClick={handleBoardDetailDelete}
+        >
+          {' '}
+          <div className='deletement'>
+            삭제하기&nbsp;
+            <FontAwesomeIcon icon={faTrash} />
+          </div>
+        </Grid>
+
+        <Grid className='accuseBtnBox' onClick={toggleReportModal}>
+          <div className='accuseText'>
+            신고하기&nbsp;
+            <FontAwesomeIcon
+              icon={faFontAwesome}
+              className='accuseBtn'
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
+        </Grid>
       </Grid>
       <Card className='UBD-card-container'>
         <Grid className='UserBoardInfo'>

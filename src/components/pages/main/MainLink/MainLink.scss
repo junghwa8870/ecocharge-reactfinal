@@ -37,11 +37,11 @@
     .card-container {
         max-width: 500px;
         margin: 20px auto 0;
-        height: 560px;
+        height: 550px;
         box-shadow: none; /* 그림자 없애기 */
         // background-color: aqua;
         border: 2px solid;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         
     }
     
@@ -72,6 +72,7 @@
             font-weight: 2rem;
             width: 95%;
             border: 2px solid;
+            
 
             .go-spot-title {
                 margin-bottom: 10px;
@@ -101,7 +102,6 @@
     position: relative;
     text-align: center;
     // background-color: aqua;
-    top: 20px;
     
     
     .support-car-name {
@@ -186,6 +186,10 @@
         background-color: hsla(234, 69%, 16%, 0.788);
         border: none;
         margin-top: 20px;
+
+        &:hover {
+            background-color: rgb(12, 12, 88);
+        }
     }
     
   }
@@ -193,10 +197,10 @@
 .carousel-indicators {
     align-items: flex-end;
     text-align: center;
-    background-color: #f6f3f2;
     // margin-bottom: 0;
     margin: 0 auto;
     margin-top: 40px;
+    background: gray;
     
 }
 
