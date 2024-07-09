@@ -96,6 +96,7 @@ function ChargeSpotDetail() {
             color='primary'
             variant='contained'
             className='reservation-button'
+            style={{ background: 'crimson' }}
           >
             예약하기
           </Button>
@@ -107,7 +108,7 @@ function ChargeSpotDetail() {
               icon={isBookmarked ? filledStar : emptyStar}
               className='star-icon'
               style={{
-                fontSize: '24px',
+                fontSize: '30px',
                 transition: 'transform 0.3s, color 0.3s',
               }}
               onMouseEnter={(e) =>
@@ -122,11 +123,10 @@ function ChargeSpotDetail() {
       </div>
 
       <div className='info-box'>
-        <h3>충전소 위치 지도</h3>
         <div className='map-review-container'>
           <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
           <div className='review-input-container'>
-            <h3>이용후기 작성하기</h3>
+            <h3>후기 작성</h3>
             <TextField
               label='이용 후기'
               multiline
@@ -140,7 +140,7 @@ function ChargeSpotDetail() {
             <Button
               variant='contained'
               color='primary'
-              style={{ marginTop: '20px' }}
+              style={{ marginTop: '20px', background: 'rgb(69, 69, 209)' }}
               onClick={handleSubmitReview}
             >
               등록

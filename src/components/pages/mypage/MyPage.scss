@@ -1,10 +1,11 @@
 .mainContainer {
-  padding: 40px;
+  padding: 20px;
   margin-top: 80px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(to bottom, lightgray 40%, white 0%);
+  background-image: linear-gradient(to bottom, lightgray 46%, floralwhite 0%);
 }
 
 .pageTitle {
@@ -19,7 +20,6 @@
   padding: 40px;
   width: 100%;
   max-width: 800px;
-  margin-bottom: 50px;
 }
 
 .contentContainer {
@@ -29,25 +29,27 @@
   width: 80%;
   max-width: 2000px;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .subContainer, .bookmarkChargeSpaceContainer {
   background-color: #fff;
-  border-radius: 8px;
-  border: 2px solid darkgray;
-  padding: 50px;
+  border-radius: 10px;
+  border: 3px solid rgb(69, 69, 209);
+  padding: 40px;
   flex: 1;
   min-width: 300px;
   max-height: 600px;
-  margin: 10px;
+  margin-top: 50px;
 }
 
 .bookmarkChargeSpaceTitle, .titles {
-  font-size: 2rem;
+  font-size: 20px;
+  font-weight: bold;
   margin-bottom: 20px;
-  color: #222;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 30px;
+  margin-left: 110px;
+  color: gray;
+  padding-bottom: 20px;
 }
 
 .reservationListContainer, .inquiryListContainer {
