@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
-function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
+function MapComponent({
+  lat,
+  lng,
+  addr,
+  setGeometricData,
+  markerLatLng,
+  setZoom,
+}) {
   const navermaps = useNavermaps();
   const [center, setCenter] = useState({ lat, lng });
 
@@ -28,9 +35,9 @@ function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
             ' 경도 = ',
             items[0].point.x,
           );
-          setGeometricData({
-            mapLat: items[0].point.y,
-            mapLng: items[0].point.x,
+          setCenter({
+            lat: items[0].point.y,
+            lng: items[0].point.x,
           });
         },
       );
@@ -38,26 +45,23 @@ function MapComponent({ lat, lng, addr, setGeometricData, markerLatLng }) {
   }, [addr]);
 
   useEffect(() => {
-    setCenter({ lat, lng });
-  }, [lat, lng]);
-
-  const handleCenterChanged = (e) => {
-    setCenter({ lat: e._lat, lng: e._lng });
-  };
-
-  const handleIdle = () => {
-    console.log(center);
-
     setGeometricData({ mapLat: center.lat, mapLng: center.lng });
-  };
+  }, [center]);
 
   return (
     <NaverMap
       mapDivId={'maps-getting-started-uncontrolled'}
       center={new navermaps.LatLng(center.lat, center.lng)}
       defaultZoom={15}
-      onCenterChanged={handleCenterChanged}
-      onIdle={handleIdle}
+      // onCenterChanged={handleCenterChanged}
+      onIdle={(e) => {
+        console.log(e.__targets.scale.target.zoom);
+        setCenter({
+          lat: e.__targets.scale.target.center._lat,
+          lng: e.__targets.scale.target.center._lng,
+        });
+        setZoom(e.__targets.scale.target.zoom);
+      }}
     >
       {markerLatLng &&
         markerLatLng.map((marker, index) => (
