@@ -21,6 +21,7 @@ function FindCharge() {
   const [addr, setAddr] = useState('');
   const [markerLatLng, setMarkerLatLng] = useState();
   const [timeoutId, setTimeoutId] = useState(null);
+  const [zoom, setZoom] = useState(15);
 
   useEffect(() => {
     function getLocation() {
@@ -59,23 +60,25 @@ function FindCharge() {
       const id = setTimeout(async () => {
         if (mapLat !== null && mapLng !== null) {
           const res = await axios.get(
-            API_BASE_URL + CHARGESPOT + `/marker?lat=${mapLat}&lng=${mapLng}`,
+            API_BASE_URL +
+              CHARGESPOT +
+              `/marker?lat=${mapLat}&lng=${mapLng}&zoom=${zoom}`,
           );
-          console.log(res.data);
+          // console.log(res.data);
 
           const data = res.data;
-          console.log(data.length);
+          // console.log(data.length);
           const array = [];
           for (let index = 0; index < data.length; index++) {
             array.push({ lat: data[index].lat, lng: data[index].lng });
           }
           setMarkerLatLng(array);
         }
-      }, 300);
+      }, 100);
       setTimeoutId(id);
     };
     makersRender();
-  }, [mapLat || mapLng]);
+  }, [mapLat, mapLng, zoom]);
 
   const handleSearch = (params) => {
     setMarkerLatLng();
@@ -86,7 +89,7 @@ function FindCharge() {
       params.searchKey !== '' &&
       params.searchKey !== undefined
     ) {
-      console.log(params.searchKey);
+      // console.log(params.searchKey);
       setAddr(params.searchKey);
     }
   };
@@ -117,6 +120,7 @@ function FindCharge() {
               addr={addr}
               setGeometricData={setGeometricData}
               markerLatLng={markerLatLng}
+              setZoom={setZoom}
             />
           </MapDiv>
         </div>
