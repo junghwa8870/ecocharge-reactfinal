@@ -40,9 +40,10 @@ function SearchComponent({
           onChange={handleChange}
         >
           <option>선택</option>
-          <option>DC콤보</option>
+          <option>AC3상</option>
           <option>AC완속</option>
-          <option>DC차데모+AC3상+DC콤보</option>
+          <option>DC콤보</option>
+          <option>DC차데모</option>
         </select>
       </div>
       <div>
@@ -53,13 +54,8 @@ function SearchComponent({
           onChange={handleChange}
         >
           <option>선택</option>
-          <option>급속(50kW)</option>
-          <option>급속(100kW단독)</option>
-          <option>초급속(350kW단독)</option>
-          <option>완속(30kW단독)</option>
-          <option>급속(400kW동시)</option>
-          <option>급속(300kW동시)</option>
-          <option>급속(200kW동시)</option>
+          <option>완속</option>
+          <option>급속</option>
         </select>
       </div>
       <div>
