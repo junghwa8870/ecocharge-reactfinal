@@ -171,13 +171,12 @@ const QnAList = () => {
       <ModalBody>
         <div>질문: {selectedQna?.qtitle}</div>
         <InputGroup style={{ marginTop: '10px' }}>
-          <InputGroupText>답변:{answer}</InputGroupText>
+          <InputGroupText>답변:</InputGroupText>
           <Input
             type='textarea'
             name='qanswer'
             id='qanswer'
             placeholder='내용을 입력하세요'
-            value={formData.qanswer}
             onChange={handleChange}
           />
         </InputGroup>

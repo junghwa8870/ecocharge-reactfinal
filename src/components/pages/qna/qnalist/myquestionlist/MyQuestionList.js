@@ -100,7 +100,7 @@ const QnAList = () => {
       const res = await axios.get(url, body, {
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log(res.data);
+      // console.log(res.data);
 
       // 서버 응답에서 qnas 배열을 추출하여 사용
       if (res.data && Array.isArray(res.data.qnas)) {
@@ -126,7 +126,7 @@ const QnAList = () => {
     const filterData = () => {
       if (selectedCategory === '전체') {
         setFilteredQnaData(myQnAData);
-        console.log(myQnAData);
+        // console.log(myQnAData);
       } else {
         const filteredData = myQnAData.filter(
           (qna) => qna.qcategory === selectedCategory,

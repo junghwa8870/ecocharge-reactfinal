@@ -33,7 +33,7 @@ const QuestionForm = () => {
       ...formData,
       [name]: value,
     });
-    console.log(value);
+    // console.log(value);
   };
 
   const fetchQna = async () => {
@@ -41,7 +41,7 @@ const QuestionForm = () => {
       const data = formData;
       const body = JSON.stringify(data);
       const res = await axiosInstance.post(REQUEST_URL, body);
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data) {
         alert('게시글이 작성되었습니다');
         navigate('/qnalist');
@@ -49,13 +49,13 @@ const QuestionForm = () => {
     } catch (error) {
       if (error.response) {
         // 서버에서 응답을 받았지만 오류가 발생한 경우
-        console.error('Error response:', error.response.data);
+        // console.error('Error response:', error.response.data);
         // 여기서 오류 메시지를 콘솔에 출력하거나, 사용자에게 알림 등의 처리를 추가할 수 있습니다.
         alert('양식을 확인해주세요!');
         navigate('/questionform');
       } else {
         // 오류를 발생시킨 요청을 설정하는 도중 문제가 발생한 경우
-        console.error('Error setting up request:', error.message);
+        // console.error('Error setting up request:', error.message);
         alert(
           '요청을 처리하는 도중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.',
         );
@@ -70,7 +70,7 @@ const QuestionForm = () => {
       content,
       category, // Include category in form data
     };
-    console.log(questionFormData);
+    // console.log(questionFormData);
     navigate('/myquestionlist');
   };
 
