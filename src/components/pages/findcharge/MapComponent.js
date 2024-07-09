@@ -13,7 +13,7 @@ function MapComponent({
   const [center, setCenter] = useState({ lat, lng });
 
   useEffect(() => {
-    if (addr !== null && addr !== '') {
+    if (addr !== null && addr !== '' && addr !== undefined) {
       navermaps.Service.geocode(
         {
           address: addr,

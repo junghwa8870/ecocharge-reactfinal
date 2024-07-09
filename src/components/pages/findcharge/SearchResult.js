@@ -6,14 +6,10 @@ function SearchResult({ searchParams }) {
 
   const keyTranslations = {
     searchKey: '검색어',
-    connector: '커넥터',
-    speed: '충전속도',
-    free: '충전요금',
-    parkingFree: '주차요금',
+    chgerType: '커넥터',
+    powerType: '충전속도',
     location: '장소',
-    availability: '충전가능',
-    publicAccess: '외부인개방',
-    wheelchairAccess: '휠체어 접근성',
+    limitYn: '외부인개방',
   };
 
   return (
