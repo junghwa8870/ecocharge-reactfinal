@@ -163,7 +163,7 @@ const UserBoardDetail = () => {
           <div className='BoardInfoDetail'>
             작성일: {detailBoard.createDate}
           </div>
-          <div className='BoardInfoDetail'>조회수: 23</div>
+          <div className='BoardInfoDetail'>조회수: {detailBoard.viewCount}</div>
         </Grid>
         <CardImg
           className='UBDcardIMG'

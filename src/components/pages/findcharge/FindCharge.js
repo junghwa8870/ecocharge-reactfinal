@@ -94,18 +94,6 @@ function FindCharge() {
     makersRender();
   }, [mapLat, mapLng, zoom]);
 
-  const handleSearch = (params) => {
-    // setMarkerLatLng();
-    setSearchParams(params);
-    if (
-      params.searchKey !== null &&
-      params.searchKey !== '' &&
-      params.searchKey !== undefined
-    ) {
-      // console.log(params.searchKey);
-      setAddr(params.searchKey);
-    }
-  };
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value); // 검색어 변경 시 상태 업데이트
@@ -160,14 +148,16 @@ function FindCharge() {
         </div>
         <div className='map-area'>
           <MapDiv>
-            <NaverMapApi
-              lat={mapLat}
-              lng={mapLng}
-              addr={addr}
-              setGeometricData={setGeometricData}
-              markerLatLng={markerLatLng}
-              setZoom={setZoom}
-            />
+            {mapLat !== null && (
+              <NaverMapApi
+                lat={mapLat}
+                lng={mapLng}
+                addr={addr}
+                setGeometricData={setGeometricData}
+                markerLatLng={markerLatLng}
+                setZoom={setZoom}
+              />
+            )}
           </MapDiv>
         </div>
       </div>
