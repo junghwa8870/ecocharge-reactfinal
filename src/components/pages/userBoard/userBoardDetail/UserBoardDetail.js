@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Card,
@@ -29,6 +29,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_BASE_URL, BOARD } from '../../../../config/host-config';
+import handleRequest from '../../../../utils/handleRequest';
+import axiosInstance from '../../../../config/axios-config';
+import AuthContext from '../../../../utils/AuthContext';
 
 const UserBoardDetail = () => {
   const navigate = useNavigate();
@@ -38,6 +41,7 @@ const UserBoardDetail = () => {
   const [commentAuthor, setCommentAuthor] = useState('');
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
+  const { onLogout } = useContext(AuthContext);
 
   // State for report modal
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -72,8 +76,17 @@ const UserBoardDetail = () => {
     setIsReportModalOpen(!isReportModalOpen);
   };
 
-  const handleBoardDetailDelete = () => {
+  const handleBoardDetailDelete = async () => {
     // 게시글 삭제 처리 함수 필요
+    handleRequest(
+      () => axiosInstance.delete(`${API_BASE_URL}${BOARD}/delete/${boardNo}`),
+      (data) => {
+        alert('게시물이 삭제되었습니다.');
+        navigate('/board');
+      },
+      onLogout,
+      navigate,
+    );
   };
 
   const handleCommentSubmit = (e) => {
