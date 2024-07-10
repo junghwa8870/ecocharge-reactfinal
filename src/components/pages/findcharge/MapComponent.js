@@ -8,6 +8,7 @@ function MapComponent({
   setGeometricData,
   markerLatLng,
   setZoom,
+  onMarkerClick,
 }) {
   const navermaps = useNavermaps();
   const [center, setCenter] = useState({ lat, lng });
@@ -29,6 +30,9 @@ function MapComponent({
           const items = result.items; // Array of the search result
           console.log('아이템 = ', items);
           // do Something
+          if (items.length <= 0) {
+            return alert('검색어를 확인하세요');
+          }
           console.log(
             '위도 = ',
             items[0].point.y,
@@ -68,6 +72,10 @@ function MapComponent({
           <Marker
             key={index}
             position={new navermaps.LatLng(marker.lat, marker.lng)}
+            onClick={(e) => {
+              onMarkerClick(e.coord.y, e.coord.x);
+              console.log(e);
+            }}
           ></Marker>
         ))}
     </NaverMap>

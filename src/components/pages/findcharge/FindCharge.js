@@ -31,6 +31,7 @@ function FindCharge() {
   const [markerLatLng, setMarkerLatLng] = useState();
   const [zoom, setZoom] = useState(15);
   const [searchQuery, setSearchQuery] = useState();
+  const [selectedMarker, setSelectedMarker] = useState(null); // 선택된 마커 정보 상태 추가
 
   const [filters, setFilters] = useState({
     searchKey: '',
@@ -92,20 +93,8 @@ function FindCharge() {
       }
     };
     makersRender();
-  }, [mapLat, mapLng, zoom]);
+  }, [mapLat, mapLng, zoom, filters, searchQuery]);
 
-  const handleSearch = (params) => {
-    // setMarkerLatLng();
-    setSearchParams(params);
-    if (
-      params.searchKey !== null &&
-      params.searchKey !== '' &&
-      params.searchKey !== undefined
-    ) {
-      // console.log(params.searchKey);
-      setAddr(params.searchKey);
-    }
-  };
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value); // 검색어 변경 시 상태 업데이트
@@ -136,6 +125,10 @@ function FindCharge() {
     }
   };
 
+  const handleMarkerClick = (lat, lng) => {
+    setSelectedMarker({ lat, lng });
+  };
+
   return (
     <div className='find-charge-container'>
       <header className='find-charge-header'>
@@ -147,27 +140,34 @@ function FindCharge() {
           onSearch={fetchChargeSpot}
           setFilters={setFilters}
           filters={filters}
-          searchAddr={handleInputChange}
-          searchValue={searchQuery}
+          setAddr={setAddr}
         />
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
           {/* <SearchBar onSearch={handleSearch} setFilters={setFilters} /> */}
           <div className='search-results'>
-            {searchParams && <SearchResult searchParams={searchParams} />}
+            {filters && (
+              <SearchResult
+                searchParams={filters}
+                markerInfo={selectedMarker}
+              />
+            )}
           </div>
         </div>
         <div className='map-area'>
           <MapDiv>
-            <NaverMapApi
-              lat={mapLat}
-              lng={mapLng}
-              addr={addr}
-              setGeometricData={setGeometricData}
-              markerLatLng={markerLatLng}
-              setZoom={setZoom}
-            />
+            {mapLat !== null && (
+              <NaverMapApi
+                lat={mapLat}
+                lng={mapLng}
+                addr={addr}
+                setGeometricData={setGeometricData}
+                markerLatLng={markerLatLng}
+                setZoom={setZoom}
+                onMarkerClick={handleMarkerClick} // 마커 클릭 시 이벤트 핸들러 전달
+              />
+            )}
           </MapDiv>
         </div>
       </div>
