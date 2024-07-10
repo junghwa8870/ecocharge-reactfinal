@@ -8,6 +8,7 @@ function MapComponent({
   setGeometricData,
   markerLatLng,
   setZoom,
+  onMarkerClick,
 }) {
   const navermaps = useNavermaps();
   const [center, setCenter] = useState({ lat, lng });
@@ -71,6 +72,10 @@ function MapComponent({
           <Marker
             key={index}
             position={new navermaps.LatLng(marker.lat, marker.lng)}
+            onClick={(e) => {
+              onMarkerClick(e.coord.y, e.coord.x);
+              console.log(e);
+            }}
           ></Marker>
         ))}
     </NaverMap>

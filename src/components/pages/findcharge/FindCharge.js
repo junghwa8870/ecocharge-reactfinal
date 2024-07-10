@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import SearchComponent from './SearchComponent'; // SearchComponent를 임포트합니다.
 import SearchResult from './SearchResult'; // SearchResult 컴포넌트를 임포트합니다.
+import SearchBar from './SearchBar'; // SearchBar를 임포트합니다.
 import '../../../scss/FindCharge.scss';
 import '../findcharge/ChargeSpotDetail';
 import { Container as MapDiv } from 'react-naver-maps';
 import NaverMapApi from './NaverMapApi';
 import axios from 'axios';
 import { API_BASE_URL, CHARGESPOT } from '../../../config/host-config';
+import { Navigate } from 'react-router-dom';
+import axiosInstance from '../../../config/axios-config';
 // import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
 
 function FindCharge() {
   const REQUEST_URL = API_BASE_URL + CHARGESPOT;
 
+  const [searchParams, setSearchParams] = useState({
+    searchKey: '',
+    chgerType: '',
+    powerType: '',
+    location: '',
+    limitYn: '',
+  });
   const [{ mapLat, mapLng }, setGeometricData] = useState({
     mapLat: null,
     mapLng: null,
@@ -21,6 +31,7 @@ function FindCharge() {
   const [markerLatLng, setMarkerLatLng] = useState();
   const [zoom, setZoom] = useState(15);
   const [searchQuery, setSearchQuery] = useState();
+  const [selectedMarker, setSelectedMarker] = useState(null); // 선택된 마커 정보 상태 추가
 
   const [filters, setFilters] = useState({
     searchKey: '',
@@ -82,11 +93,40 @@ function FindCharge() {
       }
     };
     makersRender();
-  }, [mapLat, mapLng, zoom, filters]);
+  }, [mapLat, mapLng, zoom, filters, searchQuery]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value); // 검색어 변경 시 상태 업데이트
+  };
+
+  const fetchChargeSpot = async () => {
+    const body = {
+      limitYn: filters.limitYn,
+      chgerType: filters.chgerType,
+      powerType: filters.powerType,
+      lat: mapLat,
+      lng: mapLng,
+      zoom,
+    };
+    setAddr(searchQuery);
+    console.log(filters);
+    try {
+      const res = await axiosInstance.post(REQUEST_URL, body);
+      console.log(res.data);
+      const data = res.data;
+      const array = [];
+      for (let index = 0; index < data.length; index++) {
+        array.push({ lat: data[index].lat, lng: data[index].lng });
+      }
+      setMarkerLatLng(array);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleMarkerClick = (lat, lng) => {
+    setSelectedMarker({ lat, lng });
   };
 
   return (
@@ -97,16 +137,22 @@ function FindCharge() {
       </header>
       <div className='find-charge-filters'>
         <SearchComponent
+          onSearch={fetchChargeSpot}
           setFilters={setFilters}
-          searchAddr={handleInputChange}
-          searchValue={searchQuery}
+          filters={filters}
           setAddr={setAddr}
         />
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
+          {/* <SearchBar onSearch={handleSearch} setFilters={setFilters} /> */}
           <div className='search-results'>
-            {filters && <SearchResult searchParams={filters} />}
+            {filters && (
+              <SearchResult
+                searchParams={filters}
+                markerInfo={selectedMarker}
+              />
+            )}
           </div>
         </div>
         <div className='map-area'>
@@ -119,6 +165,7 @@ function FindCharge() {
                 setGeometricData={setGeometricData}
                 markerLatLng={markerLatLng}
                 setZoom={setZoom}
+                onMarkerClick={handleMarkerClick} // 마커 클릭 시 이벤트 핸들러 전달
               />
             )}
           </MapDiv>

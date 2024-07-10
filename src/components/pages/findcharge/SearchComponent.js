@@ -6,7 +6,6 @@ function SearchComponent({ setFilters, searchAddr, searchValue, setAddr }) {
     searchKey: '',
     chgerType: '',
     powerType: '',
-    location: '',
     limitYn: '',
   });
 
