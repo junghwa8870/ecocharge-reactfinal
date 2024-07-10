@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../../scss/SearchComponent.scss';
 
-function SearchComponent({
-  onSearch,
-  setFilters,
-  filters,
-  searchAddr,
-  searchValue,
-}) {
+function SearchComponent({ setFilters, searchAddr, searchValue, setAddr }) {
+  const [values, setValues] = useState({
+    searchKey: '',
+    chgerType: '',
+    powerType: '',
+    location: '',
+    limitYn: '',
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFilters((filters) => ({
-      ...filters,
+    setValues((values) => ({
+      ...values,
       [name]: value !== '선택' ? value : '',
     }));
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch();
+    setFilters(values);
+    setAddr(searchValue);
   };
 
   return (
@@ -36,7 +39,7 @@ function SearchComponent({
         <label>커넥터</label>
         <select
           name='chgerType'
-          value={filters.chgerType}
+          value={values.chgerType}
           onChange={handleChange}
         >
           <option>선택</option>
@@ -50,7 +53,7 @@ function SearchComponent({
         <label>충전속도</label>
         <select
           name='powerType'
-          value={filters.powerType}
+          value={values.powerType}
           onChange={handleChange}
         >
           <option>선택</option>
@@ -62,7 +65,7 @@ function SearchComponent({
         <label>외부인 개방</label>
         <select
           name='limitYn'
-          value={filters.publicAccess}
+          value={values.publicAccess}
           onChange={handleChange}
         >
           <option>선택</option>
