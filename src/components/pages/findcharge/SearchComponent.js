@@ -21,19 +21,19 @@ function SearchComponent({ setFilters, searchAddr, searchValue, setAddr }) {
   const handleSearch = (e) => {
     e.preventDefault();
     setFilters(values);
-    setAddr(searchValue);
+    setAddr(values.searchKey);
+    setValues({ ...values, searchKey: '' });
   };
 
   return (
     <div className='search-component'>
       <input
         id='searchKey'
+        name='searchKey'
         type='text'
         placeholder='검색 지역을 입력하세요.'
-        value={searchValue}
-        onChange={(e) => {
-          searchAddr(e);
-        }}
+        value={values.searchKey}
+        onChange={handleChange}
       />
       <div>
         <label>커넥터</label>
