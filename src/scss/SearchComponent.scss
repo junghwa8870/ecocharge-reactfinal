@@ -1,26 +1,41 @@
 .search-component {
-    display: flex;
-    flex-wrap: wrap; // 요소가 너무 많으면 다음 줄로 넘어갈 수 있도록 flex-wrap 속성을 추가합니다.
-    justify-content: space-between;
-    margin: 0 10%;
-    margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap; // 요소가 너무 많으면 다음 줄로 넘어갈 수 있도록 flex-wrap 속성을 추가합니다.
+  justify-content: space-between;
+  margin: 0 10%;
+  margin-top: 30px;
 }
-  
-  .category {
-    flex: 1; // 각 카테고리 요소가 동일한 너비를 가지도록 설정합니다.
-    margin-right: 10px; // 각 카테고리 사이의 간격 조정
-  }
-  
-  button {
-    margin-top: 10px; // 버튼과 카테고리 사이의 간격 조정
-  }
-  .search-component select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+
+.category {
+  flex: 1; // 각 카테고리 요소가 동일한 너비를 가지도록 설정합니다.
+  margin-right: 10px; // 각 카테고리 사이의 간격 조정
+}
+
+button {
+  margin-top: 10px; // 버튼과 카테고리 사이의 간격 조정
+}
+.search-component select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  margin-left: 5px;
+}
+
+#searchKey {
+  padding: 10px;
+  margin-top: 33px;
+  margin-right: 25px;
+  // margin-bottom: 20px;
+  height: 40px;
+  width: 22%;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

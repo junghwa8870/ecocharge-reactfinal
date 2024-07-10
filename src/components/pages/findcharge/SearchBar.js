@@ -18,10 +18,10 @@ function SearchBar({ onSearch, params }) {
     wheelchairAccess: null,
   });
 
-  const handleButtonClick = (type) => {
-    setSearchType(type); // 클릭한 버튼에 해당하는 검색 타입으로 설정
-    onSearch(filters, true); // onSearch 호출
-  };
+  // const handleButtonClick = (type) => {
+  //   setSearchType(type); // 클릭한 버튼에 해당하는 검색 타입으로 설정
+  //   onSearch(filters, true); // onSearch 호출
+  // };
 
   const handleInputChange = (e) => {
     console.log(params);
@@ -42,7 +42,7 @@ function SearchBar({ onSearch, params }) {
       />
 
       {/* 버튼 그룹 */}
-      <div className='button-group'>
+      {/* <div className='button-group'>
         <button
           onClick={() => handleButtonClick('주변충전소')}
           className={searchType === '주변충전소' ? 'active' : ''}
@@ -55,7 +55,7 @@ function SearchBar({ onSearch, params }) {
         >
           지역 충전소
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

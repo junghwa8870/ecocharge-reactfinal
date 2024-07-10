@@ -1,24 +1,25 @@
 @font-face {
-  font-family: 'Jua';
-  src: url('../components/fonts/Jua-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Dongle';
-  src: url('../components/fonts/Dongle-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'YeonSung';
-  src: url('../components/fonts/YeonSung-Regular.ttf');
-}
-
-.footer {
-  background-color: #fff;
-  color: #333;
-  // padding: 20px 0;
-  font-size: 15px;
-  // margin-left: 100px;
+    font-family: "Jua";
+    src: url("../components/fonts/Jua-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "Dongle";
+    src: url("../components/fonts/Dongle-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "YeonSung";
+    src: url("../components/fonts/YeonSung-Regular.ttf");
+  }
+  
+  .footer {
+    background-color: #fff;
+    color: #333;
+    // padding: 20px 0;
+    font-size: 15px;
+    // margin-left: 100px;
+    
 
   .footer-links {
     margin-top: 0;

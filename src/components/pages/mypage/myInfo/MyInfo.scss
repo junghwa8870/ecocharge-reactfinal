@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 .userName {
-  margin: 30px 0;
+  margin: 20px 0;
   font-weight: bold;
   font-size: 40px;
 }
@@ -17,7 +18,7 @@
 }
 
 .userInfo {
-  margin: 10px 0;
+  margin: 20px 0;
   font-size: 25px;
   font-weight: bold;
   color: #777;
@@ -25,6 +26,7 @@
 
 .inputGroup {
   margin: 10px 0;
+  font-size: 17px;
 }
 
 .inputGroup label {
@@ -48,7 +50,7 @@
   margin-top: 10px;
   margin-right: 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
@@ -59,6 +61,7 @@
   background-color: rgb(69, 69, 209);
   color: white;
   font-size: 20px;
+  margin-top: 40px;
 }
 
 .editProfileButton:hover {
@@ -81,4 +84,53 @@
 
 .cancelEditButton:hover {
   background-color: lightcoral;
+}
+
+.phoneNumberButton {
+  padding: 10px 20px;
+  background-color: rgb(69, 69, 209);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.phoneNumberButton:hover {
+  background-color: darkgray;
+}
+
+.verification-code {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.verification-code input {
+  padding: 8px;
+  width: 100px;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.verification-code button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.verification-code button:hover {
+  background-color: #218838;
 }

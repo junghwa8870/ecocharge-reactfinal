@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 
-function MapComponent({ lat, lng, addr, setGeometricData }) {
+function MapComponent({
+  lat,
+  lng,
+  addr,
+  setGeometricData,
+  markerLatLng,
+  setZoom,
+}) {
   const navermaps = useNavermaps();
+  const [center, setCenter] = useState({ lat, lng });
+
   useEffect(() => {
-    if (addr !== null && addr !== '') {
+    if (addr !== null && addr !== '' && addr !== undefined) {
       navermaps.Service.geocode(
         {
           address: addr,
@@ -26,18 +35,41 @@ function MapComponent({ lat, lng, addr, setGeometricData }) {
             ' 경도 = ',
             items[0].point.x,
           );
-          setGeometricData({
-            mapLat: items[0].point.y,
-            mapLng: items[0].point.x,
+          setCenter({
+            lat: items[0].point.y,
+            lng: items[0].point.x,
           });
         },
       );
     }
   }, [addr]);
 
+  useEffect(() => {
+    setGeometricData({ mapLat: center.lat, mapLng: center.lng });
+  }, [center]);
+
   return (
-    <NaverMap center={new navermaps.LatLng(lat, lng)} defaultZoom={15}>
-      <Marker position={new navermaps.LatLng(lat, lng)} />
+    <NaverMap
+      mapDivId={'maps-getting-started-uncontrolled'}
+      center={new navermaps.LatLng(center.lat, center.lng)}
+      defaultZoom={15}
+      // onCenterChanged={handleCenterChanged}
+      onIdle={(e) => {
+        console.log(e.__targets.scale.target.zoom);
+        setCenter({
+          lat: e.__targets.scale.target.center._lat,
+          lng: e.__targets.scale.target.center._lng,
+        });
+        setZoom(e.__targets.scale.target.zoom);
+      }}
+    >
+      {markerLatLng &&
+        markerLatLng.map((marker, index) => (
+          <Marker
+            key={index}
+            position={new navermaps.LatLng(marker.lat, marker.lng)}
+          ></Marker>
+        ))}
     </NaverMap>
   );
 }
