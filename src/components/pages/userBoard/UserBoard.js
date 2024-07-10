@@ -185,41 +185,45 @@ const UserBoard = () => {
             <tr key={board.boardNo} className='bRow'>
               <td
                 className='Bno'
-                onClick={() =>
+                onClick={async () => {
+                  await axios.get(`${API_BASE_URL}${BOARD}/${board.boardNo}`);
                   navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
                     state: board.boardNo,
-                  })
-                }
+                  });
+                }}
               >
                 {board.count}
               </td>
               <td
                 className='Btitle'
-                onClick={() =>
+                onClick={async () => {
+                  await axios.get(`${API_BASE_URL}${BOARD}/${board.boardNo}`);
                   navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
                     state: board.boardNo,
-                  })
-                }
+                  });
+                }}
               >
                 {board.btitle}
               </td>
               <td
                 className='Bwriter'
-                onClick={() =>
+                onClick={async () => {
+                  await axios.get(`${API_BASE_URL}${BOARD}/${board.boardNo}`);
                   navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
                     state: board.boardNo,
-                  })
-                }
+                  });
+                }}
               >
                 {board.bwriter}
               </td>
               <td
                 className='Bdate'
-                onClick={() =>
+                onClick={async () => {
+                  await axios.get(`${API_BASE_URL}${BOARD}/${board.boardNo}`);
                   navigate(`${BOARD}/detail?boardNo=${board.boardNo}`, {
                     state: board.boardNo,
-                  })
-                }
+                  });
+                }}
               >
                 {board.createDate}
               </td>

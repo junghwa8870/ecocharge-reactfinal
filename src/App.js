@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Header from './components/layout/Header.js';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import CarList from './components/pages/carlist/CarList.js';
 import FindCharge from './components/pages/findcharge/FindCharge.js';
 import MyPage from './components/pages/mypage/MyPage.js';
@@ -27,7 +27,11 @@ import End from './components/pages/toss/End.js';
 import FindIdPw from './components/user/FindIdPw.js';
 
 import PrivateRoute from './config/PrivateRoute.js';
+import Errorpage from './Errorpage.js';
 function App() {
+  const location = useLocation();
+
+  const Errorpagename = ['/*'];
   return (
     <AuthContextProvider>
       {/* <Favicon url='/favicon-32x32.png' /> */}
@@ -80,9 +84,10 @@ function App() {
               </div>
             }
           />
+          <Route path='/*' element={<Errorpage />}></Route>
         </Routes>
         <ScrollToTopButton />
-        <Footer />
+        {!Errorpagename.includes(location.pathname) && <Footer />}
       </div>
     </AuthContextProvider>
   );

@@ -8,6 +8,7 @@ const NaverMapApi = ({
   setGeometricData,
   markerLatLng,
   setZoom,
+  onMarkerClick,
 }) => {
   const id = process.env.REACT_APP_NAVER_MAP_CLIENT_ID;
   return (
@@ -19,6 +20,7 @@ const NaverMapApi = ({
         setGeometricData={setGeometricData}
         markerLatLng={markerLatLng}
         setZoom={setZoom}
+        onMarkerClick={onMarkerClick}
       />
     </NavermapsProvider>
   );

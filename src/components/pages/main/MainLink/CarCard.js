@@ -29,7 +29,7 @@ const CarCard = ({ carData }) => {
 
   return (
     <Carousel
-      autoPlay={false}
+      autoPlay={true}
       animation='slide'
       indicators={false}
       navButtonsAlwaysVisible={true}
