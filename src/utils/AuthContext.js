@@ -6,6 +6,8 @@ const AuthContext = React.createContext({
   userName: '',
   role: '',
   phoneNumber: '',
+  userId: '',
+  token: '',
   onLogout: () => {},
   onLogin: () => {},
 });
@@ -18,6 +20,8 @@ export const AuthContextProvider = (props) => {
   );
   const [userName, setUserName] = useState('');
   const [role, setRole] = useState('');
+  const [userId, setUserId] = useState('');
+  const [token, setToken] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(
     localStorage.getItem('PHONE_NUMBER')
       ? localStorage.getItem('PHONE_NUMBER')
@@ -34,9 +38,12 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('REFRESH_TOKEN', token.refresh_token);
     localStorage.setItem('USER_ID', userId);
     localStorage.setItem('ROLE', role);
+    localStorage.setItem('USER_NAME', userName);
     setIsLoggedIn(true);
     setUserName(userName);
     setRole(role);
+    setToken(token.access_token);
+    setUserId(userId);
     setPhoneNumber(phoneNumber);
     console.log(userId);
   };
@@ -54,6 +61,8 @@ export const AuthContextProvider = (props) => {
     if (localStorage.getItem('ACCESS_TOKEN')) {
       setIsLoggedIn(true);
       setUserName(localStorage.getItem('LOGIN_USERNAME'));
+      setUserId(localStorage.getItem('USER_ID'));
+      setToken('ACCESS_TOKEN');
     }
     if (localStorage.getItem('ROLE')) {
       setRole(localStorage.getItem('ROLE'));
@@ -67,6 +76,8 @@ export const AuthContextProvider = (props) => {
         userName,
         role,
         phoneNumber,
+        userId,
+        token,
         onLogout: logoutHandler,
         onLogin: loginHandler,
       }}

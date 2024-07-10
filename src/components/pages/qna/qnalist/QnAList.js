@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import {
   Dropdown,
   DropdownToggle,
@@ -26,7 +26,6 @@ import axios from 'axios';
 import { API_BASE_URL, QNA } from '../../../../config/host-config';
 import axiosInstance from '../../../../config/axios-config';
 import PageButton from '../../pageButton/PageButton';
-
 const QnAList = () => {
   const requestUrl = API_BASE_URL + QNA;
   const categories = [
@@ -50,8 +49,12 @@ const QnAList = () => {
   const [searchType, setSearchType] = useState('title');
   const [modalOpen, setModalOpen] = useState(false); // 답변 모달 창 상태 추가
   const [selectedQna, setSelectedQna] = useState(null); // 선택된 질문 상태 추가
+  const [answer, SetAnswer] = useState(''); //작성한 답변 값 저장 상태
+  const [formData, setFormData] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
+  const userId = localStorage.getItem('USER_ID');
+  const userRole = localStorage.getItem('ROLE');
 
   const toggleCategoryDropdown = () =>
     setCategoryDropdownOpen((prevState) => !prevState);
@@ -70,12 +73,15 @@ const QnAList = () => {
   };
 
   // const handleTdClick = () => {};
-  const handleQNADeleteClick = async (No) => {
+  const handleQNADeleteClick = async (no) => {
     // 삭제처리함수
     console.log('삭제로직 작동');
     try {
-      const response = await axios.delete(`${API_BASE_URL}${QNA}/${No}`, {
+      const response = await axios.delete(`${API_BASE_URL}${QNA}/${no}`, {
         headers: { 'content-type': 'application/json' },
+        params: {
+          userId: localStorage.getItem('USER_ID'),
+        },
       });
       const res = response.data;
 
@@ -103,11 +109,12 @@ const QnAList = () => {
     setPageMaker(res.data.pageMaker);
     setPageButtonCount(res.data.pageMaker.end);
     filterQnaData(res.data.qnas); // 초기 데이터 설정
+    console.log(res.data);
   };
 
   useEffect(() => {
     qnaListRenderingHandler();
-  }, [location.state, pageNo]);
+  }, [location.state, pageNo, answer]);
 
   useEffect(() => {
     const handleBackButton = (event) => {
@@ -165,7 +172,13 @@ const QnAList = () => {
         <div>질문: {selectedQna?.qtitle}</div>
         <InputGroup style={{ marginTop: '10px' }}>
           <InputGroupText>답변:</InputGroupText>
-          <Input type='textarea' />
+          <Input
+            type='textarea'
+            name='qanswer'
+            id='qanswer'
+            placeholder='내용을 입력하세요'
+            onChange={handleChange}
+          />
         </InputGroup>
       </ModalBody>
       <ModalFooter>
@@ -174,7 +187,7 @@ const QnAList = () => {
           onClick={handleAnswerSubmit}
         >
           작성 완료
-        </Button>{' '}
+        </Button>
         <Button
           color='secondary'
           onClick={toggleModal}
@@ -185,13 +198,36 @@ const QnAList = () => {
       </ModalFooter>
     </Modal>
   );
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value, // name이 'qanswer'인 경우, formData.qanswer에 사용자 입력 값이 설정됩니다.
+      qnaNo: selectedQna.qnaNo,
+    });
+  };
 
   // 답변 작성 완료 핸들러
   const handleAnswerSubmit = async () => {
-    // 여기서 답변 작성 처리 로직을 구현합니다.
-    // axios 등을 사용하여 서버로 답변 데이터를 전송합니다.
-    // 성공 시 모달을 닫거나 새로고침 등의 작업을 수행할 수 있습니다.
-    toggleModal(); // 모달 닫기
+    try {
+      const answerInput = document.getElementById('qanswer');
+      console.log('selectqnano:', selectedQna.qnaNo);
+      const qnaNo = selectedQna.qnaNo; // selectedQna에서 qnaNo 가져오기
+      const body = JSON.stringify(formData);
+      // 서버로 PATCH 요청 보내기
+      const res = await axiosInstance.patch(`${requestUrl}/add/${qnaNo}`, body);
+      console.log(res.data);
+      console.log(res.data.qanswer);
+      // 서버로부터 받은 응답 처리
+
+      SetAnswer(res.data.qanswer);
+      toggleModal(); // 성공 시 모달 닫기 등의 처리
+      answerInput.value = '';
+    } catch (error) {
+      // 오류 처리
+      console.error('Error adding answer:', error);
+      // 필요한 오류 처리 로직 추가
+    }
   };
 
   return (
@@ -216,7 +252,11 @@ const QnAList = () => {
           </Button>
           <Button
             className='goMyAskList'
-            onClick={() => navigate('/myquestionlist')}
+            onClick={() =>
+              navigate('/myquestionlist', {
+                state: { myQuestionInfo: filteredQnaData },
+              })
+            }
           >
             내 문의내역
           </Button>
@@ -296,12 +336,14 @@ const QnAList = () => {
               >
                 <FontAwesomeIcon icon={faPenToSquare} />
               </div>
-              <div
-                className='mqlistDeleteBtn'
-                onClick={() => handleQNADeleteClick(qna.qnaNo)}
-              >
-                <FontAwesomeIcon icon={faSquareMinus} />
-              </div>
+              {qna.quserId === userId || userRole === 'ADMIN' ? (
+                <div
+                  className='mqlistDeleteBtn'
+                  onClick={() => handleQNADeleteClick(qna.qnaNo)}
+                >
+                  <FontAwesomeIcon icon={faSquareMinus} />
+                </div>
+              ) : null}
             </div>
             <div
               className='ansbox'
@@ -327,7 +369,7 @@ const QnAList = () => {
               >
                 A.
               </span>
-              <div className='ans'>답변내용:</div>
+              <div className='ans'>답변내용: {qna.qanswer}</div>
             </div>
           </div>
         ))}
