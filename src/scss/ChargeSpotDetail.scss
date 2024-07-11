@@ -1,8 +1,8 @@
 .charge-spot-detail-container {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   margin-top: 120px;
   margin-bottom: 100px;
   background: floralwhite;
@@ -14,7 +14,7 @@
   font-size: 25px;
   font-weight: bold;
   width: fit-content;
-  margin-right: 80%; 
+  margin-right: 80%;
 }
 
 .charge-spot-detail-content {
@@ -24,7 +24,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  
 }
 
 .page-title {
@@ -65,9 +64,9 @@
 }
 
 .info-box {
-  display: flex; 
-  flex-direction: column; 
-  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   max-width: 100%;
   padding: 70px;
   margin-bottom: 20px;
@@ -77,10 +76,10 @@
 }
 
 .map-review-container {
-  display: flex; 
-  justify-content: space-between; 
-  gap: 20px; 
-  width: 70%; 
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 70%;
   margin-left: 300px;
 }
 
@@ -107,4 +106,8 @@
   cursor: pointer;
   outline: none;
   margin-left: 20px;
+}
+
+.aroundList {
+  overflow: hidden;
 }
