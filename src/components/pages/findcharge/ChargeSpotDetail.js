@@ -103,49 +103,7 @@ function ChargeSpotDetail() {
           <div
             className={`bookmark-button ${isBookmarked ? 'bookmarked' : ''}`}
             onClick={handleBookmarkToggle}
-          >
-            <FontAwesomeIcon
-              icon={isBookmarked ? filledStar : emptyStar}
-              className='star-icon'
-              style={{
-                fontSize: '30px',
-                transition: 'transform 0.3s, color 0.3s',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = 'scale(1.5)')
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = 'scale(1.0)')
-              }
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className='info-box'>
-        <div className='map-review-container'>
-          <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
-          <div className='review-input-container'>
-            <h3>후기 작성</h3>
-            <TextField
-              label='이용 후기'
-              multiline
-              rows={6}
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              variant='outlined'
-              fullWidth
-              style={{ marginTop: '20px' }}
-            />
-            <Button
-              variant='contained'
-              color='primary'
-              style={{ marginTop: '20px', background: 'rgb(69, 69, 209)' }}
-              onClick={handleSubmitReview}
-            >
-              등록
-            </Button>
-          </div>
+          ></div>
         </div>
       </div>
 
@@ -235,6 +193,33 @@ function ChargeSpotDetail() {
           </Button>
         </DialogActions>
       </Dialog>
+      <div className='info-box'>
+        <div className='map-review-container'>
+          <div className='review-input-container'>
+            <h3>후기 작성</h3>
+            <TextField
+              className='text-field'
+              label='이용 후기'
+              multiline
+              // rows={6}
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              variant='outlined'
+              fullWidth
+              style={{ marginTop: '20px' }}
+            />
+            <Button
+              variant='contained'
+              color='primary'
+              style={{ marginTop: '20px', background: 'rgb(69, 69, 209)' }}
+              onClick={handleSubmitReview}
+            >
+              등록
+            </Button>
+          </div>
+          <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
+        </div>
+      </div>
     </div>
   );
 }
