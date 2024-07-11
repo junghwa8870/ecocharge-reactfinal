@@ -18,16 +18,8 @@ import {
 } from '@mui/material';
 import '../../../scss/ChargeSpotDetail.scss';
 import Checkout from '../toss/Checkout';
-import axiosInstance from '../../../config/axios-config';
 import { API_BASE_URL, CHARGESPOT } from '../../../config/host-config';
-import {
-  Container,
-  Marker,
-  NaverMap,
-  NavermapsProvider,
-  useNavermaps,
-} from 'react-naver-maps';
-import NaverMapApi from './NaverMapApi';
+import axiosInstance from '../../../config/axios-config';
 
 function ChargeSpotDetail() {
   const [open, setOpen] = useState(false);
@@ -38,13 +30,12 @@ function ChargeSpotDetail() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [review, setReview] = useState('');
   const navigate = useNavigate();
-  const navermaps = useNavermaps();
   const [aroundInfo, setAroundInfo] = useState(null);
 
   // 더미 데이터
   const address = '서울특별시 마포구 백범로 123-56';
-  console.log(location);
   const REQUEST_URL = API_BASE_URL + CHARGESPOT;
+
   const [spotInfo, setSpotInfo] = useState(null);
   const [{ lat, lng }, setLatLng] = useState({
     lat: null,
@@ -60,7 +51,7 @@ function ChargeSpotDetail() {
 
       setSpotInfo(res.data);
       console.log(res.data);
-      if (res.data) {
+      if (res) {
         const lat = res.data.latLng.split(',')[0];
         const lng = res.data.latLng.split(',')[1];
         setLatLng({ lat, lng });
@@ -153,49 +144,7 @@ function ChargeSpotDetail() {
           <div
             className={`bookmark-button ${isBookmarked ? 'bookmarked' : ''}`}
             onClick={handleBookmarkToggle}
-          >
-            <FontAwesomeIcon
-              icon={isBookmarked ? filledStar : emptyStar}
-              className='star-icon'
-              style={{
-                fontSize: '30px',
-                transition: 'transform 0.3s, color 0.3s',
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = 'scale(1.5)')
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = 'scale(1.0)')
-              }
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className='info-box'>
-        <div className='map-review-container'>
-          <div className='map-placeholder'>{/* 지도 컴포넌트..ㄱㄱ */}</div>
-          <div className='review-input-container'>
-            <h3>후기 작성</h3>
-            <TextField
-              label='이용 후기'
-              multiline
-              rows={6}
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              variant='outlined'
-              fullWidth
-              style={{ marginTop: '20px' }}
-            />
-            <Button
-              variant='contained'
-              color='primary'
-              style={{ marginTop: '20px', background: 'rgb(69, 69, 209)' }}
-              onClick={handleSubmitReview}
-            >
-              등록
-            </Button>
-          </div>
+          ></div>
         </div>
       </div>
 
@@ -223,13 +172,9 @@ function ChargeSpotDetail() {
               ))}
             </div>
           )}
-
-          <div className='section'>
-            <h2>이용후기</h2>
-            <p>여기에 이용후기 표시</p>
-          </div>
         </div>
       )}
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>예약</DialogTitle>
         <DialogContent>
@@ -305,7 +250,7 @@ function ChargeSpotDetail() {
               // rows={6}
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              variant='outlined'
+              // variant='outlined'
               fullWidth
               style={{ marginTop: '20px' }}
             />
