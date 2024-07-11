@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL, BOARD } from '../../../../config/host-config';
+import { API_BASE_URL, BOARD, USER } from '../../../../config/host-config';
 import axios from 'axios';
 import handleRequest from '../../../../utils/handleRequest';
 import axiosInstance from '../../../../config/axios-config';
@@ -19,6 +19,7 @@ const WriteBoardForm = () => {
   const [board, setBoard] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [bWriter, setBWriter] = useState('');
 
   const [formData, setFormData] = useState({
     boardNo: '',
@@ -27,6 +28,30 @@ const WriteBoardForm = () => {
     bContent: '',
     bProfileImage: null,
   });
+
+  useEffect(() => {
+    const renderingBoardForm = async () => {
+      handleRequest(
+        () =>
+          axiosInstance.post(
+            `${API_BASE_URL}${USER}/myPage`,
+            localStorage.getItem('USER_ID'),
+            {
+              headers: {
+                'Content-Type': 'text/plain',
+              },
+            },
+          ),
+        (data) => {
+          setBWriter(data.userName);
+          console.log(data.userName);
+        },
+        onLogout,
+        navigate,
+      );
+    };
+    renderingBoardForm();
+  }, [bWriter]);
 
   useEffect(() => {
     const { bWriter, bTitle, bContent } = formData;
@@ -54,14 +79,21 @@ const WriteBoardForm = () => {
     if (formData.bProfileImage) {
       data.append('bProfileImage', formData.bProfileImage);
     }
+    console.log(formData.boardNo);
 
     const onSuccess = (data) => {
       setBoard(data);
       alert('등록되었습니다.');
+      navigate('/board');
     };
 
     handleRequest(
-      () => axiosInstance.post(REQUEST_URL, data),
+      () =>
+        axiosInstance.post(`${REQUEST_URL}/create`, data, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
       onSuccess,
       onLogout,
       navigate,
@@ -101,7 +133,7 @@ const WriteBoardForm = () => {
             placeholder='이름을 입력해주세요.'
             type='text'
             className='wbwBox'
-            value={formData.bWriter}
+            value={bWriter}
             onChange={handleChange}
           />
         </FormGroup>
