@@ -8,14 +8,17 @@ import { Container as MapDiv } from 'react-naver-maps';
 import NaverMapApi from './NaverMapApi';
 import axios from 'axios';
 import { API_BASE_URL, CHARGESPOT } from '../../../config/host-config';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../config/axios-config';
 // import { NavermapsProvider, Container as MapDiv } from 'react-naver-maps';
 
 function FindCharge() {
+  const navigate = useNavigate();
   const REQUEST_URL = API_BASE_URL + CHARGESPOT;
 
   const [markerInfo, setMarkerInfo] = useState(null);
+
+  const [reservationInfo, setReservationInfo] = useState(null);
 
   const [{ mapLat, mapLng }, setGeometricData] = useState({
     mapLat: null,
@@ -134,24 +137,24 @@ function FindCharge() {
   };
 
   const handleSpotClick = async (statId) => {
-    console.log(statId);
-    const body = {
-      statId,
-    };
-    try {
-      const res = await axiosInstance.post(
-        REQUEST_URL + '/reservationInfo',
-        body,
-      );
-      console.log(res.data);
-      const data = res.data;
+    // const body = {
+    //   statId,
+    // };
+    // try {
+    //   const res = await axiosInstance.post(
+    //     REQUEST_URL + '/reservationInfo',
+    //     body,
+    //   );
+    //   console.log(res.data);
+    //   const data = res.data;
 
-      setMarkerInfo(data);
+    //   setReservationInfo(data);
 
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    navigate(`/ChargeSpotDetail?statId=${statId}`);
   };
 
   return (
@@ -175,6 +178,7 @@ function FindCharge() {
             <SearchResult
               searchParams={filters}
               markerInfo={markerInfo}
+              reservationInfo={reservationInfo}
               click={handleSpotClick}
             />
           </div>

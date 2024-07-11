@@ -18,6 +18,8 @@ import {
 } from '@mui/material';
 import '../../../scss/ChargeSpotDetail.scss';
 import Checkout from '../toss/Checkout';
+import axiosInstance from '../../../config/axios-config';
+import { API_BASE_URL, CHARGESPOT } from '../../../config/host-config';
 
 function ChargeSpotDetail() {
   const [open, setOpen] = useState(false);
@@ -31,6 +33,22 @@ function ChargeSpotDetail() {
 
   // 더미 데이터
   const address = '서울특별시 마포구 백범로 123-56';
+  console.log(location);
+  const REQUEST_URL = API_BASE_URL + CHARGESPOT;
+  const [spotInfo, setSpotInfo] = useState(null);
+
+  useEffect(() => {
+    const statId = location.search.split('=')[1];
+    const fetchSpotDetail = async () => {
+      const res = await axiosInstance.get(
+        REQUEST_URL + `/detail?statId=${statId}`,
+      );
+
+      setSpotInfo(res.data);
+      console.log(res.data);
+    };
+    fetchSpotDetail();
+  }, [location.search]);
 
   const handleReservation = () => {
     setOpen(true);
@@ -149,28 +167,29 @@ function ChargeSpotDetail() {
         </div>
       </div>
 
-      <div className='charge-spot-detail-content'>
-        <div className='section'>
-          <h2>주차장명</h2>
-          <p>여기에 주차장명 정보 표시</p>
-        </div>
+      {spotInfo && (
+        <div className='charge-spot-detail-content'>
+          <div className='section'>
+            <h2>충전소명</h2>
+            <p>{spotInfo.statNm}</p>
+          </div>
 
-        <div className='section'>
-          <h2>충전정보</h2>
-          <p>여기에 충전정보 표시</p>
-        </div>
+          <div className='section'>
+            <h2>충전정보</h2>
+            <p>여기에 충전정보 표시</p>
+          </div>
 
-        <div className='section'>
-          <h2>OO시 충전소 목록</h2>
-          <p>여기에 충전소 목록 표시</p>
-        </div>
+          <div className='section'>
+            <h2>OO시 충전소 목록</h2>
+            <p>여기에 충전소 목록 표시</p>
+          </div>
 
-        <div className='section'>
-          <h2>이용후기</h2>
-          <p>여기에 이용후기 표시</p>
+          <div className='section'>
+            <h2>이용후기</h2>
+            <p>여기에 이용후기 표시</p>
+          </div>
         </div>
-      </div>
-
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>예약</DialogTitle>
         <DialogContent>

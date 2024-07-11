@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../scss/SearchResult.scss';
-function SearchResult({ searchParams, markerInfo, click }) {
+function SearchResult({ searchParams, markerInfo, click, reservationInfo }) {
   // 영어 키를 한국어로 매핑
 
   const keyTranslations = {
