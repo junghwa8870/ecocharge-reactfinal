@@ -23,35 +23,11 @@ const WriteBoardForm = () => {
 
   const [formData, setFormData] = useState({
     boardNo: '',
-    bWriter: '',
+    bWriter: localStorage.getItem('USER_NAME'),
     bTitle: '',
     bContent: '',
     bProfileImage: null,
   });
-
-  useEffect(() => {
-    const renderingBoardForm = async () => {
-      handleRequest(
-        () =>
-          axiosInstance.post(
-            `${API_BASE_URL}${USER}/myPage`,
-            localStorage.getItem('USER_ID'),
-            {
-              headers: {
-                'Content-Type': 'text/plain',
-              },
-            },
-          ),
-        (data) => {
-          setBWriter(data.userName);
-          console.log(data.userName);
-        },
-        onLogout,
-        navigate,
-      );
-    };
-    renderingBoardForm();
-  }, [bWriter]);
 
   useEffect(() => {
     const { bWriter, bTitle, bContent } = formData;
@@ -133,8 +109,8 @@ const WriteBoardForm = () => {
             placeholder='이름을 입력해주세요.'
             type='text'
             className='wbwBox'
-            value={bWriter}
-            onChange={handleChange}
+            value={formData.bWriter}
+            readOnly={true}
           />
         </FormGroup>
         <FormGroup>
