@@ -179,7 +179,7 @@ const MyInfo = () => {
       console.log(`json 파일확인:${phoneNumber},${verificationCodeInput}`);
     } catch (error) {
       console.error('Error verifying code:', error);
-      alert('인증에 실패했습니다.');
+      alert('중복된 핸드폰번호 입니다.');
     }
     debouncedUpdateState('phone', { inputValue: phone }, msg, flag);
   };
@@ -236,6 +236,7 @@ const MyInfo = () => {
         password,
         loginMethod,
         originalPhone,
+        userId: localStorage.getItem('USER_ID'),
       };
       handleRequest(
         () =>
@@ -257,9 +258,6 @@ const MyInfo = () => {
   };
 
   const handleCancelEdit = () => {
-    // setUserName(originalUserName);
-    // setPhone(originalPhone);
-    // setPassword('');
     setIsEditing(false);
     console.log('Edit cancelled');
   };
@@ -267,7 +265,6 @@ const MyInfo = () => {
   // 렌더링 핸들러
   useEffect(() => {
     const renderingMyInfo = async () => {
-      console.log(phoneNumber);
       await handleRequest(
         () =>
           axiosInstance.post(
