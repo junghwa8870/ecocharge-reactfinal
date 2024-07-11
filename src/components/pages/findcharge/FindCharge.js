@@ -31,6 +31,7 @@ function FindCharge() {
   const [markerLatLng, setMarkerLatLng] = useState();
   const [zoom, setZoom] = useState(15);
   const [searchQuery, setSearchQuery] = useState();
+  const [selectedMarker, setSelectedMarker] = useState(null); // 선택된 마커 정보 상태 추가
 
   const [filters, setFilters] = useState({
     searchKey: '',
@@ -92,7 +93,7 @@ function FindCharge() {
       }
     };
     makersRender();
-  }, [mapLat, mapLng, zoom]);
+  }, [mapLat, mapLng, zoom, filters, searchQuery]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -124,6 +125,10 @@ function FindCharge() {
     }
   };
 
+  const handleMarkerClick = (lat, lng) => {
+    setSelectedMarker({ lat, lng });
+  };
+
   return (
     <div className='find-charge-container'>
       <header className='find-charge-header'>
@@ -135,15 +140,19 @@ function FindCharge() {
           onSearch={fetchChargeSpot}
           setFilters={setFilters}
           filters={filters}
-          searchAddr={handleInputChange}
-          searchValue={searchQuery}
+          setAddr={setAddr}
         />
       </div>
       <div className='find-charge-content'>
         <div className='search-area'>
           {/* <SearchBar onSearch={handleSearch} setFilters={setFilters} /> */}
           <div className='search-results'>
-            {searchParams && <SearchResult searchParams={searchParams} />}
+            {filters && (
+              <SearchResult
+                searchParams={filters}
+                markerInfo={selectedMarker}
+              />
+            )}
           </div>
         </div>
         <div className='map-area'>
@@ -156,6 +165,7 @@ function FindCharge() {
                 setGeometricData={setGeometricData}
                 markerLatLng={markerLatLng}
                 setZoom={setZoom}
+                onMarkerClick={handleMarkerClick} // 마커 클릭 시 이벤트 핸들러 전달
               />
             )}
           </MapDiv>

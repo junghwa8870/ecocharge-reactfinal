@@ -108,6 +108,13 @@ const QnAList = () => {
 
   const qnaListRenderingHandler = async () => {
     let url = `${requestUrl}?page=${pageNo}`;
+    // const userId = localStorage.getItem('USER_ID');
+    // const userRole = localStorage.getItem('ROLE');
+    // if (userId) {
+    //   url += `&userId=${userId}`;
+    //   url += `&userRole=${userRole}`;
+    // }
+
     const res = await axios.get(url);
     setQnaData(res.data.qnas);
     setPageMaker(res.data.pageMaker);
@@ -340,7 +347,7 @@ const QnAList = () => {
               <div className='qlistTitle'>{qna.qtitle}</div>
               <div className='qlistWriter'>{qna.qwriter}</div>
               <div className='qlistDate'>{qna.date}</div>
-              {qna.quserId === userId || userRole === 'ADMIN' ? (
+              {userRole === 'ADMIN' ? (
                 <div
                   className='qlistAnswer'
                   onClick={() => handleAnswerClick(qna.qnaNo)}

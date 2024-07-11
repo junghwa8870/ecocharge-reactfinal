@@ -32,7 +32,7 @@ const QnAList = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [activeQuestion, setActiveQuestion] = useState(null);
   const navigate = useNavigate(); // useNavigate 훅 사용
-  const { role, phoneNumber, userId, token } = useContext(AuthContext);
+  const { role } = useContext(AuthContext);
   const requestUrl = API_BASE_URL + QNA;
   const [myQnAData, setMyQnAData] = useState([]);
   const [searchParams] = useSearchParams();
@@ -95,7 +95,7 @@ const QnAList = () => {
       const userId = localStorage.getItem('USER_ID');
 
       const body = JSON.stringify(myQnAData);
-      let url = `${requestUrl}?page=${pageNo}`;
+      let url = `${requestUrl}/user?page=${pageNo}`;
 
       if (userId) {
         url += `&userId=${userId}`;
@@ -124,23 +124,38 @@ const QnAList = () => {
   };
   useEffect(() => {
     fetchQnAData(); // 페이지 로드 시 데이터 불러오기
-  }, [searchParams, pageNo, location.state, myQnAData]);
+  }, [searchParams, pageNo, location.state]);
 
   useEffect(() => {
-    const filterData = () => {
-      if (selectedCategory === '전체') {
-        setFilteredQnaData(myQnAData);
-        // console.log(myQnAData);
+    filterData(); // 필터링 적용
+  }, [myQnAData, selectedCategory]);
+
+  const filterData = () => {
+    if (selectedCategory === '전체') {
+      setFilteredQnaData(myQnAData);
+      // console.log(myQnAData);
+    } else {
+      const filteredData = myQnAData.filter(
+        (qna) => qna.qcategory === selectedCategory,
+      );
+      setFilteredQnaData(filteredData);
+    }
+  };
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      if (event.state.usr !== null) {
+        setPageNo(event.state.usr.page);
       } else {
-        const filteredData = myQnAData.filter(
-          (qna) => qna.qcategory === selectedCategory,
-        );
-        setFilteredQnaData(filteredData);
+        setPageNo(1);
       }
     };
 
-    filterData(); // 페이지 렌더링 시 필터링 적용
-  }, [myQnAData, selectedCategory]);
+    window.addEventListener('popstate', handleBackButton);
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
 
   return (
     <div className='qnacontainer' style={{ padding: '20px' }}>
