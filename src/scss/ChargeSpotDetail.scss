@@ -64,24 +64,22 @@
 }
 
 .info-box {
-  display: flex; 
-  flex-direction: column; 
-  width: 100%; 
+  display: flex;
+  justify-content: center;
+  width: 75%; 
   max-width: 100%;
   padding: 70px;
   margin-bottom: 20px;
-  border-top: 2px solid gray;
-  border-bottom: 2px solid gray;
+  border: 2px solid;
   background: white;
 }
 
 .map-review-container {
   display: flex; 
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: center; 
   gap: 20px; 
-  width: 70%; 
-  margin-left: 300px;
+  width: 70%;
 }
 
 .map-placeholder {
@@ -89,16 +87,14 @@
   height: 300px;
   border: 2px solid gray;
   margin-top: 20px;
-  margin-left: 150px;
 }
 
 .review-input-container {
   width: 70%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   // flex-direction: column;
-  margin-right: 100px;
-  margin-left: 170px;
   
   .text-field {
     width: 85%;
@@ -108,7 +104,6 @@
   h3 {
     font-size: 40px;
     font-weight: bold;
-    margin-left: 290px;
   }
 }
 
