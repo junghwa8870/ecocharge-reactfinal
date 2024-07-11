@@ -15,13 +15,8 @@ import axiosInstance from '../../../config/axios-config';
 function FindCharge() {
   const REQUEST_URL = API_BASE_URL + CHARGESPOT;
 
-  const [searchParams, setSearchParams] = useState({
-    searchKey: '',
-    chgerType: '',
-    powerType: '',
-    location: '',
-    limitYn: '',
-  });
+  const [markerInfo, setMarkerInfo] = useState(null);
+
   const [{ mapLat, mapLng }, setGeometricData] = useState({
     mapLat: null,
     mapLng: null,
@@ -33,13 +28,7 @@ function FindCharge() {
   const [searchQuery, setSearchQuery] = useState();
   const [selectedMarker, setSelectedMarker] = useState(null); // 선택된 마커 정보 상태 추가
 
-  const [filters, setFilters] = useState({
-    searchKey: '',
-    chgerType: '',
-    powerType: '',
-    location: '',
-    limitYn: '',
-  });
+  const [filters, setFilters] = useState(null);
 
   useEffect(() => {
     function getLocation() {
@@ -71,9 +60,9 @@ function FindCharge() {
 
   useEffect(() => {
     const body = {
-      limitYn: filters.limitYn,
-      chgerType: filters.chgerType,
-      powerType: filters.powerType,
+      limitYn: filters !== null ? filters.limitYn : '',
+      chgerType: filters !== null ? filters.chgerType : '',
+      powerType: filters !== null ? filters.powerType : '',
       lat: mapLat,
       lng: mapLng,
       zoom,
@@ -125,8 +114,44 @@ function FindCharge() {
     }
   };
 
-  const handleMarkerClick = (lat, lng) => {
-    setSelectedMarker({ lat, lng });
+  const handleMarkerClick = async (lat, lng) => {
+    console.log(lat, lng);
+    const body = {
+      lat,
+      lng,
+    };
+    try {
+      const res = await axiosInstance.post(REQUEST_URL + '/detail', body);
+      console.log(res.data);
+      const data = res.data;
+
+      setMarkerInfo(data);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSpotClick = async (statId) => {
+    console.log(statId);
+    const body = {
+      statId,
+    };
+    try {
+      const res = await axiosInstance.post(
+        REQUEST_URL + '/reservationInfo',
+        body,
+      );
+      console.log(res.data);
+      const data = res.data;
+
+      setMarkerInfo(data);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -147,12 +172,11 @@ function FindCharge() {
         <div className='search-area'>
           {/* <SearchBar onSearch={handleSearch} setFilters={setFilters} /> */}
           <div className='search-results'>
-            {filters && (
-              <SearchResult
-                searchParams={filters}
-                markerInfo={selectedMarker}
-              />
-            )}
+            <SearchResult
+              searchParams={filters}
+              markerInfo={markerInfo}
+              click={handleSpotClick}
+            />
           </div>
         </div>
         <div className='map-area'>
